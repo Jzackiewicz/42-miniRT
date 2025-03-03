@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 16:19:50 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/03 17:05:40 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:48:02 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	clean_on_error(char **line_split, char *line)
 {
-	free(line);
-	ft_arr2d_free(line_split);
+    if (line)
+	    free(line);
+    if (line_split)
+	    ft_arr2d_free(line_split);
 	exit(1);
 }
 
@@ -31,6 +33,30 @@ static int	is_valid_number(const char *str)
 		if (str[i] < '0' || str[i] > '9')
 			return (0);
 		i++;
+	}
+	return (1);
+}
+
+int	is_valid_float(const char *str)
+{
+	int	has_dot;
+
+	has_dot = 0;
+	if (*str == '-' || *str == '+')
+		str++;
+	if (!*str)
+		return (0);
+	while (*str)
+	{
+		if (*str == '.')
+		{
+			if (has_dot)
+				return (0);
+			has_dot = 1;
+		}
+		else if (!ft_isdigit(*str))
+			return (0);
+		str++;
 	}
 	return (1);
 }
