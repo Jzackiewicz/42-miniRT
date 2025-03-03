@@ -6,22 +6,26 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:13:36 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/03 16:20:24 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:49:12 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parser.h"
 
-void    validate_ambient(char **line_split, char *line)
+void	validate_ambient(char **line_split, char *line)
 {
-    if (ft_2d_strlen != 3)
-        clean_on_error(line_split, line);
-    if (ft_atof(line_split[1]) < 0.0 || ft_atof(line_split[1]) > 1.0)
-        clean_on_error(line_split, line);
-    if (check_colors(line_split[2]) == -1)
-        clean_on_error(line_split, line);
+	if (!line || !line_split)
+		clean_on_error(line_split, line);
+	if (ft_2d_strlen(line_split) != 3)
+		clean_on_error(line_split, line);
+	if (!is_valid_float(line_split[1]) || ft_atof(line_split[1]) < 0.0
+		|| ft_atof(line_split[1]) > 1.0)
+		clean_on_error(line_split, line);
+	if (check_colors(line_split[2]) == -1)
+		clean_on_error(line_split, line);
+	return (0);
 }
 
-void    validate_camera(char **line_split, char *line);
+void	validate_camera(char **line_split, char *line);
 
-void    validate_light(char **line_split, char *line);
+void	validate_light(char **line_split, char *line);
