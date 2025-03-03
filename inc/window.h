@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/03 09:10:08 by jzackiew         ###   ########.fr       */
+/*   Created: 2025/02/28 15:45:23 by jzackiew          #+#    #+#             */
+/*   Updated: 2025/03/03 09:09:29 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef WINDOW_H
+# define WINDOW_H
 
-#include <math.h>
-#include "../lib/libft/libft.h"
-#include "window.h"
+#include "../lib/mlx/mlx.h"
+#include <stdlib.h>
+#include <X11/keysym.h>
 
+#define WINDOW_WIDTH 1600
+#define WINDOW_HEIGHT 900
+
+typedef struct s_mlx_data
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+}			t_mlx_data;
+
+void	prepare_window(void);
 
 #endif
