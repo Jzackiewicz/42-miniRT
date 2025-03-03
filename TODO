@@ -1,0 +1,23 @@
+Parsing 
+	>input - .RT file
+	>output - struct conatining objects:
+		*lightning
+			-ambient
+			-source(s?)
+		*camera
+		*object(s)
+			-sphere
+			-plane
+			-cylinder
+			-cone/hyperboloid/paraboloid (optional)
+
+	>functions
+		*parsing
+		*error handling
+
+Operations
+	>input - tuples and/or matrices
+	>output - result of an operation
+	>functions
+		*a lot of stuff lol
+		
