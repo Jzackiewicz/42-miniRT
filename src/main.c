@@ -6,13 +6,13 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/02/28 11:14:03 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/03 09:08:28 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/miniRT.h"
 
-int	main()
+int	main(void)
 {
-	ft_printf("teścior\n");
+	prepare_window();
 }
