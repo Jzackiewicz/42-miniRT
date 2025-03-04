@@ -109,7 +109,28 @@ target_link_libraries(check_vector PRIVATE gtest gtest_main)
 target_compile_features(check_vector PRIVATE cxx_std_17)
 gtest_discover_tests(check_vector)
 
-add_executable(validate_camera validate_camera.cpp 
+# add_executable(validate_camera validate_camera.cpp 
+#     ../../src/parse/validate_settings.c
+#     ../../src/parse/validate_utils.c
+#     ../../lib/libft/ft_atoi.c
+#     ../../lib/libft/ft_split.c
+#     ../../lib/libft/ft_2dstr_len.c
+#     ../../lib/libft/ft_atof.c
+#     ../../lib/libft/ft_arr2d_free.c
+#     ../../lib/libft/ft_calloc.c
+#     ../../lib/libft/ft_itoa.c
+#     ../../lib/libft/ft_strncmp.c
+#     ../../lib/libft/ft_bzero.c
+#     ../../lib/libft/ft_strlen.c
+#     ../../lib/libft/check_for_overflow.c
+#     ../../lib/libft/ft_atof.c
+#     ../../lib/libft/ft_isdigit.c)
+
+# target_link_libraries(validate_camera PRIVATE gtest gtest_main)
+# target_compile_features(validate_camera PRIVATE cxx_std_17)
+# gtest_discover_tests(validate_camera)
+
+add_executable(validate_light validate_light.cpp 
     ../../src/parse/validate_settings.c
     ../../src/parse/validate_utils.c
     ../../lib/libft/ft_atoi.c
@@ -126,6 +147,6 @@ add_executable(validate_camera validate_camera.cpp
     ../../lib/libft/ft_atof.c
     ../../lib/libft/ft_isdigit.c)
 
-target_link_libraries(validate_camera PRIVATE gtest gtest_main)
-target_compile_features(validate_camera PRIVATE cxx_std_17)
-gtest_discover_tests(validate_camera)
+target_link_libraries(validate_light PRIVATE gtest gtest_main)
+target_compile_features(validate_light PRIVATE cxx_std_17)
+gtest_discover_tests(validate_light)
