@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 16:19:50 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/03 18:38:07 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:53:42 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,33 @@ int	is_valid_number(const char *str)
 	return (1);
 }
 
-int	is_valid_float(const char *str)
+int is_valid_float(const char *str)
 {
-	int	has_dot;
+    int i = 0;
+    int has_dot = 0;
+    int has_digit = 0;
 
-	has_dot = 0;
-	if (*str == '-' || *str == '+')
-		str++;
-	if (!*str)
-		return (0);
-	while (*str)
-	{
-		if (*str == '.')
-		{
-			if (has_dot)
-				return (0);
-			has_dot = 1;
-		}
-		else if (!ft_isdigit(*str))
-			return (0);
-		str++;
-	}
-	return (1);
+    if (!str || !*str)  
+        return (0);
+    if (str[i] == '-' || str[i] == '+')
+        i++;
+    while (str[i])
+    {
+        if (str[i] == '.')
+        {
+            if (has_dot)
+                return (0);
+            has_dot = 1;
+        }
+        else if (!ft_isdigit(str[i]))
+            return (0);
+        else
+            has_digit = 1;
+        i++;
+    }
+    return (has_digit);
 }
+
 // returns -1 on error
 int	check_colors(char *colors)
 {
@@ -113,15 +117,14 @@ int	check_cords(char *cords)
 		ft_arr2d_free(cords_split);
 		return (-1);
 	}
-	i = 0;
-	while (i < 3)
+	i = -1;
+	while (++i < 3)
 	{
 		if (!is_valid_float(cords_split[i]))
 		{
 			ft_arr2d_free(cords_split);
 			return (-1);
 		}
-		i++;
 	}
 	ft_arr2d_free(cords_split);
 	return (0);
@@ -131,6 +134,7 @@ int	check_vector(char *vector)
 {
 	char	**vector_split;
 	int		i;
+	double	x, y, z, magnitude;
 
 	if (!vector || vector[ft_strlen(vector) - 1] == ',')
 		return (-1);
@@ -142,15 +146,28 @@ int	check_vector(char *vector)
 		ft_arr2d_free(vector_split);
 		return (-1);
 	}
-	i = 0;
-	while (i < 3)
+	i = -1;
+	while (++i < 3)
 	{
-		if (!is_valid_float(vector_split[i]) || ft_atof(vector_split[i]) < -1.0
-			|| ft_atof(vector_split[i]) > 1.0)
+		if (!is_valid_float(vector_split[i]))
 		{
 			ft_arr2d_free(vector_split);
 			return (-1);
 		}
+	}
+	x = ft_atof(vector_split[0]);
+	y = ft_atof(vector_split[1]);
+	z = ft_atof(vector_split[2]);
+	if (x < -1.0 || x > 1.0 || y < -1.0 || y > 1.0 || z < -1.0 || z > 1.0)
+	{
+		ft_arr2d_free(vector_split);
+		return (-1);
+	}
+	magnitude = sqrt(x * x + y * y + z * z);
+	if (fabs(magnitude - 1.0) > 0.0001)
+	{
+		ft_arr2d_free(vector_split);
+		return (-1);
 	}
 	ft_arr2d_free(vector_split);
 	return (0);
