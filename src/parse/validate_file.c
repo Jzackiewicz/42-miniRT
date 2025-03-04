@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 12:01:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/04 11:59:12 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/04 13:06:09 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	check_extension(char *filepath)
 
 // exit(1) on file error
 // TODO: no repeats on letter presence
+// get next line leaks on bad file
+// refactor
 void	validate_file(char *filepath)
 {
 	char	*line;
@@ -52,22 +54,29 @@ void	validate_file(char *filepath)
 	while (1)
 	{
 		line = get_next_line(fd);
-		line_split = ft_split(line, ' ');
+		if (line && line[ft_strlen(line) - 1] == '\n')
+			line[ft_strlen(line) - 1] = '\0';
+		if (line)
+		{
+			line_split = ft_split(line, ' ');
+			free(line);
+		}
+		else
+			break;
 		if (!ft_strncmp(line_split[0], "A\0", 2))
 			validate_ambient(line_split, line);
 		else if (!ft_strncmp(line_split[0], "C\0", 2))
 			validate_camera(line_split, line);
 		else if (!ft_strncmp(line_split[0], "L\0", 2))
 			validate_light(line_split, line);
-		else if (!ft_strncmp(line_split[0], "S\0", 2))
+		else if (!ft_strncmp(line_split[0], "sp\0", 3))
 			validate_sphere(line_split, line);
-		else if (!ft_strncmp(line_split[0], "P\0", 2))
+		else if (!ft_strncmp(line_split[0], "pl\0", 3))
 			validate_plane(line_split, line);
-		else if (!ft_strncmp(line_split[0], "C\0", 2))
-			validate_cylinder(line_split[0], line);
+		else if (!ft_strncmp(line_split[0], "cy\0", 3))
+			validate_cylinder(line_split, line);
 		else
 			exit(1);
 		ft_arr2d_free(line_split);
-		free(line);
 	}
 }

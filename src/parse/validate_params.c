@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:02:01 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/04 12:05:30 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/04 13:00:35 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ int	check_vector(char *vector)
 {
 	char	**vector_split;
 	int		i;
-	double	x, y, z, magnitude;
 
+	double x, y, z, magnitude;
 	if (!vector || vector[ft_strlen(vector) - 1] == ',')
 		return (-1);
 	vector_split = ft_split(vector, ',');
