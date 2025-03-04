@@ -3,7 +3,9 @@ CFLAGS = -Wall -Wextra -Werror -g
 
 NAME = miniRT
 
-SRCS = src/main.c src/window/window_management.c
+SRCS = src/main.c src/window/window_management.c \
+	   src/parse/validate_file.c src/parse/validate_objects.c src/parse/validate_params.c \
+	   src/parse/validate_settings.c src/parse/validate_utils.c
 
 OBJ_DIR = obj
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)

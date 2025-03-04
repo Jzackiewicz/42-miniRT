@@ -6,16 +6,14 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 16:19:50 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/04 12:02:54 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/04 12:58:21 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parser.h"
 
-void	clean_on_error(char **line_split, char *line)
+void	clean_on_error(char **line_split)
 {
-	if (line)
-		free(line);
 	if (line_split)
 		ft_arr2d_free(line_split);
 	exit(1);
