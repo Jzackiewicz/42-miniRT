@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 16:19:50 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/04 14:25:55 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/05 19:03:21 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ int	is_valid_float(const char *str)
 	int	has_dot;
 	int	has_digit;
 
-	i = 0;
+	i = -1;
 	has_dot = 0;
 	has_digit = 0;
 	if (!str || !*str)
 		return (0);
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i])
+	while (str[++i])
 	{
+		if (!i && (str[i] == '+' || str[i] == '-'))
+			continue ;
 		if (str[i] == '.')
 		{
 			if (has_dot)
@@ -60,7 +60,21 @@ int	is_valid_float(const char *str)
 			return (0);
 		else
 			has_digit = 1;
-		i++;
 	}
 	return (has_digit);
+}
+
+int	drain_file(int fd)
+{
+	char	*line;
+
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			return (-1);
+		free(line);
+	}
+	close(fd);
+	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:13:36 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/04 15:27:36 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/05 18:17:43 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	validate_camera(char **line_split)
 		return (clean_on_error(line_split));
 	if (check_cords(line_split[1]) == -1)
 		return (clean_on_error(line_split));
-	if (check_vector(line_split[2]) == -1)
+	if (check_vector(line_split[2], -1) == -1)
 		return (clean_on_error(line_split));
 	if (!is_valid_number(line_split[3]) || check_for_overflow(line_split[3]))
 		return (clean_on_error(line_split));
@@ -64,25 +64,28 @@ static int	validate_light(char **line_split)
 
 // returns 0 on successful validation
 // 1 on id not found
-// -1 on unsuccessful validatio
-int	validate_settings(char **line_split, int fd)
+// -1 on unsuccessful validation
+int	validate_settings(char **line_split, int fd, t_key_presence *key_presence)
 {
 	if (!ft_strncmp(line_split[0], "A\0", 2))
 	{
 		if (validate_ambient(line_split) == -1)
 			return (drain_file(fd));
+		key_presence->no_present[AMBIENT]++;
 		return (0);
 	}
 	else if (!ft_strncmp(line_split[0], "C\0", 2))
 	{
 		if (validate_camera(line_split) == -1)
 			return (drain_file(fd));
+		key_presence->no_present[CAMERA]++;
 		return (0);
 	}
 	else if (!ft_strncmp(line_split[0], "L\0", 2))
 	{
 		if (validate_light(line_split) == -1)
 			return (drain_file(fd));
+		key_presence->no_present[LIGHT]++;
 		return (0);
 	}
 	else
