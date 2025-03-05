@@ -74,7 +74,7 @@ double	*negate_tuple(double *tuple)
 	return (result);
 }
 
-double	*multiply_tuple_scalar(double *tuple, double scalar)
+double	*multiply_tuple(double *tuple, double scalar)
 {
 	size_t	i;
 	double	*result;
@@ -94,7 +94,7 @@ double	*multiply_tuple_scalar(double *tuple, double scalar)
 	return (result);
 }
 
-double	*divide_tuple_scalar(double *tuple, double scalar)
+double	*divide_tuple(double *tuple, double scalar)
 {
 	size_t	i;
 	double	*result;
@@ -138,13 +138,13 @@ double	*divide_tuple_scalar(double *tuple, double scalar)
 	{
 		printf("%f ", r[i]);
 	}
-	r = multiply_tuple_scalar(t1, 2.5);
+	r = multiply_tuple(t1, 2.5);
 	printf("\nmnożenie: ");
 	for (int i = 0; i < 4; i++)
 	{
 		printf("%f ", r[i]);
 	}
-	r = divide_tuple_scalar(t1, 3);
+	r = divide_tuple(t1, 3);
 	printf("\ndzielenie: ");
 	for (int i = 0; i < 4; i++)
 	{
