@@ -6,32 +6,32 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 12:01:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/05 21:10:39 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/05 21:14:52 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parser.h"
 
 // returns -1 on error, 0 on cool name d-_-b
-static int check_extension(const char *filepath)
+static int	check_extension(const char *filepath)
 {
-    int len;
-    const char *ext;
+	int			len;
+	const char	*ext;
 
-    if (!filepath)
-        return (-1);
-    ext = ft_strrchr(filepath, '/');
-    if (ext)
-        ext++;
+	if (!filepath)
+		return (-1);
+	ext = ft_strrchr(filepath, '/');
+	if (ext)
+		ext++;
 	if (ext)
 		len = ft_strlen(ext);
 	else
 		len = ft_strlen(filepath);
-    if (len < 3)
-        return (-1);
-    if (ft_strncmp(ext + len - 3, ".rt", 3) == 0)
-        return (0);
-    return (-1);
+	if (len < 3)
+		return (-1);
+	if (ft_strncmp(ext + len - 3, ".rt", 3) == 0)
+		return (0);
+	return (-1);
 }
 
 static void	overwrite_nl(char *line)
