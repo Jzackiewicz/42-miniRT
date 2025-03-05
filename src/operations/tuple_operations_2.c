@@ -34,7 +34,7 @@ double	*normalize(double *vector)
 	size_t	i;
 
 	i = 0;
-	result = divide_tuple_scalar(vector, magnitude(vector));
+	result = divide_tuple(vector, magnitude(vector));
 	return (result);
 }
 
