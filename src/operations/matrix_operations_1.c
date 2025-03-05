@@ -6,11 +6,25 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:00 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/05 12:31:43 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/05 16:37:00 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/operations.h"
+
+t_matrix	*tuple_to_matrix(double *tuple)
+{
+	t_matrix	*matrix;
+	int			i;
+
+	if (!tuple)
+		return (NULL);
+	matrix = init_matrix(1, 4);
+	i = -1;
+	while (++i < 4)
+		matrix->grid[0][i] = tuple[i];
+	return (matrix);
+}
 
 t_matrix	*multiply_matrices(t_matrix *matrix1, t_matrix *matrix2)
 {
@@ -40,14 +54,14 @@ t_matrix	*multiply_matrices(t_matrix *matrix1, t_matrix *matrix2)
 	return (result);
 }
 
-void	transpose(t_matrix *matrix)
+t_matrix	*transpose(t_matrix *matrix)
 {
 	t_matrix	*result;
 	int			i;
 	int			j;
 
 	if (!matrix)
-		return ;
+		return (NULL);
 	result = init_matrix(matrix->col, matrix->row);
 	i = 0;
 	while (i < matrix->col)
@@ -60,6 +74,28 @@ void	transpose(t_matrix *matrix)
 		}
 		i++;
 	}
-	free_matrix(matrix);
-	matrix = result;
+	return (result);
+}
+
+void	identify(t_matrix *matrix)
+{
+	int	i;
+	int	j;
+
+	if (!matrix)
+		return ;
+	i = 0;
+	while (i < matrix->row)
+	{
+		j = 0;
+		while (j < matrix->col)
+		{
+			if (i == j)
+				matrix->grid[i][j] = 1;
+			else
+				matrix->grid[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
 }
