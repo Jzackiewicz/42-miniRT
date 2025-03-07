@@ -5,7 +5,9 @@ NAME = miniRT
 
 SRCS =	src/main.c \
 		src/window/window_management.c \
-		src/operations/tuple_operations_1.c src/operations/tuple_operations_2.c src/operations/matrix_operations_1.c src/operations/matrix_operations_2.c
+		src/operations/matrices/matrix_inversion.c src/operations/matrices/matrix_ops.c src/operations/matrices/matrix_utils.c \
+		src/operations/transformations/rotation.c src/operations/transformations/transform.c \
+		src/operations/tuples/tuple_ops_1.c src/operations/tuples/tuple_ops_2.c
 
 OBJ_DIR = obj
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)

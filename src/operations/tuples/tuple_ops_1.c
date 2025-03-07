@@ -10,8 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/operations.h"
+#include "../../../inc/operations.h"
 
+/* Returns a tuple which is a result of adding two tuples.
+Undefined behaviour when tuples have different length than 4 */
 double	*add_tuple(double *tuple1, double *tuple2)
 {
 	size_t	i;
@@ -28,11 +30,13 @@ double	*add_tuple(double *tuple1, double *tuple2)
 		result[i] = tuple1[i] + tuple2[i];
 		i++;
 	}
-	if ((result[3] - 2.0) < 0.1 && (result[3] - 2.0) > -0.1)
+	if ((result[3] - 2.0) < 0.01 && (result[3] - 2.0) > -0.01)
 		result[3] = 1.0;
 	return (result);
 }
 
+/* Returns a tuple which is a result of substracting two tuples.
+Undefined behaviour when tuples have different length than 4 */
 double	*substract_tuple(double *tuple1, double *tuple2)
 {
 	size_t	i;
@@ -49,11 +53,13 @@ double	*substract_tuple(double *tuple1, double *tuple2)
 		result[i] = tuple1[i] - tuple2[i];
 		i++;
 	}
-	if ((result[3] + 1.0) < 0.1 && (result[3] + 1.0) > -0.1)
+	if ((result[3] + 1.0) < 0.01 && (result[3] + 1.0) > -0.01)
 		result[3] = 1.0;
 	return (result);
 }
 
+/* Returns negated tuple.
+Undefined behaviour when given tuple has different length than 4 */
 double	*negate_tuple(double *tuple)
 {
 	size_t	i;
@@ -74,6 +80,8 @@ double	*negate_tuple(double *tuple)
 	return (result);
 }
 
+/* Returns a tuple which is a result of multiplying tuple by scalar.
+Undefined behaviour when given tuple has different length than 4 */
 double	*multiply_tuple(double *tuple, double scalar)
 {
 	size_t	i;
@@ -94,6 +102,8 @@ double	*multiply_tuple(double *tuple, double scalar)
 	return (result);
 }
 
+/* Returns a tuple which is a result of dividing tuple by scalar.
+Undefined behaviour when given tuple has different length than 4 */
 double	*divide_tuple(double *tuple, double scalar)
 {
 	size_t	i;
@@ -113,41 +123,3 @@ double	*divide_tuple(double *tuple, double scalar)
 	result[i] = tuple[i];
 	return (result);
 }
-
-/* int main()
-{
-	double t1[] = {18.24, 1.123, -123.2, 1};
-	double t2[] = {4, 3, 2, 0};
-	double *r;
-
-	r = add_tuple(t1, t2);
-	printf("dodawanie: ");
-	for (int i = 0; i < 4; i++)
-	{
-		printf("%f ", r[i]);
-	}
-	r = substract_tuple(t2, t1);
-	printf("\nodejmowanie: ");
-	for (int i = 0; i < 4; i++)
-	{
-		printf("%f ", r[i]);
-	}
-	r = negate_tuple(t2);
-	printf("\nniggacja: ");
-	for (int i = 0; i < 4; i++)
-	{
-		printf("%f ", r[i]);
-	}
-	r = multiply_tuple(t1, 2.5);
-	printf("\nmnożenie: ");
-	for (int i = 0; i < 4; i++)
-	{
-		printf("%f ", r[i]);
-	}
-	r = divide_tuple(t1, 3);
-	printf("\ndzielenie: ");
-	for (int i = 0; i < 4; i++)
-	{
-		printf("%f ", r[i]);
-	}
-} */

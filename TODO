@@ -15,9 +15,7 @@ Parsing
 		*parsing
 		*error handling
 
-Operations
-	>input - tuples and/or matrices
-	>output - result of an operation
-	>functions
-		*a lot of stuff lol
+Issues:
+1. Erors on valgrind when printing result of multiplying matrix and vector (it prints it out correctly though).
+
 		
