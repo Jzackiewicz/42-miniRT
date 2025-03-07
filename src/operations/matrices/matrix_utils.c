@@ -6,12 +6,13 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 09:40:56 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/05 10:59:09 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/07 13:11:37 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/operations.h"
+#include "../../../inc/operations.h"
 
+/* Creates new row * col matrix filled with zeros */
 t_matrix	*init_matrix(int row, int col)
 {
 	t_matrix	*matrix;
@@ -36,6 +37,22 @@ t_matrix	*init_matrix(int row, int col)
 		while (++j < col)
 			matrix->grid[i][j] = 0;
 	}
+	return (matrix);
+}
+
+/* Returns a 1x4 matrix from 4-element tuple.
+Other tuples sizes are not defined. */
+t_matrix	*tuple_to_matrix(double *tuple)
+{
+	t_matrix	*matrix;
+	int			i;
+
+	if (!tuple)
+		return (NULL);
+	matrix = init_matrix(1, 4);
+	i = -1;
+	while (++i < 4)
+		matrix->grid[0][i] = tuple[i];
 	return (matrix);
 }
 
@@ -84,12 +101,3 @@ void	print_matrix(t_matrix *matrix)
 	printf("}");
 	printf("\n");
 }
-
-/* int	main(void)
-{
-	t_matrix *test;
-
-	test = init_matrix(2, 7);
-	print_matrix(test);
-	free_matrix(test);
-} */

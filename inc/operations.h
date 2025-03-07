@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 17:29:30 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/06 11:33:02 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/07 17:45:16 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,21 @@ double		dot(double *vector1, double *vector2);
 double		*cross(double *vector1, double *vector2);
 
 //			matrix_operations
-t_matrix	*tuple_to_matrix(double *tuple);
 t_matrix	*multiply_matrices(t_matrix *matrix1, t_matrix *matrix2);
-t_matrix	*transpose(t_matrix *matrix);
+double		*multiply_matrix_and_tuple(t_matrix *matrix, double *tuple);
+void		transpose(t_matrix **matrix);
+void		make_identity(t_matrix *matrix);
 t_matrix	*inverse(t_matrix *matrix);
-void		identify(t_matrix *matrix);
+t_matrix	*translation(double *tuple);
+t_matrix	*scaling(double *tuple);
+t_matrix	*shearing(double *tuple);
+t_matrix	*rotation_x(double angle);
+t_matrix	*rotation_y(double angle);
+t_matrix	*rotation_z(double angle);
 
 //			matrix_utils
 t_matrix	*init_matrix(int row, int col);
+t_matrix	*tuple_to_matrix(double *tuple);
 void		free_matrix(t_matrix *matrix);
 void		print_matrix(t_matrix *matrix);
 #endif

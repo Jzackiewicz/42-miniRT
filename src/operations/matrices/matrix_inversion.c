@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_operations_2.c                              :+:      :+:    :+:   */
+/*   matrix_inversion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:31:28 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/05 12:32:26 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/07 12:28:21 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/operations.h"
+#include "../../../inc/operations.h"
+
+static double	cofactor(t_matrix *matrix, int row, int col);
 
 static t_matrix	*submatrix(t_matrix *matrix, int row, int col)
 {
@@ -112,50 +114,3 @@ t_matrix	*inverse(t_matrix *matrix)
 	}
 	return (inverted);
 }
-
-/* int	main(void)
-{
-	t_matrix *m1, *m2, *r, *s;
-
-	// m1 = init_matrix(3, 3);
-	m2 = init_matrix(8, 8);
-
-	// for (int i = 0; i < m1->row; i++)
-	// {
-	// 	for (int j = 0; j < m1->col; j++)
-	// 		m1->grid[i][j] = rand() % (12) - 5;
-	// }
-	for (int i = 0; i < m2->row; i++)
-	{
-		for (int j = 0; j < m2->col; j++)
-			m2->grid[i][j] = rand() % (13) - 5;
-	}
-	// printf("m1: \n");
-	// print_matrix(m1);
-	printf("m2: \n");
-	print_matrix(m2);
-	printf("r: \n");
-	// r = multiply_matrices(m1, m2);
-	// print_matrix(r);
-	// printf("transposed: \n");
-	// r = transpose(r);
-	// print_matrix(r);
-	// printf("m1: \n");
-	// print_matrix(m1);
-	// printf("m2: \n");
-	// print_matrix(m2);
-	// printf("multiplied m1 and m2: \n");
-	// s = multiply_matrices(m1, m2);
-	// print_matrix(s);
-
-	printf("inverted m2: \n");
-	r = inverse(m2);
-	print_matrix(r);
-	// printf("multiplied m1 and r: \n");
-	// s = multiply_matrices(m1, r);
-	// print_matrix(s);
-	// free_matrix(m1);
-	free_matrix(m2);
-	free_matrix(r);
-	// free_matrix(s);
-} */

@@ -10,13 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/operations.h"
+#include "../../../inc/operations.h"
 
+/* Returns length of a vector or -1.0 when *vector points to NULL */
 double	magnitude(double *vector)
 {
 	double	result;
 	size_t	i;
 
+	if (!vector)
+		return (-1);
 	i = 0;
 	result = 0;
 	while (i < 3)
@@ -28,6 +31,7 @@ double	magnitude(double *vector)
 	return (result);
 }
 
+/* Returns normalized vector */
 double	*normalize(double *vector)
 {
 	double	*result;
@@ -35,9 +39,12 @@ double	*normalize(double *vector)
 
 	i = 0;
 	result = divide_tuple(vector, magnitude(vector));
+	if (!result)
+		return (NULL);
 	return (result);
 }
 
+/* Returns a dot product (scalar) of two vectors */
 double	dot(double *vector1, double *vector2)
 {
 	double	result;
@@ -55,6 +62,7 @@ double	dot(double *vector1, double *vector2)
 	return (result);
 }
 
+/* Returns a cross product (vector) of two vectors */
 double	*cross(double *vector1, double *vector2)
 {
 	size_t	i;
@@ -72,28 +80,3 @@ double	*cross(double *vector1, double *vector2)
 	result[3] = 0;
 	return (result);
 }
-
-/* int	main(void)
-{
-	double t1[] = {18.24, 1.123, -123.2, 0};
-	double t2[] = {4, 3, 2, 0};
-	double *r;
-	double x;
-
-	r = normalize(t1);
-	printf("\nnormalizacja: ");
-	for (int i = 0; i < 3; i++)
-	{
-		printf("%f ", r[i]);
-	}
-	x = magnitude(r);
-	printf("\n dlugosc znormalizowanego ziuta: %f\n", x);
-
-	printf("\ncross: ");
-	r = cross(t1, t2);
-	for (int i = 0; i < 3; i++)
-	{
-		printf("%f ", r[i]);
-	}
-	return (0);
-} */
