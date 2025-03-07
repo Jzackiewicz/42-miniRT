@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 09:40:56 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/07 13:11:37 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/07 18:16:49 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,29 +75,26 @@ void	print_matrix(t_matrix *matrix)
 	int	i;
 	int	j;
 
-	i = 0;
 	if (!matrix)
 	{
 		printf("Error - No matrix\n");
 		return ;
 	}
 	printf("{");
-	while (i < matrix->row)
+	i = -1;
+	while (++i < matrix->row)
 	{
-		j = 0;
 		printf("{");
-		while (j < matrix->col)
+		j = -1;
+		while (++j < matrix->col)
 		{
 			printf("%lf", matrix->grid[i][j]);
-			j++;
 			if (j != matrix->col)
 				printf(",");
 		}
 		printf("}");
-		i++;
 		if (i != matrix->row)
 			printf(",\n");
 	}
-	printf("}");
-	printf("\n");
+	printf("}\n");
 }
