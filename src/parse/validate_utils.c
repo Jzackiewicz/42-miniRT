@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 16:19:50 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/05 19:03:21 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/10 18:54:52 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	drain_file(int fd)
 
 	while (1)
 	{
-		line = get_next_line(fd);
+		line = get_next_line(fd, 0);
 		if (!line)
 			return (-1);
 		free(line);

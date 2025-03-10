@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:21:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/10 14:37:12 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/10 19:34:53 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_key_presence
 // SECTION: data structures for objects and settings
 typedef struct s_object
 {
-	char	id;
+	char	*id;
 	// ambient specific
 	double	ambient_light_ratio;
 	// camera specific
@@ -49,7 +49,6 @@ typedef struct s_object
 	int		*colors;
 	double	*cords;
 	double	*vector;
-	double	height;
 }			t_object;
 
 // each struct for each object, store all in one
@@ -69,5 +68,18 @@ int			clean_on_error(char **line_split);
 int			validate_file(char *filepath);
 
 // SECTION: parsing functions
+void		init_with_default(t_object *obj);
+void		parse_colors(char *colors, t_object *obj);
+void		parse_vector(char *vector, t_object *obj);
+void		parse_cords(char *cords, t_object *obj);
+
+void		parse_settings(char **line_split, t_object **objects, int i);
+
+void		free_object(t_object *obj);
+
+void		parse_file(char *filepath);
+
+// debug utils
+void		print_object(t_object *obj);
 
 #endif

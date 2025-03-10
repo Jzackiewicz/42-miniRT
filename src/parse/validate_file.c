@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 12:01:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/10 14:51:28 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/10 18:54:42 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	read_and_validate(char *line, char **line_split, int fd,
 
 	while (1)
 	{
-		line = get_next_line(fd);
+		line = get_next_line(fd, 0);
 		if (!line)
 			return (0);
 		overwrite_nl(line);
