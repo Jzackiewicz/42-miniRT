@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:21:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/10 19:34:53 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/11 12:40:55 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ typedef struct s_object
 	double	*vector;
 }			t_object;
 
-// each struct for each object, store all in one
-
 // SECTION: validation functions
 int			check_colors(char *colors);
 int			check_cords(char *cords);
@@ -72,10 +70,9 @@ void		init_with_default(t_object *obj);
 void		parse_colors(char *colors, t_object *obj);
 void		parse_vector(char *vector, t_object *obj);
 void		parse_cords(char *cords, t_object *obj);
-
-void		parse_settings(char **line_split, t_object **objects, int i);
-
 void		free_object(t_object *obj);
+void		parse_settings(char **line_split, t_object **objects, int i);
+void		parse_objects(char **line_split, t_object **objects, int i);
 
 void		parse_file(char *filepath);
 
