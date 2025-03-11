@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:44:57 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/11 14:41:23 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:12:35 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ int	parse_lines(int fd, char *line, char **line_split, t_object **objects)
 }
 
 // TODO:
-// testing !!!
+// testing finish
 // memory testing !!!
+
 // obj printing
 // for (int i = 0; i < no_elems; i++)
 // {

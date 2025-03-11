@@ -6,13 +6,13 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/11 14:42:30 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:12:11 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/miniRT.h"
 
-// no_objects is neccessary for properly freeing the objects
+// no_objects variable is neccessary for properly freeing the objects
 int	main(int ac, char **av)
 {
 	t_object	**objs;
