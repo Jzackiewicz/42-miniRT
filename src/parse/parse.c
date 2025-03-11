@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:44:57 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/11 12:41:43 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:26:14 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	get_no_elements(char *filepath)
 		free(line);
 		if (!line_split || !*line_split)
 			return (close(fd), -1);
-		no_elems++;
+		if (line_split[0][0] != '\n')
+			no_elems++;
 		ft_arr2d_free(line_split);
 	}
 	return (close(fd), no_elems);
@@ -49,36 +50,40 @@ void	parse_element(char **line_split, t_object **objects, int i)
 int	parse_lines(int fd, char *line, char **line_split, t_object **objects)
 {
 	int	i;
-	int	reset_flag;
 
-	i = 0;
-	reset_flag = 1;
+	i = -1;
 	while (1)
 	{
 		line = get_next_line(fd);
-		reset_flag = 0;
 		if (!line)
 			return (close(fd), 0);
+		if (*line == '\n')
+		{
+			free(line);
+			continue ;
+		}
 		line_split = ft_split(line, ' ');
 		free(line);
 		if (!line_split)
 			return (close(fd), -1);
-		parse_element(line_split, objects, i);
+		parse_element(line_split, objects, ++i);
 		ft_arr2d_free(line_split);
 		if (!objects[i])
 			return (close(fd), -1);
-		i++;
 	}
-	line = get_next_line(fd);
 	close(fd);
 	return (0);
 }
 
 // TODO:
-// object parsing
-// get_next_line remains leaking()
 // testing !!!
 // memory testing !!!
+// obj printing
+// for (int i = 0; i < no_elems; i++)
+	// {
+	// 	printf("\n");
+	// 	print_object(objects[i]);
+	// }
 void	parse_file(char *filepath)
 {
 	char		*line;
@@ -95,15 +100,8 @@ void	parse_file(char *filepath)
 	objects = malloc((no_elems + 1) * sizeof(t_object *));
 	if (!objects)
 		return ;
-	for (int i = 0; i <= no_elems; i++)
-		objects[i] = NULL;
 	fd = open(filepath, O_RDONLY);
 	parse_lines(fd, line, line_split, objects);
-	for (int i = 0; i < no_elems; i++)
-	{
-		printf("\n");
-		print_object(objects[i]);
-	}
 	while (--no_elems != -1)
 	{
 		free_object(objects[no_elems]);
@@ -111,4 +109,3 @@ void	parse_file(char *filepath)
 	}
 	free(objects);
 }
-
