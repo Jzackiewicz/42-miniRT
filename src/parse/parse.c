@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:44:57 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/11 12:27:12 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/11 12:41:43 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ void	parse_element(char **line_split, t_object **objects, int i)
 		parse_settings(line_split, objects, i);
 	else if (!ft_strncmp(line_split[0], "sp\0", 3) || !ft_strncmp(line_split[0],
 			"pl\0", 3) || !ft_strncmp(line_split[0], "cy\0", 3))
-		// tmp
-		objects[i] = NULL;
+		parse_objects(line_split, objects, i);
 }
 
 int	parse_lines(int fd, char *line, char **line_split, t_object **objects)
@@ -100,11 +99,11 @@ void	parse_file(char *filepath)
 		objects[i] = NULL;
 	fd = open(filepath, O_RDONLY);
 	parse_lines(fd, line, line_split, objects);
-	// for (int i = 0; i < no_elems; i++)
-	// {
-	// 	printf("\n");
-	// 	print_object(objects[i]);
-	// }
+	for (int i = 0; i < no_elems; i++)
+	{
+		printf("\n");
+		print_object(objects[i]);
+	}
 	while (--no_elems != -1)
 	{
 		free_object(objects[no_elems]);
