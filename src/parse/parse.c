@@ -6,13 +6,13 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:44:57 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/10 19:42:55 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/11 12:27:12 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parser.h"
 
-int	get_no_elements(char *filepath, int reset_flag)
+int	get_no_elements(char *filepath)
 {
 	char	*line;
 	char	**line_split;
@@ -23,10 +23,9 @@ int	get_no_elements(char *filepath, int reset_flag)
 	fd = open(filepath, O_RDONLY);
 	while (1)
 	{
-		line = get_next_line(fd, reset_flag);
-		reset_flag = 0;
+		line = get_next_line(fd);
 		if (!line)
-			return (close(fd), no_elems);
+			return (free(line), close(fd), no_elems);
 		line_split = ft_split(line, ' ');
 		free(line);
 		if (!line_split || !*line_split)
@@ -57,7 +56,7 @@ int	parse_lines(int fd, char *line, char **line_split, t_object **objects)
 	reset_flag = 1;
 	while (1)
 	{
-		line = get_next_line(fd, reset_flag);
+		line = get_next_line(fd);
 		reset_flag = 0;
 		if (!line)
 			return (close(fd), 0);
@@ -71,6 +70,7 @@ int	parse_lines(int fd, char *line, char **line_split, t_object **objects)
 			return (close(fd), -1);
 		i++;
 	}
+	line = get_next_line(fd);
 	close(fd);
 	return (0);
 }
@@ -92,21 +92,24 @@ void	parse_file(char *filepath)
 	line_split = NULL;
 	if (validate_file(filepath) != 0)
 		return ;
-	no_elems = get_no_elements(filepath, 1);
+	no_elems = get_no_elements(filepath);
 	objects = malloc((no_elems + 1) * sizeof(t_object *));
 	if (!objects)
 		return ;
+	for (int i = 0; i <= no_elems; i++)
+		objects[i] = NULL;
 	fd = open(filepath, O_RDONLY);
 	parse_lines(fd, line, line_split, objects);
-	for (int i = 0; i < 3; i++)
+	// for (int i = 0; i < no_elems; i++)
+	// {
+	// 	printf("\n");
+	// 	print_object(objects[i]);
+	// }
+	while (--no_elems != -1)
 	{
-		printf("\n");
-		print_object(objects[i]);
-	}
-	for (int i = 0; i < 3; i++)
-	{
-		free_object(objects[i]);
-		free(objects[i]);
+		free_object(objects[no_elems]);
+		free(objects[no_elems]);
 	}
 	free(objects);
 }
+

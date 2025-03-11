@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:43:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/10 19:12:35 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/11 12:25:10 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,19 @@ void parse_cords(char *cords, t_object *obj)
 
 void free_object(t_object *obj)
 {
-	if (obj->id)
-		free(obj->id);
-	if (obj->orientation_vector)
-		free(obj->orientation_vector);
-	if (obj->colors)
-		free(obj->colors);
-	if (obj->cords)
-		free(obj->cords);
-	if (obj->vector)
-		free(obj->vector);
+	if (obj)
+	{
+		if (obj->id)
+			free(obj->id);
+		if (obj->orientation_vector)
+			free(obj->orientation_vector);
+		if (obj->colors)
+			free(obj->colors);
+		if (obj->cords)
+			free(obj->cords);
+		if (obj->vector)
+			free(obj->vector);
+	}
 }
 
 void print_object(t_object *obj)
