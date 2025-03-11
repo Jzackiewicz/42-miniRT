@@ -23,6 +23,7 @@ TEST(ParsingValidation, ValidFile1)
 
     // ambient Light
     EXPECT_EQ(objs[0]->id[0], 'A');
+    EXPECT_FLOAT_EQ(objs[0]->ambient_light_ratio, 0.2);
     EXPECT_EQ(objs[0]->colors[0], 255);
     EXPECT_EQ(objs[0]->colors[1], 255);
     EXPECT_EQ(objs[0]->colors[2], 255);
@@ -46,6 +47,225 @@ TEST(ParsingValidation, ValidFile1)
     EXPECT_EQ(objs[2]->colors[0], 255);
     EXPECT_EQ(objs[2]->colors[1], 255);
     EXPECT_EQ(objs[2]->colors[2], 255);
+
+    // plane
+    EXPECT_STREQ(objs[3]->id, "pl");
+    EXPECT_FLOAT_EQ(objs[3]->cords[0], 0.0);
+    EXPECT_FLOAT_EQ(objs[3]->cords[1], 0.0);
+    EXPECT_FLOAT_EQ(objs[3]->cords[2], 0.0);
+    EXPECT_FLOAT_EQ(objs[3]->vector[0], 0.0);
+    EXPECT_FLOAT_EQ(objs[3]->vector[1], 1.0);
+    EXPECT_FLOAT_EQ(objs[3]->vector[2], 0.0);
+    EXPECT_EQ(objs[3]->colors[0], 255);
+    EXPECT_EQ(objs[3]->colors[1], 0);
+    EXPECT_EQ(objs[3]->colors[2], 225);
+
+    // sphere
+    EXPECT_STREQ(objs[4]->id, "sp");
+    EXPECT_FLOAT_EQ(objs[4]->cords[0], 0.0);
+    EXPECT_FLOAT_EQ(objs[4]->cords[1], 0.0);
+    EXPECT_FLOAT_EQ(objs[4]->cords[2], 20.0);
+    EXPECT_FLOAT_EQ(objs[4]->diameter, 20.0);
+    EXPECT_EQ(objs[4]->colors[0], 255);
+    EXPECT_EQ(objs[4]->colors[1], 0);
+    EXPECT_EQ(objs[4]->colors[2], 0);
+
+    // cylinder
+    EXPECT_STREQ(objs[5]->id, "cy");
+    EXPECT_FLOAT_EQ(objs[5]->cords[0], 50.0);
+    EXPECT_FLOAT_EQ(objs[5]->cords[1], 0.0);
+    EXPECT_FLOAT_EQ(objs[5]->cords[2], 20.6);
+    EXPECT_FLOAT_EQ(objs[5]->vector[0], 0.0);
+    EXPECT_FLOAT_EQ(objs[5]->vector[1], 0.0);
+    EXPECT_FLOAT_EQ(objs[5]->vector[2], 1.0);
+    EXPECT_FLOAT_EQ(objs[5]->diameter, 14.2);
+    EXPECT_FLOAT_EQ(objs[5]->height, 21.42);
+    EXPECT_EQ(objs[5]->colors[0], 10);
+    EXPECT_EQ(objs[5]->colors[1], 0);
+    EXPECT_EQ(objs[5]->colors[2], 255);
+
+    free_objects(objs, no_elems);
+    free(filepath);
+}
+
+TEST(ParsingValidation, ValidFile2)
+{
+    char *filepath = ft_strdup("../testfiles/multip_spaces.rt");
+    t_object **objs = NULL;
+
+    int no_elems = parse_file(filepath, &objs);
+
+    ASSERT_NE(objs, nullptr);
+    ASSERT_NE(objs[0], nullptr);
+    ASSERT_NE(objs[1], nullptr);
+    ASSERT_NE(objs[2], nullptr);
+    ASSERT_NE(objs[3], nullptr);
+    ASSERT_NE(objs[4], nullptr);
+    ASSERT_NE(objs[5], nullptr);
+
+    // ambient Light
+    EXPECT_EQ(objs[0]->id[0], 'A');
+    EXPECT_FLOAT_EQ(objs[0]->ambient_light_ratio, 0.3);
+    EXPECT_EQ(objs[0]->colors[0], 255);
+    EXPECT_EQ(objs[0]->colors[1], 255);
+    EXPECT_EQ(objs[0]->colors[2], 255);
+
+    // camera
+    EXPECT_EQ(objs[1]->id[0], 'C');
+    EXPECT_FLOAT_EQ(objs[1]->cords[0], -50.0);
+    EXPECT_FLOAT_EQ(objs[1]->cords[1], 0.0);
+    EXPECT_FLOAT_EQ(objs[1]->cords[2], 20.0);
+    EXPECT_FLOAT_EQ(objs[1]->orientation_vector[0], 0);
+    EXPECT_FLOAT_EQ(objs[1]->orientation_vector[1], 0);
+    EXPECT_FLOAT_EQ(objs[1]->orientation_vector[2], 1);
+    EXPECT_EQ(objs[1]->fov, 90);
+
+    // light
+    EXPECT_EQ(objs[2]->id[0], 'L');
+    EXPECT_FLOAT_EQ(objs[2]->cords[0], -40.0);
+    EXPECT_FLOAT_EQ(objs[2]->cords[1], 0.0);
+    EXPECT_FLOAT_EQ(objs[2]->cords[2], 50.0);
+    EXPECT_FLOAT_EQ(objs[2]->brightness, 0.5);
+    EXPECT_EQ(objs[2]->colors[0], 10);
+    EXPECT_EQ(objs[2]->colors[1], 10);
+    EXPECT_EQ(objs[2]->colors[2], 255);
+
+    // plane
+    EXPECT_STREQ(objs[3]->id, "pl");
+    EXPECT_FLOAT_EQ(objs[3]->cords[0], 0.0);
+    EXPECT_FLOAT_EQ(objs[3]->cords[1], 0.0);
+    EXPECT_FLOAT_EQ(objs[3]->cords[2], 10.0);
+    EXPECT_FLOAT_EQ(objs[3]->vector[0], 0.0);
+    EXPECT_FLOAT_EQ(objs[3]->vector[1], 1.0);
+    EXPECT_FLOAT_EQ(objs[3]->vector[2], 0.0);
+    EXPECT_EQ(objs[3]->colors[0], 255);
+    EXPECT_EQ(objs[3]->colors[1], 100);
+    EXPECT_EQ(objs[3]->colors[2], 0);
+
+    // sphere
+    EXPECT_STREQ(objs[4]->id, "sp");
+    EXPECT_FLOAT_EQ(objs[4]->cords[0], 0.0);
+    EXPECT_FLOAT_EQ(objs[4]->cords[1], 0.0);
+    EXPECT_FLOAT_EQ(objs[4]->cords[2], 20.0);
+    EXPECT_FLOAT_EQ(objs[4]->diameter, 15.0);
+    EXPECT_EQ(objs[4]->colors[0], 255);
+    EXPECT_EQ(objs[4]->colors[1], 0);
+    EXPECT_EQ(objs[4]->colors[2], 255);
+
+    // cylinder
+    EXPECT_STREQ(objs[5]->id, "cy");
+    EXPECT_FLOAT_EQ(objs[5]->cords[0], 100.0);
+    EXPECT_FLOAT_EQ(objs[5]->cords[1], 0.0);
+    EXPECT_FLOAT_EQ(objs[5]->cords[2], 0.0);
+    EXPECT_FLOAT_EQ(objs[5]->vector[0], 1.0);
+    EXPECT_FLOAT_EQ(objs[5]->vector[1], 0.0);
+    EXPECT_FLOAT_EQ(objs[5]->vector[2], 0.0);
+    EXPECT_FLOAT_EQ(objs[5]->diameter, 12.0);
+    EXPECT_FLOAT_EQ(objs[5]->height, 20.0);
+    EXPECT_EQ(objs[5]->colors[0], 0);
+    EXPECT_EQ(objs[5]->colors[1], 255);
+    EXPECT_EQ(objs[5]->colors[2], 0);
+
+    free_objects(objs, no_elems);
+    free(filepath);
+}
+
+TEST(ParsingValidation, MultipleObjectsFile)
+{
+    char *filepath = ft_strdup("../testfiles/multiple_objects.rt");
+    t_object **objs = NULL;
+
+    int no_elems = parse_file(filepath, &objs);
+
+    ASSERT_NE(objs, nullptr);
+    ASSERT_GE(no_elems, 6);
+
+    // Ambient Light
+    EXPECT_EQ(objs[0]->id[0], 'A');
+    EXPECT_FLOAT_EQ(objs[0]->ambient_light_ratio, 0.3);
+    EXPECT_EQ(objs[0]->colors[0], 200);
+    EXPECT_EQ(objs[0]->colors[1], 200);
+    EXPECT_EQ(objs[0]->colors[2], 200);
+
+    // Camera
+    EXPECT_EQ(objs[1]->id[0], 'C');
+    EXPECT_FLOAT_EQ(objs[1]->cords[0], 0.0);
+    EXPECT_FLOAT_EQ(objs[1]->cords[1], 0.0);
+    EXPECT_FLOAT_EQ(objs[1]->cords[2], 50.0);
+    EXPECT_FLOAT_EQ(objs[1]->orientation_vector[0], 0.0);
+    EXPECT_FLOAT_EQ(objs[1]->orientation_vector[1], 0.0);
+    EXPECT_FLOAT_EQ(objs[1]->orientation_vector[2], -1.0);
+    EXPECT_EQ(objs[1]->fov, 90);
+
+    // Light
+    EXPECT_EQ(objs[2]->id[0], 'L');
+    EXPECT_FLOAT_EQ(objs[2]->cords[0], 10.0);
+    EXPECT_FLOAT_EQ(objs[2]->cords[1], 20.0);
+    EXPECT_FLOAT_EQ(objs[2]->cords[2], 30.0);
+    EXPECT_FLOAT_EQ(objs[2]->brightness, 0.8);
+    EXPECT_EQ(objs[2]->colors[0], 255);
+    EXPECT_EQ(objs[2]->colors[1], 255);
+    EXPECT_EQ(objs[2]->colors[2], 255);
+
+    // Plane
+    EXPECT_STREQ(objs[3]->id, "pl");
+    EXPECT_FLOAT_EQ(objs[3]->cords[0], 0.0);
+    EXPECT_FLOAT_EQ(objs[3]->cords[1], -10.0);
+    EXPECT_FLOAT_EQ(objs[3]->cords[2], 0.0);
+    EXPECT_FLOAT_EQ(objs[3]->vector[0], 0.0);
+    EXPECT_FLOAT_EQ(objs[3]->vector[1], 1.0);
+    EXPECT_FLOAT_EQ(objs[3]->vector[2], 0.0);
+    EXPECT_EQ(objs[3]->colors[0], 100);
+    EXPECT_EQ(objs[3]->colors[1], 100);
+    EXPECT_EQ(objs[3]->colors[2], 100);
+
+    // Sphere 1
+    EXPECT_STREQ(objs[4]->id, "sp");
+    EXPECT_FLOAT_EQ(objs[4]->cords[0], 10.0);
+    EXPECT_FLOAT_EQ(objs[4]->cords[1], 10.0);
+    EXPECT_FLOAT_EQ(objs[4]->cords[2], 20.0);
+    EXPECT_FLOAT_EQ(objs[4]->diameter, 5.0);
+    EXPECT_EQ(objs[4]->colors[0], 0);
+    EXPECT_EQ(objs[4]->colors[1], 255);
+    EXPECT_EQ(objs[4]->colors[2], 0);
+
+    // Sphere 2
+    EXPECT_STREQ(objs[5]->id, "sp");
+    EXPECT_FLOAT_EQ(objs[5]->cords[0], -10.0);
+    EXPECT_FLOAT_EQ(objs[5]->cords[1], -10.0);
+    EXPECT_FLOAT_EQ(objs[5]->cords[2], 15.0);
+    EXPECT_FLOAT_EQ(objs[5]->diameter, 8.0);
+    EXPECT_EQ(objs[5]->colors[0], 255);
+    EXPECT_EQ(objs[5]->colors[1], 255);
+    EXPECT_EQ(objs[5]->colors[2], 0);
+
+    // Cylinder 1
+    EXPECT_STREQ(objs[6]->id, "cy");
+    EXPECT_FLOAT_EQ(objs[6]->cords[0], 20.0);
+    EXPECT_FLOAT_EQ(objs[6]->cords[1], 5.0);
+    EXPECT_FLOAT_EQ(objs[6]->cords[2], 10.0);
+    EXPECT_FLOAT_EQ(objs[6]->vector[0], 0.0);
+    EXPECT_FLOAT_EQ(objs[6]->vector[1], 1.0);
+    EXPECT_FLOAT_EQ(objs[6]->vector[2], 0.0);
+    EXPECT_FLOAT_EQ(objs[6]->diameter, 5.0);
+    EXPECT_FLOAT_EQ(objs[6]->height, 10.0);
+    EXPECT_EQ(objs[6]->colors[0], 0);
+    EXPECT_EQ(objs[6]->colors[1], 0);
+    EXPECT_EQ(objs[6]->colors[2], 255);
+
+    // Cylinder 2
+    EXPECT_STREQ(objs[7]->id, "cy");
+    EXPECT_FLOAT_EQ(objs[7]->cords[0], -20.0);
+    EXPECT_FLOAT_EQ(objs[7]->cords[1], -5.0);
+    EXPECT_FLOAT_EQ(objs[7]->cords[2], 15.0);
+    EXPECT_FLOAT_EQ(objs[7]->vector[0], 1.0);
+    EXPECT_FLOAT_EQ(objs[7]->vector[1], 0.0);
+    EXPECT_FLOAT_EQ(objs[7]->vector[2], 0.0);
+    EXPECT_FLOAT_EQ(objs[7]->diameter, 3.0);
+    EXPECT_FLOAT_EQ(objs[7]->height, 15.0);
+    EXPECT_EQ(objs[7]->colors[0], 255);
+    EXPECT_EQ(objs[7]->colors[1], 0);
+    EXPECT_EQ(objs[7]->colors[2], 0);
 
     free_objects(objs, no_elems);
     free(filepath);
