@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:44:57 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/11 13:26:14 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:41:23 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,32 +80,27 @@ int	parse_lines(int fd, char *line, char **line_split, t_object **objects)
 // memory testing !!!
 // obj printing
 // for (int i = 0; i < no_elems; i++)
-	// {
-	// 	printf("\n");
-	// 	print_object(objects[i]);
-	// }
-void	parse_file(char *filepath)
+// {
+// 	printf("\n");
+// 	print_object(objects[i]);
+// }
+// returns the number of parsed elements to free properly, -1 on error
+int	parse_file(char *filepath, t_object ***objects)
 {
-	char		*line;
-	char		**line_split;
-	int			fd;
-	int			no_elems;
-	t_object	**objects;
+	char	*line;
+	char	**line_split;
+	int		fd;
+	int		no_elems;
 
 	line = NULL;
 	line_split = NULL;
 	if (validate_file(filepath) != 0)
-		return ;
+		return (-1);
 	no_elems = get_no_elements(filepath);
-	objects = malloc((no_elems + 1) * sizeof(t_object *));
-	if (!objects)
-		return ;
+	*objects = malloc((no_elems + 1) * sizeof(t_object *));
+	if (!*objects)
+		return (-1);
 	fd = open(filepath, O_RDONLY);
-	parse_lines(fd, line, line_split, objects);
-	while (--no_elems != -1)
-	{
-		free_object(objects[no_elems]);
-		free(objects[no_elems]);
-	}
-	free(objects);
+	parse_lines(fd, line, line_split, *objects);
+	return (no_elems);
 }

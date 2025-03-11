@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:21:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/11 12:40:55 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:34:07 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ void		init_with_default(t_object *obj);
 void		parse_colors(char *colors, t_object *obj);
 void		parse_vector(char *vector, t_object *obj);
 void		parse_cords(char *cords, t_object *obj);
-void		free_object(t_object *obj);
+void		free_objects(t_object **objs, int no_objects);
 void		parse_settings(char **line_split, t_object **objects, int i);
 void		parse_objects(char **line_split, t_object **objects, int i);
 
-void		parse_file(char *filepath);
+int			parse_file(char *filepath, t_object ***objects);
 
 // debug utils
 void		print_object(t_object *obj);
