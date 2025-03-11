@@ -23,6 +23,7 @@ int	main(int ac, char **av)
 	objs = NULL;
 	no_objects = parse_file("tests/integration_tests/testfiles/valid.rt",
 			&objs);
-	free_objects(objs, no_objects);
+	if (no_objects != -1)
+		free_objects(objs, no_objects);
 	return (0);
 }
