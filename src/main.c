@@ -6,24 +6,35 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/12 12:57:15 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:05:54 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/miniRT.h"
 
-// no_objects variable is neccessary for properly freeing the objects
-int	main(int ac, char **av)
+int main()
 {
+	t_ray ray;
+	double o[] = {2.0, 2.0, 3.0, 1.0};
+	double d[] = {1.0, 0.0, 0.0, 0.0};
+	double	*pos;
+	double	*arr_t;
 	t_object	**objs;
 	int			no_objects;
-
-	(void)ac;
-	(void)av;
+	
 	objs = NULL;
 	no_objects = parse_file("tests/integration_tests/testfiles/valid.rt",
 			&objs);
-	if (no_objects != -1)
+	if (no_objects == -1)
+	{
 		free_objects(objs, no_objects);
-	return (0);
+		return (-1);
+	}
+	ray = *create_ray(o, d);
+	pos = position(&ray, 2.33);
+	arr_t = intersect(objs[4], &ray);
+	//printf("point: {%f, %f, %f, %f}\n", pos[0], pos[1], pos[2], pos[3]);
+	printf("t: %f, %f\n", arr_t[0], arr_t[1]);
+	free_objects(objs, no_objects);
+	//printf("dir: {%f %f %f}, origin: {%f %f %f}", ray.direction[0], ray.direction[1], ray.direction[2], ray.origin[0], ray.origin[1], ray.origin[2]);
 }

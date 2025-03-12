@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   rays.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/12 13:37:16 by jzackiew         ###   ########.fr       */
+/*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
+/*   Updated: 2025/03/12 15:03:49 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef RAYS_H
+# define RAYS_H
 
-#include <math.h>
-#include "../lib/libft/libft.h"
-#include "window.h"
-#include "operations.h"
-#include "parser.h"
-#include "rays.h"
+# include "../lib/libft/libft.h"
+# include "operations.h"
+# include "parser.h"
+
+typedef struct s_ray // xD
+{
+	double *origin;
+	double *direction;
+	double t;
+}		t_ray;
+
+t_ray	*create_ray(double *origin, double *direction);
+double	*position(t_ray *ray, double t);
+double	*intersect(t_object *obj, t_ray *ray);
 
 #endif
