@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   operation_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/12 13:37:16 by jzackiew         ###   ########.fr       */
+/*   Created: 2025/03/12 16:26:02 by agarbacz          #+#    #+#             */
+/*   Updated: 2025/03/12 16:28:08 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "../../inc/operations.h"
 
-#include <math.h>
-#include "../lib/libft/libft.h"
-#include "window.h"
-#include "operations.h"
-#include "parser.h"
-#include "rays.h"
-
-#endif
+int	compare_floats(double a, double b, double epsilon)
+{
+	return (fabs(a - b) < epsilon);
+}

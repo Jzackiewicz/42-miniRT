@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:02:01 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/05 17:28:01 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:45:33 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void	cnv_xyz(char **vector_split, double *x, double *y, double *z)
 	*z = ft_atof(vector_split[2]);
 }
 
-// i passed with -1
+/* i param passed with -1: <3 norminette */
 int	check_vector(char *vector, int i)
 {
 	char	**vector_split;
