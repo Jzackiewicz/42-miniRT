@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/12 17:26:23 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:51:31 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ double	*intersect_sphere(t_object *obj, t_ray *ray)
 	double	b;
 	double	c;
 	double	delta;
-	
+
 	arr_t = (double *)malloc(sizeof(double) * 2);
 	if (!arr_t)
 		return (NULL);
@@ -30,7 +30,7 @@ double	*intersect_sphere(t_object *obj, t_ray *ray)
 	delta = pow(b, 2) - 4 * c;
 	if (delta < 0)
 	{
-		printf("Does not intersect\n");
+		printf("Object does not intersect\n");
 		exit(-1);
 	}
 	arr_t[0] = (-b + sqrt(delta)) / 2;
@@ -38,33 +38,34 @@ double	*intersect_sphere(t_object *obj, t_ray *ray)
 	return (arr_t);
 }
 
-double *intersect_plane(t_object *obj, t_ray *ray)
+double	*intersect_plane(t_object *obj, t_ray *ray)
 {
-    double *arr_t;
-    double denom;
-    double t;
-    
-    arr_t = (double *)malloc(sizeof(double) * 2);
-    if (!arr_t)
-        return (NULL);
+	double	*arr_t;
+	double	denom;
+	double	t;
 
-    denom = dot(ray->direction, obj->vector);
+	arr_t = (double *)malloc(sizeof(double) * 2);
+	if (!arr_t)
+		return (NULL);
+	denom = dot(ray->direction, obj->vector);
 	if (compare_floats(denom, 0.0, 1e-6))
-    {
-		printf("Does not intersect\n");
-        free(arr_t);
-        return (NULL);
-    }
-    t = dot(obj->vector, substract_tuple(obj->cords, ray->origin)) / denom;
-    arr_t[0] = t;
-    arr_t[1] = t;
-    return (arr_t);
+	{
+		printf("Object does not intersect\n");
+		free(arr_t);
+		return (NULL);
+	}
+	t = dot(obj->vector, substract_tuple(obj->cords, ray->origin)) / denom;
+	arr_t[0] = t;
+	arr_t[1] = t;
+	return (arr_t);
 }
 
-
+/* highest level intersection finding function
+	called with a pointer to an object (plane, sphere or cylinder)
+	and an initialized t_ray pointer */
 double	*intersect(t_object *obj, t_ray *ray)
 {
-	double *arr_t;
+	double	*arr_t;
 
 	arr_t = NULL;
 	if (!ft_strncmp(obj->id, "sp\0", 3))
