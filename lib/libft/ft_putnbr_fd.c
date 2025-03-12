@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/12 12:57:15 by jzackiew         ###   ########.fr       */
+/*   Created: 2024/12/05 16:11:12 by jzackiew          #+#    #+#             */
+/*   Updated: 2024/12/06 11:14:01 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/miniRT.h"
+#include "libft.h"
 
-// no_objects variable is neccessary for properly freeing the objects
-int	main(int ac, char **av)
+void	ft_putnbr_fd(int n, int fd)
 {
-	t_object	**objs;
-	int			no_objects;
+	char	*nbr;
 
-	(void)ac;
-	(void)av;
-	objs = NULL;
-	no_objects = parse_file("tests/integration_tests/testfiles/valid.rt",
-			&objs);
-	if (no_objects != -1)
-		free_objects(objs, no_objects);
-	return (0);
+	nbr = ft_itoa(n);
+	ft_putstr_fd(nbr, fd);
+	free(nbr);
 }

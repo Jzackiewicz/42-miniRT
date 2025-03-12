@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/12 12:57:15 by jzackiew         ###   ########.fr       */
+/*   Created: 2024/12/06 15:47:43 by jzackiew          #+#    #+#             */
+/*   Updated: 2024/12/09 08:49:31 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/miniRT.h"
+#include "libft.h"
 
-// no_objects variable is neccessary for properly freeing the objects
-int	main(int ac, char **av)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	t_object	**objs;
-	int			no_objects;
+	t_list	*buffer;
 
-	(void)ac;
-	(void)av;
-	objs = NULL;
-	no_objects = parse_file("tests/integration_tests/testfiles/valid.rt",
-			&objs);
-	if (no_objects != -1)
-		free_objects(objs, no_objects);
-	return (0);
+	if (!lst || !f)
+		return ;
+	buffer = lst;
+	while (buffer)
+	{
+		f(buffer->content);
+		buffer = buffer->next;
+	}
 }

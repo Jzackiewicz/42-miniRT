@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/12 12:57:15 by jzackiew         ###   ########.fr       */
+/*   Created: 2025/01/28 11:56:40 by jzackiew          #+#    #+#             */
+/*   Updated: 2025/01/31 14:41:04 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/miniRT.h"
+#include "libft.h"
 
-// no_objects variable is neccessary for properly freeing the objects
-int	main(int ac, char **av)
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 {
-	t_object	**objs;
-	int			no_objects;
+	void	*new;
+	size_t	copy_size;
 
-	(void)ac;
-	(void)av;
-	objs = NULL;
-	no_objects = parse_file("tests/integration_tests/testfiles/valid.rt",
-			&objs);
-	if (no_objects != -1)
-		free_objects(objs, no_objects);
-	return (0);
+	if (!ptr)
+		return (malloc(new_size));
+	if (new_size <= 0)
+	{
+		free(ptr);
+		return (NULL);
+	}
+	new = malloc(new_size);
+	if (!new)
+		return (NULL);
+	if (old_size < new_size)
+		copy_size = old_size;
+	else
+		copy_size = new_size;
+	memcpy(new, ptr, copy_size);
+	free(ptr);
+	return (new);
 }

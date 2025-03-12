@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/12 12:57:15 by jzackiew         ###   ########.fr       */
+/*   Created: 2024/12/02 15:54:14 by jzackiew          #+#    #+#             */
+/*   Updated: 2024/12/02 16:03:12 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/miniRT.h"
+#include "libft.h"
 
-// no_objects variable is neccessary for properly freeing the objects
-int	main(int ac, char **av)
+int	ft_isascii(int c)
 {
-	t_object	**objs;
-	int			no_objects;
-
-	(void)ac;
-	(void)av;
-	objs = NULL;
-	no_objects = parse_file("tests/integration_tests/testfiles/valid.rt",
-			&objs);
-	if (no_objects != -1)
-		free_objects(objs, no_objects);
-	return (0);
+	if (c < 0 || c > 127)
+		return (0);
+	return (1);
 }
