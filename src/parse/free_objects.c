@@ -6,12 +6,13 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:09:46 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/11 14:40:50 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/12 12:45:11 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parser.h"
 
+// frees the freeable contents of the object
 void	free_object(t_object *obj)
 {
 	if (obj)
@@ -28,7 +29,7 @@ void	free_object(t_object *obj)
 			free(obj->vector);
 	}
 }
-
+// no_objects is neccessary for proper free() calls
 void	free_objects(t_object **objs, int no_objects)
 {
 	while (--no_objects != -1)
