@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/04 12:43:59 by agarbacz         ###   ########.fr       */
+/*   Created: 2024/12/02 13:33:28 by jzackiew          #+#    #+#             */
+/*   Updated: 2024/12/02 16:03:30 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+int	ft_isalpha(int c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	return (0);
+}
 
-#include <math.h>
-#include "../lib/libft/libft.h"
-#include "window.h"
-#include "parser.h"
-
-
-#endif
+/* int main()
+{
+	printf("%d", ft_isalpha(100));
+} */

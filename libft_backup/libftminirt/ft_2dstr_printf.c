@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   ft_2dstr_printf.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/04 12:43:59 by agarbacz         ###   ########.fr       */
+/*   Created: 2025/01/31 08:56:48 by jzackiew          #+#    #+#             */
+/*   Updated: 2025/02/18 08:52:18 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "libft.h"
 
-#include <math.h>
-#include "../lib/libft/libft.h"
-#include "window.h"
-#include "parser.h"
+void	ft_2d_strprintf(char **str)
+{
+	size_t	i;
 
-
-#endif
+	i = 0;
+	while (str[i])
+	{
+		ft_printf("%s\n", str[i]);
+		i++;
+	}
+}

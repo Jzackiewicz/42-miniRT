@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/04 12:43:59 by agarbacz         ###   ########.fr       */
+/*   Created: 2024/12/03 11:54:40 by jzackiew          #+#    #+#             */
+/*   Updated: 2024/12/03 15:19:10 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "libft.h"
 
-#include <math.h>
-#include "../lib/libft/libft.h"
-#include "window.h"
-#include "parser.h"
+int	ft_toupper(int c)
+{
+	if (c >= (int) 'a' && c <= (int) 'z')
+		c -= 97 - 65;
+	return (c);
+}
 
-
-#endif
+/* int main()
+{
+	printf("%c", ft_toupper('z'));
+} */

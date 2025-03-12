@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_arr2d_free.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/11 15:12:11 by agarbacz         ###   ########.fr       */
+/*   Created: 2025/03/03 16:13:16 by agarbacz          #+#    #+#             */
+/*   Updated: 2025/03/03 16:13:47 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/miniRT.h"
+#include "libft.h"
 
-// no_objects variable is neccessary for properly freeing the objects
-int	main(int ac, char **av)
+void	ft_arr2d_free(char **arr)
 {
-	t_object	**objs;
-	int			no_objects;
+	int	i;
 
-	(void)ac;
-	(void)av;
-	objs = NULL;
-	no_objects = parse_file("tests/integration_tests/testfiles/valid.rt",
-			&objs);
-	if (no_objects != -1)
-		free_objects(objs, no_objects);
-	return (0);
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }

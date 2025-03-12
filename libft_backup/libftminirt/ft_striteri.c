@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/04 12:43:59 by agarbacz         ###   ########.fr       */
+/*   Created: 2024/12/05 15:52:50 by jzackiew          #+#    #+#             */
+/*   Updated: 2024/12/07 14:00:20 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "libft.h"
 
-#include <math.h>
-#include "../lib/libft/libft.h"
-#include "window.h"
-#include "parser.h"
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+	size_t	i;
 
-
-#endif
+	if (!s || !f)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
+	}
+}

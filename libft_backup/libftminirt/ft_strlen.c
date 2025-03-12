@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/04 12:43:59 by agarbacz         ###   ########.fr       */
+/*   Created: 2024/12/02 16:06:04 by jzackiew          #+#    #+#             */
+/*   Updated: 2024/12/02 17:29:59 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "libft.h"
 
-#include <math.h>
-#include "../lib/libft/libft.h"
-#include "window.h"
-#include "parser.h"
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
 
+	i = 0;
+	while (s[i] != 0)
+		i++;
+	return (i);
+}
 
-#endif
+/* int	main()
+{
+	printf("%zu\n", ft_strlen("dupadupa"));
+} */
