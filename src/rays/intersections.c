@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/12 16:33:26 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:26:23 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ double	*intersect(t_object *obj, t_ray *ray)
 		arr_t = intersect_sphere(obj, ray);
 	else if (!ft_strncmp(obj->id, "pl\0", 3))
 		arr_t = intersect_plane(obj, ray);
-	// else if (!ft_strncmp(obj->id, "cy\0", 3))
-	// 	arr_t = intersect_cylinder(obj, ray);
+	else if (!ft_strncmp(obj->id, "cy\0", 3))
+		arr_t = intersect_cylinder(obj, ray);
 	else
 	{
 		printf("Error: unknown object id: %s\n", obj->id);
