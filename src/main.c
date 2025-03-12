@@ -6,16 +6,20 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/12 15:40:39 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:40:22 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/miniRT.h"
 
+// TODO: properly analyze and test the intersection calculations
+// norminette with ray management
+// find out what to do next lol
+
 int main()
 {
 	t_ray ray;
-	double o[] = {2.0, 2.0, 3.0, 1.0};
+	double o[] = {30.0, 0.0, 30.0, 1.0};
 	double d[] = {1.0, 0.0, 0.0, 0.0};
 	double	*pos;
 	double	*arr_t;
@@ -32,7 +36,10 @@ int main()
 	}
 	ray = *create_ray(o, d);
 	pos = position(&ray, 2.33);
-	arr_t = intersect(objs[3], &ray);
+	// calcs the cylinder for now
+	arr_t = intersect(objs[5], &ray);
+	
+	// practically means no intersection
 	if (!arr_t)
 	{
 		free_objects(objs, no_objects);
