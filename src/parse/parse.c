@@ -6,12 +6,14 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:44:57 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/11 15:12:35 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:44:35 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parser.h"
 
+/* counts the number of objects / settings in the file
+neccessary for proper memory allocation and deallocation */
 int	get_no_elements(char *filepath)
 {
 	char	*line;
@@ -75,17 +77,8 @@ int	parse_lines(int fd, char *line, char **line_split, t_object **objects)
 	return (0);
 }
 
-// TODO:
-// testing finish
-// memory testing !!!
-
-// obj printing
-// for (int i = 0; i < no_elems; i++)
-// {
-// 	printf("\n");
-// 	print_object(objects[i]);
-// }
-// returns the number of parsed elements to free properly, -1 on error
+/* returns the number of parsed elements which are passed by the caller to the free_objects() funcs
+ -1 on error */
 int	parse_file(char *filepath, t_object ***objects)
 {
 	char	*line;

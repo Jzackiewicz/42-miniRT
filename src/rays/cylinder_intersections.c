@@ -6,23 +6,23 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:25:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/12 17:36:56 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:52:18 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/rays.h"
 
-double  *scale_tuple(double *vector, double scalar)
+double	*scale_tuple(double *vector, double scalar)
 {
-    double  *result;
-    
-    result = (double *)malloc(sizeof(double) * 3);
-    if (!result)
-        return (NULL);
-    result[0] = vector[0] * scalar;
-    result[1] = vector[1] * scalar;
-    result[2] = vector[2] * scalar;
-    return (result);
+	double	*result;
+
+	result = (double *)malloc(sizeof(double) * 3);
+	if (!result)
+		return (NULL);
+	result[0] = vector[0] * scalar;
+	result[1] = vector[1] * scalar;
+	result[2] = vector[2] * scalar;
+	return (result);
 }
 
 double	*init_cylinder_quad(t_object *obj, t_ray *ray, double *oc_vector)
@@ -32,18 +32,17 @@ double	*init_cylinder_quad(t_object *obj, t_ray *ray, double *oc_vector)
 	quad = (double *)malloc(sizeof(double) * 3);
 	if (!quad)
 		return (NULL);
-	quad[0] = dot(ray->direction, ray->direction) -
-		pow(dot(ray->direction, obj->vector), 2);
-	quad[1] = 2 * (dot(ray->direction, oc_vector) -
-		dot(ray->direction, obj->vector) * dot(oc_vector, obj->vector));
-	quad[2] = dot(oc_vector, oc_vector) -
-		pow(dot(oc_vector, obj->vector), 2) -
-		pow(obj->diameter / 2, 2);
+	quad[0] = dot(ray->direction, ray->direction) - pow(dot(ray->direction,
+				obj->vector), 2);
+	quad[1] = 2 * (dot(ray->direction, oc_vector) - dot(ray->direction,
+				obj->vector) * dot(oc_vector, obj->vector));
+	quad[2] = dot(oc_vector, oc_vector) - pow(dot(oc_vector, obj->vector), 2)
+		- pow(obj->diameter / 2, 2);
 	return (quad);
 }
 
 static double	check_height_constraints(t_object *obj, t_ray *ray,
-					double *oc_vector, double t)
+		double *oc_vector, double t)
 {
 	double	m;
 
@@ -69,7 +68,7 @@ double	*intersect_cylinder_body(t_object *obj, t_ray *ray)
 	quad = init_cylinder_quad(obj, ray, oc_vector);
 	if (!quad || compare_floats(quad[0], 0.0, 1e-6))
 	{
-        printf("Does not intersect");
+		printf("Object does not intersect");
 		free(arr_t);
 		free(oc_vector);
 		if (quad)
@@ -79,7 +78,7 @@ double	*intersect_cylinder_body(t_object *obj, t_ray *ray)
 	delta = pow(quad[1], 2) - 4 * quad[0] * quad[2];
 	if (delta < 0)
 	{
-        printf("Does not intersect");
+		printf("Object does not intersect");
 		free(arr_t);
 		free(oc_vector);
 		free(quad);
@@ -95,15 +94,15 @@ double	*intersect_cylinder_body(t_object *obj, t_ray *ray)
 	arr_t[1] = t2;
 	if (t1 == INFINITY && t2 == INFINITY)
 	{
-        printf("Does not intersect");
+		printf("Object does not intersect");
 		free(arr_t);
 		return (NULL);
 	}
 	return (arr_t);
 }
 
-static double	intersect_cap(t_object *obj, t_ray *ray,
-					double *center, double direction)
+static double	intersect_cap(t_object *obj, t_ray *ray, double *center,
+		double direction)
 {
 	double	denom;
 	double	t;
@@ -117,13 +116,14 @@ static double	intersect_cap(t_object *obj, t_ray *ray,
 	free(obj_vector);
 	if (compare_floats(denom, 0.0, 1e-6))
 		return (INFINITY);
-	t = dot(substract_tuple(center, ray->origin), obj->vector) * direction / denom;
+	t = dot(substract_tuple(center, ray->origin), obj->vector) * direction
+		/ denom;
 	if (t <= 0)
 		return (INFINITY);
 	hit_point = add_tuple(ray->origin, scale_tuple(ray->direction, t));
 	center_to_hit = substract_tuple(hit_point, center);
-	dist_squared = dot(center_to_hit, center_to_hit) -
-					pow(dot(center_to_hit, obj->vector), 2);
+	dist_squared = dot(center_to_hit, center_to_hit) - pow(dot(center_to_hit,
+				obj->vector), 2);
 	free(hit_point);
 	free(center_to_hit);
 	if (dist_squared > pow(obj->diameter / 2, 2))
@@ -155,8 +155,8 @@ double	*intersect_cylinder_caps(t_object *obj, t_ray *ray)
 	return (arr_t);
 }
 
-static void	find_closest_t(double *side_t, double *caps_t,
-					double *t1, double *t2)
+static void	find_closest_t(double *side_t, double *caps_t, double *t1,
+		double *t2)
 {
 	if (side_t)
 	{
@@ -181,6 +181,7 @@ double	*intersect_cylinder(t_object *obj, t_ray *ray)
 	double	*result_t;
 	double	t1;
 	double	t2;
+	double	tmp;
 
 	side_t = intersect_cylinder_body(obj, ray);
 	caps_t = intersect_cylinder_caps(obj, ray);
@@ -208,11 +209,11 @@ double	*intersect_cylinder(t_object *obj, t_ray *ray)
 		return (NULL);
 	}
 	if (t1 > t2)
-    {
-        double tmp = t2;
-        t2 = t1;
-        t1 = tmp;
-    }
+	{
+		tmp = t2;
+		t2 = t1;
+		t1 = tmp;
+	}
 	result_t[0] = t1;
 	result_t[1] = t2;
 	return (result_t);
