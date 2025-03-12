@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:21:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/11 14:34:07 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:37:01 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 // SECTION: includes
 # include "../lib/libft/libft.h"
-# include "miniRT.h"
-
+# include <math.h>
 // SECTION: key validation
 // array indexes of each id type for presence checks
 # define AMBIENT 0

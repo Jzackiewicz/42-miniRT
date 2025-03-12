@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 12:01:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/11 11:50:03 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:44:12 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ static int	read_and_validate(char *line, char **line_split, int fd,
 }
 
 // returns -1 on file error and exits
-// TODO: no repeats on letter presence
 int	validate_file(char *filepath)
 {
 	char			*line;
