@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/12 12:57:15 by jzackiew         ###   ########.fr       */
+/*   Created: 2024/12/03 12:05:06 by jzackiew          #+#    #+#             */
+/*   Updated: 2024/12/04 10:08:34 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/miniRT.h"
+#include "libft.h"
 
-// no_objects variable is neccessary for properly freeing the objects
-int	main(int ac, char **av)
+char	*ft_strchr(const char *s, int c)
 {
-	t_object	**objs;
-	int			no_objects;
+	int		i;
+	char	*output;
 
-	(void)ac;
-	(void)av;
-	objs = NULL;
-	no_objects = parse_file("tests/integration_tests/testfiles/valid.rt",
-			&objs);
-	if (no_objects != -1)
-		free_objects(objs, no_objects);
-	return (0);
+	output = (char *)s;
+	i = 0;
+	while (s[i])
+	{
+		if ((int)output[i] == (char) c)
+			return (&output[i]);
+		i++;
+	}
+	if (s[i] == c)
+		return (&output[i]);
+	return (NULL);
 }
+
+/* int main()
+{
+	printf("%s\n", ft_strchr("Testing", 'z'));
+} */

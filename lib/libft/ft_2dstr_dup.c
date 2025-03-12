@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_2d_strdup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/12 12:57:15 by jzackiew         ###   ########.fr       */
+/*   Created: 2025/01/28 11:55:11 by jzackiew          #+#    #+#             */
+/*   Updated: 2025/01/28 11:55:38 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/miniRT.h"
+#include "libft.h"
 
-// no_objects variable is neccessary for properly freeing the objects
-int	main(int ac, char **av)
+char	**ft_2d_strdup(char **arr)
 {
-	t_object	**objs;
-	int			no_objects;
+	int		i;
+	int		arr_len;
+	char	**new_arr;
 
-	(void)ac;
-	(void)av;
-	objs = NULL;
-	no_objects = parse_file("tests/integration_tests/testfiles/valid.rt",
-			&objs);
-	if (no_objects != -1)
-		free_objects(objs, no_objects);
-	return (0);
+	if (!arr)
+		return (NULL);
+	arr_len = ft_2d_strlen(arr);
+	i = 0;
+	new_arr = (char **)malloc(sizeof(char *) * (arr_len + 1));
+	if (!new_arr)
+		return (NULL);
+	while (arr[i])
+	{
+		new_arr[i] = ft_strdup(arr[i]);
+		i++;
+	}
+	new_arr[i] = 0;
+	return (new_arr);
 }

@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/12 12:57:15 by jzackiew         ###   ########.fr       */
+/*   Created: 2024/12/03 12:26:47 by jzackiew          #+#    #+#             */
+/*   Updated: 2024/12/07 12:59:47 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/miniRT.h"
+#include "libft.h"
 
-// no_objects variable is neccessary for properly freeing the objects
-int	main(int ac, char **av)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	t_object	**objs;
-	int			no_objects;
+	size_t			i;
+	unsigned char	*output;
 
-	(void)ac;
-	(void)av;
-	objs = NULL;
-	no_objects = parse_file("tests/integration_tests/testfiles/valid.rt",
-			&objs);
-	if (no_objects != -1)
-		free_objects(objs, no_objects);
-	return (0);
+	output = (unsigned char *)s;
+	i = 0;
+	if (n == 0)
+		return (NULL);
+	while (i < n)
+	{
+		if (output[i] == (unsigned char)c)
+			return ((char *)&output[i]);
+		i++;
+	}
+	return (NULL);
 }
+
+/* int main()
+{
+	char	s[] = {0, 1, 2, 3, 4, 5};
+
+	printf("%d\n", ft_memchr(s, 2, 3));
+}
+ */

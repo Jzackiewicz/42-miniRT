@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/12 12:57:15 by jzackiew         ###   ########.fr       */
+/*   Created: 2024/12/03 12:12:52 by jzackiew          #+#    #+#             */
+/*   Updated: 2024/12/07 13:51:25 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/miniRT.h"
+#include "libft.h"
 
-// no_objects variable is neccessary for properly freeing the objects
-int	main(int ac, char **av)
+char	*ft_strrchr(const char *s, int c)
 {
-	t_object	**objs;
-	int			no_objects;
+	char	*output;
+	int		str_len;
 
-	(void)ac;
-	(void)av;
-	objs = NULL;
-	no_objects = parse_file("tests/integration_tests/testfiles/valid.rt",
-			&objs);
-	if (no_objects != -1)
-		free_objects(objs, no_objects);
-	return (0);
+	output = (char *)s;
+	str_len = (int)ft_strlen(s);
+	while (str_len >= 0)
+	{
+		if (output[str_len] == (char)c)
+			return (&output[str_len]);
+		str_len--;
+	}
+	return (NULL);
 }
+
+/* int main()
+{
+	char s[] = "tripouille";
+	printf("%c\n", 't'+256);
+	printf("%s\n", ft_strrchr(s, 't' + 256));
+} */
