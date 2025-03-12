@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/12 15:07:34 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:33:26 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,30 @@ double	*intersect_sphere(t_object *obj, t_ray *ray)
 	return (arr_t);
 }
 
+double *intersect_plane(t_object *obj, t_ray *ray)
+{
+    double *arr_t;
+    double denom;
+    double t;
+    
+    arr_t = (double *)malloc(sizeof(double) * 2);
+    if (!arr_t)
+        return (NULL);
+
+    denom = dot(ray->direction, obj->vector);
+	if (compare_floats(denom, 0.0, 1e-6))
+    {
+		printf("Does not intersect\n");
+        free(arr_t);
+        return (NULL);
+    }
+    t = dot(obj->vector, substract_tuple(obj->cords, ray->origin)) / denom;
+    arr_t[0] = t;
+    arr_t[1] = t;
+    return (arr_t);
+}
+
+
 double	*intersect(t_object *obj, t_ray *ray)
 {
 	double *arr_t;
@@ -45,5 +69,14 @@ double	*intersect(t_object *obj, t_ray *ray)
 	arr_t = NULL;
 	if (!ft_strncmp(obj->id, "sp\0", 3))
 		arr_t = intersect_sphere(obj, ray);
+	else if (!ft_strncmp(obj->id, "pl\0", 3))
+		arr_t = intersect_plane(obj, ray);
+	// else if (!ft_strncmp(obj->id, "cy\0", 3))
+	// 	arr_t = intersect_cylinder(obj, ray);
+	else
+	{
+		printf("Error: unknown object id: %s\n", obj->id);
+		return (NULL);
+	}
 	return (arr_t);
 }
