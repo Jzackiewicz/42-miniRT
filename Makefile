@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 
 NAME = miniRT
 
-SRCS =	src/main.c src/window/window_management.c \
+SRCS =	src/main.c src/graphics/window_management.c src/graphics/draw.c src/graphics/init.c\
 		src/parse/validate_file.c src/parse/validate_objects.c src/parse/validate_params.c \
 		src/parse/validate_settings.c src/parse/validate_utils.c src/parse/parse.c src/parse/parse_utils.c \
 		src/parse/parse_settings.c src/parse/parse_objects.c src/parse/free_objects.c \

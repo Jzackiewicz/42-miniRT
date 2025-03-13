@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/13 13:03:57 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:49:34 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "operations.h"
 # include "parser.h"
 # include "rays.h"
-# include "window.h"
+# include "graphics.h"
 # include <math.h>
 
 #endif
