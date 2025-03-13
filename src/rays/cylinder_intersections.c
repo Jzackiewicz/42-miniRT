@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_intersections.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:25:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/13 13:02:16 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:45:07 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ static double	intersect_cap(t_object *obj, t_ray *ray, double *center,
 	double	*obj_vector;
 
 	obj_vector = multiply_tuple(obj->vector, direction);
-	free(obj_vector);
-	if (compare_floats(dot(ray->direction, obj_vector), 0.0, 1e-6))
-		return (INFINITY);
+	if (compare_floats(dot(ray->direction, obj_vector), 0.0))
+		return (free(obj_vector), INFINITY);
 	t = dot(substract_tuple(center, ray->origin), obj->vector) * direction
 		/ dot(ray->direction, obj_vector);
+	free(obj_vector);
 	if (t <= 0)
 		return (INFINITY);
 	hit_point = add_tuple(ray->origin, multiply_tuple(ray->direction, t));
@@ -69,13 +69,15 @@ double	*intersect_cylinder_caps(t_object *obj, t_ray *ray)
 	double	t_bottom;
 	double	t_top;
 	double	*top_center;
+	double	*v_h;
 
 	arr_t = (double *)malloc(sizeof(double) * 2);
 	if (!arr_t)
 		return (NULL);
 	t_bottom = intersect_cap(obj, ray, obj->cords, -1.0);
-	top_center = add_tuple(obj->cords, multiply_tuple(obj->vector,
-				obj->height));
+	v_h = multiply_tuple(obj->vector, obj->height);
+	top_center = add_tuple(obj->cords, v_h);
+	free(v_h);
 	t_top = intersect_cap(obj, ray, top_center, 1.0);
 	free(top_center);
 	arr_t[0] = t_bottom;
