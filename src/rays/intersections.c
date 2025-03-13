@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/13 13:14:35 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:30:48 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ double	*intersect_sphere(t_object *obj, t_ray *ray)
 	delta = pow(b, 2) - 4 * c;
 	if (delta < 0)
 	{
-		printf("Object does not intersect\n");
+		printf("Ray does not intersect\n");
 		exit(-1);
 	}
 	arr_t[0] = (-b + sqrt(delta)) / 2;
@@ -50,7 +50,7 @@ double	*intersect_plane(t_object *obj, t_ray *ray)
 	denom = dot(ray->direction, obj->vector);
 	if (compare_floats(denom, 0.0))
 	{
-		printf("Object does not intersect\n");
+		printf("Ray does not intersect\n");
 		free(arr_t);
 		return (NULL);
 	}
@@ -80,4 +80,24 @@ double	*intersect(t_object *obj, t_ray *ray)
 		return (NULL);
 	}
 	return (arr_t);
+}
+
+void	append_intersec(t_intersec **all, double *arr_t, t_object *obj, int intersec_no)
+{
+	t_intersec	*x;
+	int			i;
+	
+	if (!arr_t || !all || !obj)
+		return ;
+	x = (t_intersec *)malloc(sizeof(t_intersec));
+	if (!x)
+		return ;
+	i = 0;
+	while (i < 2)
+	{
+		x->t = arr_t[i];
+		x->object = obj;
+		all[i + intersec_no] = x;
+		i++;
+	}
 }
