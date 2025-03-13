@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:09:46 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/12 12:45:11 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:03:11 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_object(t_object *obj)
 {
 	if (obj)
 	{
-		if (obj->id) 
+		if (obj->id)
 			free(obj->id);
 		if (obj->orientation_vector)
 			free(obj->orientation_vector);
@@ -29,6 +29,7 @@ void	free_object(t_object *obj)
 			free(obj->vector);
 	}
 }
+
 // no_objects is neccessary for proper free() calls
 void	free_objects(t_object **objs, int no_objects)
 {

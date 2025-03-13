@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 16:19:50 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/12 17:47:14 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:03:03 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	is_valid_float(const char *str)
 	}
 	return (has_digit);
 }
+
 /* utility which reads the file to the end with gnl()
 	on encountered error in parsing/validation
 		to prevent memory leaks */

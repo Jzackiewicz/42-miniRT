@@ -10,7 +10,8 @@ SRCS =	src/main.c src/window/window_management.c \
 		src/operations/matrices/matrix_inversion.c src/operations/matrices/matrix_ops.c src/operations/matrices/matrix_utils.c \
 		src/operations/transformations/rotation.c src/operations/transformations/transform.c \
 		src/operations/tuples/tuple_ops_1.c src/operations/tuples/tuple_ops_2.c \
-		src/rays/rays.c src/rays/intersections.c src/rays/cylinder_intersections.c src/operations/operation_utils.c
+		src/rays/rays.c src/rays/intersections.c src/rays/cylinder_intersections.c src/operations/operation_utils.c \
+		src/rays/cylinder_utils.c src/rays/cylinder_intersection_inits.c src/rays/cylinder_cleanup.c
 
 OBJ_DIR = obj
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)

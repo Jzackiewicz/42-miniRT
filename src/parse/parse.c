@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:44:57 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/12 17:44:35 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:02:30 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,9 @@ int	parse_lines(int fd, char *line, char **line_split, t_object **objects)
 	return (0);
 }
 
-/* returns the number of parsed elements which are passed by the caller to the free_objects() funcs
- -1 on error */
+/* returns the number of parsed elements which are passed
+ 	by the caller to the free_objects() funcs
+ 	-1 on error */
 int	parse_file(char *filepath, t_object ***objects)
 {
 	char	*line;

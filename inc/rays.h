@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/12 17:26:15 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:04:10 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,27 @@
 
 typedef struct s_ray // xD
 {
-	double *origin;
-	double *direction;
-	double t;
+	double	*origin;
+	double	*direction;
+	double	t;
 }		t_ray;
 
 t_ray	*create_ray(double *origin, double *direction);
 double	*position(t_ray *ray, double t);
+double	*init_cylinder_quad(t_object *obj, t_ray *ray, double *oc_vector);
+void	free_cylinder_resources(double *arr_t, double *oc_vector, double *quad);
+double	*init_result_t(void);
+double	*init_cylinder_quad(t_object *obj, t_ray *ray, double *oc_vector);
+double	check_height_constraints(t_object *obj, t_ray *ray, double *oc_vector,
+			double t);
+int		check_cylinder_discriminant(double *quad, double **arr_t,
+			double *oc_vector);
+double	*calculate_intersection_points(t_object *obj, t_ray *ray,
+			double *oc_vector, double *quad);
+void	find_closest_t(double *side_t, double *caps_t, double *t1, double *t2);
 double	*intersect_cylinder(t_object *obj, t_ray *ray);
 double	*intersect(t_object *obj, t_ray *ray);
+void	clean_intersect_memory(double *side_t, double *caps_t);
+void	free_cylinder_resources(double *arr_t, double *oc_vector, double *quad);
 
 #endif
