@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   cylinder_cleanup.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/13 13:03:57 by agarbacz         ###   ########.fr       */
+/*   Created: 2025/03/13 12:52:22 by agarbacz          #+#    #+#             */
+/*   Updated: 2025/03/13 12:53:07 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "../../inc/rays.h"
 
-# include "../lib/libft/libft.h"
-# include "operations.h"
-# include "parser.h"
-# include "rays.h"
-# include "window.h"
-# include <math.h>
+void	clean_intersect_memory(double *side_t, double *caps_t)
+{
+	if (side_t)
+		free(side_t);
+	if (caps_t)
+		free(caps_t);
+}
 
-#endif
+void	free_cylinder_resources(double *arr_t, double *oc_vector, double *quad)
+{
+	if (arr_t)
+		free(arr_t);
+	if (oc_vector)
+		free(oc_vector);
+	if (quad)
+		free(quad);
+}

@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:00:44 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/03 16:14:09 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:00:57 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ int					ft_2d_strlen(char **arr);
 void				ft_2d_strprintf(char **str);
 void				*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 void				ft_debug(void);
+
 #endif
