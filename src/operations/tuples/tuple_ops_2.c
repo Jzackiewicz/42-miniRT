@@ -35,9 +35,7 @@ double	magnitude(double *vector)
 double	*normalize(double *vector)
 {
 	double	*result;
-	size_t	i;
 
-	i = 0;
 	result = divide_tuple(vector, magnitude(vector));
 	if (!result)
 		return (NULL);
@@ -65,7 +63,6 @@ double	dot(double *vector1, double *vector2)
 /* Returns a cross product (vector) of two vectors */
 double	*cross(double *vector1, double *vector2)
 {
-	size_t	i;
 	double	*result;
 
 	if (!vector1 || !vector2)
@@ -73,7 +70,6 @@ double	*cross(double *vector1, double *vector2)
 	result = (double *)malloc(sizeof(double) * 4);
 	if (!result)
 		return (NULL);
-	i = 0;
 	result[0] = vector1[1] * vector2[2] - vector1[2] * vector2[1];
 	result[1] = vector1[2] * vector2[0] - vector1[0] * vector2[2];
 	result[2] = vector1[0] * vector2[1] - vector1[1] * vector2[0];

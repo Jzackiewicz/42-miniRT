@@ -45,11 +45,11 @@ static double	intersect_cap(t_object *obj, t_ray *ray, double *center,
 	double	*obj_vector;
 
 	obj_vector = multiply_tuple(obj->vector, direction);
-	free(obj_vector);
 	if (compare_floats(dot(ray->direction, obj_vector), 0.0, 1e-6))
 		return (INFINITY);
 	t = dot(substract_tuple(center, ray->origin), obj->vector) * direction
 		/ dot(ray->direction, obj_vector);
+	free(obj_vector);
 	if (t <= 0)
 		return (INFINITY);
 	hit_point = add_tuple(ray->origin, multiply_tuple(ray->direction, t));

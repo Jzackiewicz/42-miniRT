@@ -18,10 +18,11 @@ int	main(void)
 	
 	rt_data = NULL;
 	init_mlx(&rt_data);
+	render_image(rt_data);
 	mlx_key_hook(rt_data->mlx_data->window_ptr, handle_key_input, rt_data);
 	mlx_hook(rt_data->mlx_data->window_ptr, 17, 0, close_window, rt_data);
 	mlx_loop(rt_data->mlx_data->mlx_ptr);
-	// clean_mlx(rt_data);
+	clean_mlx(rt_data);
 	return (0);
 }
 
