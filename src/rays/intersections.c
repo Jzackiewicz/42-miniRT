@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/12 17:51:31 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:14:35 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ double	*intersect_plane(t_object *obj, t_ray *ray)
 	if (!arr_t)
 		return (NULL);
 	denom = dot(ray->direction, obj->vector);
-	if (compare_floats(denom, 0.0, 1e-6))
+	if (compare_floats(denom, 0.0))
 	{
 		printf("Object does not intersect\n");
 		free(arr_t);

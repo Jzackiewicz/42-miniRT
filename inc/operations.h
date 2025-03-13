@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 17:29:30 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/12 16:30:50 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:14:17 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ void		free_matrix(t_matrix *matrix);
 void		print_matrix(t_matrix *matrix);
 
 // misc
-int			compare_floats(double a, double b, double epsilon);
+int			compare_floats(double a, double b);
 
 #endif

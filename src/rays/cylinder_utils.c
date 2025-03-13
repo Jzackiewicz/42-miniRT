@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:38:59 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/13 12:53:01 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:14:30 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_cylinder_discriminant(double *quad, double **arr_t, double *oc_vector)
 {
 	double	delta;
 
-	if (!quad || compare_floats(quad[0], 0.0, 1e-6))
+	if (!quad || compare_floats(quad[0], 0.0))
 	{
 		printf("Object does not intersect");
 		free_cylinder_resources(*arr_t, oc_vector, quad);
