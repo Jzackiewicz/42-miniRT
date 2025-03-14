@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/14 13:45:07 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:52:27 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,22 @@ void append_intersec(t_intersec **all, double *arr_t, t_object *obj, int interse
         i++;
     }
     all[(intersec_no * 2) + 2] = NULL;
+}
+
+void calc_intersections(t_ray *ray, t_object **objs, t_intersec **ray_intersex)
+{
+	int i;
+	double *arr_t;
+
+	i = 0;
+	while (objs[i])
+	{
+		arr_t = intersect(objs[i], ray);
+		if (arr_t)
+		{
+			append_intersec(ray_intersex, arr_t, objs[i], i);
+			free(arr_t);
+		}
+		i++;
+	}
 }

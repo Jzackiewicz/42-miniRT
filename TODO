@@ -1,21 +1,6 @@
-Parsing 
-	>input - .RT file
-	>output - struct conatining objects:
-		*lightning
-			-ambient
-			-source(s?)
-		*camera
-		*object(s)
-			-sphere
-			-plane
-			-cylinder
-			-cone/hyperboloid/paraboloid (optional)
+1. Create an array of rays according to the camera parameters (src/rays/rays.c func camshot())
+2. Applying transformations matrices to rays (switching object intersection to identity objects)
 
-	>functions
-		*parsing
-		*error handling
 
-Issues:
-1. Erors on valgrind when printing result of multiplying matrix and vector (it prints it out correctly though).
 
 		

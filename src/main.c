@@ -6,29 +6,11 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/14 16:09:13 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:57:17 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/miniRT.h"
-
-void calc_intersections(t_ray *ray, t_object **objs, t_intersec **ray_intersex)
-{
-	int i;
-	double *arr_t;
-
-	i = 0;
-	while (objs[i])
-	{
-		arr_t = intersect(objs[i], ray);
-		if (arr_t)
-		{
-			append_intersec(ray_intersex, arr_t, objs[i], i);
-			free(arr_t);
-		}
-		i++;
-	}
-}
 
 int main()
 {	
@@ -49,6 +31,7 @@ int main()
 			&data);
 	// objs extracted from the data_arr
 	objs = get_objects(data, no_lines);
+	
 	if (no_lines == -1)
 	{
 		printf("Error: file error\n");
