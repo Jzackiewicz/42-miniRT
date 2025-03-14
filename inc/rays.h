@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/14 15:31:50 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:05:08 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ void					append_intersec(t_intersec **all, double *arr_t,
 							t_object *obj, int intersec_no);
 void					sort_intersections(t_intersec **i_s, int start_index,
 							int end_index);
-double					*calc_hit_point(t_ray *ray, t_intersec **i_s);
+double					*identify_hit(t_ray *ray, t_intersec **i_s);
 
 #endif

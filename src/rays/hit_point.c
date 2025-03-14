@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 14:45:37 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/14 15:31:44 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:05:57 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // i_s: intersections array sorted in ascending order
 // returns NULL on non-negative t not found
-double	*calc_hit_point(t_ray *ray, t_intersec **i_s)
+double	*identify_hit(t_ray *ray, t_intersec **i_s)
 {
 	int i = 0;
 	
