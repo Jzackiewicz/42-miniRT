@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/14 12:19:16 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:41:08 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,8 @@ typedef struct	s_ambient
 	double	brightness;
 	int		*color;
 }				t_ambient;
+
+void	clean_rays(t_intersec **ray_intersex, t_ray *ray);
+void	clean_objects(t_object **objs, t_input_data **data, int no_lines);
 
 #endif
