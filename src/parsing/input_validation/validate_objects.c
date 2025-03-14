@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   validate_objects.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:16:47 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/05 18:18:37 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/14 11:58:28 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/parser.h"
+#include "../../../inc/parser.h"
 
 static int	validate_sphere(char **line_split)
 {
@@ -18,7 +18,7 @@ static int	validate_sphere(char **line_split)
 		return (clean_on_error(line_split));
 	if (ft_2d_strlen(line_split) != 4)
 		return (clean_on_error(line_split));
-	if (check_cords(line_split[1]) == -1)
+	if (check_coords(line_split[1]) == -1)
 		return (clean_on_error(line_split));
 	if (!is_valid_float(line_split[2]))
 		return (clean_on_error(line_split));
@@ -33,7 +33,7 @@ static int	validate_plane(char **line_split)
 		return (clean_on_error(line_split));
 	if (ft_2d_strlen(line_split) != 4)
 		return (clean_on_error(line_split));
-	if (check_cords(line_split[1]) == -1)
+	if (check_coords(line_split[1]) == -1)
 		return (clean_on_error(line_split));
 	if (check_vector(line_split[2], -1) == -1)
 		return (clean_on_error(line_split));
@@ -48,7 +48,7 @@ static int	validate_cylinder(char **line_split)
 		return (clean_on_error(line_split));
 	if (ft_2d_strlen(line_split) != 6)
 		return (clean_on_error(line_split));
-	if (check_cords(line_split[1]) == -1)
+	if (check_coords(line_split[1]) == -1)
 		return (clean_on_error(line_split));
 	if (check_vector(line_split[2], -1) == -1)
 		return (clean_on_error(line_split));

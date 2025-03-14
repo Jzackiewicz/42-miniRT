@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:21:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/13 14:31:19 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:19:43 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_key_presence
 }			t_key_presence;
 
 // SECTION: data structures for objects and settings
-typedef struct s_object
+typedef struct s_input_data
 {
 	char	*id;
 	// ambient specific
@@ -46,14 +46,14 @@ typedef struct s_object
 	double	diameter;
 	double	height;
 	// common
-	int		*colors;
-	double	*cords;
+	int		*color;
+	double	*coords;
 	double	*vector;
-}			t_object;
+}			t_input_data;
 
 // SECTION: validation functions
-int			check_colors(char *colors);
-int			check_cords(char *cords);
+int			check_colors(char *color);
+int			check_coords(char *coords);
 int			check_vector(char *vector, int i);
 int			is_valid_number(const char *str);
 int			is_valid_float(const char *str);
@@ -66,17 +66,19 @@ int			clean_on_error(char **line_split);
 int			validate_file(char *filepath);
 
 // SECTION: parsing functions
-void		init_with_default(t_object *obj);
-void		parse_colors(char *colors, t_object *obj);
-void		parse_vector(char *vector, t_object *obj);
-void		parse_cords(char *cords, t_object *obj);
-void		free_objects(t_object **objs, int no_objects);
-void		parse_settings(char **line_split, t_object **objects, int i);
-void		parse_objects(char **line_split, t_object **objects, int i);
+void		init_with_default(t_input_data *obj);
+void		parse_colors(char *color, t_input_data *obj);
+void		parse_vector(char *vector, t_input_data *obj);
+void		parse_coords(char *coords, t_input_data *obj);
+void		free_objects(t_input_data **objs, int no_objects);
+void		parse_settings(char **line_split, t_input_data **objects, int i);
+void		parse_objects(char **line_split, t_input_data **objects, int i);
 
-int			parse_file(char *filepath, t_object ***objects);
+int			parse_file(char *filepath, t_input_data ***objects);
+
+struct	s_object	**get_objects(t_input_data **data, int no_data);
 
 // debug utils
-void		print_object(t_object *obj);
+void		print_object(t_input_data *obj);
 
 #endif

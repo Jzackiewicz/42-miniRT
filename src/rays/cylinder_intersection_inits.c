@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_intersection_inits.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:48:44 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/13 12:49:30 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/14 09:27:02 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/rays.h"
 
-double	*init_cylinder_quad(t_object *obj, t_ray *ray, double *oc_vector)
+double	*init_cylinder_quad(t_input_data *obj, t_ray *ray, double *oc_vector)
 {
 	double	*quad;
 

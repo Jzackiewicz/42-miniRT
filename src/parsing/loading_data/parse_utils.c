@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:43:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/11 14:10:31 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/14 11:58:55 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/parser.h"
+#include "../../../inc/parser.h"
 
-void	init_with_default(t_object *obj)
+void	init_with_default(t_input_data *obj)
 {
 	obj->id = NULL;
 	obj->ambient_light_ratio = 0.0;
@@ -21,29 +21,29 @@ void	init_with_default(t_object *obj)
 	obj->brightness = 0;
 	obj->diameter = 0;
 	obj->height = 0;
-	obj->colors = NULL;
-	obj->cords = NULL;
+	obj->color = NULL;
+	obj->coords = NULL;
 	obj->vector = NULL;
 	obj->height = 0;
 }
 
-void	parse_colors(char *colors, t_object *obj)
+void	parse_colors(char *color, t_input_data *obj)
 {
 	char	**colors_split;
 
-	obj->colors = ft_calloc(4, sizeof(int));
-	if (!obj->colors)
+	obj->color = ft_calloc(4, sizeof(int));
+	if (!obj->color)
 		return ;
-	colors_split = ft_split(colors, ',');
+	colors_split = ft_split(color, ',');
 	if (!colors_split)
 		return ;
-	obj->colors[0] = ft_atoi(colors_split[0]);
-	obj->colors[1] = ft_atoi(colors_split[1]);
-	obj->colors[2] = ft_atoi(colors_split[2]);
+	obj->color[0] = ft_atoi(colors_split[0]);
+	obj->color[1] = ft_atoi(colors_split[1]);
+	obj->color[2] = ft_atoi(colors_split[2]);
 	ft_arr2d_free(colors_split);
 }
 
-void	parse_vector(char *vector, t_object *obj)
+void	parse_vector(char *vector, t_input_data *obj)
 {
 	char	**vector_split;
 
@@ -59,23 +59,23 @@ void	parse_vector(char *vector, t_object *obj)
 	ft_arr2d_free(vector_split);
 }
 
-void	parse_cords(char *cords, t_object *obj)
+void	parse_coords(char *coords, t_input_data *obj)
 {
-	char	**cords_split;
+	char	**coords_split;
 
-	obj->cords = ft_calloc(4, sizeof(double));
-	if (!obj->cords)
+	obj->coords = ft_calloc(4, sizeof(double));
+	if (!obj->coords)
 		return ;
-	cords_split = ft_split(cords, ',');
-	if (!cords_split)
+	coords_split = ft_split(coords, ',');
+	if (!coords_split)
 		return ;
-	obj->cords[0] = ft_atof(cords_split[0]);
-	obj->cords[1] = ft_atof(cords_split[1]);
-	obj->cords[2] = ft_atof(cords_split[2]);
-	ft_arr2d_free(cords_split);
+	obj->coords[0] = ft_atof(coords_split[0]);
+	obj->coords[1] = ft_atof(coords_split[1]);
+	obj->coords[2] = ft_atof(coords_split[2]);
+	ft_arr2d_free(coords_split);
 }
 
-void	print_object(t_object *obj)
+void	print_object(t_input_data *obj)
 {
 	if (!obj)
 	{
@@ -92,12 +92,12 @@ void	print_object(t_object *obj)
 	printf("brightness: %f\n", obj->brightness);
 	printf("diameter: %f\n", obj->diameter);
 	printf("height: %f\n", obj->height);
-	if (obj->colors)
-		printf("colors: %d %d %d\n", obj->colors[0], obj->colors[1],
-			obj->colors[2]);
-	if (obj->cords)
-		printf("cords: %f %f %f\n", obj->cords[0], obj->cords[1],
-			obj->cords[2]);
+	if (obj->color)
+		printf("color: %d %d %d\n", obj->color[0], obj->color[1],
+			obj->color[2]);
+	if (obj->coords)
+		printf("coords: %f %f %f\n", obj->coords[0], obj->coords[1],
+			obj->coords[2]);
 	if (obj->vector)
 		printf("vector: %f %f %f\n", obj->vector[0], obj->vector[1],
 			obj->vector[2]);
