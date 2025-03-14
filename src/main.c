@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/14 13:10:45 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:19:03 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 int main()
 {
 	t_ray *ray;
+	// arbitraly chosen rays
 	double o[] = {30.0, 0.0, 30.0, 1.0};
 	double d[] = {1.0, 0.0, 0.0, 0.0};
 	double			*arr_t;
@@ -41,29 +42,38 @@ int main()
 	t_intersec	**ray_intersex;
 	int			no_lines;
 	
+	// objs & settings arr
 	data = NULL;
 	no_lines = parse_file("tests/integration_tests/testfiles/valid_nocy.rt",
 			&data);
+	// objs extracted from the data_arr
 	objs = get_objects(data, no_lines);
 	if (no_lines == -1)
 	{
 		printf("Error: file error\n");
 		return (-1);
 	}
+	// ray creation
 	ray = create_ray(o, d);
+	// ray intersection array
 	ray_intersex = (t_intersec **)ft_calloc((no_lines - 3) * 2 + 1, sizeof(t_intersec *));
 	if (!ray_intersex)
 		return (-1);
+	// intersection calculation
 	for (int i = 0; objs[i]; i++)
 	{
 		arr_t = intersect(objs[i], ray);
 		append_intersec(ray_intersex, arr_t, objs[i], i);
 		free(arr_t);
 	}
+	// debug
 	for (int i = 0; ray_intersex[i]; i++)
 	{
 		printf("t: %f, obj: %s\n", ray_intersex[i]->t, ray_intersex[i]->object->id);
 	}
+
+
+	// cleanups
 	free(ray);
 	for (int i = 0; ray_intersex[i]; i++)
 		free(ray_intersex[i]);
