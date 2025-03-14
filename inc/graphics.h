@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:45:23 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/13 16:37:35 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:33:50 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_ray_tracer_data
 }				t_ray_tracer_data;
 
 // SECTION: minilibx setup & cleanup
-void			init_mlx(t_ray_tracer_data **ray_tracer_data);
+void			init_mlx(t_ray_tracer_data **rt_data);
 void			clean_mlx(t_ray_tracer_data *rt_data);
 int				close_window(t_ray_tracer_data *rt_data, int errno);
 void			free_window(t_mlx_data *mlx_data);
