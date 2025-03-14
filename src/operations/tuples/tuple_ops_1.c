@@ -37,7 +37,7 @@ double	*add_tuple(double *tuple1, double *tuple2)
 
 /* Returns a tuple which is a result of substracting two tuples.
 Undefined behaviour when tuples have different length than 4 */
-double	*substract_tuple(double *tuple1, double *tuple2)
+double	*subtract_tuple(double *tuple1, double *tuple2)
 {
 	size_t	i;
 	double	*result;
