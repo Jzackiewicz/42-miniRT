@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:30:12 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/13 16:33:00 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/14 15:37:40 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,23 @@ void	draw_pixel(t_ray_tracer_data *data, int x, int y, int color)
 }
 
 /*  health check debug draw */
-static void draw_rectangle(t_ray_tracer_data *data, int color)
-{
-    int x;
-    int y;
+// static void draw_rectangle(t_ray_tracer_data *data, int color)
+// {
+//     int x;
+//     int y;
 
-    y = 0;
-    while (y < WINDOW_HEIGHT)
-    {
-        x = 0;
-        while (x < WINDOW_WIDTH)
-        {
-            draw_pixel(data, x, y, color);
-            x++;
-        }
-        y++;
-    }
-}
+//     y = 0;
+//     while (y < WINDOW_HEIGHT)
+//     {
+//         x = 0;
+//         while (x < WINDOW_WIDTH)
+//         {
+//             draw_pixel(data, x, y, color);
+//             x++;
+//         }
+//         y++;
+//     }
+// }
 
 /*
  	to find out what x and y will be
@@ -51,17 +51,18 @@ static void draw_rectangle(t_ray_tracer_data *data, int color)
 	only kuab knows.......
 	for health check the fn now draws a rectangle :33
 */
-void	trace_rays(t_ray_tracer_data *data) 
+void	trace_rays(t_ray_tracer_data *data, double *hitpoint) 
 {
+	// int i = 0;
 	/* ideal world pseudocode
 	x, y = calc_rays()
 	draw_pixel(data, x, y, color) */
-	draw_rectangle(data, 0x00CCCC);
+	draw_pixel(data, (int) hitpoint[0], (int) hitpoint[1], 0x00CCCC);
 }
 
-void	render_image(t_ray_tracer_data *data)
+void	render_image(t_ray_tracer_data *data, double *hitpoint)
 {
-	trace_rays(data);
+	trace_rays(data, hitpoint);
 	mlx_put_image_to_window(data->mlx_data->mlx_ptr, data->mlx_data->window_ptr,
 		data->mlx_data->img_ptr, 0, 0);
 }

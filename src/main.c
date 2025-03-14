@@ -6,25 +6,11 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/14 13:40:56 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/14 15:38:41 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/miniRT.h"
-
-/* int	main(void)
-{
-	t_ray_tracer_data *rt_data;
-	
-	rt_data = NULL;
-	init_mlx(&rt_data);
-	render_image(rt_data);
-	mlx_key_hook(rt_data->mlx_data->window_ptr, handle_key_input, rt_data);
-	mlx_hook(rt_data->mlx_data->window_ptr, 17, 0, close_window, rt_data);
-	mlx_loop(rt_data->mlx_data->mlx_ptr);
-	clean_mlx(rt_data);
-	return (0);
-} */
 
 void calc_intersections(t_ray *ray, t_object **objs, t_intersec **ray_intersex)
 {
@@ -45,11 +31,12 @@ void calc_intersections(t_ray *ray, t_object **objs, t_intersec **ray_intersex)
 }
 
 int main()
-{
-	t_ray *ray;
+{	
 	// arbitraly chosen rays
 	double o[] = {30.0, 0.0, 30.0, 1.0};
 	double d[] = {1.0, 0.0, 0.0, 0.0};
+	t_ray *ray;
+	t_ray_tracer_data *rt_data;
 	t_input_data	**data;
 	t_object		**objs;
 	t_intersec	**ray_intersex;
@@ -57,6 +44,7 @@ int main()
 	
 	// objs & settings arr
 	data = NULL;
+	rt_data = NULL;
 	no_lines = parse_file("tests/integration_tests/testfiles/valid_nocy.rt",
 			&data);
 	// objs extracted from the data_arr
@@ -75,14 +63,20 @@ int main()
 		
 	// intersection calculation
 	calc_intersections(ray, objs, ray_intersex);
+	sort_intersections(ray_intersex, 0, ((no_lines - 3) * 2 - 1));
 	
-	// debug
-	for (int i = 0; ray_intersex[i]; i++)
-	{
-		printf("t: %f, obj: %s\n", ray_intersex[i]->t, ray_intersex[i]->object->id);
-	}
+	// mlx integration
+	init_mlx(&rt_data);
+	double *hitpoint = calc_hit_point(ray, ray_intersex);
+	render_image(rt_data, hitpoint);
+	free(hitpoint);
+	mlx_key_hook(rt_data->mlx_data->window_ptr, handle_key_input, rt_data);
+	mlx_hook(rt_data->mlx_data->window_ptr, 17, 0, close_window, rt_data);
+	mlx_loop(rt_data->mlx_data->mlx_ptr);
 	
 	// cleanups
+	clean_mlx(rt_data);
 	clean_rays(ray_intersex, ray);
 	clean_objects(objs, data, no_lines);
+	return (0);
 }
