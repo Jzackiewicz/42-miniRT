@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 17:29:30 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/14 12:19:33 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:03:54 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_matrix
 
 //			tuple_operations
 double		*add_tuple(double *tuple1, double *tuple2);
-double		*substract_tuple(double *tuple1, double *tuple2);
+double		*subtract_tuple(double *tuple1, double *tuple2);
 double		*negate_tuple(double *tuple);
 double		*multiply_tuple(double *tuple, double scalar);
 double		*divide_tuple(double *tuple, double scalar);

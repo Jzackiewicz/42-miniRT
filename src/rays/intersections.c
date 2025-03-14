@@ -6,13 +6,14 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/14 09:27:02 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:08:10 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/rays.h"
+#include "../../inc/miniRT.h"
 
-double	*intersect_sphere(t_input_data *obj, t_ray *ray)
+double	*intersect_sphere(t_object *obj, t_ray *ray)
 {
 	double	*arr_t;
 	double	*oc_vector;
@@ -20,7 +21,7 @@ double	*intersect_sphere(t_input_data *obj, t_ray *ray)
 	double	c;
 	double	delta;
 
-	oc_vector = substract_tuple(ray->origin, obj->coords);
+	oc_vector = subtract_tuple(ray->origin, obj->coords);
 	b = dot(oc_vector, ray->direction) * 2;
 	c = dot(oc_vector, oc_vector) - pow(obj->diameter / 2, 2);
 	free(oc_vector);
@@ -35,16 +36,19 @@ double	*intersect_sphere(t_input_data *obj, t_ray *ray)
 	return (arr_t);
 }
 
-double	*intersect_plane(t_input_data *obj, t_ray *ray)
+double	*intersect_plane(t_object *obj, t_ray *ray)
 {
 	double	*arr_t;
 	double	denom;
 	double	t;
+	double	*sub;
 
-	denom = dot(ray->direction, obj->vector);
+	denom = dot(ray->direction, obj->normal_vector);
 	if (compare_floats(denom, 0.0))
 		return (NULL);
-	t = dot(obj->vector, substract_tuple(obj->coords, ray->origin)) / denom;
+	sub = subtract_tuple(obj->coords, ray->origin);
+	t = dot(obj->normal_vector, sub) / denom;
+	free(sub);
 	arr_t = (double *)malloc(sizeof(double) * 2);
 	if (!arr_t)
 		return (NULL);
@@ -56,7 +60,7 @@ double	*intersect_plane(t_input_data *obj, t_ray *ray)
 /* highest level intersection finding function
 	called with a pointer to an object (plane, sphere or cylinder)
 	and an initialized t_ray pointer */
-double	*intersect(t_input_data *obj, t_ray *ray)
+double	*intersect(t_object *obj, t_ray *ray)
 {
 	double	*arr_t;
 
@@ -65,8 +69,6 @@ double	*intersect(t_input_data *obj, t_ray *ray)
 		arr_t = intersect_sphere(obj, ray);
 	else if (!ft_strncmp(obj->id, "pl\0", 3))
 		arr_t = intersect_plane(obj, ray);
-	else if (!ft_strncmp(obj->id, "cy\0", 3))
-		arr_t = intersect_cylinder(obj, ray);
 	else
 	{
 		printf("Error: unknown object id: %s\n", obj->id);
@@ -75,20 +77,20 @@ double	*intersect(t_input_data *obj, t_ray *ray)
 	return (arr_t);
 }
 
-void	append_intersec(t_intersec **all, double *arr_t, t_input_data *obj,
+void	append_intersec(t_intersec **all, double *arr_t, t_object *obj,
 		int intersec_no)
 {
 	t_intersec *x;
 	int i;
 
-	if (!arr_t || !all || !obj)
-		return ;
-	x = (t_intersec *)malloc(sizeof(t_intersec));
-	if (!x)
+	if (!all || !obj || !arr_t)
 		return ;
 	i = 0;
 	while (i < 2)
 	{
+		x = (t_intersec *)malloc(sizeof(t_intersec));
+		if (!x)
+			return ;
 		x->t = arr_t[i];
 		x->object = obj;
 		all[i + intersec_no] = x;

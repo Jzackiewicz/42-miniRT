@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/14 12:21:08 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:10:45 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // norminette with ray management
 // find out what to do next lol
 
-int	main(void)
+/* int	main(void)
 {
 	t_ray_tracer_data *rt_data;
 	
@@ -28,39 +28,48 @@ int	main(void)
 	mlx_loop(rt_data->mlx_data->mlx_ptr);
 	clean_mlx(rt_data);
 	return (0);
-}
+} */
 
-/* int main()
+int main()
 {
-	t_ray ray;
+	t_ray *ray;
 	double o[] = {30.0, 0.0, 30.0, 1.0};
 	double d[] = {1.0, 0.0, 0.0, 0.0};
-	double	*pos;
-	double	*arr_t;
-	t_object	**objs;
-	int			no_objects;
+	double			*arr_t;
+	t_input_data	**data;
+	t_object		**objs;
+	t_intersec	**ray_intersex;
+	int			no_lines;
 	
-	objs = NULL;
-	no_objects = parse_file("tests/integration_tests/testfiles/valid.rt",
-			&objs);
-	if (no_objects == -1)
+	data = NULL;
+	no_lines = parse_file("tests/integration_tests/testfiles/valid_nocy.rt",
+			&data);
+	objs = get_objects(data, no_lines);
+	if (no_lines == -1)
 	{
 		printf("Error: file error\n");
 		return (-1);
 	}
-	ray = *create_ray(o, d);
-	pos = position(&ray, 2.33);
-	// calcs the cylinder for now
-	arr_t = intersect(objs[5], &ray);
-	
-	// practically means no intersection
-	if (!arr_t)
-	{
-		free_objects(objs, no_objects);
+	ray = create_ray(o, d);
+	ray_intersex = (t_intersec **)ft_calloc((no_lines - 3) * 2 + 1, sizeof(t_intersec *));
+	if (!ray_intersex)
 		return (-1);
+	for (int i = 0; objs[i]; i++)
+	{
+		arr_t = intersect(objs[i], ray);
+		append_intersec(ray_intersex, arr_t, objs[i], i);
+		free(arr_t);
 	}
-	//printf("point: {%f, %f, %f, %f}\n", pos[0], pos[1], pos[2], pos[3]);
-	printf("t: %f, %f\n", arr_t[0], arr_t[1]);
-	// free_objects(objs, no_objects);
-	//printf("dir: {%f %f %f}, origin: {%f %f %f}", ray.direction[0], ray.direction[1], ray.direction[2], ray.origin[0], ray.origin[1], ray.origin[2]);
-} */
+	for (int i = 0; ray_intersex[i]; i++)
+	{
+		printf("t: %f, obj: %s\n", ray_intersex[i]->t, ray_intersex[i]->object->id);
+	}
+	free(ray);
+	for (int i = 0; ray_intersex[i]; i++)
+		free(ray_intersex[i]);
+	free(ray_intersex);
+	free_objects(data, no_lines);
+	for (int i = 0; objs[i]; i++)
+		free(objs[i]);
+	free(objs);
+}
