@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   parse_settings.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 17:10:12 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/10 19:34:50 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/14 11:58:52 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/parser.h"
+#include "../../../inc/parser.h"
 
-static void	parse_ambient(t_object *obj, char **line_split)
+static void	parse_ambient(t_input_data *obj, char **line_split)
 {
 	obj->ambient_light_ratio = ft_atof(line_split[1]);
 	parse_colors(line_split[2], obj);
 }
 
-static void	parse_camera(t_object *obj, char **line_split)
+static void	parse_camera(t_input_data *obj, char **line_split)
 {
 	char	**orientation_split;
 
-	parse_cords(line_split[1], obj);
+	parse_coords(line_split[1], obj);
 	obj->orientation_vector = ft_calloc(4, sizeof(double));
 	if (!obj->orientation_vector)
 		return ;
@@ -36,16 +36,16 @@ static void	parse_camera(t_object *obj, char **line_split)
 	obj->fov = ft_atoi(line_split[3]);
 }
 
-static void	parse_light(t_object *obj, char **line_split)
+static void	parse_light(t_input_data *obj, char **line_split)
 {
-	parse_cords(line_split[1], obj);
+	parse_coords(line_split[1], obj);
 	obj->brightness = ft_atof(line_split[2]);
 	parse_colors(line_split[3], obj);
 }
 
-void	parse_settings(char **line_split, t_object **objects, int i)
+void	parse_settings(char **line_split, t_input_data **objects, int i)
 {
-	objects[i] = malloc(sizeof(t_object));
+	objects[i] = malloc(sizeof(t_input_data));
 	if (!objects[i])
 		return ;
 	init_with_default(objects[i]);

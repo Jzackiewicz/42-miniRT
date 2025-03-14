@@ -6,19 +6,19 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:25:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/13 14:58:02 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/14 09:27:02 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/rays.h"
 
-double	*intersect_cylinder_body(t_object *obj, t_ray *ray)
+double	*intersect_cylinder_body(t_input_data *obj, t_ray *ray)
 {
 	double	*arr_t;
 	double	*oc_vector;
 	double	*quad;
 
-	oc_vector = substract_tuple(ray->origin, obj->cords);
+	oc_vector = substract_tuple(ray->origin, obj->coords);
 	if (!oc_vector)
 		return (NULL);
 	quad = init_cylinder_quad(obj, ray, oc_vector);
@@ -35,7 +35,7 @@ double	*intersect_cylinder_body(t_object *obj, t_ray *ray)
 	return (arr_t);
 }
 
-static double	intersect_cap(t_object *obj, t_ray *ray, double *center,
+static double	intersect_cap(t_input_data *obj, t_ray *ray, double *center,
 		double direction)
 {
 	double	t;
@@ -63,7 +63,7 @@ static double	intersect_cap(t_object *obj, t_ray *ray, double *center,
 	return (t);
 }
 
-double	*intersect_cylinder_caps(t_object *obj, t_ray *ray)
+double	*intersect_cylinder_caps(t_input_data *obj, t_ray *ray)
 {
 	double	*arr_t;
 	double	t_bottom;
@@ -74,9 +74,9 @@ double	*intersect_cylinder_caps(t_object *obj, t_ray *ray)
 	arr_t = (double *)malloc(sizeof(double) * 2);
 	if (!arr_t)
 		return (NULL);
-	t_bottom = intersect_cap(obj, ray, obj->cords, -1.0);
+	t_bottom = intersect_cap(obj, ray, obj->coords, -1.0);
 	v_h = multiply_tuple(obj->vector, obj->height);
-	top_center = add_tuple(obj->cords, v_h);
+	top_center = add_tuple(obj->coords, v_h);
 	free(v_h);
 	t_top = intersect_cap(obj, ray, top_center, 1.0);
 	free(top_center);
@@ -111,7 +111,7 @@ double	*prepare_intersection_result(double t1, double t2)
 	return (result_t);
 }
 
-double	*intersect_cylinder(t_object *obj, t_ray *ray)
+double	*intersect_cylinder(t_input_data *obj, t_ray *ray)
 {
 	double	*side_t;
 	double	*caps_t;

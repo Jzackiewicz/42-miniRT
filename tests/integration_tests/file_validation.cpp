@@ -35,7 +35,7 @@ extern "C" {
 // }
 
 // TEST(FileValidationTest, InvalidFile1) {
-//     char *filepath = strdup("../testfiles/missing_plane_cords.rt");
+//     char *filepath = strdup("../testfiles/missing_plane_coords.rt");
 //     int v = validate_file(filepath);
 //     EXPECT_EQ(v, -1);
 //     free(filepath);

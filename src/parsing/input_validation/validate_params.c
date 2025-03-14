@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   validate_params.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:02:01 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/12 17:45:33 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/14 11:58:36 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/parser.h"
+#include "../../../inc/parser.h"
 
 static int	is_valid_color(char **colors_split)
 {
@@ -30,13 +30,13 @@ static int	is_valid_color(char **colors_split)
 	return (0);
 }
 
-int	check_colors(char *colors)
+int	check_colors(char *color)
 {
 	char	**colors_split;
 
-	if (!colors || colors[ft_strlen(colors) - 1] == ',')
+	if (!color || color[ft_strlen(color) - 1] == ',')
 		return (-1);
-	colors_split = ft_split(colors, ',');
+	colors_split = ft_split(color, ',');
 	if (!colors_split || ft_2d_strlen(colors_split) != 3)
 		return (ft_arr2d_free(colors_split), -1);
 	if (is_valid_color(colors_split) == -1)
@@ -44,31 +44,31 @@ int	check_colors(char *colors)
 	return (ft_arr2d_free(colors_split), 0);
 }
 
-int	check_cords(char *cords)
+int	check_coords(char *coords)
 {
-	char	**cords_split;
+	char	**coords_split;
 	int		i;
 
-	if (!cords || cords[ft_strlen(cords) - 1] == ',')
+	if (!coords || coords[ft_strlen(coords) - 1] == ',')
 		return (-1);
-	cords_split = ft_split(cords, ',');
-	if (!cords_split)
+	coords_split = ft_split(coords, ',');
+	if (!coords_split)
 		return (-1);
-	if (ft_2d_strlen(cords_split) != 3)
+	if (ft_2d_strlen(coords_split) != 3)
 	{
-		ft_arr2d_free(cords_split);
+		ft_arr2d_free(coords_split);
 		return (-1);
 	}
 	i = -1;
 	while (++i < 3)
 	{
-		if (!is_valid_float(cords_split[i]))
+		if (!is_valid_float(coords_split[i]))
 		{
-			ft_arr2d_free(cords_split);
+			ft_arr2d_free(coords_split);
 			return (-1);
 		}
 	}
-	ft_arr2d_free(cords_split);
+	ft_arr2d_free(coords_split);
 	return (0);
 }
 

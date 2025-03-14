@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   free_objects.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:09:46 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/13 13:03:11 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/14 11:59:01 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/parser.h"
+#include "../../../inc/parser.h"
 
 // frees the freeable contents of the object
-void	free_object(t_object *obj)
+void	free_object(t_input_data *obj)
 {
 	if (obj)
 	{
@@ -21,17 +21,17 @@ void	free_object(t_object *obj)
 			free(obj->id);
 		if (obj->orientation_vector)
 			free(obj->orientation_vector);
-		if (obj->colors)
-			free(obj->colors);
-		if (obj->cords)
-			free(obj->cords);
+		if (obj->color)
+			free(obj->color);
+		if (obj->coords)
+			free(obj->coords);
 		if (obj->vector)
 			free(obj->vector);
 	}
 }
 
 // no_objects is neccessary for proper free() calls
-void	free_objects(t_object **objs, int no_objects)
+void	free_objects(t_input_data **objs, int no_objects)
 {
 	while (--no_objects != -1)
 	{
