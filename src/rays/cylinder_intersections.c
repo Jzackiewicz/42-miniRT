@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:25:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/14 12:20:01 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:30:36 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static double	intersect_cap(t_input_data *obj, t_ray *ray, double *center,
 	double	*obj_vector;
 
 	obj_vector = multiply_tuple(obj->vector, direction);
-	if (compare_floats(dot(ray->direction, obj_vector), 0.0, 1e-6))
+	if (compare_floats(dot(ray->direction, obj_vector), 0.0))
 		return (INFINITY);
 	t = dot(substract_tuple(center, ray->origin), obj->vector) * direction
 		/ dot(ray->direction, obj_vector);
