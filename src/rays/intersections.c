@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/14 13:08:10 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:45:07 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,23 +77,26 @@ double	*intersect(t_object *obj, t_ray *ray)
 	return (arr_t);
 }
 
-void	append_intersec(t_intersec **all, double *arr_t, t_object *obj,
-		int intersec_no)
+void append_intersec(t_intersec **all, double *arr_t, t_object *obj, int intersec_no)
 {
-	t_intersec *x;
-	int i;
+    t_intersec *x;
+    int i;
+    int position;
 
-	if (!all || !obj || !arr_t)
-		return ;
-	i = 0;
-	while (i < 2)
-	{
-		x = (t_intersec *)malloc(sizeof(t_intersec));
-		if (!x)
-			return ;
-		x->t = arr_t[i];
-		x->object = obj;
-		all[i + intersec_no] = x;
-		i++;
-	}
+    if (!all || !obj || !arr_t)
+        return;
+    
+    i = 0;
+    while (i < 2)
+    {
+        position = (intersec_no * 2) + i;
+        x = (t_intersec *)malloc(sizeof(t_intersec));
+        if (!x)
+            return;
+        x->t = arr_t[i];
+        x->object = obj;
+        all[position] = x;
+        i++;
+    }
+    all[(intersec_no * 2) + 2] = NULL;
 }
