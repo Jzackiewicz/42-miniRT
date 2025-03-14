@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:38:59 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/13 12:53:01 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/14 09:27:02 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/rays.h"
 
-double	check_height_constraints(t_object *obj, t_ray *ray, double *oc_vector,
+double	check_height_constraints(t_input_data *obj, t_ray *ray, double *oc_vector,
 		double t)
 {
 	double	m;
@@ -27,7 +27,7 @@ int	check_cylinder_discriminant(double *quad, double **arr_t, double *oc_vector)
 {
 	double	delta;
 
-	if (!quad || compare_floats(quad[0], 0.0, 1e-6))
+	if (!quad || compare_floats(quad[0], 0.0))
 	{
 		printf("Object does not intersect");
 		free_cylinder_resources(*arr_t, oc_vector, quad);
@@ -44,7 +44,7 @@ int	check_cylinder_discriminant(double *quad, double **arr_t, double *oc_vector)
 	return (1);
 }
 
-double	*calculate_intersection_points(t_object *obj, t_ray *ray,
+double	*calculate_intersection_points(t_input_data *obj, t_ray *ray,
 		double *oc_vector, double *quad)
 {
 	double	*arr_t;

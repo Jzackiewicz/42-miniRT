@@ -3,41 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:32:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/11 13:17:23 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/14 11:58:58 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/parser.h"
+#include "../../../inc/parser.h"
 
-static void	parse_sphere(t_object *obj, char **line_split)
+static void	parse_sphere(t_input_data *obj, char **line_split)
 {
-	parse_cords(line_split[1], obj);
+	parse_coords(line_split[1], obj);
 	obj->diameter = ft_atof(line_split[2]);
 	parse_colors(line_split[3], obj);
 }
 
-static void	parse_plane(t_object *obj, char **line_split)
+static void	parse_plane(t_input_data *obj, char **line_split)
 {
-	parse_cords(line_split[1], obj);
+	parse_coords(line_split[1], obj);
 	parse_vector(line_split[2], obj);
 	parse_colors(line_split[3], obj);
 }
 
-static void	parse_cylinder(t_object *obj, char **line_split)
+static void	parse_cylinder(t_input_data *obj, char **line_split)
 {
-	parse_cords(line_split[1], obj);
+	parse_coords(line_split[1], obj);
 	parse_vector(line_split[2], obj);
 	obj->diameter = ft_atof(line_split[3]);
 	obj->height = ft_atof(line_split[4]);
 	parse_colors(line_split[5], obj);
 }
 
-void	parse_objects(char **line_split, t_object **objects, int i)
+void	parse_objects(char **line_split, t_input_data **objects, int i)
 {
-	objects[i] = malloc(sizeof(t_object));
+	objects[i] = malloc(sizeof(t_input_data));
 	if (!objects[i])
 		return ;
 	init_with_default(objects[i]);

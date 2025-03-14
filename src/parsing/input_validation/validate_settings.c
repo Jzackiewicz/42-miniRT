@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   validate_settings.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:13:36 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/12 17:47:38 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/14 11:58:39 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/parser.h"
+#include "../../../inc/parser.h"
 
 static int	validate_ambient(char **line_split)
 {
@@ -34,7 +34,7 @@ static int	validate_camera(char **line_split)
 		return (clean_on_error(line_split));
 	if (ft_2d_strlen(line_split) != 4)
 		return (clean_on_error(line_split));
-	if (check_cords(line_split[1]) == -1)
+	if (check_coords(line_split[1]) == -1)
 		return (clean_on_error(line_split));
 	if (check_vector(line_split[2], -1) == -1)
 		return (clean_on_error(line_split));
@@ -52,7 +52,7 @@ static int	validate_light(char **line_split)
 		return (clean_on_error(line_split));
 	if (ft_2d_strlen(line_split) != 4)
 		return (clean_on_error(line_split));
-	if (check_cords(line_split[1]) == -1)
+	if (check_coords(line_split[1]) == -1)
 		return (clean_on_error(line_split));
 	if (!is_valid_float(line_split[2]) || ft_atof(line_split[2]) > 1.0
 		|| ft_atof(line_split[2]) < 0.0)

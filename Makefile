@@ -3,15 +3,8 @@ CFLAGS = -Wall -Wextra -Werror -g
 
 NAME = miniRT
 
-SRCS =	src/main.c src/graphics/input.c src/graphics/clean_mlx.c src/graphics/draw.c src/graphics/init.c\
-		src/parse/validate_file.c src/parse/validate_objects.c src/parse/validate_params.c \
-		src/parse/validate_settings.c src/parse/validate_utils.c src/parse/parse.c src/parse/parse_utils.c \
-		src/parse/parse_settings.c src/parse/parse_objects.c src/parse/free_objects.c \
-		src/operations/matrices/matrix_inversion.c src/operations/matrices/matrix_ops.c src/operations/matrices/matrix_utils.c \
-		src/operations/transformations/rotation.c src/operations/transformations/transform.c \
-		src/operations/tuples/tuple_ops_1.c src/operations/tuples/tuple_ops_2.c \
-		src/rays/rays.c src/rays/intersections.c src/rays/cylinder_intersections.c src/operations/operation_utils.c \
-		src/rays/cylinder_utils.c src/rays/cylinder_intersection_inits.c src/rays/cylinder_cleanup.c
+SRC_DIR = src
+SRCS = $(shell find $(SRC_DIR) -type f -name "*.c")
 
 OBJ_DIR = obj
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
