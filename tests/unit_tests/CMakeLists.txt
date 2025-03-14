@@ -67,7 +67,7 @@ include(GoogleTest)
 # # target_compile_features(validate_ambient PRIVATE cxx_std_17)
 # # gtest_discover_tests(validate_ambient)
 
-# add_executable(check_cords check_cords.cpp 
+# add_executable(check_coords check_coords.cpp 
 #     ../../src/parse/validate_settings.c
 #     ../../src/parse/validate_utils.c
 #     ../../lib/libft/ft_atoi.c
@@ -84,9 +84,9 @@ include(GoogleTest)
 #     ../../lib/libft/ft_atof.c
 #     ../../lib/libft/ft_isdigit.c)
 
-# target_link_libraries(check_cords PRIVATE gtest gtest_main)
-# target_compile_features(check_cords PRIVATE cxx_std_17)
-# gtest_discover_tests(check_cords)
+# target_link_libraries(check_coords PRIVATE gtest gtest_main)
+# target_compile_features(check_coords PRIVATE cxx_std_17)
+# gtest_discover_tests(check_coords)
 
 # add_executable(check_vector check_vector.cpp 
 #     ../../src/parse/validate_settings.c

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   validate_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 12:01:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/12 17:44:12 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/14 11:58:23 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/parser.h"
+#include "../../../inc/parser.h"
 
 // returns -1 on error, 0 on cool name d-_-b
 static int	check_extension(const char *filepath)

@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 17:29:30 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/13 13:14:17 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/14 08:59:21 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ t_matrix	*tuple_to_matrix(double *tuple);
 void		free_matrix(t_matrix *matrix);
 void		print_matrix(t_matrix *matrix);
 
-// misc
+// 			utils
 int			compare_floats(double a, double b);
+void		print_tuple(double *tuple);
 
 #endif
