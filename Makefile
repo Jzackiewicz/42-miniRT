@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -g #-Wall -Wextra -Werror
 
 NAME = miniRT
 
