@@ -3,25 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/17 17:01:56 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/17 19:30:24 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/miniRT.h"
 
+// generate rays on canvas with color
+// create a func to generate a bitmap, with ones 
+
 int main()
 {	
 	// arbitraly chosen rays
-	double o[] = {30.0, 0.0, 30.0, 1.0};
-	double d[] = {1.0, 0.0, 0.0, 0.0};
+	// double o[] = {30.0, 0.0, 30.0, 1.0};
+	// double d[] = {1.0, 0.0, 0.0, 0.0};
 	t_ray *ray;
 	t_ray_tracer_data *rt_data;
 	t_input_data	**data;
 	t_object		**objs;
-	t_intersec	**ray_intersex;
+	t_intersec	***ray_intersex;
 	t_intersec	*hitpoint;
 	// double		**bitmap;
 	int			no_lines;
@@ -34,8 +37,10 @@ int main()
 		return (printf("Error: file error\n"), -1);
 	// objs extracted from the data_arr
 	objs = get_objects(data, no_lines);
-	t_camera *cam_data = get_cam_data(data, no_lines);	
+	t_camera *cam_data = get_cam_data(data, no_lines);
 	t_ray	**cam_shot = generate_rays(cam_data);
+	ray_intersex = find_all_intersections(cam_shot, objs);
+	
 /* 	bitmap = init_bitmap(data);
 	for (int i = 0; i < count_rays(cam_shot); i++)
 	{

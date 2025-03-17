@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/17 17:03:07 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/17 19:28:16 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define RAYS_H
 
 # include "../lib/libft/libft.h"
+# include "graphics.h"
 # include "operations.h"
 # include "parser.h"
-# include "graphics.h"
 
 typedef struct s_ray // xD
 {
@@ -32,7 +32,7 @@ typedef struct s_intersec
 }						t_intersec;
 
 typedef struct s_object	t_object;
-typedef struct s_camera t_camera;
+typedef struct s_camera	t_camera;
 
 t_ray					*create_ray(double *origin, double *direction);
 double					*position(t_ray *ray, double t);
@@ -65,5 +65,7 @@ t_intersec				*identify_hit(t_intersec **i_s);
 t_ray					**generate_rays(t_camera *cam_data);
 
 int						count_intersections(t_intersec **intersex);
+t_intersec				***find_all_intersections(t_ray **rays,
+							t_object **objs);
 
 #endif
