@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   casting_rays.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:32:48 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/17 17:02:19 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/17 18:46:44 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_ray	**generate_rays(t_camera *cam_data)
 	t_ray	**rays;
 	
 	width = get_canvas_width(cam_data);
-	rays = (t_ray **)malloc(sizeof(t_ray *) * WINDOW_WIDTH * WINDOW_HEIGHT);
+	rays = (t_ray **)ft_calloc(WINDOW_WIDTH * WINDOW_HEIGHT, sizeof(t_ray *));
 	i = -1;
 	while (++i < WINDOW_HEIGHT)
 	{
