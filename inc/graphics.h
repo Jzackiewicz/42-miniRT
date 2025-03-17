@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:45:23 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/14 16:48:14 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:19:49 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_mlx_data
 typedef struct s_ray_tracer_data
 {
 	t_mlx_data	*mlx_data;
-	t_intersec	*intersex;
+	struct s_intersec	*intersex;
 	int			x;
 	int			y;
 }				t_ray_tracer_data;
@@ -54,5 +54,7 @@ int				handle_key_input(int keysym, t_ray_tracer_data *rt_data);
 // SECTION: drawing utilities
 void			draw_pixel(t_ray_tracer_data *data, int x, int y, int color);
 void			render_image(t_ray_tracer_data *data, double *hitpoint);
+
+double			**init_bitmap(t_input_data *data);
 
 #endif

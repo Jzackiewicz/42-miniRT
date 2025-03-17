@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/14 12:11:49 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/17 09:34:48 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,7 @@ t_object	**get_objects(t_input_data **data, int no_data)
 	int			i;
 	t_object	**objects;
 
-	num_of_objs = 0;
-	i = -1;
-	while (++i < no_data)
-	{
-		if (!ft_strncmp(data[i]->id, "A\0", 2) || !ft_strncmp(data[i]->id,
-				"C\0", 2) || !ft_strncmp(data[i]->id, "L\0", 2))
-			continue ;
-		else
-			num_of_objs++;
-	}
+	num_of_objs = no_data - 3;
 	objects = (t_object **)ft_calloc(sizeof(t_object *), num_of_objs + 1);
 	if (!objects)
 		return (NULL);
@@ -62,4 +53,16 @@ t_object	**get_objects(t_input_data **data, int no_data)
 			objects[num_of_objs++] = assign_object(data[i]);
 	}
 	return (objects);
+}
+
+int	count_objects(t_object **objs)
+{
+	int	len;
+
+	len = 0;
+	while (objs[len])
+	{
+		len++;
+	}
+	return (len);
 }

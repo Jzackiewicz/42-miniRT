@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersections.c                                    :+:      :+:    :+:   */
+/*   find_intersections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/14 16:52:27 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/17 09:27:27 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/rays.h"
-#include "../../inc/miniRT.h"
+#include "../../../inc/rays.h"
+#include "../../../inc/miniRT.h"
 
 double	*intersect_sphere(t_object *obj, t_ray *ray)
 {
@@ -75,46 +75,4 @@ double	*intersect(t_object *obj, t_ray *ray)
 		return (NULL);
 	}
 	return (arr_t);
-}
-
-void append_intersec(t_intersec **all, double *arr_t, t_object *obj, int intersec_no)
-{
-    t_intersec *x;
-    int i;
-    int position;
-
-    if (!all || !obj || !arr_t)
-        return;
-    
-    i = 0;
-    while (i < 2)
-    {
-        position = (intersec_no * 2) + i;
-        x = (t_intersec *)malloc(sizeof(t_intersec));
-        if (!x)
-            return;
-        x->t = arr_t[i];
-        x->object = obj;
-        all[position] = x;
-        i++;
-    }
-    all[(intersec_no * 2) + 2] = NULL;
-}
-
-void calc_intersections(t_ray *ray, t_object **objs, t_intersec **ray_intersex)
-{
-	int i;
-	double *arr_t;
-
-	i = 0;
-	while (objs[i])
-	{
-		arr_t = intersect(objs[i], ray);
-		if (arr_t)
-		{
-			append_intersec(ray_intersex, arr_t, objs[i], i);
-			free(arr_t);
-		}
-		i++;
-	}
 }
