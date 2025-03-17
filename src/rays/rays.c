@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:32:48 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/14 18:08:10 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/17 09:18:03 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	cam_shot(t_ray **rays, t_input_data **data)
 	double viewport_w;
 	double aspect_ratio;
 
+	(void)rays;
 	camera = find_camera(data);
 	if (!camera)
 		return ;
@@ -68,7 +69,7 @@ void	cam_shot(t_ray **rays, t_input_data **data)
 	// an orthogonal coordinate system, not cartesian obv
 	// w back of the camera, u- up, v- right the last two are perpendicular
 	// maybeeeeeeeeee
-	double w[4], u[4], v[4];
+	// double w[4], u[4], v[4];
 	// vec_normalize (direction, w);
 	// vec_scale(w, -1.0, w);
 }

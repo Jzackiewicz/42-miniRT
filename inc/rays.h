@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/14 17:15:11 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:50:42 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,11 @@ double					*position(t_ray *ray, double t);
 // 					double *quad);
 
 double					*intersect(t_object *obj, t_ray *ray);
-void					append_intersec(t_intersec **all, double *arr_t,
-							t_object *obj, int intersec_no);
-void					calc_intersections(t_ray *ray, t_object **objs,
-							t_intersec **ray_intersex);
 void					sort_intersections(t_intersec **i_s, int start_index,
 							int end_index);
-double					*identify_hit(t_ray *ray, t_intersec **i_s);
+t_intersec				**get_sorted_intersections(t_ray *ray, t_object **objs);
+t_intersec				*identify_hit(t_intersec **i_s);
+
+int						count_intersections(t_intersec **intersex);
 
 #endif

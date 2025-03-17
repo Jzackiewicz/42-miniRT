@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:21:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/14 12:19:43 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:51:16 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void		parse_objects(char **line_split, t_input_data **objects, int i);
 int			parse_file(char *filepath, t_input_data ***objects);
 
 struct	s_object	**get_objects(t_input_data **data, int no_data);
+int			count_objects(struct s_object **objs);
 
 // debug utils
 void		print_object(t_input_data *obj);

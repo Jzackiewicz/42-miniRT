@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sort_intersections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 15:21:26 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/14 15:25:27 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/17 09:49:56 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/rays.h"
+#include "../../../inc/rays.h"
 
 static void	free_tmp(t_intersec **left, t_intersec **right)
 {
@@ -18,7 +18,7 @@ static void	free_tmp(t_intersec **left, t_intersec **right)
 	free(right);
 }
 
-void	merge_arrays(t_intersec **i_s, t_intersec **left_arr,
+static void	merge_arrays(t_intersec **i_s, t_intersec **left_arr,
 		t_intersec **right_arr, int *params)
 {
 	int	i;
@@ -42,7 +42,7 @@ void	merge_arrays(t_intersec **i_s, t_intersec **left_arr,
 		i_s[k++] = right_arr[j++];
 }
 
-void	merge(t_intersec **i_s, int left, int mid, int right)
+static void	merge(t_intersec **i_s, int left, int mid, int right)
 {
 	int			params[3];
 	int			i;
