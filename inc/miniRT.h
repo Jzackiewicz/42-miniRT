@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/14 13:41:08 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:15:16 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ typedef	struct	s_object
 	double	height;
 	int		*color;
 	double	*coords;
-	double	*normal_vector;
+	double	*orientation_vector;
 }				t_object;
 
 typedef struct	s_camera
 {
 	double	*origin;
-	double	*normal_vector;
+	double	*orientation_vector;
 	int		fov;
 }				t_camera;
 

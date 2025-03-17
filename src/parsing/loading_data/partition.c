@@ -6,15 +6,12 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/17 09:34:48 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:15:16 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/miniRT.h"
 #include "../../../inc/parser.h"
-
-
-//strlen
 
 static t_object	*assign_object(t_input_data *data)
 {
@@ -28,7 +25,7 @@ static t_object	*assign_object(t_input_data *data)
 	obj->height = data->height;
 	obj->color = data->color;
 	obj->coords = data->coords;
-	obj->normal_vector = data->orientation_vector;
+	obj->orientation_vector = data->orientation_vector;
 	return (obj);
 }
 
@@ -53,6 +50,28 @@ t_object	**get_objects(t_input_data **data, int no_data)
 			objects[num_of_objs++] = assign_object(data[i]);
 	}
 	return (objects);
+}
+
+t_camera	*get_cam_data(t_input_data **data, int no_data)
+{
+	int			i;
+	t_camera	*cam;
+	
+	cam = (t_camera *)malloc(sizeof(t_camera));
+	if (!cam)
+		return (NULL);
+	i = -1;
+	while (++i < no_data)
+	{
+		if (!ft_strncmp(data[i]->id, "C\0", 2))
+		{
+			cam->fov = data[i]->fov;
+			cam->orientation_vector = data[i]->orientation_vector;
+			cam->origin = data[i]->coords;
+			return (cam);
+		}
+	}
+	return (NULL);
 }
 
 int	count_objects(t_object **objs)

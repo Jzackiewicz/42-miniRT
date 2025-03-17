@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/17 11:50:42 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/17 17:03:07 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_intersec
 }						t_intersec;
 
 typedef struct s_object	t_object;
+typedef struct s_camera t_camera;
 
 t_ray					*create_ray(double *origin, double *direction);
 double					*position(t_ray *ray, double t);
@@ -61,6 +62,7 @@ void					sort_intersections(t_intersec **i_s, int start_index,
 							int end_index);
 t_intersec				**get_sorted_intersections(t_ray *ray, t_object **objs);
 t_intersec				*identify_hit(t_intersec **i_s);
+t_ray					**generate_rays(t_camera *cam_data);
 
 int						count_intersections(t_intersec **intersex);
 

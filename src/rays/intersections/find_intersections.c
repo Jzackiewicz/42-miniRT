@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/17 09:27:27 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:15:16 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ double	*intersect_plane(t_object *obj, t_ray *ray)
 	double	t;
 	double	*sub;
 
-	denom = dot(ray->direction, obj->normal_vector);
+	denom = dot(ray->direction, obj->orientation_vector);
 	if (compare_floats(denom, 0.0))
 		return (NULL);
 	sub = subtract_tuple(obj->coords, ray->origin);
-	t = dot(obj->normal_vector, sub) / denom;
+	t = dot(obj->orientation_vector, sub) / denom;
 	free(sub);
 	arr_t = (double *)malloc(sizeof(double) * 2);
 	if (!arr_t)
