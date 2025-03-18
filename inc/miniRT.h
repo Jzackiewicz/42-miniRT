@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/18 12:27:49 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/18 13:11:47 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ typedef struct s_ambient
 
 void		clean_intersections(t_intersec ***ray_intersex);
 void		clean_rays(t_ray **rays);
+void		free_objects(t_input_data **inp_data, t_object **objs,
+				int no_lines);
+void		free_bitmap(int **bitmap);
 void		clean_objects(t_object **objs, t_input_data **data, int no_lines);
 
 #endif

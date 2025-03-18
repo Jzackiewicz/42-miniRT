@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 13:35:09 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/18 12:43:26 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/18 13:12:08 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,16 @@ void	clean_intersections(t_intersec ***ray_intersex)
 	}
 	free(ray_intersex);
 }
-void	clean_objects(t_object **objs, t_input_data **data, int no_lines)
+
+void	free_bitmap(int **bitmap)
 {
-	free_objects(data, no_lines);
-	for (int i = 0; objs[i]; i++)
-		free(objs[i]);
-	free(objs);
+	int	i;
+
+	i = 0;
+	while (i < WINDOW_WIDTH)
+	{
+		free(bitmap[i]);
+		i++;
+	}
+	free(bitmap);
 }
