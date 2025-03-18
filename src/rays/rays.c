@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:32:48 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/17 12:06:17 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/18 09:45:12 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_ray	*create_ray(double *origin, double *direction)
 		return (NULL);
 	new_ray->origin = origin;
 	new_ray->direction = direction;
-	new_ray->t = 0;
 	return (new_ray);
 }
 
@@ -33,6 +32,7 @@ double	*position(t_ray *ray, double t)
 	dir_t = multiply_tuple(ray->direction, t);
 	pos = add_tuple(ray->origin, dir_t);
 	free(dir_t);
+	pos[3] = 1;
 	return (pos);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/17 19:28:16 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/18 10:21:28 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct s_ray // xD
 {
 	double *origin;
 	double *direction;
-	double t;
 }						t_ray;
 
 typedef struct s_intersec
@@ -63,7 +62,8 @@ void					sort_intersections(t_intersec **i_s, int start_index,
 t_intersec				**get_sorted_intersections(t_ray *ray, t_object **objs);
 t_intersec				*identify_hit(t_intersec **i_s);
 t_ray					**generate_rays(t_camera *cam_data);
-
+int					**generate_bitmap(t_intersec ***ray_intersections, t_ray **rays, t_camera *cam_data);
+double	get_canvas_width(t_camera *cam_data);
 int						count_intersections(t_intersec **intersex);
 t_intersec				***find_all_intersections(t_ray **rays,
 							t_object **objs);
