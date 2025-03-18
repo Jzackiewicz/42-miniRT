@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   casting_rays.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:32:48 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/17 18:46:44 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/18 10:03:05 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ double	get_canvas_width(t_camera *cam_data)
 	distance = magnitude(cam_to_center);
 	angle = cam_data->fov * (M_PI / 180.0);
 	width = 2 * (tan(angle / 2) * distance);
-	printf("distance: %f\nangle: %f\nwidth: %f\n", distance, angle, width);
 	return (width);
 }
 /* Not sure if works */

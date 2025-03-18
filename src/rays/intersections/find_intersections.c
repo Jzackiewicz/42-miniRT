@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_intersections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/17 19:27:47 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/18 09:27:07 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_intersec ***find_all_intersections(t_ray **rays, t_object **objs)
 	
     while (rays[ray_count])
         ray_count++;
-    res = malloc(sizeof(t_intersec**) * (ray_count + 1));
+    res = (t_intersec ***)malloc(sizeof(t_intersec**) * (ray_count + 1));
     if (!res)
         return NULL;
     

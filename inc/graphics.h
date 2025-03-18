@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:45:23 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/17 18:34:24 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/18 10:20:48 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int				handle_key_input(int keysym, t_ray_tracer_data *rt_data);
 
 // SECTION: drawing utilities
 void			draw_pixel(t_ray_tracer_data *data, int x, int y, int color);
-void			render_image(t_ray_tracer_data *data, double *hitpoint);
+void			render_image(t_ray_tracer_data *data, int **bitmap);
 
 // double			**init_bitmap(t_input_data *data);
 

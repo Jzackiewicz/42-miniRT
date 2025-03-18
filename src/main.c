@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/17 19:30:24 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/18 10:29:08 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int main()
 	t_object		**objs;
 	t_intersec	***ray_intersex;
 	t_intersec	*hitpoint;
-	// double		**bitmap;
+	int		**bitmap;
 	int			no_lines;
 	
 	data = NULL;
@@ -40,26 +40,13 @@ int main()
 	t_camera *cam_data = get_cam_data(data, no_lines);
 	t_ray	**cam_shot = generate_rays(cam_data);
 	ray_intersex = find_all_intersections(cam_shot, objs);
-	
-/* 	bitmap = init_bitmap(data);
-	for (int i = 0; i < count_rays(cam_shot); i++)
-	{
-		ray_intersex[i] = get_sorted_intersections(ray, objs);	
-		double *hitpoint = identify_hit(ray_intersex[i]);
-	} */
-	// ray = create_ray(o, d);
-	// ray_intersex = get_sorted_intersections(ray, objs);	
-	// hitpoint = identify_hit(ray_intersex);
-	// clean_objects(objs, data, no_lines);
-	// clean_rays(ray_intersex, ray);
-	// init_mlx(&rt_data);
-	// //render_image(rt_data, hitpoint);
-	// // cleanups
-	// free(hitpoint);
-	// // mlx integration
-	// mlx_key_hook(rt_data->mlx_data->window_ptr, handle_key_input, rt_data);
-	// mlx_hook(rt_data->mlx_data->window_ptr, 17, 0, close_window, rt_data);
-	// mlx_loop(rt_data->mlx_data->mlx_ptr);
-	// clean_mlx(rt_data);
-	// return (0);
+	bitmap = generate_bitmap(ray_intersex, cam_shot, cam_data);
+	init_mlx(&rt_data);
+	render_image(rt_data, bitmap);
+	// cleanups
+	mlx_key_hook(rt_data->mlx_data->window_ptr, handle_key_input, rt_data);
+	mlx_hook(rt_data->mlx_data->window_ptr, 17, 0, close_window, rt_data);
+	mlx_loop(rt_data->mlx_data->mlx_ptr);
+	clean_mlx(rt_data);
+	return (0);
 }
