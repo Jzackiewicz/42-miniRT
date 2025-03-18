@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:32:48 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/18 09:45:12 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/18 11:33:39 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/rays.h"
-
-t_ray	*create_ray(double *origin, double *direction)
-{
-	t_ray	*new_ray;
-
-	new_ray = (t_ray *)malloc(sizeof(t_ray));
-	if (!new_ray)
-		return (NULL);
-	new_ray->origin = origin;
-	new_ray->direction = direction;
-	return (new_ray);
-}
 
 double	*position(t_ray *ray, double t)
 {
@@ -36,16 +24,3 @@ double	*position(t_ray *ray, double t)
 	return (pos);
 }
 
-static t_input_data	*find_camera(t_input_data **data)
-{
-	int	i;
-
-	i = 0;
-	while (data[i])
-	{
-		if (!ft_strncmp(data[i]->id, "C\0", 2))
-			return (data[i]);
-		i++;
-	}
-	return (NULL);
-}
