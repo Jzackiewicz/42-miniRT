@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 13:35:09 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/18 12:33:16 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/18 12:43:26 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void clean_rays(t_ray **rays)
 	{
 		free(rays[i]->direction);
 		free(rays[i]);
+		i++;
 	}
 	free(rays);
 }

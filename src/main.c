@@ -6,11 +6,24 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/18 12:39:00 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/18 12:52:59 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/miniRT.h"
+
+void	free_bitmap(int **bitmap)
+{
+	int	i;
+
+	i = 0;
+	while (i < WINDOW_WIDTH)
+	{
+		free(bitmap[i]);
+		i++;
+	}
+	free(bitmap);
+}
 
 int	main(void)
 {
@@ -32,10 +45,15 @@ int	main(void)
 	cam_shot = generate_rays(cam_data);
 	ray_intersex = find_all_intersections(cam_shot, objs);
 	bitmap = generate_bitmap(ray_intersex, cam_shot, cam_data);
+	free(cam_data);
+	free_bitmap(bitmap);
 	(void) bitmap;
 	// mlx_run(bitmap);
 	clean_rays(cam_shot);
 	clean_intersections(ray_intersex);
 	free_objects(data, no_lines);
+	for (int i = 0; objs[i]; i++)
+		free(objs[i]);
+	free(objs);
 	return (0);
 }
