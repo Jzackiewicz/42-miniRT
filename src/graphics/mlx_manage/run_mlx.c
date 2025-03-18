@@ -6,11 +6,12 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:15:56 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/18 11:49:52 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/18 13:12:27 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/graphics.h"
+#include "../../../inc/miniRT.h"
 
 void	init_mlx(t_ray_tracer_data **rt_data)
 {
@@ -39,5 +40,6 @@ void	mlx_run(int **bitmap)
 	render_image(rt_data, bitmap);
 	mlx_key_hook(rt_data->mlx_data->window_ptr, handle_key_input, rt_data);
 	mlx_hook(rt_data->mlx_data->window_ptr, 17, 0, close_window, rt_data);
+	free_bitmap(bitmap);
 	mlx_loop(rt_data->mlx_data->mlx_ptr);
 }
