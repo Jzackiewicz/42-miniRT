@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_intersections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/18 09:27:07 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/18 12:17:55 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,5 @@ t_intersec ***find_all_intersections(t_ray **rays, t_object **objs)
         i++;
     }
     res[i] = NULL;
-    
     return res;
 }
