@@ -6,33 +6,38 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/17 14:15:16 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:40:11 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/rays.h"
 #include "../../../inc/miniRT.h"
 
-double	*intersect_sphere(t_object *obj, t_ray *ray)
+/* Finds t for ray-sphere intersection for identity sphere */
+double	*intersect_sphere(t_ray *ray)
 {
 	double	*arr_t;
 	double	*oc_vector;
-	double	b;
-	double	c;
+	double	coefficients[3];
 	double	delta;
-
-	oc_vector = subtract_tuple(ray->origin, obj->coords);
-	b = dot(oc_vector, ray->direction) * 2;
-	c = dot(oc_vector, oc_vector) - pow(obj->diameter / 2, 2);
+	double	*coords;
+	
+	coords = init_tuple(1);
+	oc_vector = subtract_tuple(ray->origin, coords);
+	normalize(&oc_vector);
+	free(coords);
+	coefficients[0] = dot(ray->direction, ray->direction);
+	coefficients[1] = dot(oc_vector, ray->direction) * 2;
+	coefficients[2] = dot(oc_vector, oc_vector) - 1;
 	free(oc_vector);
-	delta = pow(b, 2) - 4 * c;
+	delta = pow(coefficients[1], 2) - 4 * coefficients[0] * coefficients[2];
 	if (delta < 0)
 		return (NULL);
 	arr_t = (double *)malloc(sizeof(double) * 2);
 	if (!arr_t)
 		return (NULL);
-	arr_t[0] = (-b + sqrt(delta)) / 2;
-	arr_t[1] = (-b - sqrt(delta)) / 2;
+	arr_t[0] = (-coefficients[1] + sqrt(delta)) / (2 * coefficients[0]);
+	arr_t[1] = (-coefficients[1] - sqrt(delta)) / (2 * coefficients[0]);
 	return (arr_t);
 }
 
@@ -57,6 +62,25 @@ double	*intersect_plane(t_object *obj, t_ray *ray)
 	return (arr_t);
 }
 
+/* For now for sphere only */
+t_matrix	*set_transform(t_object *obj)
+{
+	t_matrix	*scaling_transform;
+	t_matrix	*translation_transform;
+	t_matrix	*transform;
+	double		tmp[3];
+
+	tmp[0] = obj->diameter;
+	tmp[1] = obj->diameter;
+	tmp[2] = obj->diameter;
+	scaling_transform = scaling(tmp);
+	translation_transform = translation(obj->coords);
+	transform = multiply_matrices(translation_transform, scaling_transform);
+	free_matrix(scaling_transform);
+	free_matrix(translation_transform);
+	return (transform);
+}
+
 /* highest level intersection finding function
 	called with a pointer to an object (plane, sphere or cylinder)
 	and an initialized t_ray pointer */
@@ -66,7 +90,11 @@ double	*intersect(t_object *obj, t_ray *ray)
 
 	arr_t = NULL;
 	if (!ft_strncmp(obj->id, "sp\0", 3))
-		arr_t = intersect_sphere(obj, ray);
+	{
+		arr_t = intersect_sphere(ray);
+		obj->transform = set_transform(obj);
+		
+	}
 	else if (!ft_strncmp(obj->id, "pl\0", 3))
 		arr_t = intersect_plane(obj, ray);
 	else

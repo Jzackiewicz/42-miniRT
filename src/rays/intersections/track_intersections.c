@@ -6,11 +6,12 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 09:26:53 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/17 11:50:19 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:36:05 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/rays.h"
+#include "../../../inc/miniRT.h"
 
 int	count_intersections(t_intersec **intersex)
 {
@@ -49,11 +50,12 @@ static t_intersec	**get_intersections(t_ray *ray, t_object **objs)
 {
 	int i;
 	double *arr_t;
+	double	*tmp;
 	t_intersec	**intersex;
 
 	if (!ray || !objs || !*objs)
 		return (NULL);
-	intersex = (t_intersec **) ft_calloc(count_objects(objs) * 2 + 1, sizeof(t_intersec *));
+	intersex = (t_intersec **)ft_calloc(count_objects(objs) * 2 + 1, sizeof(t_intersec *));
 	if (!intersex)
 		return (NULL);
 	i = 0;
@@ -63,6 +65,14 @@ static t_intersec	**get_intersections(t_ray *ray, t_object **objs)
 		if (arr_t)
 		{
 			append_intersec(intersex, arr_t, objs[i], i);
+			// objs[i]->transform = inverse(objs[i]->transform);
+			tmp = multiply_matrix_and_tuple(objs[i]->transform, ray->origin);
+			// free(ray->origin);
+			ray->origin = tmp;
+			tmp = multiply_matrix_and_tuple(objs[i]->transform, ray->direction);
+			ray->direction = tmp;
+			// free(ray->direction);
+			// exit(1);
 			free(arr_t);
 		}
 		i++;

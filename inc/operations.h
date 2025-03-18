@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 17:29:30 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/14 13:03:54 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:21:37 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ double		*negate_tuple(double *tuple);
 double		*multiply_tuple(double *tuple, double scalar);
 double		*divide_tuple(double *tuple, double scalar);
 double		magnitude(double *vector);
-double		*normalize(double *vector);
+void		normalize(double **vector);
 double		dot(double *vector1, double *vector2);
 double		*cross(double *vector1, double *vector2);
 
@@ -64,6 +64,7 @@ void		print_matrix(t_matrix *matrix);
 
 // 			utils
 int			compare_floats(double a, double b);
+double		*init_tuple(int w);
 void		print_tuple(double *tuple);
 
 #endif
