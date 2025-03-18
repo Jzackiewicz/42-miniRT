@@ -32,14 +32,20 @@ double	magnitude(double *vector)
 }
 
 /* Returns normalized vector */
-double	*normalize(double *vector)
+void	normalize(double **vector)
 {
-	double	*result;
+	int		i;
+	double	len;
 
-	result = divide_tuple(vector, magnitude(vector));
-	if (!result)
-		return (NULL);
-	return (result);
+	len = magnitude(*vector);
+	if (!len)
+		return ;
+	i = 0;
+	while (i < 3)
+	{
+		(*vector)[i] /= len;
+		i++;
+	}
 }
 
 /* Returns a dot product (scalar) of two vectors */

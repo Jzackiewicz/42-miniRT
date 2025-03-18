@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/17 14:15:16 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:39:55 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ typedef	struct	s_object
 	int		*color;
 	double	*coords;
 	double	*orientation_vector;
-}				t_object;
+	struct s_matrix *transform;
+}			t_object;
 
 typedef struct	s_camera
 {
