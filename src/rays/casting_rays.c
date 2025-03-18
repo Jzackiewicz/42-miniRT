@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:32:48 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/18 12:41:24 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/18 12:46:44 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,22 @@ static double	*get_cam_orientation_vector(t_camera *cam_data, int h_id, int w_id
 {
 	double		angle[2];
 	double		*direction;
+	double		*tmp_direction;
 	double		ratio;
-	t_matrix	*tmp;
+	t_matrix	*tmp_matrix;
 
 	angle[0] = cam_data->fov * (M_PI / 180) / 2;
 	ratio = (double)WINDOW_WIDTH / (double)WINDOW_HEIGHT;
 	angle[1] = angle[0] * ratio;
 	angle[0] *= (w_id - WINDOW_WIDTH / 2) / (double)WINDOW_WIDTH;
 	angle[1] *= (h_id - WINDOW_HEIGHT / 2) / (double)WINDOW_HEIGHT;
-	tmp = rotation_x(angle[0]);
-	direction = multiply_matrix_and_tuple(tmp, cam_data->orientation_vector);
-	free(tmp);
-	tmp = rotation_y(angle[1]);
-	direction = multiply_matrix_and_tuple(tmp, direction);
-	free(tmp);
+	tmp_matrix = rotation_x(angle[0]);
+	tmp_direction = multiply_matrix_and_tuple(tmp_matrix, cam_data->orientation_vector);
+	free_matrix(tmp_matrix);
+	tmp_matrix = rotation_y(angle[1]);
+	direction = multiply_matrix_and_tuple(tmp_matrix, tmp_direction);
+	free(tmp_direction);
+	free_matrix(tmp_matrix);
 	return (direction);
 }
 
