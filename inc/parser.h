@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:21:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/17 12:04:53 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/18 13:07:42 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void			init_with_default(t_input_data *obj);
 void			parse_colors(char *color, t_input_data *obj);
 void			parse_vector(char *vector, t_input_data *obj);
 void			parse_coords(char *coords, t_input_data *obj);
-void			free_objects(t_input_data **objs, int no_objects);
 void			parse_settings(char **line_split, t_input_data **objects,
 					int i);
 void			parse_objects(char **line_split, t_input_data **objects, int i);
