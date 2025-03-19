@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window_management.c                                :+:      :+:    :+:   */
+/*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 15:46:52 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/13 16:37:06 by agarbacz         ###   ########.fr       */
+/*   Created: 2025/03/12 13:32:48 by jzackiew          #+#    #+#             */
+/*   Updated: 2025/03/18 11:33:39 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/graphics.h"
+#include "../../inc/rays.h"
 
-int	handle_key_input(int keysym, t_ray_tracer_data *rt_data)
+double	*position(t_ray *ray, double t)
 {
-	if (keysym == XK_Escape)
-		close_window(rt_data, 1);
-	return (0);
+	double	*dir_t;
+	double	*pos;
+
+	dir_t = multiply_tuple(ray->direction, t);
+	pos = add_tuple(ray->origin, dir_t);
+	free(dir_t);
+	pos[3] = 1;
+	return (pos);
 }
+

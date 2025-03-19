@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_objects.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:09:46 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/14 11:59:01 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/18 13:06:18 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/parser.h"
+#include "../../../inc/miniRT.h"
 
 // frees the freeable contents of the object
 void	free_object(t_input_data *obj)
@@ -31,12 +31,21 @@ void	free_object(t_input_data *obj)
 }
 
 // no_objects is neccessary for proper free() calls
-void	free_objects(t_input_data **objs, int no_objects)
+void	free_objects(t_input_data **inp_data, t_object **objs, int no_lines)
 {
-	while (--no_objects != -1)
+	int	i;
+
+	while (--no_lines != -1)
 	{
-		free_object(objs[no_objects]);
-		free(objs[no_objects]);
+		free_object(inp_data[no_lines]);
+		free(inp_data[no_lines]);
+	}
+	free(inp_data);
+	i = 0;
+	while (objs[i])
+	{
+		free(objs[i]);
+		i++;
 	}
 	free(objs);
 }

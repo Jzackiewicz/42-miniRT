@@ -6,11 +6,11 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:30:12 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/14 15:37:40 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/18 11:28:30 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/graphics.h"
+#include "../../../inc/graphics.h"
 
 /* draws a pixel on specified coordinates with a specified color */
 void	draw_pixel(t_ray_tracer_data *data, int x, int y, int color)
@@ -24,46 +24,22 @@ void	draw_pixel(t_ray_tracer_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-/*  health check debug draw */
-// static void draw_rectangle(t_ray_tracer_data *data, int color)
-// {
-//     int x;
-//     int y;
-
-//     y = 0;
-//     while (y < WINDOW_HEIGHT)
-//     {
-//         x = 0;
-//         while (x < WINDOW_WIDTH)
-//         {
-//             draw_pixel(data, x, y, color);
-//             x++;
-//         }
-//         y++;
-//     }
-// }
-
-/*
- 	to find out what x and y will be
-	will this be an array?
-	will this be a reversed doubly linked binary tree?
-	will this be a toyota corolla 2024?
-	only kuab knows.......
-	for health check the fn now draws a rectangle :33
-*/
-void	trace_rays(t_ray_tracer_data *data, double *hitpoint) 
+void	render_image(t_ray_tracer_data *data, int **bitmap)
 {
-	// int i = 0;
-	/* ideal world pseudocode
-	x, y = calc_rays()
-	draw_pixel(data, x, y, color) */
-	draw_pixel(data, (int) hitpoint[0], (int) hitpoint[1], 0x00CCCC);
-}
+	int	i;
+	int	j;
 
-void	render_image(t_ray_tracer_data *data, double *hitpoint)
-{
-	trace_rays(data, hitpoint);
+	i = 0;
+	while (i < WINDOW_HEIGHT)
+	{
+		j = 0;
+		while (j < WINDOW_WIDTH)
+		{
+			draw_pixel(data, i, j, bitmap[i][j]);
+			j++;
+		}
+		i++;
+	}
 	mlx_put_image_to_window(data->mlx_data->mlx_ptr, data->mlx_data->window_ptr,
 		data->mlx_data->img_ptr, 0, 0);
 }
-
