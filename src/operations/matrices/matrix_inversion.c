@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:31:28 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/18 18:26:08 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:03:15 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,27 +90,30 @@ static double	cofactor(t_matrix *matrix, int row, int col)
 	return (cof);
 }
 
-t_matrix	*inverse(t_matrix *matrix)
+void	inverse(t_matrix *matrix)
 {
 	t_matrix	*inverted;
-	double		det;
 	int			i;
 	int			j;
 
 	if (!matrix || matrix->row != matrix->col)
-		return (NULL);
-	det = determinant(matrix);
-	if (det == 0)
-		return (NULL);
+		return ;
+	if (determinant(matrix) == 0)
+		return ;
 	inverted = init_matrix(matrix->row, matrix->col);
-	if (!inverted)
-		return (NULL);
 	i = -1;
 	while (++i < matrix->row)
 	{
 		j = -1;
 		while (++j < matrix->col)
-			inverted->grid[j][i] = cofactor(matrix, i, j) / det;
+			inverted->grid[j][i] = cofactor(matrix, i, j) / determinant(matrix);
 	}
-	return (inverted);
+	i = -1;
+	while (++i < matrix->row)
+	{
+		j = -1;
+		while (++j < matrix->col)
+			matrix->grid[j][i] = inverted->grid[j][i];
+	}
+	free_matrix(inverted);
 }

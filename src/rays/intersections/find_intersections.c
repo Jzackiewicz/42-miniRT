@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/18 18:40:11 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:04:13 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,12 @@ double	*intersect_plane(t_object *obj, t_ray *ray)
 }
 
 /* For now for sphere only */
-t_matrix	*set_transform(t_object *obj)
+t_ray	*ray_to_object_space(t_ray *ray, t_object *obj)
 {
 	t_matrix	*scaling_transform;
 	t_matrix	*translation_transform;
 	t_matrix	*transform;
+	t_ray		*new_ray;
 	double		tmp[3];
 
 	tmp[0] = obj->diameter;
@@ -78,7 +79,9 @@ t_matrix	*set_transform(t_object *obj)
 	transform = multiply_matrices(translation_transform, scaling_transform);
 	free_matrix(scaling_transform);
 	free_matrix(translation_transform);
-	return (transform);
+	new_ray->origin = multiply_matrix_and_tuple(transform, ray->origin);
+	
+	return (new_ray);
 }
 
 /* highest level intersection finding function
@@ -92,7 +95,7 @@ double	*intersect(t_object *obj, t_ray *ray)
 	if (!ft_strncmp(obj->id, "sp\0", 3))
 	{
 		arr_t = intersect_sphere(ray);
-		obj->transform = set_transform(obj);
+		// obj->transform = ray_to_object_space(obj);
 		
 	}
 	else if (!ft_strncmp(obj->id, "pl\0", 3))
