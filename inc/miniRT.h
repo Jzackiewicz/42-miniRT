@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/18 18:39:55 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:07:25 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 # define MINIRT_H
 
 # include "../lib/libft/libft.h"
+# include "graphics.h"
 # include "operations.h"
 # include "parser.h"
 # include "rays.h"
-# include "graphics.h"
 # include <math.h>
 
-typedef	struct	s_object
+typedef struct s_object
 {
 	char	*id;
 	double	diameter;
@@ -31,27 +31,31 @@ typedef	struct	s_object
 	struct s_matrix *transform;
 }			t_object;
 
-typedef struct	s_camera
+typedef struct s_camera
 {
 	double	*origin;
 	double	*orientation_vector;
 	int		fov;
-}				t_camera;
+}			t_camera;
 
-typedef struct	s_light
+typedef struct s_light
 {
 	double	*origin;
 	double	brightness;
 	int		*color;
-}				t_light;
+}			t_light;
 
-typedef struct	s_ambient
+typedef struct s_ambient
 {
 	double	brightness;
 	int		*color;
-}				t_ambient;
+}			t_ambient;
 
-void	clean_rays(t_intersec **ray_intersex, t_ray *ray);
-void	clean_objects(t_object **objs, t_input_data **data, int no_lines);
+void		clean_intersections(t_intersec ***ray_intersex);
+void		clean_rays(t_ray **rays);
+void		free_objects(t_input_data **inp_data, t_object **objs,
+				int no_lines);
+void		free_bitmap(int **bitmap);
+void		clean_objects(t_object **objs, t_input_data **data, int no_lines);
 
 #endif
