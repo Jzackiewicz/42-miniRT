@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 09:26:53 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/18 18:36:05 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:03:53 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ static t_intersec	**get_intersections(t_ray *ray, t_object **objs)
 		if (arr_t)
 		{
 			append_intersec(intersex, arr_t, objs[i], i);
+			print_matrix(objs[i]->transform);
+			inverse(objs[i]->transform);
+			print_matrix(objs[i]->transform);
 			// objs[i]->transform = inverse(objs[i]->transform);
 			tmp = multiply_matrix_and_tuple(objs[i]->transform, ray->origin);
 			// free(ray->origin);
