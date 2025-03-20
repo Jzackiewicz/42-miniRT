@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 09:40:56 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/18 18:19:25 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:36:10 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	print_matrix(t_matrix *matrix)
 		j = -1;
 		while (++j < matrix->col)
 		{
-			printf("%lf", matrix->grid[i][j]);
+			printf("%f", matrix->grid[i][j]);
 			if (j != matrix->col - 1)
 				printf(",");
 		}

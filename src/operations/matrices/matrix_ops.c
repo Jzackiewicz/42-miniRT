@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:00 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/07 17:18:40 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:01:15 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ t_matrix	*multiply_matrices(t_matrix *matrix1, t_matrix *matrix2)
 			k = -1;
 			while (++k < matrix1->col)
 				result->grid[i][j] += matrix1->grid[i][k] * matrix2->grid[k][j];
+			if (compare_floats(result->grid[i][j], 0.0))
+				result->grid[i][j] = 0;
 		}
 	}
 	return (result);
@@ -43,7 +45,7 @@ t_matrix	*multiply_matrices(t_matrix *matrix1, t_matrix *matrix2)
 
 /* Returns a tuple that is a result of multiplying matrix and tuple.
 Undefined behaviour when tuple len is not the same as number of columns */
-double	*multiply_matrix_and_tuple(t_matrix *matrix, double *tuple)
+double	*multiply_tuple_and_matrix(t_matrix *matrix, double *tuple)
 {
 	int		i;
 	int		j;

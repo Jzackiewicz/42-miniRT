@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 09:26:53 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/19 11:03:53 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/20 09:36:15 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static t_intersec	**get_intersections(t_ray *ray, t_object **objs)
 {
 	int i;
 	double *arr_t;
-	double	*tmp;
 	t_intersec	**intersex;
 
 	if (!ray || !objs || !*objs)
@@ -61,21 +60,11 @@ static t_intersec	**get_intersections(t_ray *ray, t_object **objs)
 	i = 0;
 	while (objs[i])
 	{
+		//ray = ray_to_object_space(ray, objs[i]);
 		arr_t = intersect(objs[i], ray);
 		if (arr_t)
 		{
 			append_intersec(intersex, arr_t, objs[i], i);
-			print_matrix(objs[i]->transform);
-			inverse(objs[i]->transform);
-			print_matrix(objs[i]->transform);
-			// objs[i]->transform = inverse(objs[i]->transform);
-			tmp = multiply_matrix_and_tuple(objs[i]->transform, ray->origin);
-			// free(ray->origin);
-			ray->origin = tmp;
-			tmp = multiply_matrix_and_tuple(objs[i]->transform, ray->direction);
-			ray->direction = tmp;
-			// free(ray->direction);
-			// exit(1);
 			free(arr_t);
 		}
 		i++;

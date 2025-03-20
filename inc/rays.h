@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/18 11:46:30 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:12:47 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ t_intersec				***find_all_intersections(t_ray **rays,
 int						count_intersections(t_intersec **intersex);
 int						**generate_bitmap(t_intersec ***ray_intersections,
 							t_ray **rays, t_camera *cam_data);
-// double					get_canvas_width(t_camera *cam_data);
+
+
+//				spacial_conversion
+t_ray	*ray_to_object_space(t_ray *ray, t_object *obj);
 
 #endif

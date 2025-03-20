@@ -1,10 +1,5 @@
-1. Create an array of rays according to the camera parameters (src/rays/rays.c func camshot())
-2. Applying transformations matrices to rays (switching object intersection to identity objects)
 
 
 
 !!!! Doesn't work when camera is in 0, 0, 0 !!!!
-
-
-
-		
+!!!! Parsing accepts negative diameter !!!!

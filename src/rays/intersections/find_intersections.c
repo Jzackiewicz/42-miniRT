@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/19 11:07:51 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:21:51 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,28 +62,6 @@ double	*intersect_plane(t_object *obj, t_ray *ray)
 	return (arr_t);
 }
 
-/* For now for sphere only */
-t_ray	*ray_to_object_space(t_ray *ray, t_object *obj)
-{
-	t_matrix	*scaling_transform;
-	t_matrix	*translation_transform;
-	t_matrix	*transform;
-	t_ray		*new_ray;
-	double		tmp[3];
-
-	tmp[0] = obj->diameter;
-	tmp[1] = obj->diameter;
-	tmp[2] = obj->diameter;
-	scaling_transform = scaling(tmp);
-	translation_transform = translation(obj->coords);
-	transform = multiply_matrices(translation_transform, scaling_transform);
-	free_matrix(scaling_transform);
-	free_matrix(translation_transform);
-	new_ray->origin = multiply_matrix_and_tuple(transform, ray->origin);
-	
-	return (new_ray);
-}
-
 /* highest level intersection finding function
 	called with a pointer to an object (plane, sphere or cylinder)
 	and an initialized t_ray pointer */
@@ -93,11 +71,7 @@ double	*intersect(t_object *obj, t_ray *ray)
 
 	arr_t = NULL;
 	if (!ft_strncmp(obj->id, "sp\0", 3))
-	{
 		arr_t = intersect_sphere(ray);
-		// obj->transform = ray_to_object_space(obj);
-		
-	}
 	else if (!ft_strncmp(obj->id, "pl\0", 3))
 		arr_t = intersect_plane(obj, ray);
 	else

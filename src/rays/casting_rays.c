@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   casting_rays.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:32:48 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/18 12:46:44 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/19 18:43:25 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static double	*get_cam_orientation_vector(t_camera *cam_data, int h_id, int w_id
 	angle[0] *= (w_id - WINDOW_WIDTH / 2) / (double)WINDOW_WIDTH;
 	angle[1] *= (h_id - WINDOW_HEIGHT / 2) / (double)WINDOW_HEIGHT;
 	tmp_matrix = rotation_x(angle[0]);
-	tmp_direction = multiply_matrix_and_tuple(tmp_matrix, cam_data->orientation_vector);
+	tmp_direction = multiply_tuple_and_matrix(tmp_matrix, cam_data->orientation_vector);
 	free_matrix(tmp_matrix);
 	tmp_matrix = rotation_y(angle[1]);
-	direction = multiply_matrix_and_tuple(tmp_matrix, tmp_direction);
+	direction = multiply_tuple_and_matrix(tmp_matrix, tmp_direction);
 	free(tmp_direction);
 	free_matrix(tmp_matrix);
 	return (direction);
