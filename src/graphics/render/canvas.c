@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   canvas.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 11:34:11 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/18 12:48:58 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/20 09:56:05 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ double	get_canvas_width(t_camera *cam_data)
 	center[3] = 0.0;
 	cam_to_center = subtract_tuple(cam_data->origin, center);
 	distance = magnitude(cam_to_center);
+	distance = 2;
 	free(cam_to_center);
 	angle = cam_data->fov * (M_PI / 180.0);
 	width = 2 * (tan(angle / 2) * distance);
