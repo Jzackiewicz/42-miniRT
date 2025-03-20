@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/20 16:06:30 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:40:06 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 typedef struct s_ray // xD
 {
-	double	*origin;
-	double	*direction;
+	double *origin;
+	double *direction;
 }						t_ray;
 
 typedef struct s_intersec
@@ -47,9 +47,12 @@ int						count_intersections(t_intersec **intersex);
 int						**generate_bitmap(t_intersec ***ray_intersections,
 							t_ray **rays, t_camera *cam_data);
 
-
 //				spacial_conversion
 void	load_transform_matrix(t_object *obj);
 t_ray	*ray_to_object_space(t_ray *ray, t_object *obj);
+int						rgb_to_int(double r, double g, double b);
+// light section
+double					*get_normal_at(t_object *obj, double *w_point);
+double					*reflect(double *in, double *normal);
 
 #endif

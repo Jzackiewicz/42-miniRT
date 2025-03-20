@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/18 13:13:15 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:24:16 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ int	main(void)
 	cam_data = get_cam_data(data, no_lines);
 	cam_shot = generate_rays(cam_data);
 	ray_intersex = find_all_intersections(cam_shot, objs);
+	double	tmp_point[4] = {0, 0, 1, 0};
+	double *normal = get_normal_at(objs[0], tmp_point);
+	print_tuple(normal);
+	double *r = reflect(normal, tmp_point);
+	print_tuple(r);
+	exit(1);
 	bitmap = generate_bitmap(ray_intersex, cam_shot, cam_data);
 	clean_rays(cam_shot);
 	clean_intersections(ray_intersex);
