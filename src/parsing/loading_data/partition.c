@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   partition.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/17 14:15:16 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:12:51 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_camera	*get_cam_data(t_input_data **data, int no_data)
 {
 	int			i;
 	t_camera	*cam;
-	
+
 	cam = (t_camera *)malloc(sizeof(t_camera));
 	if (!cam)
 		return (NULL);
@@ -74,14 +74,34 @@ t_camera	*get_cam_data(t_input_data **data, int no_data)
 	return (NULL);
 }
 
+t_light	*get_light_data(t_input_data **data, int no_data)
+{
+	int		i;
+	t_light	*light;
+
+	light = (t_light *)malloc(sizeof(t_light));
+	if (!light)
+		return (NULL);
+	i = -1;
+	while (++i < no_data)
+	{
+		if (!ft_strncmp(data[i]->id, "L\0", 2))
+		{
+			light->brightness = data[i]->brightness;
+			light->color = data[i]->color;
+			light->coords = data[i]->coords;
+			return (light);
+		}
+	}
+	return (NULL);
+}
+
 int	count_objects(t_object **objs)
 {
 	int	len;
 
 	len = 0;
 	while (objs[len])
-	{
 		len++;
-	}
 	return (len);
 }
