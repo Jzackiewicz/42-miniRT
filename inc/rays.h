@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/19 12:12:47 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:06:30 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int						**generate_bitmap(t_intersec ***ray_intersections,
 
 
 //				spacial_conversion
+void	load_transform_matrix(t_object *obj);
 t_ray	*ray_to_object_space(t_ray *ray, t_object *obj);
 
 #endif

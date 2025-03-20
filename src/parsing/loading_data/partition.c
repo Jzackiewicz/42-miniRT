@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/17 14:15:16 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:37:39 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static t_object	*assign_object(t_input_data *data)
 	obj->color = data->color;
 	obj->coords = data->coords;
 	obj->orientation_vector = data->orientation_vector;
+	load_transform_matrix(obj);
 	return (obj);
 }
 
