@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   space_conversion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:07:59 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/19 14:12:37 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/20 13:06:53 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_ray	*ray_to_object_space(t_ray *ray, t_object *obj)
 	printf("dir: ");
 	print_tuple(ray->direction); */
 	inverse(transform);
+	obj->transform = transform;
 	new_ray->origin = multiply_tuple_and_matrix(transform, ray->origin);
 	new_ray->direction = multiply_tuple_and_matrix(transform, ray->direction);
 /* 	printf("\npost:\n");
@@ -51,7 +52,7 @@ t_ray	*ray_to_object_space(t_ray *ray, t_object *obj)
 	print_tuple(new_ray->origin);
 	printf("dir: ");
 	print_tuple(new_ray->direction); */
-	free_matrix(transform);
+	//free_matrix(transform);
 	// exit(1);
 	return (new_ray);
 }

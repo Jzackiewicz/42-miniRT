@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   generate_bitmap.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:02:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/20 09:57:02 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/20 11:54:45 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	**generate_bitmap(t_intersec ***ray_intersections, t_ray **rays,
 	bitmap = init_bitmap();
 	i = 0;
 	width = get_canvas_width(cam_data);
-	printf("width: %f\n", width);
+	// printf("width: %f\n", width);
 	pixel_size = WINDOW_WIDTH / width;
 	while (ray_intersections[i])
 	{
@@ -68,12 +68,11 @@ int	**generate_bitmap(t_intersec ***ray_intersections, t_ray **rays,
 		if (hitpoint)
 		{
 			pos = position(rays[i], hitpoint->t);
-			print_tuple(pos);
-			print_tuple(cam_data->orientation_vector);
-			exit(1);
+			// print_tuple(pos);
+			// print_tuple(cam_data->orientation_vector);
+			// exit(1);
 			int	x_pos = (int)((pos[0] * pixel_size) + (WINDOW_WIDTH / 2)); 
 			int	y_pos = (int)((pos[1] * pixel_size) + (WINDOW_HEIGHT / 2));
-			// int z_pos = (int)((pos[2] * pixel_size) + (WINDOW_HEIGHT / 2));
 			free(pos);
 			int	color = rgb_to_int(hitpoint->object->color[0], hitpoint->object->color[1], hitpoint->object->color[2]);
 			bitmap[x_pos][y_pos] = color;

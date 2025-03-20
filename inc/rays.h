@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/19 12:12:47 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/20 12:55:34 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,8 @@ int						**generate_bitmap(t_intersec ***ray_intersections,
 
 //				spacial_conversion
 t_ray	*ray_to_object_space(t_ray *ray, t_object *obj);
+
+// light section
+double	*get_normal_at(t_object *obj, double *w_point);
 
 #endif
