@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:57:27 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/20 15:13:29 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/20 15:44:00 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,12 @@ double	*lighting(t_light *light, t_object *obj, t_camera *cam_data,
 	double *ambient;
 	
 	effective_color = rgb_to_int(obj->color[0], obj->color[1], obj->color[2]) * light->brightness;
+	
 	ft_memcpy(light_p, light->coords, sizeof(double) * 4);
-	normalize(subtract_tuple(light_p, cam_data->origin));
+	light_v = subtract_tuple(light_p, cam_data->origin);
+	normalize(&light_v);
+	
+	// ambient ← effective_color * material.ambient
 	
 	
 	return ;
