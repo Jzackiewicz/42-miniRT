@@ -41,23 +41,44 @@ double	*reflect(double *in, double *normal)
 	res = subtract_tuple(in, res);
 	return (res);
 }
+
 // p. 88 book
-double	*lighting(t_light *light, t_object *obj, t_camera *cam_data,
+double	lighting(t_light *light, t_object *obj, t_camera *cam_data,
 		double *normal)
 {
 	double effective_color;
 	double *light_p;
 	double *light_v;
-	double *ambient;
-	
+	double *reflect_v;
+	double reflect_dot_eye;
+	double ambient;
+    double light_dot_normal;
+    double diffuse;
+	double specular;
+
 	effective_color = rgb_to_int(obj->color[0], obj->color[1], obj->color[2]) * light->brightness;
-	
+	// copying to new var due to normalize fn modifying by reference
 	ft_memcpy(light_p, light->coords, sizeof(double) * 4);
 	light_v = subtract_tuple(light_p, cam_data->origin);
 	normalize(&light_v);
-	
-	// ambient ← effective_color * material.ambient
-	
-	
-	return ;
+
+	ambient = effective_color * obj->material->ambient;
+
+	light_dot_normal = dot(light_v, normal);
+	if (light_dot_normal < 0)
+    {
+		diffuse = 0; // both black
+		specular = 0;
+	}
+	else
+	{
+		diffuse = effective_color * obj->material->diffuse * light_dot_normal;
+		reflect_v = reflect(light_v, normal); // light_v should be negative (reflectv ← reflect(-lightv, normalv))
+		reflect_dot_eye = dot(reflect_v, cam_data->origin); // cam origin is eyev ??? cam->origin was the point param previously
+		if (reflect_dot_eye <= 0)
+			specular = 0;
+		else
+			specular = light->brightness * obj->material->specular * pow(reflect_dot_eye, obj->material->shininess);
+	}
+	return (ambient + diffuse + specular);
 }
