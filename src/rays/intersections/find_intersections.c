@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/20 16:08:30 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/24 09:31:17 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ double	*intersect_sphere(t_ray *ray)
 	
 	coords = init_tuple(1);
 	oc_vector = subtract_tuple(ray->origin, coords);
-	normalize(&oc_vector);
 	free(coords);
 	coefficients[0] = dot(ray->direction, ray->direction);
 	coefficients[1] = dot(oc_vector, ray->direction) * 2;
@@ -36,8 +35,8 @@ double	*intersect_sphere(t_ray *ray)
 	arr_t = (double *)malloc(sizeof(double) * 2);
 	if (!arr_t)
 		return (NULL);
-	arr_t[0] = (-coefficients[1] + sqrt(delta)) / (2 * coefficients[0]);
-	arr_t[1] = (-coefficients[1] - sqrt(delta)) / (2 * coefficients[0]);
+	arr_t[0] = (-coefficients[1] - sqrt(delta)) / (2 * coefficients[0]);
+	arr_t[1] = (-coefficients[1] + sqrt(delta)) / (2 * coefficients[0]);
 	return (arr_t);
 }
 
