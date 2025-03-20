@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:32:48 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/19 18:43:25 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:26:45 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,7 @@ t_ray	**generate_rays(t_camera *cam_data)
 		j = -1;
 		while (++j < WINDOW_WIDTH)
 		{
-			// rays[i * WINDOW_WIDTH + j] = (t_ray *)malloc(sizeof(t_ray));
-			// if (!rays[i * WINDOW_WIDTH + j])
-			// 	return (NULL);
 			direction = get_cam_orientation_vector(cam_data, i, j);
-			// free(tmp);
-			// direction = normalize(tmp);
 			rays[i * WINDOW_WIDTH + j] = create_ray(cam_data->origin,
 					direction);
 		}

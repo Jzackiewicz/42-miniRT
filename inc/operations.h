@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 17:29:30 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/19 12:01:15 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:10:12 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		transpose(t_matrix **matrix);
 void		make_identity(t_matrix *matrix);
 
 //			transformations
-void		inverse(t_matrix *matrix);
+t_matrix	*inverse(t_matrix *matrix);
 t_matrix	*translation(double *tuple);
 t_matrix	*scaling(double *tuple);
 t_matrix	*shearing(double *tuple);
