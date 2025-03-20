@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:02:41 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/18 13:13:15 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/24 13:12:16 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,24 @@ int	main(void)
 			&data);
 	if (no_lines == -1)
 		return (printf("Error: file error\n"), -1);
-	objs = get_objects(data, no_lines);
+	
 	cam_data = get_cam_data(data, no_lines);
-	cam_shot = generate_rays(cam_data);
-	ray_intersex = find_all_intersections(cam_shot, objs);
-	bitmap = generate_bitmap(ray_intersex, cam_shot, cam_data);
-	clean_rays(cam_shot);
-	clean_intersections(ray_intersex);
-	free_objects(data, objs, no_lines);
-	free(cam_data);
+	objs = get_objects(data, no_lines);
+	bitmap = generate_new_bitmap(cam_data, objs);
+	
+	// t_ambient *ambient = get_ambient_data(data, no_lines);
+	// for (int i = 0; i < no_lines - 3; i++)
+	// {
+	// 	assign_object_material(ambient, objs[i]);
+	// }
+	// 
+	// cam_shot = generate_rays(cam_data);
+	// ray_intersex = find_all_intersections(cam_shot, objs);
+	// bitmap = generate_bitmap(ray_intersex, cam_shot, cam_data, get_light_data(data, no_lines));
+	// clean_rays(cam_shot);
+	// clean_intersections(ray_intersex);
+	// free_objects(data, objs, no_lines);
+	// free(cam_data);
 	mlx_run(bitmap);
 	return (0);
 }

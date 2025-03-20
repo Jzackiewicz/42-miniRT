@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:21:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/18 13:07:42 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:12:29 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int				parse_file(char *filepath, t_input_data ***objects);
 
 struct s_object	**get_objects(t_input_data **data, int no_data);
 struct s_camera	*get_cam_data(t_input_data **data, int no_data);
+struct s_light	*get_light_data(t_input_data **data, int no_data);
 int				count_objects(struct s_object **objs);
 
 // debug utils

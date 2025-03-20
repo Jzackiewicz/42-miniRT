@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:26:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/19 11:07:34 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/24 09:50:10 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,20 @@ double	*init_tuple(int w)
 
 void	print_tuple(double *tuple)
 {
+	if (!tuple)
+	{
+		printf("No tuple\n");
+		return ;
+	}
 	if (compare_floats(tuple[3], 1))
 		printf("Point: ");
 	else if (compare_floats(tuple[3], 0))
 		printf("Vector: ");
 	else
+	{
 		printf("Tuple: ");
+		printf("{%f, %f, %f, %f}\n", tuple[0], tuple[1], tuple[2], tuple[3]);
+		return ;
+	}
 	printf("{%f, %f, %f}\n", tuple[0], tuple[1], tuple[2]);
 }
