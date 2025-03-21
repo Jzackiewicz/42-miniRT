@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   generate_bitmap.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:02:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/21 14:47:48 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:22:08 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,12 @@ int	**generate_bitmap(t_intersec ***ray_intersections, t_ray **rays,
 			pos = position(rays[i], hitpoint->t);
 			normal = get_normal_at((hitpoint->object), pos);
 			light_color = lighting(light, hitpoint->object, cam_data, normal, pos);
+			printf("color: %d\n", (int)light_color);
 			int	x_pos = (int)((pos[0] * pixel_size) + (WINDOW_WIDTH / 2)); 
 			int	y_pos = (int)((pos[1] * pixel_size) + (WINDOW_HEIGHT / 2));
 			free(pos);
 			int	color = rgb_to_int(hitpoint->object->color[0], hitpoint->object->color[1], hitpoint->object->color[2]);
-			bitmap[x_pos][y_pos] = color * (int) (light_color);
+			bitmap[x_pos][y_pos] = (int) (color + light_color);
 		}
 		i++;
 	}

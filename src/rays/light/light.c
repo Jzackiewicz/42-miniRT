@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:57:27 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/21 14:56:21 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:18:13 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ double	*get_normal_at(t_object *obj, double *w_point)
 	obj_point = multiply_tuple_and_matrix(obj->inv_transform, w_point);
 	obj_normal = subtract_tuple(obj_point, sphere_center);
 	normalize(&obj_normal);
+	transpose(&obj->inv_transform);
 	world_normal = multiply_tuple_and_matrix(obj->inv_transform, obj_normal);
+	transpose(&obj->inv_transform);
 	normalize(&world_normal);
 	free(sphere_center);
 	free(obj_normal);
-	// print_tuple(world_normal);
 	return (world_normal);
 }
 
@@ -38,7 +39,7 @@ double	*reflect(double *in, double *normal)
 	double	*res;
 
 	res = multiply_tuple(normal, 2 * dot(in, normal));
-	res = subtract_tuple(in, res);
+	res = subtract_tuple(res, in);
 	return (res);
 }
 
@@ -63,8 +64,8 @@ double	lighting(t_light *light, t_object *obj, t_camera *cam_data,
 	light_v = subtract_tuple(light_p, point);
 	normalize(&light_v);
 
-	ambient = (double) effective_color * obj->material->ambient;
-
+	ambient = (double) (effective_color * obj->material->ambient);
+	printf("ambient: %d * %f = %f\n", effective_color, obj->material->ambient, ambient);
 	light_dot_normal = dot(light_v, normal);
 	if (light_dot_normal < 0)
     {
@@ -81,5 +82,5 @@ double	lighting(t_light *light, t_object *obj, t_camera *cam_data,
 		else
 			specular = light->brightness * obj->material->specular * pow(reflect_dot_eye, obj->material->shininess);
 	}
-	return (ambient + diffuse + specular);
+	return (ambient + diffuse);
 }
