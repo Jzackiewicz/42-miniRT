@@ -20,6 +20,15 @@
 # include "rays.h"
 # include <math.h>
 
+typedef struct s_material
+{
+	double			ambient;
+	double			diffuse;
+	double			specular;
+	double			shininess;
+
+}					t_material;
+
 typedef struct s_object
 {
 	char			*id;
@@ -33,14 +42,6 @@ typedef struct s_object
 	t_material		*material;
 }					t_object;
 
-typedef struct s_material
-{
-	double			ambient;
-	double			diffuse;
-	double			specular;
-	double			shininess;
-
-}					t_material;
 
 typedef struct s_camera
 {

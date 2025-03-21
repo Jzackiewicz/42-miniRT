@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:57:27 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/20 15:44:00 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/21 12:24:10 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,44 @@ double	*reflect(double *in, double *normal)
 	res = subtract_tuple(in, res);
 	return (res);
 }
+
 // p. 88 book
-double	*lighting(t_light *light, t_object *obj, t_camera *cam_data,
-		double *normal)
+double	lighting(t_light *light, t_object *obj, t_camera *cam_data,
+		double *normal, double *point)
 {
-	double effective_color;
+	int		effective_color;
 	double *light_p;
 	double *light_v;
-	double *ambient;
-	
+	double *reflect_v;
+	double reflect_dot_eye;
+	double ambient;
+    double light_dot_normal;
+    double diffuse;
+	double specular;
+
 	effective_color = rgb_to_int(obj->color[0], obj->color[1], obj->color[2]) * light->brightness;
 	
 	ft_memcpy(light_p, light->coords, sizeof(double) * 4);
-	light_v = subtract_tuple(light_p, cam_data->origin);
+	light_v = subtract_tuple(light_p, point);
 	normalize(&light_v);
-	
-	// ambient ← effective_color * material.ambient
-	
-	
-	return ;
+
+	ambient = (double) effective_color * obj->material->ambient;
+
+	light_dot_normal = dot(light_v, normal);
+	if (light_dot_normal < 0)
+    {
+		diffuse = 0;
+		specular = 0;
+	}
+	else
+	{
+		diffuse = (double) effective_color * obj->material->diffuse * light_dot_normal;
+		reflect_v = reflect(negate_tuple(light_v), normal);
+		reflect_dot_eye = dot(reflect_v, cam_data->orientation_vector);
+		if (reflect_dot_eye <= 0)
+			specular = 0;
+		else
+			specular = light->brightness * obj->material->specular * pow(reflect_dot_eye, obj->material->shininess);
+	}
+	return (ambient + diffuse + specular);
 }
