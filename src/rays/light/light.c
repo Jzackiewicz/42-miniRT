@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:57:27 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/21 12:24:10 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/21 14:56:21 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ double	*get_normal_at(t_object *obj, double *w_point)
 	double	*obj_point;
 	double	*world_normal;
 
-	inverse(obj->transform);
 	sphere_center = init_tuple(1);
-	obj_point = multiply_tuple_and_matrix(obj->transform, w_point);
+	obj_point = multiply_tuple_and_matrix(obj->inv_transform, w_point);
 	obj_normal = subtract_tuple(obj_point, sphere_center);
 	normalize(&obj_normal);
-	world_normal = multiply_tuple_and_matrix(obj->transform, obj_normal);
+	world_normal = multiply_tuple_and_matrix(obj->inv_transform, obj_normal);
 	normalize(&world_normal);
 	free(sphere_center);
 	free(obj_normal);
+	// print_tuple(world_normal);
 	return (world_normal);
 }
 
@@ -57,7 +57,8 @@ double	lighting(t_light *light, t_object *obj, t_camera *cam_data,
 	double specular;
 
 	effective_color = rgb_to_int(obj->color[0], obj->color[1], obj->color[2]) * light->brightness;
-	
+
+	light_p = init_tuple(1);	
 	ft_memcpy(light_p, light->coords, sizeof(double) * 4);
 	light_v = subtract_tuple(light_p, point);
 	normalize(&light_v);

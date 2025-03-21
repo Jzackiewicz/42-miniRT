@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/20 16:40:06 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/21 13:47:44 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_intersec
 	struct s_object		*object;
 }						t_intersec;
 
+typedef struct s_light t_light;
 typedef struct s_object	t_object;
 typedef struct s_camera	t_camera;
 
@@ -45,14 +46,20 @@ t_intersec				***find_all_intersections(t_ray **rays,
 							t_object **objs);
 int						count_intersections(t_intersec **intersex);
 int						**generate_bitmap(t_intersec ***ray_intersections,
-							t_ray **rays, t_camera *cam_data);
+							t_ray **rays, t_camera *cam_data, t_light *light);
+
 
 //				spacial_conversion
-void	load_transform_matrix(t_object *obj);
-t_ray	*ray_to_object_space(t_ray *ray, t_object *obj);
+void					load_transform_matrix(t_object *obj);
+t_ray					*ray_to_object_space(t_ray *ray, t_object *obj);
 int						rgb_to_int(double r, double g, double b);
+
+typedef struct s_light	t_light;
+
 // light section
 double					*get_normal_at(t_object *obj, double *w_point);
 double					*reflect(double *in, double *normal);
+double					lighting(t_light *light, t_object *obj,
+							t_camera *cam_data, double *normal, double *point);
 
 #endif
