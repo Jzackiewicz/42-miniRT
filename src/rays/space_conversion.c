@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:07:59 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/20 16:40:45 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:34:20 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	load_transform_matrix(t_object *obj)
 	tmp[2] = obj->diameter;
 	scaling_transform = scaling(tmp);
 	translation_transform = translation(obj->coords);
-	transform = multiply_matrices(translation_transform, scaling_transform);
+	transform = multiply_matrices(scaling_transform, translation_transform);
 	free_matrix(scaling_transform);
 	free_matrix(translation_transform);
 	obj->transform = transform;
