@@ -63,8 +63,7 @@ int	**generate_bitmap(t_intersec ***ray_intersections, t_ray **rays,
 	i = 0;
 	width = get_canvas_width(cam_data);
 	pixel_size = WINDOW_WIDTH / width;
-	while (ray_intersections[i])
-	{
+	while (ray_intersections[i]) {
 		hitpoint = identify_hit(ray_intersections[i]);
 		if (hitpoint)
 		{
@@ -75,9 +74,6 @@ int	**generate_bitmap(t_intersec ***ray_intersections, t_ray **rays,
 			x_pos = (int)((pos[0] * pixel_size) + (WINDOW_WIDTH / 2));
 			y_pos = (int)((pos[1] * pixel_size) + (WINDOW_HEIGHT / 2));
 			free(pos);
-			color = rgb_to_int(hitpoint->object->color[0] * light_color / 255.0, // split into channels for precision
-                    hitpoint->object->color[1] * light_color / 255.0,
-                    hitpoint->object->color[2] * light_color / 255.0);
 			bitmap[x_pos][y_pos] = light_color;
 		}
 		i++;
