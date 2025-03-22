@@ -22,9 +22,9 @@ void	assign_object_material(t_ambient *ambient, t_object *obj)
 	// obj->material->ambient = ambient->brightness * rgb_to_int(ambient->color[0],
 	// 		ambient->color[1], ambient->color[2]);
 	obj->material->ambient = ambient->brightness;
-	obj->material->diffuse = 2;
-	obj->material->specular = 1;
-	obj->material->shininess = 100;
+	obj->material->diffuse = 0.9;
+	obj->material->specular = 0.9;
+	obj->material->shininess = 32;
 }
 
 static t_object	*assign_object(t_input_data *data)
