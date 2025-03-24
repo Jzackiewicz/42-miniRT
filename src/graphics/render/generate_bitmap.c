@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:02:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/24 13:13:33 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/24 13:19:23 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,10 @@
 
 int	rgb_to_int(double r, double g, double b)
 {
-	int	color;
-
-	color = 0;
-	color |= (int)(b);
-	color |= (int)(g) << 8;
-	color |= (int)(r) << 16;
-	return (color);
+	r = fmin(255, fmax(0, r));
+	g = fmin(255, fmax(0, g));
+	b = fmin(255, fmax(0, b));
+	return (((int)r << 16) | ((int)g << 8) | (int)b);
 }
 
 int	**init_bitmap(void)
@@ -52,38 +49,40 @@ int	**init_bitmap(void)
 
 /* func should return a 2d array (bitmap) of hitpoints to color in mlx */
 int	**generate_bitmap(t_intersec ***ray_intersections, t_ray **rays,
-		t_camera *cam_data)
+		t_camera *cam_data, t_light *light)
 {
-	int i;
-	int **bitmap;
-	t_intersec *hitpoint;
-	double *pos;
-	double width;
-	double pixel_size;
+	int			i;
+	int			**bitmap;
+	t_intersec	*hitpoint;
+	double		*pos;
+	double		width;
+	double		pixel_size;
+	double		light_color;
+	double		*normal;
+	int			x_pos;
+	int			y_pos;
+	int			color;
 
 	bitmap = init_bitmap();
 	i = 0;
 	width = get_canvas_width(cam_data);
-	// printf("width: %f\n", width);
 	pixel_size = WINDOW_WIDTH / width;
-	while (ray_intersections[i])
-	{
+	while (ray_intersections[i]) {
 		hitpoint = identify_hit(ray_intersections[i]);
 		if (hitpoint)
 		{
 			pos = position(rays[i], hitpoint->t);
-			// print_tuple(pos);
-			// print_tuple(cam_data->orientation_vector);
-			// exit(1);
-			int	x_pos = (int)((pos[0] * pixel_size) + (WINDOW_WIDTH / 2)); 
-			int	y_pos = (int)((pos[1] * pixel_size) + (WINDOW_HEIGHT / 2));
+			normal = get_normal_at((hitpoint->object), pos);
+			light_color = lighting(light, hitpoint->object, cam_data, normal,
+					pos);
+			x_pos = (int)((pos[0] * pixel_size) + (WINDOW_WIDTH / 2));
+			y_pos = (int)((pos[1] * pixel_size) + (WINDOW_HEIGHT / 2));
 			free(pos);
-			int	color = rgb_to_int(hitpoint->object->color[0], hitpoint->object->color[1], hitpoint->object->color[2]);
-			bitmap[x_pos][y_pos] = color;
+			bitmap[x_pos][y_pos] = light_color;
 		}
 		i++;
 	}
-	return (bitmap);
+	return (bitmap);	
 }
 
 int	**generate_new_bitmap(t_camera *cam_data, t_object **objs)

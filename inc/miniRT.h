@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/20 16:39:37 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/21 12:49:44 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@
 # include "parser.h"
 # include "rays.h"
 # include <math.h>
+
+typedef struct s_material
+{
+	double			ambient;
+	double			diffuse;
+	double			specular;
+	double			shininess;
+
+}					t_material;
 
 typedef struct s_object
 {
@@ -33,14 +42,6 @@ typedef struct s_object
 	t_material		*material;
 }					t_object;
 
-typedef struct s_material
-{
-	double			ambient;
-	double			diffuse;
-	double			specular;
-	double			shininess;
-
-}					t_material;
 
 typedef struct s_camera
 {
