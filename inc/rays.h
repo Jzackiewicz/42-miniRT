@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/21 13:47:44 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/24 18:22:59 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void					sort_intersections(t_intersec **i_s, int start_index,
 							int end_index);
 t_intersec				**get_sorted_intersections(t_ray *ray, t_object **objs);
 t_intersec				*identify_hit(t_intersec **i_s);
-t_intersec				***find_all_intersections(t_ray **rays,
+t_intersec				***intersect_world(t_ray **rays,
 							t_object **objs);
 int						count_intersections(t_intersec **intersex);
 int						**generate_bitmap(t_intersec ***ray_intersections,
