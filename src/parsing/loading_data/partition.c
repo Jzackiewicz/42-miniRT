@@ -3,15 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   partition.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/20 16:40:33 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/21 18:52:23 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/miniRT.h"
 #include "../../../inc/parser.h"
+
+// TODO: split the ambient color calcs into channels
+void	assign_object_material(t_ambient *ambient, t_object *obj)
+{
+	obj->material = (t_material *)malloc(sizeof(t_material));
+	if (!obj->material)
+		return ;
+	// obj->material->ambient = ambient->brightness * rgb_to_int(ambient->color[0],
+	// 		ambient->color[1], ambient->color[2]);
+	obj->material->ambient = ambient->brightness;
+	obj->material->diffuse = 0.9;
+	obj->material->specular = 0.9;
+	obj->material->shininess = 32;
+}
 
 static t_object	*assign_object(t_input_data *data)
 {
@@ -92,6 +106,27 @@ t_light	*get_light_data(t_input_data **data, int no_data)
 			light->color = data[i]->color;
 			light->coords = data[i]->coords;
 			return (light);
+		}
+	}
+	return (NULL);
+}
+
+t_ambient	*get_ambient_data(t_input_data **data, int no_data)
+{
+	int			i;
+	t_ambient	*ambient;
+
+	ambient = (t_ambient *)malloc(sizeof(t_ambient));
+	if (!ambient)
+		return (NULL);
+	i = -1;
+	while (++i < no_data)
+	{
+		if (!ft_strncmp(data[i]->id, "A\0", 2))
+		{
+			ambient->brightness = data[i]->ambient_light_ratio;
+			ambient->color = data[i]->color;
+			return (ambient);
 		}
 	}
 	return (NULL);
