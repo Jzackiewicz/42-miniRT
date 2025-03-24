@@ -6,24 +6,25 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/21 16:23:55 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/24 09:11:21 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/miniRT.h"
 #include "../../../inc/parser.h"
 
+// TODO: split the ambient color calcs into channels
 void	assign_object_material(t_ambient *ambient, t_object *obj)
 {
 	obj->material = (t_material *)malloc(sizeof(t_material));
 	if (!obj->material)
 		return ;
-	obj->material->ambient = ambient->brightness * rgb_to_int(ambient->color[0],
-			ambient->color[1], ambient->color[2]);
-	// obj->material->ambient = ambient->brightness;
-	obj->material->diffuse = 1;
+	// obj->material->ambient = ambient->brightness * rgb_to_int(ambient->color[0],
+	// 		ambient->color[1], ambient->color[2]);
+	obj->material->ambient = ambient->brightness;
+	obj->material->diffuse = 2;
 	obj->material->specular = 1;
-	obj->material->shininess = 1;
+	obj->material->shininess = 100;
 }
 
 static t_object	*assign_object(t_input_data *data)
