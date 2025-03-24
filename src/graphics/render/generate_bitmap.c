@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:02:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/21 16:22:08 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:27:04 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ int	**generate_bitmap(t_intersec ***ray_intersections, t_ray **rays,
 			int	y_pos = (int)((pos[1] * pixel_size) + (WINDOW_HEIGHT / 2));
 			free(pos);
 			int	color = rgb_to_int(hitpoint->object->color[0], hitpoint->object->color[1], hitpoint->object->color[2]);
+		if (color + light_color <= 0xFFFFFF)
 			bitmap[x_pos][y_pos] = (int) (color + light_color);
+		else
+				bitmap[x_pos][y_pos] = 0xFFFFFF;
 		}
 		i++;
 	}
