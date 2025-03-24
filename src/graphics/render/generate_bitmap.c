@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:02:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/24 13:19:23 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/24 14:29:30 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,25 @@ int	**generate_bitmap(t_intersec ***ray_intersections, t_ray **rays,
 	return (bitmap);	
 }
 
-int	**generate_new_bitmap(t_camera *cam_data, t_object **objs)
+int	get_lightning_color(t_camera *cam_data, t_light *light_data, t_ray *ray, t_intersec *hitpoint)
 {
-	int wall_z = 100;
-	int wall_size = 70;
-	double	pixel_size = wall_size / WINDOW_WIDTH;
-	double	half = wall_size / 2;
+	int	light_color;
+	double	*pos;
+	double	*normal;
+
+	pos = position(ray, hitpoint->t);
+	normal = get_normal_at((hitpoint->object), pos);
+	light_color = lighting(light_data, hitpoint->object, cam_data, normal, pos);
+
+	return (light_color);
+}
+
+int	**generate_new_bitmap(t_camera *cam_data, t_object **objs, t_light *light_data)
+{
+	double wall_z = 10.0;
+	double wall_size = 10.0;
+	double	pixel_size;
+	double	half;
 	double	world_y;
 	double	world_x;
 	int	i;
@@ -98,6 +111,8 @@ int	**generate_new_bitmap(t_camera *cam_data, t_object **objs)
 	
 	int **bitmap = init_bitmap();
 	i = -1;
+	pixel_size = wall_size / WINDOW_WIDTH;
+	half = wall_size / 2;
 	while (++i < WINDOW_HEIGHT)
 	{
 		world_y = half - pixel_size * i;
@@ -109,16 +124,20 @@ int	**generate_new_bitmap(t_camera *cam_data, t_object **objs)
 			double	*dir = subtract_tuple(tmp, cam_data->origin);
 			normalize(&dir);
 			t_ray *ray = create_ray(cam_data->origin, dir);
+			//ray = ray_to_object_space(ray, objs[0]);
 			t_intersec **intersex = get_sorted_intersections(ray, objs);
 			t_intersec *hitpoint = identify_hit(intersex);
-			// printf("hitpoint: %f\n", hitpoint->t);
+			
+
 			if (hitpoint)
 			{
-				printf("t: %f\n", hitpoint->t);
-				bitmap[j][i] = rgb_to_int(objs[0]->color[0], objs[0]->color[1], objs[0]->color[2]);
+				int color = get_lightning_color(cam_data, light_data, ray, hitpoint);
+				bitmap[i][j] = color;
 			}
-
 		}
 	}
 	return(bitmap);
 }
+
+
+
