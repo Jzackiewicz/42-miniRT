@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:57:27 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/24 14:32:13 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/24 14:34:30 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ double	*reflect(double *in, double *normal)
 	double	*res;
 
 	res = multiply_tuple(normal, 2 * dot(in, normal));
-	res = subtract_tuple(res, in);
+	res = subtract_tuple(in, res);
 	return (res);
 }
 
@@ -83,7 +83,6 @@ double lighting(t_light *light, t_object *obj, t_camera *cam_data,
         diffuse = obj->material->diffuse * light_dot_normal;
         reflect_v = reflect(negate_tuple(light_v), normal);
         reflect_dot_eye = dot(reflect_v, view_v);
-		
         if (reflect_dot_eye <= 0)
             specular = 0;
         else
