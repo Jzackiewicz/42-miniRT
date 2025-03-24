@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:57:27 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/21 16:18:13 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/21 18:55:15 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,43 +44,55 @@ double	*reflect(double *in, double *normal)
 }
 
 // p. 88 book
-double	lighting(t_light *light, t_object *obj, t_camera *cam_data,
-		double *normal, double *point)
+// TODO: refactor lol
+// specular is not visible for some reason
+double lighting(t_light *light, t_object *obj, t_camera *cam_data,
+        double *normal, double *point)
 {
-	int		effective_color;
-	double *light_p;
-	double *light_v;
-	double *reflect_v;
-	double reflect_dot_eye;
-	double ambient;
-    double light_dot_normal;
-    double diffuse;
-	double specular;
+    double *light_p;
+    double *light_v;
+    double *reflect_v;
+    double reflect_dot_eye;
+    double ambient, light_dot_normal, diffuse, specular;
+    double r = obj->color[0];
+    double g = obj->color[1];
+    double b = obj->color[2];
+    double total_light;
+    double light_r = light->color[0] / 255.0;
+    double light_g = light->color[1] / 255.0;
+    double light_b = light->color[2] / 255.0;
 
-	effective_color = rgb_to_int(obj->color[0], obj->color[1], obj->color[2]) * light->brightness;
+    light_p = init_tuple(1);
+    ft_memcpy(light_p, light->coords, sizeof(double) * 4);
+    light_v = subtract_tuple(light_p, point);
+    normalize(&light_v);
 
-	light_p = init_tuple(1);	
-	ft_memcpy(light_p, light->coords, sizeof(double) * 4);
-	light_v = subtract_tuple(light_p, point);
-	normalize(&light_v);
-
-	ambient = (double) (effective_color * obj->material->ambient);
-	printf("ambient: %d * %f = %f\n", effective_color, obj->material->ambient, ambient);
-	light_dot_normal = dot(light_v, normal);
-	if (light_dot_normal < 0)
+    light_dot_normal = dot(light_v, normal);
+    if (light_dot_normal < 0)
     {
-		diffuse = 0;
-		specular = 0;
-	}
-	else
-	{
-		diffuse = (double) effective_color * obj->material->diffuse * light_dot_normal;
-		reflect_v = reflect(negate_tuple(light_v), normal);
-		reflect_dot_eye = dot(reflect_v, cam_data->orientation_vector);
-		if (reflect_dot_eye <= 0)
-			specular = 0;
-		else
-			specular = light->brightness * obj->material->specular * pow(reflect_dot_eye, obj->material->shininess);
-	}
-	return (ambient + diffuse);
+        diffuse = 0;
+        specular = 0;
+    }
+    else
+    {
+        diffuse = obj->material->diffuse * light_dot_normal;
+        reflect_v = reflect(negate_tuple(light_v), normal);
+        reflect_dot_eye = dot(reflect_v, cam_data->orientation_vector);
+        if (reflect_dot_eye <= 0)
+            specular = 0;
+        else
+            specular = obj->material->specular * pow(reflect_dot_eye, obj->material->shininess);
+        free(reflect_v);
+    }
+    ambient = obj->material->ambient * light->brightness;
+
+    // split colors for each channel for more color precision :))
+    int result_r = fmin(255, r * (ambient * light_r + light->brightness * diffuse * light_r + light->brightness * specular));
+    int result_g = fmin(255, g * (ambient * light_g + light->brightness * diffuse * light_g + light->brightness * specular));
+    int result_b = fmin(255, b * (ambient * light_b + light->brightness * diffuse * light_b + light->brightness * specular));
+
+    free(light_p);
+    free(light_v);
+    return rgb_to_int(result_r, result_g, result_b);
 }
+
