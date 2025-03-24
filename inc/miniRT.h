@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/21 12:49:44 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/24 18:39:46 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,26 @@
 # include "parser.h"
 # include "rays.h"
 # include <math.h>
+# include <stdbool.h>
+
+typedef struct s_comps
+{
+	double			t;
+	t_object		*obj;
+	double			*point;
+	double			*eyev;
+	double			*normalv;
+	bool			inside;
+}					t_comps;
+
+typedef struct s_world
+{
+	t_object		**objs;
+	t_light			*light;
+	t_ambient		*ambient;
+	t_camera		*camera;
+
+}					t_world;
 
 typedef struct s_material
 {
@@ -38,10 +58,9 @@ typedef struct s_object
 	double			*coords;
 	double			*orientation_vector;
 	struct s_matrix	*transform;
-	struct s_matrix *inv_transform;
+	struct s_matrix	*inv_transform;
 	t_material		*material;
 }					t_object;
-
 
 typedef struct s_camera
 {
@@ -70,5 +89,8 @@ void				free_objects(t_input_data **inp_data, t_object **objs,
 void				free_bitmap(int **bitmap);
 void				clean_objects(t_object **objs, t_input_data **data,
 						int no_lines);
+
+t_world				*create_world(t_world *world, t_light *light,
+						t_ambient *ambient, t_object **objs);
 
 #endif
