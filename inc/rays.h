@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/25 12:05:29 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/25 12:55:15 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,9 @@ t_intersec				*identify_hit(t_intersec **i_s);
 t_intersec				***intersect_world(t_ray **rays,
 							t_object **objs);
 int						count_intersections(t_intersec **intersex);
-int						**generate_bitmap(t_intersec ***ray_intersections,
-							t_ray **rays, t_camera *cam_data, t_light *light);
 
 
 //				spacial_conversion
-void					load_transform_matrix(t_object *obj);
 t_ray					*ray_to_object_space(t_ray *ray, t_object *obj);
 int						rgb_to_int(double r, double g, double b);
 

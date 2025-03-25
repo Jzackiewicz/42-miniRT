@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/25 12:05:40 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/25 13:11:17 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_ambient
 	int				*color;
 }					t_ambient;
 
-void				free_intersections(t_intersec ***ray_intersex);
+void				free_intersections(t_intersec **ray_intersex);
 void				clean_rays(t_ray **rays);
 void				free_objects(t_input_data **inp_data, t_object **objs,
 						int no_lines);

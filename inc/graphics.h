@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:45:23 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/25 11:50:16 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/25 12:55:38 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,21 @@ typedef struct s_ray_tracer_data
 	int					y;
 }						t_ray_tracer_data;
 
-
-// SECTION: drawing utilities
-void					draw_pixel(t_ray_tracer_data *data, int x, int y,
-							int color);
+// 						RENDERING
 void					render_image(t_ray_tracer_data *data, int **bitmap);
 
-// SECTION: minilibx setup & cleanup
-void					init_mlx(t_ray_tracer_data **rt_data);
-void					clean_mlx(t_ray_tracer_data *rt_data);
+//						MLX_MANAGE
 int						close_window(t_ray_tracer_data *rt_data, int errno);
-void					free_window(t_mlx_data *mlx_data);
-void					free_image(t_mlx_data *mlx_data);
 int						handle_key_input(int keysym,
 							t_ray_tracer_data *rt_data);
-
-// SECTION: main mlx fn
 void					mlx_run(int **bitmap);
 
 
-typedef struct s_object t_object;
-typedef struct s_light t_light;
+typedef struct s_object	t_object;
+typedef struct s_light	t_light;
 typedef struct s_camera	t_camera;
-int	**generate_new_bitmap(t_camera *cam_data, t_object **objs, t_light *light_data);
+typedef struct s_ambient	t_ambient;
+int	**generate_bitmap(t_camera *cam_data, t_object **objs,
+	t_light *light_data, t_ambient *ambient_data);
 
 #endif

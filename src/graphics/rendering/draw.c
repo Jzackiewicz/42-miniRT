@@ -6,14 +6,14 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:30:12 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/24 13:29:35 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/25 12:30:06 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/graphics.h"
 
 /* draws a pixel on specified coordinates with a specified color */
-void	draw_pixel(t_ray_tracer_data *data, int x, int y, int color)
+static void	draw_pixel(t_ray_tracer_data *data, int x, int y, int color)
 {
 	char	*dst;
 

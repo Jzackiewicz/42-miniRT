@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:46:52 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/18 11:17:54 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/25 12:25:22 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int	handle_key_input(int keysym, t_ray_tracer_data *rt_data)
 {
 	if (keysym == XK_Escape)
-		close_window(rt_data, 1);
+		close_window(rt_data, 0);
 	return (0);
 }

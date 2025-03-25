@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   clean_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 11:17:43 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/18 11:20:05 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/25 12:31:35 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/graphics.h"
 
-void	free_window(t_mlx_data *mlx_data)
+static void	free_window(t_mlx_data *mlx_data)
 {
 	if (mlx_data->window_ptr)
 		mlx_destroy_window(mlx_data->mlx_ptr, mlx_data->window_ptr);
@@ -23,7 +23,7 @@ void	free_window(t_mlx_data *mlx_data)
 	}
 }
 
-void	free_image(t_mlx_data *mlx_data)
+static void	free_image(t_mlx_data *mlx_data)
 {
 	if (mlx_data->img_ptr)
 	{
@@ -33,7 +33,7 @@ void	free_image(t_mlx_data *mlx_data)
 	}
 }
 
-void	clean_mlx(t_ray_tracer_data *rt_data)
+static void	clean_mlx(t_ray_tracer_data *rt_data)
 {
 	if (!rt_data)
 		return ;
@@ -56,7 +56,6 @@ void	clean_mlx(t_ray_tracer_data *rt_data)
 int	close_window(t_ray_tracer_data *rt_data, int errno)
 {
 	clean_mlx(rt_data);
-	errno = 0;
 	exit(errno);
 	return (0);
 }

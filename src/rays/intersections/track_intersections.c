@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   track_intersections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 09:26:53 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/24 18:22:10 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/25 13:32:01 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static t_intersec	**get_intersections(t_ray *ray, t_object **objs)
 			append_intersec(intersex, arr_t, objs[i], i);
 			free(arr_t);
 		}
-		
 		i++;
 	}
 	return (intersex);
