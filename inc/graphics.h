@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:45:23 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/24 14:29:41 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/24 18:15:30 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void					mlx_run(int **bitmap);
 
 
 typedef struct s_object t_object;
+typedef struct s_light t_light;
 int	**generate_new_bitmap(t_camera *cam_data, t_object **objs, t_light *light_data);
 
 #endif
