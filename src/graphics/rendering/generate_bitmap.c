@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:02:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 13:18:07 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/25 13:43:02 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	**generate_bitmap(t_camera *cam_data, t_object **objs,
 	int			i;
 	int			j;
 	int			**bitmap;
-	double tmp[] = {world_x, world_y, wall_z, 1};
 	double		*dir;
 	t_ray		*ray;
 	t_intersec	**intersex;
@@ -93,6 +92,7 @@ int	**generate_bitmap(t_camera *cam_data, t_object **objs,
 		while (++j < WINDOW_WIDTH)
 		{
 			world_x = -half + pixel_size * j;
+			double tmp[] = {world_x, world_y, wall_z, 1};
 			dir = subtract_tuple(tmp, cam_data->origin);
 			normalize(&dir);
 			ray = create_ray(cam_data->origin, dir);
