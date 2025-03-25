@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 13:16:05 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/25 13:46:35 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,13 @@ double	color_at(t_world *world, t_ray *ray)
 	double result;
 
 	intersections = get_sorted_intersections(ray, world->objs);
-	printf("t: %f\n", intersections[1]->t);
 	hit = identify_hit(intersections);
-	
-	comps = prepare_computations(hit, ray);
-	result = shade_hit(world, comps);
-	free(comps);
+	if (hit)
+	{
+		comps = prepare_computations(hit, ray);
+		result = shade_hit(world, comps);
+		free(comps);
+	}
 	free_intersections(intersections);
 	return (result);
 }
