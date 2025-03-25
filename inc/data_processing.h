@@ -81,6 +81,7 @@ typedef struct s_object		t_object;
 
 struct s_object				**get_objects(t_input_data **data, int no_data);
 struct s_camera				*get_cam_data(t_input_data **data, int no_data);
+void						assign_pixel_size(struct s_camera *cam_data);
 struct s_light				*get_light_data(t_input_data **data, int no_data);
 struct s_ambient			*get_ambient_data(t_input_data **data, int no_data);
 int							count_objects(struct s_object **objs);
