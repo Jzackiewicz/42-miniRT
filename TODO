@@ -1,5 +1,5 @@
-
-
-
-!!!! Doesn't work when camera is in 0, 0, 0 !!!!
-!!!! Parsing accepts negative diameter !!!!
+1. Parsing accepts negative diameter.
+2. Ambient doesn't work in lightining
+3. Ambient color not taken into account in assign_object_material
+4. Freeing functions not used in free_mlx
+5. Not applying transforms on projected rays
