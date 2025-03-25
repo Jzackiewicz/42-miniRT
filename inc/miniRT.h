@@ -67,6 +67,10 @@ typedef struct s_camera
 	double			*origin;
 	double			*orientation_vector;
 	int				fov;
+	struct s_matrix	*transform;
+	double			half_width;
+	double			half_height;
+	double			pixel_size;
 }					t_camera;
 
 typedef struct s_light

@@ -59,7 +59,7 @@ t_camera	*get_cam_data(t_input_data **data, int no_data)
 	{
 		if (!ft_strncmp(data[i]->id, "C\0", 2))
 		{
-			cam->fov = data[i]->fov;
+			cam->fov = data[i]->fov / 2;
 			cam->orientation_vector = data[i]->orientation_vector;
 			cam->origin = data[i]->coords;
 			return (cam);

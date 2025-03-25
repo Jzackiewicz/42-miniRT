@@ -20,8 +20,10 @@
 # include <stdlib.h>
 
 // SECTION: constants
-# define WINDOW_WIDTH 1000
-# define WINDOW_HEIGHT 1000
+# define WINDOW_WIDTH 400
+# define WINDOW_HEIGHT 400
+# define WALL_Z 10.0
+# define WALL_SIZE 10.0
 
 // SECTION: structs
 typedef struct s_mlx_data

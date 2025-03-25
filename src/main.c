@@ -28,7 +28,6 @@ int	main(void)
 			&data);
 	if (no_lines == -1)
 		return (printf("Error: file error\n"), -1);
-	
 	objs = get_objects(data, no_lines);
 	cam_data = get_cam_data(data, no_lines);
 	light_data = get_light_data(data, no_lines);
