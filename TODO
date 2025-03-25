@@ -3,3 +3,9 @@
 3. Ambient color not taken into account in assign_object_material
 4. Freeing functions not used in free_mlx
 5. Not applying transforms on projected rays
+
+
+CHANGES:
+
+camera additional data assigments (pixel size calc) -> cam_utils.c, getters.c
+ray_for_pixel() in progress -> casting_rays.c

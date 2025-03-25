@@ -24,3 +24,15 @@ t_ray	*create_ray(double *origin, double *direction)
 	new_ray->direction = direction;
 	return (new_ray);
 }
+
+/* p. 104 from the bible... i mean book */
+t_ray *ray_for_pixel(t_camera *cam_data, int px, int py)
+{
+	double x_offset = (px + 0.5) * cam_data->pixel_size;
+	double y_offset = (py + 0.5) * cam_data->pixel_size;
+	double world_x = cam_data->half_width - x_offset;
+	double world_y = cam_data->half_height - y_offset;
+	// double pixel = inverse(cam_data->transform);
+	// double origin;
+	// double direction;
+}
