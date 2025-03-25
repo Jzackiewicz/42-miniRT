@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:02:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 13:43:02 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/25 13:47:00 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,11 @@ int	**generate_bitmap(t_camera *cam_data, t_object **objs,
 			ray = create_ray(cam_data->origin, dir);
 			// ray = ray_to_object_space(ray, objs[0]);
 			intersex = get_sorted_intersections(ray, objs);
-			// t_world	*world = create_world(cam_data, light_data, ambient_data, objs);
-			// printf("%f\n", color_at(world, ray));
+			t_world	*world = create_world(cam_data, light_data, ambient_data, objs);
 			hitpoint = identify_hit(intersex);
 			if (hitpoint)
 			{
-				color = get_lightning_color(cam_data, light_data, ray,
-						hitpoint);
+				color = color_at(world, ray);
 				bitmap[i][j] = color;
 			}
 		}

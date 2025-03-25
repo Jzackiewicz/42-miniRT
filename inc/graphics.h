@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:45:23 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/25 12:55:38 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/25 13:47:27 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <stdlib.h>
 
 // SECTION: constants
-# define WINDOW_WIDTH 500
-# define WINDOW_HEIGHT 500
+# define WINDOW_WIDTH 1000
+# define WINDOW_HEIGHT 1000
 
 // SECTION: structs
 typedef struct s_mlx_data
