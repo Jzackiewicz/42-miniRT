@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:30:12 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/18 11:28:30 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/24 13:29:35 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	render_image(t_ray_tracer_data *data, int **bitmap)
 		j = 0;
 		while (j < WINDOW_WIDTH)
 		{
-			draw_pixel(data, i, j, bitmap[i][j]);
+			draw_pixel(data, i, j, bitmap[j][i]);
 			j++;
 		}
 		i++;

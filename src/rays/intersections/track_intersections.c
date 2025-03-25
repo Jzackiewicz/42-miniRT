@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 09:26:53 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/21 16:58:51 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/24 18:22:10 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ static t_intersec	**get_intersections(t_ray *ray, t_object **objs)
 	i = 0;
 	while (objs[i])
 	{
-		ray = ray_to_object_space(ray, objs[i]);
 		arr_t = intersect(objs[i], ray);
 		if (arr_t)
 		{
 			append_intersec(intersex, arr_t, objs[i], i);
 			free(arr_t);
 		}
+		
 		i++;
 	}
 	return (intersex);

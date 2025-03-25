@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:00 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/21 15:32:06 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/24 13:19:31 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ double	*multiply_tuple_and_matrix(t_matrix *matrix, double *tuple)
 
 	if (!matrix || !tuple)
 		return (NULL);
-	result = (double *)ft_calloc(sizeof(double), matrix->row);
+	result = init_tuple((int)tuple[3]);
 	if (!result)
 		return (NULL);
 	i = -1;
@@ -63,6 +63,7 @@ double	*multiply_tuple_and_matrix(t_matrix *matrix, double *tuple)
 		while (++j < matrix->col)
 			result[i] += matrix->grid[i][j] * tuple[j];
 	}
+	result[3] = tuple[3];
 	return (result);
 }
 
