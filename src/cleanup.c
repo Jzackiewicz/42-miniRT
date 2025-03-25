@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 13:35:09 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/18 13:12:08 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/25 11:52:33 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void clean_rays(t_ray **rays)
 	free(rays);
 }
 
-void	clean_intersections(t_intersec ***ray_intersex)
+void	free_intersections(t_intersec ***ray_intersex)
 {
 	int	i;
 	int j;

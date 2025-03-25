@@ -6,11 +6,11 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:44:57 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/14 12:09:31 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/25 12:08:33 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/parser.h"
+#include "../../../inc/data_processing.h"
 
 /* counts the number of objects / settings in the file
 neccessary for proper memory allocation and deallocation */

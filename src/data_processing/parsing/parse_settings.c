@@ -6,11 +6,11 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 17:10:12 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/14 11:58:52 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/25 12:08:27 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/parser.h"
+#include "../../../inc/data_processing.h"
 
 static void	parse_ambient(t_input_data *obj, char **line_split)
 {
