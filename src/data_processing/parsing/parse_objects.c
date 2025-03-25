@@ -6,11 +6,11 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:32:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/14 11:58:58 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/25 12:08:25 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/parser.h"
+#include "../../../inc/data_processing.h"
 
 static void	parse_sphere(t_input_data *obj, char **line_split)
 {

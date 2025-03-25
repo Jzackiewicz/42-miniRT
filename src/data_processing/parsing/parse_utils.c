@@ -6,11 +6,11 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:43:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/14 11:58:55 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/25 12:08:30 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/parser.h"
+#include "../../../inc/data_processing.h"
 
 void	init_with_default(t_input_data *obj)
 {
