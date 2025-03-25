@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/24 18:48:09 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/25 11:32:28 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,16 @@ t_world	*create_world(t_camera *cam_data, t_light *light, t_ambient *ambient,
 {
 	t_world	*world;
 
+	world = malloc(sizeof(t_world));
+	if (!world)
+		return (NULL);
 	world->light = light;
 	world->objs = objs;
 	world->ambient = ambient;
 	world->camera = cam_data;
 	return (world);
 }
+
 /* creates an array of all ray-object intersections sorted ascendingly */
 t_intersec	***intersect_world(t_ray **rays, t_object **objs)
 {
@@ -53,11 +57,14 @@ t_comps	*prepare_computations(t_intersec *intersection, t_ray *ray)
 {
 	t_comps	*comps;
 
+	comps = malloc(sizeof(t_comps));
+	if (!comps)
+		return (NULL);
 	comps->t = intersection->t;
 	comps->obj = intersection->object;
 	comps->point = position(ray, comps->t);
-	comps->eyev = ray->direction;
-	comps->normalv = get_normal_at(intersection->object, comps->point);
+	comps->eyev = negate_tuple(ray->direction);
+	comps->normalv = get_normal_at(comps->obj, comps->point);
 	if (dot(comps->normalv, comps->eyev) < 0)
 	{
 		comps->inside = true;
@@ -68,25 +75,29 @@ t_comps	*prepare_computations(t_intersec *intersection, t_ray *ray)
 	return (comps);
 }
 
-t_comps **get_comps_for_all_intersections(t_intersec ***world_intersections)
-{
-	int i;
-	int limit;
-	t_comps **intersection_computations;
-	
-	i = -1;
-	limit = count_intersections(*world_intersections);
-	while (++i < limit)
-	{
-		intersection_computations[i] = prepare_computations((*world_intersections)[i], <ray>); // ray placeholder (which ray?)
-	}
-	return (intersection_computations);
-}
-
 /* The function returns the color at the intersection
-	encapsulated by comps, in the given world. */
+encapsulated by comps, in the given world. */
 double	shade_hit(t_world *world, t_comps *comps)
 {
-	return (lighting(world->light, comps->obj, world->camera, comps->normalv,
-			comps->eyev));
+	return (lighting(world->light, comps->obj->material, comps->point,
+			comps->eyev, comps->normalv));
+}
+
+double	color_at(t_world *world, t_ray *ray)
+{
+	t_intersec **intersections;
+	t_intersec *hit;
+	t_comps *comps;
+	double result;
+
+	intersections = intersect_world(world, ray);
+	hit = find_hit(intersections);
+	// black if no hit
+	if (!hit)
+		return (rgb_to_int(0, 0, 0));
+	comps = prepare_computations(hit, ray);
+	result = shade_hit(world, comps);
+	free(comps);
+	free_intersections(intersections);
+	return (result);
 }

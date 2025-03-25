@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/24 18:39:46 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/25 11:37:37 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,9 @@ void				free_bitmap(int **bitmap);
 void				clean_objects(t_object **objs, t_input_data **data,
 						int no_lines);
 
-t_world				*create_world(t_world *world, t_light *light,
+t_world				*create_world(t_camera *cam_data, t_light *light,
 						t_ambient *ambient, t_object **objs);
+
+double				color_at(t_world *world, t_ray *ray);
 
 #endif
