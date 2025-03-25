@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   run_mlx.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:15:56 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/18 13:12:27 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/25 12:26:03 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/graphics.h"
 #include "../../../inc/miniRT.h"
 
-void	init_mlx(t_ray_tracer_data **rt_data)
+static void	init_mlx(t_ray_tracer_data **rt_data)
 {
 	*rt_data = malloc(sizeof(t_ray_tracer_data));
 	if (!(*rt_data))

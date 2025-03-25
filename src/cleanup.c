@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 13:35:09 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 11:52:33 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/25 13:11:08 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void clean_rays(t_ray **rays)
 	free(rays);
 }
 
-void	free_intersections(t_intersec ***ray_intersex)
+void	free_intersections(t_intersec **ray_intersex)
 {
 	int	i;
 	int j;
@@ -34,12 +34,6 @@ void	free_intersections(t_intersec ***ray_intersex)
 	i = 0;
 	while (ray_intersex[i])
 	{
-		j = 0;
-		while (ray_intersex[i][j])
-		{
-			free(ray_intersex[i][j]);
-			j++;
-		}
 		free(ray_intersex[i]);
 		i++;
 	}
