@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:02:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 11:45:59 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/25 11:48:49 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,44 +47,6 @@ int	**init_bitmap(void)
 	return (bitmap);
 }
 
-/* func should return a 2d array (bitmap) of hitpoints to color in mlx */
-int	**generate_bitmap(t_intersec ***ray_intersections, t_ray **rays,
-		t_camera *cam_data, t_light *light)
-{
-	int			i;
-	int			**bitmap;
-	t_intersec	*hitpoint;
-	double		*pos;
-	double		width;
-	double		pixel_size;
-	double		light_color;
-	double		*normal;
-	int			x_pos;
-	int			y_pos;
-	int			color;
-
-	bitmap = init_bitmap();
-	i = 0;
-	width = get_canvas_width(cam_data);
-	pixel_size = WINDOW_WIDTH / width;
-	while (ray_intersections[i]) {
-		hitpoint = identify_hit(ray_intersections[i]);
-		if (hitpoint)
-		{
-			pos = position(rays[i], hitpoint->t);
-			normal = get_normal_at((hitpoint->object), pos);
-			light_color = lighting(light, hitpoint->object, cam_data, normal,
-					pos);
-			x_pos = (int)((pos[0] * pixel_size) + (WINDOW_WIDTH / 2));
-			y_pos = (int)((pos[1] * pixel_size) + (WINDOW_HEIGHT / 2));
-			free(pos);
-			bitmap[x_pos][y_pos] = light_color;
-		}
-		i++;
-	}
-	return (bitmap);	
-}
-
 int	get_lightning_color(t_camera *cam_data, t_light *light_data, t_ray *ray, t_intersec *hitpoint)
 {
 	int	light_color;
@@ -98,6 +60,7 @@ int	get_lightning_color(t_camera *cam_data, t_light *light_data, t_ray *ray, t_i
 	return (light_color);
 }
 
+/* Temporary function just to show results. */
 int	**generate_new_bitmap(t_camera *cam_data, t_object **objs, t_light *light_data)
 {
 	double wall_z = 10.0;
@@ -127,8 +90,6 @@ int	**generate_new_bitmap(t_camera *cam_data, t_object **objs, t_light *light_da
 			//ray = ray_to_object_space(ray, objs[0]);
 			t_intersec **intersex = get_sorted_intersections(ray, objs);
 			t_intersec *hitpoint = identify_hit(intersex);
-			
-
 			if (hitpoint)
 			{
 				int color = get_lightning_color(cam_data, light_data, ray, hitpoint);

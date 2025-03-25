@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:45:23 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/24 18:15:30 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/03/25 11:50:16 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ typedef struct s_ray_tracer_data
 	int					y;
 }						t_ray_tracer_data;
 
-// SECTION: canvas and image utilities
-typedef struct s_camera	t_camera;
-double					get_canvas_width(t_camera *cam_data);
 
 // SECTION: drawing utilities
 void					draw_pixel(t_ray_tracer_data *data, int x, int y,
@@ -66,6 +63,7 @@ void					mlx_run(int **bitmap);
 
 typedef struct s_object t_object;
 typedef struct s_light t_light;
+typedef struct s_camera	t_camera;
 int	**generate_new_bitmap(t_camera *cam_data, t_object **objs, t_light *light_data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:57:27 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/24 14:34:30 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/25 11:51:04 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ double	*reflect(double *in, double *normal)
 
 // p. 88 book
 // TODO: refactor lol
-// specular is not suuuper visible for some reason
 double lighting(t_light *light, t_object *obj, t_camera *cam_data,
         double *normal, double *point)
 {
