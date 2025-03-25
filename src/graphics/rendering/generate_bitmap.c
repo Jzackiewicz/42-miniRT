@@ -64,8 +64,6 @@ int	get_lightning_color(t_camera *cam_data, t_light *light_data, t_ray *ray,
 int	**generate_bitmap(t_camera *cam_data, t_object **objs,
 		t_light *light_data, t_ambient *ambient_data)
 {
-	double		wall_z;
-	double		wall_size;
 	double		pixel_size;
 	double		half;
 	double		world_y;
@@ -79,12 +77,10 @@ int	**generate_bitmap(t_camera *cam_data, t_object **objs,
 	t_intersec	*hitpoint;
 	int			color;
 
-	wall_z = 10.0;
-	wall_size = 10.0;
 	bitmap = init_bitmap();
 	i = -1;
-	pixel_size = wall_size / WINDOW_WIDTH;
-	half = wall_size / 2;
+	pixel_size = WALL_SIZE / WINDOW_WIDTH;
+	half = WALL_SIZE / 2;
 	while (++i < WINDOW_HEIGHT)
 	{
 		world_y = half - pixel_size * i;
@@ -92,7 +88,7 @@ int	**generate_bitmap(t_camera *cam_data, t_object **objs,
 		while (++j < WINDOW_WIDTH)
 		{
 			world_x = -half + pixel_size * j;
-			double tmp[] = {world_x, world_y, wall_z, 1};
+			double tmp[] = {world_x, world_y, WALL_Z, 1};
 			dir = subtract_tuple(tmp, cam_data->origin);
 			normalize(&dir);
 			ray = create_ray(cam_data->origin, dir);
