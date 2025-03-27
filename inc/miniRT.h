@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/25 13:11:17 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:53:27 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ typedef struct s_camera
 {
 	double			*origin;
 	double			*orientation_vector;
-	int				fov;
+	double			fov;
 	struct s_matrix	*transform;
+	struct s_matrix	*inv_transform;
 	double			half_width;
 	double			half_height;
 	double			pixel_size;

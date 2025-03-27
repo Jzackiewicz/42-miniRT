@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assign_data.c                                      :+:      :+:    :+:   */
+/*   assign_object_data.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/25 13:35:54 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/27 13:41:36 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	assign_object_material(t_ambient *ambient, t_object *obj)
 	if (!obj->material)
 		return ;
 	obj->material->ambient = ambient->brightness;
-	obj->material->diffuse = 0.9;
-	obj->material->specular = 0.9;
+	obj->material->diffuse = 1;
+	obj->material->specular = 1;
 	obj->material->shininess = 32;
 }
 
-static void	load_transform_matrix(t_object *obj)
+static void	load_object_transform_matrix(t_object *obj)
 {
 	t_matrix	*scaling_transform;
 	t_matrix	*translation_transform;
@@ -56,6 +56,6 @@ t_object	*assign_object(t_input_data *data)
 	obj->color = data->color;
 	obj->coords = data->coords;
 	obj->orientation_vector = data->orientation_vector;
-	load_transform_matrix(obj);
+	load_object_transform_matrix(obj);
 	return (obj);
 }

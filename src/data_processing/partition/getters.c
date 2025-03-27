@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 12:04:30 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/25 12:15:14 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/27 19:27:43 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,13 @@ t_camera	*get_cam_data(t_input_data **data, int no_data)
 	{
 		if (!ft_strncmp(data[i]->id, "C\0", 2))
 		{
-			cam->fov = data[i]->fov;
+			cam->fov = (double)(M_PI / 180 * data[i]->fov);
 			cam->orientation_vector = data[i]->orientation_vector;
+			cam->orientation_vector[3] = 0;
 			cam->origin = data[i]->coords;
+			cam->origin[3] = 1;
 			assign_pixel_size(cam);
-			cam->transform = translation(cam->origin);
+			load_camera_transform_matrix(cam);
 			return (cam);
 		}
 	}

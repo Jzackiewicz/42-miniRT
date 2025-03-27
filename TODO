@@ -3,7 +3,7 @@
 3. Ambient color not taken into account in assign_object_material
 4. Freeing functions not used in free_mlx
 5. Not applying transforms on projected rays
-
+6. Check every case where coordinates direction matters -> default camera forward orientation in book is z=-1; I assumed z=1 :v
 
 CHANGES:
 
