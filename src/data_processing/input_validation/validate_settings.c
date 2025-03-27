@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:13:36 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 12:08:09 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/27 18:51:00 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	validate_camera(char **line_split)
 	if (!is_valid_number(line_split[3]) || check_for_overflow(line_split[3]))
 		return (clean_on_error(line_split));
 	fov = ft_atoi(line_split[3]);
-	if (fov < 0 || fov > 179)
+	if (fov < 0 || fov > 180)
 		return (clean_on_error(line_split));
 	return (0);
 }
