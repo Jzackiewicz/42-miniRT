@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/25 12:55:15 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:58:04 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int						count_intersections(t_intersec **intersex);
 //				spacial_conversion
 t_ray					*ray_to_object_space(t_ray *ray, t_object *obj);
 int						rgb_to_int(double r, double g, double b);
-
+t_ray					*ray_for_pixel(t_camera *cam_data, int px, int py);
 typedef struct s_light	t_light;
 
 // light section

@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 13:46:35 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/27 13:08:29 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,6 @@ t_world	*create_world(t_camera *cam_data, t_light *light, t_ambient *ambient,
 	world->camera = cam_data;
 	return (world);
 }
-
-/* creates an array of all ray-object intersections sorted ascendingly */
-// t_intersec	**intersect_world(t_object **objs, t_ray *ray)
-// {
-// 	int			ray_count;
-// 	t_intersec	**res;
-// 	if (!res)
-// 		return (NULL);
-// 	res = get_sorted_intersections(ray, objs);
-// 	return (res);
-// }
 
 t_comps	*prepare_computations(t_intersec *intersection, t_ray *ray)
 {
@@ -76,7 +65,8 @@ double	color_at(t_world *world, t_ray *ray)
 	t_intersec *hit;
 	t_comps *comps;
 	double result;
-
+	
+	result = 0;
 	intersections = get_sorted_intersections(ray, world->objs);
 	hit = identify_hit(intersections);
 	if (hit)

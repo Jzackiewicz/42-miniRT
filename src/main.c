@@ -6,10 +6,9 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/03/25 13:01:46 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/27 19:11:38 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../inc/miniRT.h"
 
@@ -34,9 +33,10 @@ int	main(void)
 	ambient = get_ambient_data(data, no_lines);
 	for (int i = 0; i < no_lines - 3; i++)
 		assign_object_material(ambient, objs[i]);
-	bitmap = generate_bitmap(cam_data, objs, light_data, ambient);
+	ray_for_pixel(cam_data, 0, 0);
+	//bitmap = generate_bitmap(cam_data, objs, light_data, ambient);
 	free_objects(data, objs, no_lines);
 	free(cam_data);
-	mlx_run(bitmap);
+	// mlx_run(bitmap);
 	return (0);
 }
