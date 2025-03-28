@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:02:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 13:47:00 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/28 09:44:35 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,12 @@ int	**generate_bitmap(t_camera *cam_data, t_object **objs,
 
 	bitmap = init_bitmap();
 	i = -1;
-	pixel_size = WALL_SIZE / WINDOW_WIDTH;
-	half = WALL_SIZE / 2;
 	while (++i < WINDOW_HEIGHT)
 	{
-		world_y = half - pixel_size * i;
 		j = -1;
 		while (++j < WINDOW_WIDTH)
 		{
-			world_x = -half + pixel_size * j;
-			double tmp[] = {world_x, world_y, WALL_Z, 1};
-			dir = subtract_tuple(tmp, cam_data->origin);
-			normalize(&dir);
-			ray = create_ray(cam_data->origin, dir);
-			// ray = ray_to_object_space(ray, objs[0]);
+			ray = ray_for_pixel(cam_data, i, j);
 			intersex = get_sorted_intersections(ray, objs);
 			t_world	*world = create_world(cam_data, light_data, ambient_data, objs);
 			hitpoint = identify_hit(intersex);

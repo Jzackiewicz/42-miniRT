@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:32:48 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/28 09:38:34 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/28 09:42:00 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,5 @@ t_ray *ray_for_pixel(t_camera *cam_data, int px, int py)
 	free(world_point);
 	free(zero_point);
 	free(pixel_point);
-	print_tuple(ray->origin);
-	print_tuple(ray->direction);
 	return (ray);
 }

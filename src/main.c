@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/03/28 09:38:52 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/28 09:46:39 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,14 @@ int	main(void)
 	ambient = get_ambient_data(data, no_lines);
 	for (int i = 0; i < no_lines - 3; i++)
 		assign_object_material(ambient, objs[i]);
-	ray_for_pixel(cam_data, 0, 0);
-	//bitmap = generate_bitmap(cam_data, objs, light_data, ambient);
+	bitmap = generate_bitmap(cam_data, objs, light_data, ambient);
+	double tmp[4] = {0,20,10,1};
+	double tmptmp[4] = {0, 0, 0, 0};
+	double *res = subtract_tuple(tmptmp, tmp);
+	normalize(&res);
+	print_tuple(res);
 	free_objects(data, objs, no_lines);
 	free(cam_data);
-	// mlx_run(bitmap);
+	mlx_run(bitmap);
 	return (0);
 }
