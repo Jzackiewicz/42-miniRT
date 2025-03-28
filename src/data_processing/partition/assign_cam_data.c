@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:37:54 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/27 20:19:56 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/28 09:37:40 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static t_matrix	*get_orient_matrix(t_camera *cam_data)
 	double		*tmp;
 
 	global_up = init_tuple(0);
-	global_up[0] = 1;
+	global_up[1] = 1;
 	normalize(&global_up);
 	cam_left = cross(cam_data->orientation_vector, global_up);
 	free(global_up);
@@ -91,5 +91,4 @@ void	load_camera_transform_matrix(t_camera *cam_data)
 	cam_data->inv_transform = inverse(cam_data->transform);
 	free_matrix(orient_matrix);
 	free_matrix(trans_matrix);
-	free_matrix(cam_data->transform);
 }
