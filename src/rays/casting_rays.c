@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:32:48 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/28 09:42:00 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:59:35 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,19 @@ t_ray *ray_for_pixel(t_camera *cam_data, int px, int py)
 	world_point[0] = cam_data->half_height - offset[0];
 	world_point[1] = cam_data->half_width - offset[1];
 	world_point[2] = -1;
-	// transpose(&cam_data->inv_transform);
 	pixel_point = multiply_tuple_and_matrix(cam_data->inv_transform, world_point);
 	ray->origin = multiply_tuple_and_matrix(cam_data->inv_transform, zero_point);
-	// transpose(&cam_data->inv_transform);
 	ray->direction = subtract_tuple(pixel_point, ray->origin);
 	normalize(&ray->direction);
 	free(world_point);
 	free(zero_point);
 	free(pixel_point);
 	return (ray);
+}
+
+void	free_ray(t_ray *ray)
+{
+	free(ray->origin);
+	free(ray->direction);
+	free(ray);
 }

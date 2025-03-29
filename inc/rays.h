@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/27 17:58:04 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:15:06 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_object	t_object;
 typedef struct s_camera	t_camera;
 
 t_ray					*create_ray(double *origin, double *direction);
+void					free_ray(t_ray *ray);
 t_ray					**generate_rays(t_camera *cam_data);
 double					*position(t_ray *ray, double t);
 double					*intersect(t_object *obj, t_ray *ray);

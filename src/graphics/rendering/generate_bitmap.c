@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:02:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/28 09:44:35 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:33:50 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,17 @@ int	get_lightning_color(t_camera *cam_data, t_light *light_data, t_ray *ray,
 int	**generate_bitmap(t_camera *cam_data, t_object **objs,
 		t_light *light_data, t_ambient *ambient_data)
 {
-	double		pixel_size;
-	double		half;
-	double		world_y;
-	double		world_x;
 	int			i;
 	int			j;
 	int			**bitmap;
-	double		*dir;
 	t_ray		*ray;
 	t_intersec	**intersex;
 	t_intersec	*hitpoint;
+	t_world		*world;
 	int			color;
 
 	bitmap = init_bitmap();
+	world = create_world(cam_data, light_data, ambient_data, objs);
 	i = -1;
 	while (++i < WINDOW_HEIGHT)
 	{
@@ -85,14 +82,8 @@ int	**generate_bitmap(t_camera *cam_data, t_object **objs,
 		while (++j < WINDOW_WIDTH)
 		{
 			ray = ray_for_pixel(cam_data, i, j);
-			intersex = get_sorted_intersections(ray, objs);
-			t_world	*world = create_world(cam_data, light_data, ambient_data, objs);
-			hitpoint = identify_hit(intersex);
-			if (hitpoint)
-			{
-				color = color_at(world, ray);
-				bitmap[i][j] = color;
-			}
+			color = color_at(world, ray);
+			bitmap[i][j] = color;
 		}
 	}
 	return (bitmap);

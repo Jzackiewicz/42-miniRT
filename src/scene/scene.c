@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/27 13:08:29 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:20:20 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ double	color_at(t_world *world, t_ray *ray)
 		result = shade_hit(world, comps);
 		free(comps);
 	}
+	else
+		result = 0;
 	free_intersections(intersections);
 	return (result);
 }
