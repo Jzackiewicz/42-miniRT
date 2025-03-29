@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 09:26:53 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/25 13:43:50 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:41:05 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ static void	append_intersec(t_intersec **all, double *arr_t, t_object *obj, int 
 static t_intersec	**get_intersections(t_ray *ray, t_object **objs)
 {
 	int i;
+	int	j;
 	double *arr_t;
 	t_intersec	**intersex;
+	t_ray		*ray_2;
 
 	if (!ray || !objs || !*objs)
 		return (NULL);
@@ -58,12 +60,16 @@ static t_intersec	**get_intersections(t_ray *ray, t_object **objs)
 	if (!intersex)
 		return (NULL);
 	i = 0;
+	j = 0;
 	while (objs[i])
 	{
-		arr_t = intersect(objs[i], ray);
+		ray_2 = ray_to_object_space(ray, objs[i]);
+		arr_t = intersect(objs[i], ray_2);
+		free_ray(ray_2);
 		if (arr_t)
 		{
-			append_intersec(intersex, arr_t, objs[i], i);
+			append_intersec(intersex, arr_t, objs[i], j);
+			j++;
 			free(arr_t);
 		}
 		i++;
