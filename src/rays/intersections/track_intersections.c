@@ -46,7 +46,7 @@ static void	append_intersec(t_intersec **all, double *arr_t, t_object *obj, int 
     all[(intersec_no * 2) + 2] = NULL;
 }
 
-static t_intersec	**get_intersections(t_ray *ray, t_object **objs)
+t_intersec	**get_intersections(t_ray *ray, t_object **objs)
 {
 	int i;
 	double *arr_t;

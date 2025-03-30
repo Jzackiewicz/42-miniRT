@@ -40,6 +40,7 @@ double					*position(t_ray *ray, double t);
 double					*intersect(t_object *obj, t_ray *ray);
 void					sort_intersections(t_intersec **i_s, int start_index,
 							int end_index);
+t_intersec	**get_intersections(t_ray *ray, t_object **objs);
 t_intersec				**get_sorted_intersections(t_ray *ray, t_object **objs);
 t_intersec				*identify_hit(t_intersec **i_s);
 t_intersec				***intersect_world(t_ray **rays,
