@@ -52,6 +52,7 @@ t_comps	*prepare_computations(t_intersec *intersection, t_ray *ray)
 	comps->point = position(ray, comps->t);
 	comps->eyev = negate_tuple(ray->direction);
 	comps->normalv = get_normal_at(comps->obj, comps->point);
+    comps->over_point = add_tuple(comps->point, (multiply_tuple(comps->normalv, EPSILON)));
 	if (dot(comps->normalv, comps->eyev) < 0)
 	{
 		comps->inside = true;
@@ -64,13 +65,16 @@ t_comps	*prepare_computations(t_intersec *intersection, t_ray *ray)
 
 /* The function returns the color at the intersection
 encapsulated by comps, in the given world. */
-double	shade_hit(t_world *world, t_comps *comps)
+double	shade_hit(t_world *world, t_comps *comps, t_object **objs)
 {
+  	bool shadowed;
+
+    shadowed = is_shadowed(world, comps->over_point, objs);
 	return (lighting(world->light, comps->obj, world->camera,
 			comps->normalv, comps->point));
 }
 
-double	color_at(t_world *world, t_ray *ray)
+double	color_at(t_world *world, t_ray *ray, t_object **objs)
 {
 	t_intersec **intersections;
 	t_intersec *hit;
@@ -82,7 +86,7 @@ double	color_at(t_world *world, t_ray *ray)
 	if (hit)
 	{
 		comps = prepare_computations(hit, ray);
-		result = shade_hit(world, comps);
+		result = shade_hit(world, comps, objs);
 		free(comps);
 	}
 	free_intersections(intersections);

@@ -60,4 +60,8 @@ double					*reflect(double *in, double *normal);
 double					lighting(t_light *light, t_object *obj,
 							t_camera *cam_data, double *normal, double *point);
 
+typedef struct s_world	t_world;
+// shadows
+bool	is_shadowed(t_world *w, double *p, t_object **objs);
+
 #endif

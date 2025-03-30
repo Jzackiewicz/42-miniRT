@@ -20,12 +20,16 @@
 # include "rays.h"
 # include <math.h>
 # include <stdbool.h>
+# include <stdlib.h>
+
+# define EPSILON 0.00001
 
 typedef struct s_comps
 {
 	double			t;
 	t_object		*obj;
 	double			*point;
+    double			*over_point;
 	double			*eyev;
 	double			*normalv;
 	bool			inside;
@@ -97,6 +101,6 @@ void				clean_objects(t_object **objs, t_input_data **data,
 t_world				*create_world(t_camera *cam_data, t_light *light,
 						t_ambient *ambient, t_object **objs);
 
-double				color_at(t_world *world, t_ray *ray);
+double				color_at(t_world *world, t_ray *ray, t_object **objs);
 
 #endif
