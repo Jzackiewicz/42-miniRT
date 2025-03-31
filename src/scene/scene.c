@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 13:46:35 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/31 13:37:20 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,16 @@ t_comps	*prepare_computations(t_intersec *intersection, t_ray *ray)
 
 /* The function returns the color at the intersection
 encapsulated by comps, in the given world. */
-double	shade_hit(t_world *world, t_comps *comps, t_object **objs)
+double	shade_hit(t_world *world, t_comps *comps)
 {
   	bool shadowed;
 
-    shadowed = is_shadowed(world, comps->over_point, objs);
+    shadowed = is_shadowed(world, comps->over_point);
 	return (lighting(world->light, comps->obj, world->camera,
 			comps->normalv, comps->point));
 }
 
-double	color_at(t_world *world, t_ray *ray, t_object **objs)
+double	color_at(t_world *world, t_ray *ray)
 {
 	t_intersec **intersections;
 	t_intersec *hit;
@@ -86,7 +86,7 @@ double	color_at(t_world *world, t_ray *ray, t_object **objs)
 	if (hit)
 	{
 		comps = prepare_computations(hit, ray);
-		result = shade_hit(world, comps, objs);
+		result = shade_hit(world, comps);
 		free(comps);
 	}
 	free_intersections(intersections);
