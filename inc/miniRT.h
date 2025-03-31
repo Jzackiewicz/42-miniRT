@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/25 13:11:17 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/31 13:36:06 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,6 @@ void				clean_objects(t_object **objs, t_input_data **data,
 t_world				*create_world(t_camera *cam_data, t_light *light,
 						t_ambient *ambient, t_object **objs);
 
-double				color_at(t_world *world, t_ray *ray, t_object **objs);
+double				color_at(t_world *world, t_ray *ray);
 
 #endif

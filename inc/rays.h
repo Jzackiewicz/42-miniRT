@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/25 12:55:15 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/31 13:36:41 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../lib/libft/libft.h"
 # include "graphics.h"
+# include "stdbool.h"
 # include "operations.h"
 # include "data_processing.h"
 
@@ -40,7 +41,7 @@ double					*position(t_ray *ray, double t);
 double					*intersect(t_object *obj, t_ray *ray);
 void					sort_intersections(t_intersec **i_s, int start_index,
 							int end_index);
-t_intersec	**get_intersections(t_ray *ray, t_object **objs);
+t_intersec				**get_intersections(t_ray *ray, t_object **objs);
 t_intersec				**get_sorted_intersections(t_ray *ray, t_object **objs);
 t_intersec				*identify_hit(t_intersec **i_s);
 t_intersec				***intersect_world(t_ray **rays,
@@ -62,6 +63,6 @@ double					lighting(t_light *light, t_object *obj,
 
 typedef struct s_world	t_world;
 // shadows
-bool	is_shadowed(t_world *w, double *p, t_object **objs);
+bool	is_shadowed(t_world *w, double *p);
 
 #endif
