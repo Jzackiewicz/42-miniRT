@@ -6,23 +6,12 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/28 15:35:38 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:40:26 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/data_processing.h"
 #include "../../../inc/miniRT.h"
-
-void	assign_object_material(t_ambient *ambient, t_object *obj)
-{
-	obj->material = (t_material *)malloc(sizeof(t_material));
-	if (!obj->material)
-		return ;
-	obj->material->ambient = ambient->brightness;
-	obj->material->diffuse = 1;
-	obj->material->specular = 1;
-	obj->material->shininess = 32;
-}
 
 static void	load_object_transform_matrix(t_object *obj)
 {
@@ -47,7 +36,7 @@ static void	load_object_transform_matrix(t_object *obj)
 t_object	*assign_object(t_input_data *data)
 {
 	t_object	*obj;
-
+	
 	obj = (t_object *)malloc(sizeof(t_object));
 	if (!obj)
 		return (NULL);

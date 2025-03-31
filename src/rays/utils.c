@@ -1,35 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleanup.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/14 13:35:09 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 13:11:08 by jzackiew         ###   ########.fr       */
+/*   Created: 2025/03/12 13:32:48 by jzackiew          #+#    #+#             */
+/*   Updated: 2025/03/31 13:51:33 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/miniRT.h"
+#include "../../inc/miniRT.h"
+#include "../../inc/rays.h"
 
-void clean_rays(t_ray **rays)
+t_ray	*create_ray(double *origin, double *direction)
 {
-	int i;
+	t_ray	*new_ray;
 
-	i = 0;
-	while (rays[i])
-	{
-		free(rays[i]->direction);
-		free(rays[i]);
-		i++;
-	}
-	free(rays);
+	new_ray = (t_ray *)malloc(sizeof(t_ray));
+	if (!new_ray)
+		return (NULL);
+	new_ray->origin = origin;
+	new_ray->direction = direction;
+	return (new_ray);
+}
+
+double	*position(t_ray *ray, double t)
+{
+	double	*dir_t;
+	double	*pos;
+
+	dir_t = multiply_tuple(ray->direction, t);
+	pos = add_tuple(ray->origin, dir_t);
+	free(dir_t);
+	pos[3] = 1;
+	return (pos);
+}
+
+void	free_ray(t_ray *ray)
+{
+	free(ray->origin);
+	free(ray->direction);
+	free(ray);
 }
 
 void	free_intersections(t_intersec **ray_intersex)
 {
 	int	i;
-	int j;
 	
 	i = 0;
 	while (ray_intersex[i])
@@ -38,17 +55,4 @@ void	free_intersections(t_intersec **ray_intersex)
 		i++;
 	}
 	free(ray_intersex);
-}
-
-void	free_bitmap(int **bitmap)
-{
-	int	i;
-
-	i = 0;
-	while (i < WINDOW_WIDTH)
-	{
-		free(bitmap[i]);
-		i++;
-	}
-	free(bitmap);
 }

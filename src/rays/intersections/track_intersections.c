@@ -6,14 +6,14 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 09:26:53 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/29 14:41:05 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:26:10 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/rays.h"
 #include "../../../inc/miniRT.h"
+#include "../../../inc/rays.h"
 
-int	count_intersections(t_intersec **intersex)
+static int	count_intersections(t_intersec **intersex)
 {
 	int	count;
 
@@ -23,45 +23,45 @@ int	count_intersections(t_intersec **intersex)
 	return (count);
 }
 
-static void	append_intersec(t_intersec **all, double *arr_t, t_object *obj, int intersec_no)
+static void	append_intersec(t_intersec **all, double *arr_t, t_object *obj,
+		int intersec_no)
 {
-    t_intersec *x;
-    int i;
-    int position;
+	t_intersec	*x;
+	int			i;
+	int			position;
 
-    if (!all || !obj || !arr_t)
-        return;
-    i = 0;
-    while (i < 2)
-    {
-        position = (intersec_no * 2) + i;
-        x = (t_intersec *)malloc(sizeof(t_intersec));
-        if (!x)
-            return;
-        x->t = arr_t[i];
-        x->object = obj;
-        all[position] = x;
-        i++;
-    }
-    all[(intersec_no * 2) + 2] = NULL;
+	if (!all || !obj || !arr_t)
+		return ;
+	i = 0;
+	while (i < 2)
+	{
+		position = (intersec_no * 2) + i;
+		x = (t_intersec *)malloc(sizeof(t_intersec));
+		if (!x)
+			return ;
+		x->t = arr_t[i];
+		x->object = obj;
+		all[position] = x;
+		i++;
+	}
+	all[(intersec_no * 2) + 2] = NULL;
 }
 
 static t_intersec	**get_intersections(t_ray *ray, t_object **objs)
 {
-	int i;
-	int	j;
-	double *arr_t;
+	int			i;
+	int			j;
+	double		*arr_t;
 	t_intersec	**intersex;
 	t_ray		*ray_2;
 
 	if (!ray || !objs || !*objs)
 		return (NULL);
-	intersex = (t_intersec **)ft_calloc(count_objects(objs) * 2 + 1, sizeof(t_intersec *));
-	if (!intersex)
-		return (NULL);
-	i = 0;
+	intersex = (t_intersec **)ft_calloc(count_objects(objs) * 2 + 1,
+			sizeof(t_intersec *));
+	i = -1;
 	j = 0;
-	while (objs[i])
+	while (objs[++i])
 	{
 		ray_2 = ray_to_object_space(ray, objs[i]);
 		arr_t = intersect(objs[i], ray_2);
@@ -72,12 +72,11 @@ static t_intersec	**get_intersections(t_ray *ray, t_object **objs)
 			j++;
 			free(arr_t);
 		}
-		i++;
 	}
 	return (intersex);
 }
 
-t_intersec **get_sorted_intersections(t_ray	*ray, t_object **objs)
+t_intersec	**get_sorted_intersections(t_ray *ray, t_object **objs)
 {
 	t_intersec	**intersex;
 
@@ -92,8 +91,9 @@ t_intersec **get_sorted_intersections(t_ray	*ray, t_object **objs)
 // returns NULL on non-negative t not found
 t_intersec	*identify_hit(t_intersec **i_s)
 {
-	int i = 0;
-	
+	int	i;
+
+	i = 0;
 	if (!i_s)
 		return (NULL);
 	while (i_s[i])

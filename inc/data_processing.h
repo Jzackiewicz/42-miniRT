@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:21:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 12:17:06 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/31 13:53:00 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,24 @@ int							parse_file(char *filepath, t_input_data ***objects);
 
 typedef struct s_ambient	t_ambient;
 typedef struct s_object		t_object;
+typedef struct s_camera		t_camera;
+typedef struct s_world		t_world;
 
 struct s_object				**get_objects(t_input_data **data, int no_data);
-struct s_camera				*get_cam_data(t_input_data **data, int no_data);
+struct s_camera				*get_cam_data(t_input_data **data);
 void						assign_pixel_size(struct s_camera *cam_data);
-struct s_light				*get_light_data(t_input_data **data, int no_data);
-struct s_ambient			*get_ambient_data(t_input_data **data, int no_data);
+struct s_light				*get_light_data(t_input_data **data);
+struct s_ambient			*get_ambient_data(t_input_data **data);
 int							count_objects(struct s_object **objs);
 
 //							Partition
 t_object					*assign_object(t_input_data *data);
 void						assign_object_material(t_ambient *ambient,
 								t_object *obj);
-
+void	load_camera_transform_matrix(t_camera *cam_data);
 // 							Debug
 void						print_object(t_input_data *obj);
+void	free_input_data(t_input_data *input_data);
+void	free_world(t_world	*world);
 
 #endif

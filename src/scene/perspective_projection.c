@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   casting_rays.c                                     :+:      :+:    :+:   */
+/*   space_conversion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 13:32:48 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/28 13:59:35 by jzackiew         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/03/31 10:29:00 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/miniRT.h"
 #include "../../inc/rays.h"
+#include "../../inc/miniRT.h"
 
-t_ray	*create_ray(double *origin, double *direction)
+/* For now for sphere only */
+t_ray	*ray_to_object_space(t_ray *ray, t_object *obj)
 {
 	t_ray	*new_ray;
-
+	
 	new_ray = (t_ray *)malloc(sizeof(t_ray));
-	if (!new_ray)
+	if (!new_ray || !obj->transform)
 		return (NULL);
-	new_ray->origin = origin;
-	new_ray->direction = direction;
+	new_ray->origin = init_tuple(1);
+	new_ray->direction = init_tuple(0);
+	if (!new_ray->origin || !new_ray->direction)
+		return (NULL);
+	new_ray->origin = multiply_tuple_and_matrix(obj->inv_transform, ray->origin);
+	new_ray->direction = multiply_tuple_and_matrix(obj->inv_transform, ray->direction);
 	return (new_ray);
 }
 
@@ -34,6 +39,8 @@ t_ray *ray_for_pixel(t_camera *cam_data, int px, int py)
 	t_ray	*ray;
 	
 	ray = (t_ray *)malloc(sizeof(t_ray));
+	if (!ray)
+		return (NULL);
 	offset[0] = ((double)px + 0.5) * cam_data->pixel_size;
 	offset[1] = ((double)py + 0.5) * cam_data->pixel_size;
 	zero_point = init_tuple(1);
@@ -49,11 +56,4 @@ t_ray *ray_for_pixel(t_camera *cam_data, int px, int py)
 	free(zero_point);
 	free(pixel_point);
 	return (ray);
-}
-
-void	free_ray(t_ray *ray)
-{
-	free(ray->origin);
-	free(ray->direction);
-	free(ray);
 }

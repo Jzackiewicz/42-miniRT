@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:44:57 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 12:08:33 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:54:17 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	parse_file(char *filepath, t_input_data ***objects)
 	if (validate_file(filepath) != 0)
 		return (-1);
 	no_elems = get_no_elements(filepath);
-	*objects = (t_input_data **)malloc((no_elems + 1) * sizeof(t_input_data *));
+	*objects = (t_input_data **)ft_calloc((no_elems + 1), sizeof(t_input_data *));
 	if (!*objects)
 		return (-1);
 	fd = open(filepath, O_RDONLY);

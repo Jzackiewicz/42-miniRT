@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/27 17:53:27 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:46:41 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "operations.h"
 # include "data_processing.h"
 # include "rays.h"
+# include "scene.h"
 # include <math.h>
 # include <stdbool.h>
 
@@ -30,15 +31,6 @@ typedef struct s_comps
 	double			*normalv;
 	bool			inside;
 }					t_comps;
-
-typedef struct s_world
-{
-	t_object		**objs;
-	t_light			*light;
-	t_ambient		*ambient;
-	t_camera		*camera;
-
-}					t_world;
 
 typedef struct s_material
 {
@@ -87,17 +79,9 @@ typedef struct s_ambient
 	int				*color;
 }					t_ambient;
 
-void				free_intersections(t_intersec **ray_intersex);
-void				clean_rays(t_ray **rays);
 void				free_objects(t_input_data **inp_data, t_object **objs,
 						int no_lines);
-void				free_bitmap(int **bitmap);
 void				clean_objects(t_object **objs, t_input_data **data,
 						int no_lines);
-
-t_world				*create_world(t_camera *cam_data, t_light *light,
-						t_ambient *ambient, t_object **objs);
-
-double				color_at(t_world *world, t_ray *ray);
 
 #endif

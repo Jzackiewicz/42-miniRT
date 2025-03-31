@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/29 14:20:20 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/31 13:50:53 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,17 @@
 
 /* default world initializer
 	takes an array of objects and the light + ambient data */
-t_world	*create_world(t_camera *cam_data, t_light *light, t_ambient *ambient,
-		t_object **objs)
+t_world	*create_world(t_input_data **input_data, int no_lines)
 {
 	t_world	*world;
 
-	world = malloc(sizeof(t_world));
+	world = (t_world *)malloc(sizeof(t_world));
 	if (!world)
 		return (NULL);
-	world->light = light;
-	world->objs = objs;
-	world->ambient = ambient;
-	world->camera = cam_data;
+	world->light = get_light_data(input_data);
+	world->objs = get_objects(input_data, no_lines);
+	world->ambient = get_ambient_data(input_data);
+	world->camera = get_cam_data(input_data);
 	return (world);
 }
 
@@ -55,17 +54,17 @@ t_comps	*prepare_computations(t_intersec *intersection, t_ray *ray)
 encapsulated by comps, in the given world. */
 double	shade_hit(t_world *world, t_comps *comps)
 {
-	return (lighting(world->light, comps->obj, world->camera,
+	return (lighting(world->light, comps->obj, world->camera, world->ambient,
 			comps->normalv, comps->point));
 }
 
 double	color_at(t_world *world, t_ray *ray)
 {
-	t_intersec **intersections;
-	t_intersec *hit;
-	t_comps *comps;
-	double result;
-	
+	t_intersec	**intersections;
+	t_intersec	*hit;
+	t_comps		*comps;
+	double		result;
+
 	result = 0;
 	intersections = get_sorted_intersections(ray, world->objs);
 	hit = identify_hit(intersections);
