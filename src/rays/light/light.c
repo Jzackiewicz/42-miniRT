@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:57:27 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 11:51:04 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/31 17:04:47 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,80 @@ double	*get_normal_at(t_object *obj, double *w_point)
 	return (world_normal);
 }
 
-double	*reflect(double *in, double *normal)
+double	*find_incidence(double *origin, double *target)
 {
-	double	*res;
-
-	res = multiply_tuple(normal, 2 * dot(in, normal));
-	res = subtract_tuple(in, res);
-	return (res);
+	double	*incidence;
+	
+	incidence = subtract_tuple(origin, target);
+	normalize(&incidence);
+	return (incidence);
 }
 
-// p. 88 book
-// TODO: refactor lol
-double lighting(t_light *light, t_object *obj, t_camera *cam_data,
-        double *normal, double *point)
+double	*find_reflection(double *origin, double *normal, double *target)
 {
-    double *light_p;
-    double *light_v;
-    double *reflect_v;
-    double *view_v;
-    double reflect_dot_eye;
-    double ambient, light_dot_normal, diffuse, specular;
+	double	*incidence;
+	double	*rev_incidence;
+	double	*reflection;
+	double	*tmp;
+	
+	incidence = find_incidence(origin, target);
+	rev_incidence = negate_tuple(incidence);
+	free(incidence);
+	tmp = multiply_tuple(normal, 2 * dot(rev_incidence, normal));
+	reflection = subtract_tuple(rev_incidence, tmp);
+	free(tmp);
+	free(rev_incidence);
+	return (reflection);
+}
+
+double	get_diffuse(double *origin, double *target, double *normal)
+{
+	double	*incidence;
+	double	angle_of_incidence;
+	double	diffuse;
+	double	diffuse_factor;
+	
+	diffuse_factor = 1;
+	incidence = subtract_tuple(origin, target);
+    normalize(&incidence);
+    angle_of_incidence = dot(incidence, normal);
+	free(incidence);
+	if (angle_of_incidence < 0)
+		return (0);
+	diffuse = diffuse_factor * angle_of_incidence;
+	return (diffuse);
+}
+
+double	get_specular(double *light_incidence, double *origin, double *normal, double *target)
+{
+	double	*reflection;
+	double	angle_of_reflection;
+	double	specular;
+	double	specular_factor = 0.1;
+	double	shininess = 32;
+	
+	light_incidence = find_incidence(origin, target);
+	if (dot(light_incidence, normal) < 0)
+		return (0);
+	reflection = find_reflection(origin, target, normal);
+	normalize(&reflection);
+	angle_of_reflection = dot(reflection, light_incidence);
+	printf("reflection:\n");
+	print_tuple(reflection);
+	if (angle_of_reflection <= 0)
+		return (0);
+	else
+		specular = specular_factor * pow(angle_of_reflection, shininess);
+	return (specular);
+}
+
+double lighting(t_light *light, t_object *obj, t_camera *cam_data, t_ambient *ambient_data,
+        double *normal, double *target)
+{
+    double ambient;
+	double	diffuse;
+	double	specular;
+	double	*light_incidence = find_incidence(light->coords, target);
     double r = obj->color[0];
     double g = obj->color[1];
     double b = obj->color[2];
@@ -61,33 +115,18 @@ double lighting(t_light *light, t_object *obj, t_camera *cam_data,
     double light_g = light->color[1] / 255.0;
     double light_b = light->color[2] / 255.0;
 
-    light_p = init_tuple(1);
-    ft_memcpy(light_p, light->coords, sizeof(double) * 4);
-    light_v = subtract_tuple(light_p, point);
-    normalize(&light_v);
-
-	// view vector (tried to fix the specular :(( )
-    view_v = subtract_tuple(cam_data->origin, point);
-    normalize(&view_v);
-
-    ambient = obj->material->ambient;
-    light_dot_normal = dot(light_v, normal);
-    if (light_dot_normal < 0)
-    {
-        diffuse = 0;
-        specular = 0;
-    }
-    else
-    {
-        diffuse = obj->material->diffuse * light_dot_normal;
-        reflect_v = reflect(negate_tuple(light_v), normal);
-        reflect_dot_eye = dot(reflect_v, view_v);
-        if (reflect_dot_eye <= 0)
-            specular = 0;
-        else
-            specular = obj->material->specular * pow(reflect_dot_eye, obj->material->shininess);
-        free(reflect_v);
-    }
+	if (dot(light_incidence, normal) < 0)
+	{
+		diffuse = 0;
+		specular = 0;
+	}
+	else
+	{
+		diffuse = get_diffuse(light->coords, normal, target);
+		specular = get_specular(light_incidence, cam_data->origin, normal, target);
+	}
+	ambient = ambient_data->brightness;
+	printf("specular: %f\n", specular);
     double effective_ambient_r = ambient * light_r * light->brightness;
     double effective_ambient_g = ambient * light_g * light->brightness;
     double effective_ambient_b = ambient * light_b * light->brightness;
@@ -105,8 +144,5 @@ double lighting(t_light *light, t_object *obj, t_camera *cam_data,
     int result_g = fmin(255, g * effective_ambient_g + g * effective_diffuse_g + 255 * effective_specular_g);
     int result_b = fmin(255, b * effective_ambient_b + b * effective_diffuse_b + 255 * effective_specular_b);
 
-    free(light_p);
-    free(light_v);
-    free(view_v);
     return rgb_to_int(result_r, result_g, result_b);
 }
