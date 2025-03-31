@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 11:17:43 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 12:31:35 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:13:56 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,8 @@ static void	clean_mlx(t_ray_tracer_data *rt_data)
 		return ;
 	if (rt_data->mlx_data)
 	{
-		if (rt_data->mlx_data->img_ptr && rt_data->mlx_data->mlx_ptr)
-			mlx_destroy_image(rt_data->mlx_data->mlx_ptr,
-				rt_data->mlx_data->img_ptr);
-		if (rt_data->mlx_data->window_ptr && rt_data->mlx_data->mlx_ptr)
-			mlx_destroy_window(rt_data->mlx_data->mlx_ptr,
-				rt_data->mlx_data->window_ptr);
-		if (rt_data->mlx_data->mlx_ptr)
-			mlx_destroy_display(rt_data->mlx_data->mlx_ptr);
-		free(rt_data->mlx_data->mlx_ptr);
+		free_image(rt_data->mlx_data);
+		free_window(rt_data->mlx_data);
 		free(rt_data->mlx_data);
 	}
 	free(rt_data);
