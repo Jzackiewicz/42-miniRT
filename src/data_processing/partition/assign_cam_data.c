@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:37:54 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/28 09:37:40 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/31 13:48:29 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static t_matrix	*get_orient_matrix(t_camera *cam_data)
 	double		*global_up;
 	double		*cam_left;
 	double		*cam_up;
-	double		*tmp;
 
 	global_up = init_tuple(0);
 	global_up[1] = 1;
