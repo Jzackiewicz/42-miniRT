@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:57:27 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/01 12:22:33 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/01 18:07:32 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,6 @@ double	*get_normal_at(t_object *obj, double *w_point)
 	return (world_normal);
 }
 
-double	*find_incidence(double *origin, double *target)
-{
-	double	*incidence;
-	
-	incidence = subtract_tuple(origin, target);
-	normalize(&incidence);
-	return (incidence);
-}
-
 double	*find_reflection(double *origin, double *normal, double *target)
 {
 	double	*incidence;
@@ -50,7 +41,8 @@ double	*find_reflection(double *origin, double *normal, double *target)
 	double	*reflection;
 	double	*tmp;
 	
-	incidence = find_incidence(origin, target);
+	incidence = subtract_tuple(origin, target);
+	normalize(&incidence);
 	if (dot(incidence, normal) < 0)
 		return (free(incidence), NULL);
 	rev_incidence = negate_tuple(incidence);
@@ -87,12 +79,13 @@ double	get_specular(double *light_origin, double *cam_v, double *normal, double 
 	double	angle_of_reflection;
 	double	specular;
 	double	specular_factor = 1;
-	double	shininess = 40;
+	double	shininess = 400;
 	
 	reflection = find_reflection(light_origin, target, normal);
 	if (!reflection)
 		return (0);
-	camera_vector = find_incidence(cam_v, target);
+	camera_vector = subtract_tuple(cam_v, target);
+	normalize(&camera_vector);
 	normalize(&reflection);
 	angle_of_reflection = dot(reflection, camera_vector);
 	if (angle_of_reflection <= 0)
@@ -117,9 +110,8 @@ double lighting(t_light *light, t_object *obj, t_camera *cam_data, t_ambient *am
 
 	diffuse = get_diffuse(light->coords, normal, target);
 	specular = get_specular(light->coords, cam_data->orientation_vector, normal, target);
-	printf("specular: %f\n", specular);
-	// specular = 0;
 	ambient = ambient_data->brightness;
+	
     double effective_ambient_r = ambient * light_r * light->brightness;
     double effective_ambient_g = ambient * light_g * light->brightness;
     double effective_ambient_b = ambient * light_b * light->brightness;
