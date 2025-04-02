@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 12:04:30 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/31 11:38:09 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/02 14:58:37 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ t_light	*get_light_data(t_input_data **data)
 			light->brightness = data[i]->brightness;
 			light->color = data[i]->color;
 			light->coords = data[i]->coords;
+			light->coords[3] = 1;
 			return (light);
 		}
 	}
