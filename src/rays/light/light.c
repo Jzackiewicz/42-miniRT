@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:57:27 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/01 18:07:32 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:34:32 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,38 +34,38 @@ double	*get_normal_at(t_object *obj, double *w_point)
 	return (world_normal);
 }
 
-double	*find_reflection(double *origin, double *normal, double *target)
+double	*find_reflection(double *lightp, double *normal, double *objectp)
 {
-	double	*incidence;
-	double	*rev_incidence;
+	double	*lightv;
+	double	*rev_lightv;
 	double	*reflection;
 	double	*tmp;
 	
-	incidence = subtract_tuple(origin, target);
-	normalize(&incidence);
-	if (dot(incidence, normal) < 0)
-		return (free(incidence), NULL);
-	rev_incidence = negate_tuple(incidence);
-	free(incidence);
-	tmp = multiply_tuple(normal, 2 * dot(rev_incidence, normal));
-	reflection = subtract_tuple(rev_incidence, tmp);
+	lightv = subtract_tuple(lightp, objectp);
+	normalize(&lightv);
+	if (dot(lightv, normal) < 0)
+		return (free(lightv), NULL);
+	rev_lightv = negate_tuple(lightv);
+	free(lightv);
+	tmp = multiply_tuple(normal, 2 * dot(lightv, normal));
+	reflection = subtract_tuple(lightv, tmp);
 	free(tmp);
-	free(rev_incidence);
+	free(rev_lightv);
 	return (reflection);
 }
 
-double	get_diffuse(double *light_point, double *object_point, double *normal)
+double	get_diffuse(double *lightp, double *normal, double *objectp)
 {
-	double	*incidence;
+	double	*lightv;
 	double	angle_of_incidence;
 	double	diffuse;
 	double	diffuse_factor;
 	
 	diffuse_factor = 1;
-	incidence = subtract_tuple(light_point, object_point);
-    normalize(&incidence);
-    angle_of_incidence = dot(incidence, normal);
-	free(incidence);
+	lightv = subtract_tuple(lightp, objectp);
+    normalize(&lightv);
+    angle_of_incidence = dot(lightv, normal);
+	free(lightv);
 	if (angle_of_incidence < 0)
 		return (0);
 	diffuse = diffuse_factor * angle_of_incidence;
@@ -75,19 +75,16 @@ double	get_diffuse(double *light_point, double *object_point, double *normal)
 double	get_specular(double *light_origin, double *cam_v, double *normal, double *target)
 {
 	double	*reflection;
-	double	*camera_vector;
 	double	angle_of_reflection;
 	double	specular;
 	double	specular_factor = 1;
-	double	shininess = 400;
+	double	shininess = 20;
 	
 	reflection = find_reflection(light_origin, target, normal);
 	if (!reflection)
 		return (0);
-	camera_vector = subtract_tuple(cam_v, target);
-	normalize(&camera_vector);
 	normalize(&reflection);
-	angle_of_reflection = dot(reflection, camera_vector);
+	angle_of_reflection = dot(reflection, cam_v);
 	if (angle_of_reflection <= 0)
 		return (0);
 	else
@@ -95,39 +92,37 @@ double	get_specular(double *light_origin, double *cam_v, double *normal, double 
 	return (specular);
 }
 
-double lighting(t_light *light, t_object *obj, t_camera *cam_data, t_ambient *ambient_data,
-        double *normal, double *target)
+double lighting(t_world *world, t_comps *comps)
 {
     double ambient;
 	double	diffuse;
 	double	specular;
-    double r = obj->color[0];
-    double g = obj->color[1];
-    double b = obj->color[2];
-    double light_r = light->color[0] / 255.0;
-    double light_g = light->color[1] / 255.0;
-    double light_b = light->color[2] / 255.0;
+    double r = comps->obj->color[0];
+    double g = comps->obj->color[1];
+    double b = comps->obj->color[2];
+    double light_r = world->light->color[0] / 255.0;
+    double light_g = world->light->color[1] / 255.0;
+    double light_b = world->light->color[2] / 255.0;
 
-	diffuse = get_diffuse(light->coords, normal, target);
-	specular = get_specular(light->coords, cam_data->orientation_vector, normal, target);
-	ambient = ambient_data->brightness;
+	diffuse = get_diffuse(world->light->coords, comps->normalv, comps->point);
+	specular = get_specular(world->light->coords, world->camera->orientation_vector, comps->normalv, comps->point);
+	ambient = world->ambient->brightness;
 	
-    double effective_ambient_r = ambient * light_r * light->brightness;
-    double effective_ambient_g = ambient * light_g * light->brightness;
-    double effective_ambient_b = ambient * light_b * light->brightness;
+    double effective_ambient_r = ambient * light_r * world->light->brightness;
+    double effective_ambient_g = ambient * light_g * world->light->brightness;
+    double effective_ambient_b = ambient * light_b * world->light->brightness;
 
-    double effective_diffuse_r = diffuse * light_r * light->brightness;
-    double effective_diffuse_g = diffuse * light_g * light->brightness;
-    double effective_diffuse_b = diffuse * light_b * light->brightness;
+    double effective_diffuse_r = diffuse * light_r * world->light->brightness;
+    double effective_diffuse_g = diffuse * light_g * world->light->brightness;
+    double effective_diffuse_b = diffuse * light_b * world->light->brightness;
 
-    double effective_specular_r = specular * light_r * light->brightness;
-    double effective_specular_g = specular * light_g * light->brightness;
-    double effective_specular_b = specular * light_b * light->brightness;
+    double effective_specular_r = specular * light_r * world->light->brightness;
+    double effective_specular_g = specular * light_g * world->light->brightness;
+    double effective_specular_b = specular * light_b * world->light->brightness;
 
-    // color by color for precision
+    // color by color for precisio
     int result_r = fmin(255, r * effective_ambient_r + r * effective_diffuse_r + 255 * effective_specular_r);
     int result_g = fmin(255, g * effective_ambient_g + g * effective_diffuse_g + 255 * effective_specular_g);
     int result_b = fmin(255, b * effective_ambient_b + b * effective_diffuse_b + 255 * effective_specular_b);
-
     return rgb_to_int(result_r, result_g, result_b);
 }
