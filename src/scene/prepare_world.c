@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/03 10:22:48 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:40:12 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,4 @@ void	free_comps(t_comps *comps)
 	free(comps->eyev);
 	free(comps->normalv);
 	free(comps);
-}
-
-double	color_at(t_world *world, t_ray *ray)
-{
-	t_intersec	**intersections;
-	t_intersec	*hit;
-	t_comps		*comps;
-	double		result;
-
-	result = 0;
-	intersections = get_sorted_intersections(ray, world->objs);
-	hit = identify_hit(intersections);
-	if (hit)
-	{
-		comps = prepare_computations(hit, ray);
-		result = lighting(world, comps);
-		free_comps(comps);
-	}
-	else
-		result = 0;
-	free_intersections(intersections);
-	return (result);
 }
