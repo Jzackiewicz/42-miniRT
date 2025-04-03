@@ -1,0 +1,55 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   phong_getters.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/03 16:42:38 by agarbacz          #+#    #+#             */
+/*   Updated: 2025/04/03 16:44:21 by agarbacz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../../../inc/miniRT.h"
+
+double	get_diffuse(double *lightp, double *normal, double *objectp)
+{
+	double	*lightv;
+	double	angle_of_incidence;
+	double	diffuse;
+	double	diffuse_factor;
+
+	diffuse_factor = 0.7;
+	lightv = subtract_tuple(lightp, objectp);
+	normalize(&lightv);
+	angle_of_incidence = dot(lightv, normal);
+	free(lightv);
+	if (angle_of_incidence < 0)
+		return (0);
+	diffuse = diffuse_factor * angle_of_incidence;
+	return (diffuse);
+}
+
+double	get_specular(double *light_origin, double *cam_v, double *normal,
+		double *target)
+{
+	double	*reflection;
+	double	angle_of_reflection;
+	double	specular;
+	double	specular_factor;
+	double	shininess;
+
+	specular_factor = 0.6;
+	shininess = 50;
+	reflection = find_reflection(light_origin, normal, target);
+	if (!reflection)
+		return (0);
+	normalize(&reflection);
+	angle_of_reflection = dot(reflection, cam_v);
+	free(reflection);
+	if (angle_of_reflection <= 0)
+		return (0);
+	else
+		specular = specular_factor * pow(angle_of_reflection, shininess);
+	return (specular);
+}

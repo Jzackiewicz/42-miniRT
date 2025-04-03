@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/03 12:41:11 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:43:25 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,26 @@ t_intersec				*identify_hit(t_intersec **i_s);
 
 //				spacial_conversion
 
+// light section
+typedef struct s_comps	t_comps;
 typedef struct s_light	t_light;
 
-// light section
 double					*get_normal_at(t_object *obj, double *w_point);
-typedef struct s_comps	t_comps;
+int						rgb_to_int(double r, double g, double b);
+double					*find_reflection(double *lightp, double *normal,
+							double *objectp);
+							double	get_diffuse(double *lightp, double *normal, double *objectp);
+double					get_specular(double *light_origin, double *cam_v,
+							double *normal, double *target);
+double					*assign_rgb(t_comps *comps);
+double					*assign_light_colors(t_world *world);
+double					*assign_effective_ambient(t_world *world,
+							double *light_rgb);
+double					*assign_effective_diffuse(double *light_rgb,
+							t_world *world, t_comps *comps);
+double					*assign_effective_specular(double *light_rgb,
+							t_world *world, t_comps *comps);
+
 double					lighting(t_world *world, t_comps *comps);
 
 // shadow section
