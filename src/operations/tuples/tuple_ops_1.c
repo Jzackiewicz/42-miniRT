@@ -53,7 +53,7 @@ double	*subtract_tuple(double *tuple1, double *tuple2)
 		result[i] = tuple1[i] - tuple2[i];
 		i++;
 	}
-	if ((result[3] + 1.0) < 0.01 && (result[3] + 1.0) > -0.01)
+	if ((result[3] + 1.0) < 10e-6 && (result[3] + 1.0) > -10e-6)
 		result[3] = 1.0;
 	return (result);
 }

@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_intersections.c                               :+:      :+:    :+:   */
+/*   intersect_objects.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/24 18:23:09 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:20:01 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/rays.h"
 #include "../../../inc/miniRT.h"
+#include "../../../inc/rays.h"
 
 /* Finds t for ray-sphere intersection for identity sphere */
-double	*intersect_sphere(t_ray *ray)
+static double	*intersect_sphere(t_ray *ray)
 {
 	double	*arr_t;
 	double	*oc_vector;
 	double	coefficients[3];
 	double	delta;
 	double	*coords;
-	
+
 	coords = init_tuple(1);
 	oc_vector = subtract_tuple(ray->origin, coords);
 	free(coords);
@@ -40,7 +40,7 @@ double	*intersect_sphere(t_ray *ray)
 	return (arr_t);
 }
 
-double	*intersect_plane(t_object *obj, t_ray *ray)
+static double	*intersect_plane(t_object *obj, t_ray *ray)
 {
 	double	*arr_t;
 	double	denom;
@@ -80,4 +80,3 @@ double	*intersect(t_object *obj, t_ray *ray)
 	}
 	return (arr_t);
 }
-
