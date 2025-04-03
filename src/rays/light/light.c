@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:57:27 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/03 13:01:08 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:21:17 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,14 @@ double	*find_reflection(double *lightp, double *normal, double *objectp)
 	double	*reflection;
 	double	*tmp;
 
-	// double	*rev_lightv;
 	lightv = subtract_tuple(lightp, objectp);
 	normalize(&lightv);
 	if (dot(lightv, normal) < 0)
 		return (free(lightv), NULL);
-	// rev_lightv = negate_tuple(lightv);
 	tmp = multiply_tuple(normal, 2 * dot(lightv, normal));
 	reflection = subtract_tuple(lightv, tmp);
 	free(tmp);
 	free(lightv);
-	// free(rev_lightv);
 	return (reflection);
 }
 
@@ -105,62 +102,138 @@ double	get_specular(double *light_origin, double *cam_v, double *normal,
 	return (specular);
 }
 
+static int	calc_shadow(t_comps *comps, t_world *world)
+{
+	double	s_r;
+	double	s_g;
+	double	s_b;
+
+	s_r = comps->obj->color[0] * world->ambient->color[0] / 255.0
+		* world->ambient->brightness;
+	s_g = comps->obj->color[1] * world->ambient->color[1] / 255.0
+		* world->ambient->brightness;
+	s_b = comps->obj->color[2] * world->ambient->color[2] / 255.0
+		* world->ambient->brightness;
+	return (rgb_to_int(s_r, s_g, s_b));
+}
+
+double	*assign_rgb(t_comps *comps)
+{
+	double	*rgb;
+
+	rgb = malloc((3) * sizeof(double));
+	if (!rgb)
+		return (NULL);
+	rgb[0] = comps->obj->color[0];
+	rgb[1] = comps->obj->color[1];
+	rgb[2] = comps->obj->color[2];
+	return (rgb);
+}
+
+double	*assign_light_colors(t_world *world)
+{
+	double	*light_rgb;
+
+	light_rgb = malloc(3 * sizeof(double));
+	if (!light_rgb)
+		return (NULL);
+	light_rgb[0] = world->light->color[0] / 255.0;
+	light_rgb[1] = world->light->color[1] / 255.0;
+	light_rgb[2] = world->light->color[2] / 255.0;
+	return (light_rgb);
+}
+
+double	*assign_effective_ambient(t_world *world, double *light_rgb)
+{
+	double	*effective_ambient;
+
+	effective_ambient = malloc(3 * sizeof(double));
+	if (!effective_ambient)
+		return (NULL);
+	effective_ambient[0] = world->ambient->brightness * light_rgb[0]
+		* world->light->brightness;
+	effective_ambient[1] = world->ambient->brightness * light_rgb[1]
+		* world->light->brightness;
+	effective_ambient[2] = world->ambient->brightness * light_rgb[2]
+		* world->light->brightness;
+	return (effective_ambient);
+}
+
+double	*assign_effective_diffuse(double diffuse, double *light_rgb,
+		t_world *world)
+{
+	double	*effective_diffuse_rgb;
+
+	effective_diffuse_rgb = malloc(3 * sizeof(double));
+	if (!effective_diffuse_rgb)
+		return (NULL);
+	effective_diffuse_rgb[0] = diffuse * light_rgb[0]
+		* world->light->brightness;
+	effective_diffuse_rgb[1] = diffuse * light_rgb[1]
+		* world->light->brightness;
+	effective_diffuse_rgb[2] = diffuse * light_rgb[2]
+		* world->light->brightness;
+	return (effective_diffuse_rgb);
+}
+
+double	*assign_effective_specular(double specular, double *light_rgb,
+		t_world *world)
+{
+	double	*effective_specular_rgb;
+
+	effective_specular_rgb = malloc(3 * sizeof(double));
+	if (!effective_specular_rgb)
+		return (NULL);
+	effective_specular_rgb[0] = specular * light_rgb[0]
+		* world->light->brightness;
+	effective_specular_rgb[1] = specular * light_rgb[1]
+		* world->light->brightness;
+	effective_specular_rgb[2] = specular * light_rgb[2]
+		* world->light->brightness;
+	return (effective_specular_rgb);
+}
+void free_phong_utils()
+{
+	
+}
+
+
+double	calc_res_color(double *rgb, double *effective_ambient,
+		double *effective_diffuse, double *effective_specular)
+{
+	double	res[3];
+	
+	res[0] = fmin(255, rgb[0] * effective_ambient[0] + rgb[0]
+			* effective_diffuse[0] + 255 * effective_specular[0]);
+	res[1] = fmin(255, rgb[1] * effective_ambient[1] + rgb[1]
+			* effective_diffuse[1] + 255 * effective_specular[1]);
+	res[2] = fmin(255, rgb[2] * effective_ambient[2] + rgb[2]
+			* effective_diffuse[2] + 255 * effective_specular[2]);
+	return (rgb_to_int(res[0], res[1], res[2]));
+}
+
 double	lighting(t_world *world, t_comps *comps)
 {
-	if (is_shadowed(world, comps->over_point)) {
-		double s_r = comps->obj->color[0] * world->ambient->color[0] / 255.0 * world->ambient->brightness;
-		double s_g = comps->obj->color[1] * world->ambient->color[1] / 255.0 * world->ambient->brightness;
-		double s_b = comps->obj->color[2] * world->ambient->color[2] / 255.0 * world->ambient->brightness;
-		return rgb_to_int(s_r, s_g, s_b);
-	}
-	
-	double	ambient;
 	double	diffuse;
 	double	specular;
-	double	r;
-	double	g;
-	double	b;
-	double	light_r;
-	double	light_g;
-	double	light_b;
-	double	effective_ambient_r;
-	double	effective_ambient_g;
-	double	effective_ambient_b;
-	double	effective_diffuse_r;
-	double	effective_diffuse_g;
-	double	effective_diffuse_b;
-	double	effective_specular_r;
-	double	effective_specular_g;
-	double	effective_specular_b;
-	int		result_r;
-	int		result_g;
-	int		result_b;
+	double	*rgb;
+	double	*light_rgb;
+	double	*effective_ambient_rgb;
+	double	*effective_diffuse_rgb;
+	double	*effective_specular_rgb;
 
-	r = comps->obj->color[0];
-	g = comps->obj->color[1];
-	b = comps->obj->color[2];
-	light_r = world->light->color[0] / 255.0;
-	light_g = world->light->color[1] / 255.0;
-	light_b = world->light->color[2] / 255.0;
+	if (is_shadowed(world, comps->over_point))
+		return (calc_shadow(comps, world));
+	rgb = assign_rgb(comps);
+	light_rgb = assign_light_colors(world);
 	diffuse = get_diffuse(world->light->coords, comps->normalv, comps->point);
 	specular = get_specular(world->light->coords,
 			world->camera->orientation_vector, comps->normalv, comps->point);
-	ambient = world->ambient->brightness;
-	effective_ambient_r = ambient * light_r * world->light->brightness;
-	effective_ambient_g = ambient * light_g * world->light->brightness;
-	effective_ambient_b = ambient * light_b * world->light->brightness;
-	effective_diffuse_r = diffuse * light_r * world->light->brightness;
-	effective_diffuse_g = diffuse * light_g * world->light->brightness;
-	effective_diffuse_b = diffuse * light_b * world->light->brightness;
-	effective_specular_r = specular * light_r * world->light->brightness;
-	effective_specular_g = specular * light_g * world->light->brightness;
-	effective_specular_b = specular * light_b * world->light->brightness;
-	// color by color for precisio
-	result_r = fmin(255, r * effective_ambient_r + r * effective_diffuse_r + 255
-			* effective_specular_r);
-	result_g = fmin(255, g * effective_ambient_g + g * effective_diffuse_g + 255
-			* effective_specular_g);
-	result_b = fmin(255, b * effective_ambient_b + b * effective_diffuse_b + 255
-			* effective_specular_b);
-	return (rgb_to_int(result_r, result_g, result_b));
+	effective_ambient_rgb = assign_effective_ambient(world, light_rgb);
+	effective_diffuse_rgb = assign_effective_diffuse(diffuse, light_rgb, world);
+	effective_specular_rgb = assign_effective_specular(specular, light_rgb,
+			world);
+	free(light_rgb);
+	return (calc_res_color(rgb, effective_ambient_rgb, effective_diffuse_rgb,
+			effective_specular_rgb));
 }
