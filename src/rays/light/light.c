@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:57:27 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/03 08:59:20 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:17:03 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ double	get_diffuse(double *lightp, double *normal, double *objectp)
 	double	diffuse;
 	double	diffuse_factor;
 	
-	diffuse_factor = 1;
+	diffuse_factor = 0.7;
 	lightv = subtract_tuple(lightp, objectp);
     normalize(&lightv);
     angle_of_incidence = dot(lightv, normal);
@@ -77,7 +77,7 @@ double	get_specular(double *light_origin, double *cam_v, double *normal, double 
 	double	*reflection;
 	double	angle_of_reflection;
 	double	specular;
-	double	specular_factor = 1;
+	double	specular_factor = 0.6;
 	double	shininess = 50;
 	
 	reflection = find_reflection(light_origin, normal, target);
