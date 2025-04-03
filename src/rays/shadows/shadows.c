@@ -1,13 +1,12 @@
 #include "../../../inc/miniRT.h"
 
-static t_intersec	*precompute_shadows(double *p, double *v, t_object **objs)
+static t_intersec *precompute_shadows(double *p, double *v, t_object **objs)
 {
-	double		distance;
-	double		*direction;
-	t_ray		*ray;
-	t_intersec	**i_s;
+	double distance;
+	double *direction;
+	t_ray *ray;
+	t_intersec **i_s;
 
-	direction = (double *)malloc(4 * sizeof(double));
 	ft_memcpy(direction, v, 4 * sizeof(double));
 	normalize(&direction);
 	ray = create_ray(p, direction);
@@ -25,16 +24,17 @@ static t_intersec	*precompute_shadows(double *p, double *v, t_object **objs)
 	3. 	intersect the world with that ray
 	4. 	check if there's a hit
  */
-bool	is_shadowed(t_world *w, double *p)
+bool is_shadowed(t_world *w, double *p, t_object **objs)
 {
-	t_intersec	*hit;
-	double		*v;
-	double		distance;
+	t_intersec *hit;
+    double *v;
+    double distance;
 
 	v = subtract_tuple(w->light->coords, p);
 	distance = magnitude(v);
-	hit = precompute_shadows(p, v, w->objs);
-	if (hit && hit->t < distance)
-		return (true);
-	return (false);
+    hit = precompute_shadows(p, v, objs);
+    if (hit && hit->t < distance)
+     	return (true);
+    return (false);
 }
+
