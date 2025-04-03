@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/03 09:48:54 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 11:26:04 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_ray					*create_ray(double *origin, double *direction);
 void					free_ray(t_ray *ray);
 double					*position(t_ray *ray, double t);
 double					*intersect(t_object *obj, t_ray *ray);
+t_intersec				**get_intersections(t_ray *ray, t_object **objs);
 void					sort_intersections(t_intersec **i_s, int start_index,
 							int end_index);
 t_intersec				**get_sorted_intersections(t_ray *ray, t_object **objs);
