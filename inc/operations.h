@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 17:29:30 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/20 16:10:12 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:56:59 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void		print_matrix(t_matrix *matrix);
 // 			utils
 int			compare_floats(double a, double b);
 double		*init_tuple(int w);
+double		*tupledup(double *tuple);
 void		print_tuple(double *tuple);
 
 #endif

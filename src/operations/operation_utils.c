@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:26:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/24 09:50:10 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:28:22 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	compare_floats(double a, double b)
 	w == 0: vector{0, 0, 0, 0} */
 double	*init_tuple(int w)
 {
-	int	i;
+	int		i;
 	double	*tuple;
-	
+
 	tuple = (double *)malloc(sizeof(double) * 4);
 	if (!tuple)
 		return (NULL);
@@ -39,6 +39,23 @@ double	*init_tuple(int w)
 	}
 	tuple[i] = w;
 	return (tuple);
+}
+
+double	*tupledup(double *tuple)
+{
+	int		i;
+	double	*new_tuple;
+
+	new_tuple = (double *)malloc(sizeof(double) * 4);
+	if (!new_tuple)
+		return (NULL);
+	i = 0;
+	while (i < 4)
+	{
+		new_tuple[i] = tuple[i];
+		i++;
+	}
+	return (new_tuple);
 }
 
 void	print_tuple(double *tuple)

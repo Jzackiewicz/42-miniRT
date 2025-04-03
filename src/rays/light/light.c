@@ -6,11 +6,19 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:57:27 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 11:51:04 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:34:05 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/miniRT.h"
+
+static int	rgb_to_int(double r, double g, double b)
+{
+	r = fmin(255, fmax(0, r));
+	g = fmin(255, fmax(0, g));
+	b = fmin(255, fmax(0, b));
+	return (((int)r << 16) | ((int)g << 8) | (int)b);
+}
 
 /* returns the normal vector at a point on the surface of the object
 	works only for a sphere for now */
@@ -24,6 +32,7 @@ double	*get_normal_at(t_object *obj, double *w_point)
 	sphere_center = init_tuple(1);
 	obj_point = multiply_tuple_and_matrix(obj->inv_transform, w_point);
 	obj_normal = subtract_tuple(obj_point, sphere_center);
+	free(obj_point);
 	normalize(&obj_normal);
 	transpose(&obj->inv_transform);
 	world_normal = multiply_tuple_and_matrix(obj->inv_transform, obj_normal);
@@ -34,79 +43,117 @@ double	*get_normal_at(t_object *obj, double *w_point)
 	return (world_normal);
 }
 
-double	*reflect(double *in, double *normal)
+double	*find_reflection(double *lightp, double *normal, double *objectp)
 {
-	double	*res;
+	double	*lightv;
+	double	*reflection;
+	double	*tmp;
 
-	res = multiply_tuple(normal, 2 * dot(in, normal));
-	res = subtract_tuple(in, res);
-	return (res);
+	// double	*rev_lightv;
+	lightv = subtract_tuple(lightp, objectp);
+	normalize(&lightv);
+	if (dot(lightv, normal) < 0)
+		return (free(lightv), NULL);
+	// rev_lightv = negate_tuple(lightv);
+	tmp = multiply_tuple(normal, 2 * dot(lightv, normal));
+	reflection = subtract_tuple(lightv, tmp);
+	free(tmp);
+	free(lightv);
+	// free(rev_lightv);
+	return (reflection);
 }
 
-// p. 88 book
-// TODO: refactor lol
-double lighting(t_light *light, t_object *obj, t_camera *cam_data,
-        double *normal, double *point)
+double	get_diffuse(double *lightp, double *normal, double *objectp)
 {
-    double *light_p;
-    double *light_v;
-    double *reflect_v;
-    double *view_v;
-    double reflect_dot_eye;
-    double ambient, light_dot_normal, diffuse, specular;
-    double r = obj->color[0];
-    double g = obj->color[1];
-    double b = obj->color[2];
-    double light_r = light->color[0] / 255.0;
-    double light_g = light->color[1] / 255.0;
-    double light_b = light->color[2] / 255.0;
+	double	*lightv;
+	double	angle_of_incidence;
+	double	diffuse;
+	double	diffuse_factor;
 
-    light_p = init_tuple(1);
-    ft_memcpy(light_p, light->coords, sizeof(double) * 4);
-    light_v = subtract_tuple(light_p, point);
-    normalize(&light_v);
+	diffuse_factor = 0.7;
+	lightv = subtract_tuple(lightp, objectp);
+	normalize(&lightv);
+	angle_of_incidence = dot(lightv, normal);
+	free(lightv);
+	if (angle_of_incidence < 0)
+		return (0);
+	diffuse = diffuse_factor * angle_of_incidence;
+	return (diffuse);
+}
 
-	// view vector (tried to fix the specular :(( )
-    view_v = subtract_tuple(cam_data->origin, point);
-    normalize(&view_v);
+double	get_specular(double *light_origin, double *cam_v, double *normal,
+		double *target)
+{
+	double	*reflection;
+	double	angle_of_reflection;
+	double	specular;
+	double	specular_factor;
+	double	shininess;
 
-    ambient = obj->material->ambient;
-    light_dot_normal = dot(light_v, normal);
-    if (light_dot_normal < 0)
-    {
-        diffuse = 0;
-        specular = 0;
-    }
-    else
-    {
-        diffuse = obj->material->diffuse * light_dot_normal;
-        reflect_v = reflect(negate_tuple(light_v), normal);
-        reflect_dot_eye = dot(reflect_v, view_v);
-        if (reflect_dot_eye <= 0)
-            specular = 0;
-        else
-            specular = obj->material->specular * pow(reflect_dot_eye, obj->material->shininess);
-        free(reflect_v);
-    }
-    double effective_ambient_r = ambient * light_r * light->brightness;
-    double effective_ambient_g = ambient * light_g * light->brightness;
-    double effective_ambient_b = ambient * light_b * light->brightness;
+	specular_factor = 0.6;
+	shininess = 50;
+	reflection = find_reflection(light_origin, normal, target);
+	if (!reflection)
+		return (0);
+	normalize(&reflection);
+	angle_of_reflection = dot(reflection, cam_v);
+	free(reflection);
+	if (angle_of_reflection <= 0)
+		return (0);
+	else
+		specular = specular_factor * pow(angle_of_reflection, shininess);
+	return (specular);
+}
 
-    double effective_diffuse_r = diffuse * light_r * light->brightness;
-    double effective_diffuse_g = diffuse * light_g * light->brightness;
-    double effective_diffuse_b = diffuse * light_b * light->brightness;
+double	lighting(t_world *world, t_comps *comps)
+{
+	double	ambient;
+	double	diffuse;
+	double	specular;
+	double	r;
+	double	g;
+	double	b;
+	double	light_r;
+	double	light_g;
+	double	light_b;
+	double	effective_ambient_r;
+	double	effective_ambient_g;
+	double	effective_ambient_b;
+	double	effective_diffuse_r;
+	double	effective_diffuse_g;
+	double	effective_diffuse_b;
+	double	effective_specular_r;
+	double	effective_specular_g;
+	double	effective_specular_b;
+	int		result_r;
+	int		result_g;
+	int		result_b;
 
-    double effective_specular_r = specular * light_r * light->brightness;
-    double effective_specular_g = specular * light_g * light->brightness;
-    double effective_specular_b = specular * light_b * light->brightness;
-
-    // color by color for precision
-    int result_r = fmin(255, r * effective_ambient_r + r * effective_diffuse_r + 255 * effective_specular_r);
-    int result_g = fmin(255, g * effective_ambient_g + g * effective_diffuse_g + 255 * effective_specular_g);
-    int result_b = fmin(255, b * effective_ambient_b + b * effective_diffuse_b + 255 * effective_specular_b);
-
-    free(light_p);
-    free(light_v);
-    free(view_v);
-    return rgb_to_int(result_r, result_g, result_b);
+	r = comps->obj->color[0];
+	g = comps->obj->color[1];
+	b = comps->obj->color[2];
+	light_r = world->light->color[0] / 255.0;
+	light_g = world->light->color[1] / 255.0;
+	light_b = world->light->color[2] / 255.0;
+	diffuse = get_diffuse(world->light->coords, comps->normalv, comps->point);
+	specular = get_specular(world->light->coords,
+			world->camera->orientation_vector, comps->normalv, comps->point);
+	ambient = world->ambient->brightness;
+	effective_ambient_r = ambient * light_r * world->light->brightness;
+	effective_ambient_g = ambient * light_g * world->light->brightness;
+	effective_ambient_b = ambient * light_b * world->light->brightness;
+	effective_diffuse_r = diffuse * light_r * world->light->brightness;
+	effective_diffuse_g = diffuse * light_g * world->light->brightness;
+	effective_diffuse_b = diffuse * light_b * world->light->brightness;
+	effective_specular_r = specular * light_r * world->light->brightness;
+	effective_specular_g = specular * light_g * world->light->brightness;
+	effective_specular_b = specular * light_b * world->light->brightness;
+	// color by color for precisio
+	result_r = fmin(255, r * effective_ambient_r + r * effective_diffuse_r + 255
+			* effective_specular_r);
+	result_g = fmin(255, g * effective_ambient_g + g * effective_diffuse_g + 255
+			* effective_specular_g);
+	result_b = fmin(255, b * effective_ambient_b + b * effective_diffuse_b + 255
+			* effective_specular_b);
+	return (rgb_to_int(result_r, result_g, result_b));
 }

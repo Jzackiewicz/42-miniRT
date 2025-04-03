@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assign_data.c                                      :+:      :+:    :+:   */
+/*   assign_object_data.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/25 13:35:54 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:20:46 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/data_processing.h"
 #include "../../../inc/miniRT.h"
 
-void	assign_object_material(t_ambient *ambient, t_object *obj)
-{
-	obj->material = (t_material *)malloc(sizeof(t_material));
-	if (!obj->material)
-		return ;
-	obj->material->ambient = ambient->brightness;
-	obj->material->diffuse = 0.9;
-	obj->material->specular = 0.9;
-	obj->material->shininess = 32;
-}
-
-static void	load_transform_matrix(t_object *obj)
+static void	load_object_transform_matrix(t_object *obj)
 {
 	t_matrix	*scaling_transform;
 	t_matrix	*translation_transform;
@@ -35,6 +24,7 @@ static void	load_transform_matrix(t_object *obj)
 	tmp[1] = obj->diameter;
 	tmp[2] = obj->diameter;
 	scaling_transform = scaling(tmp);
+	transpose(&scaling_transform);
 	translation_transform = translation(obj->coords);
 	transform = multiply_matrices(translation_transform, scaling_transform);
 	free_matrix(scaling_transform);
@@ -56,6 +46,6 @@ t_object	*assign_object(t_input_data *data)
 	obj->color = data->color;
 	obj->coords = data->coords;
 	obj->orientation_vector = data->orientation_vector;
-	load_transform_matrix(obj);
+	load_object_transform_matrix(obj);
 	return (obj);
 }
