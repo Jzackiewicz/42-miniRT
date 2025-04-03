@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 10:41:40 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/31 13:51:15 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:56:32 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ typedef struct s_world
 	t_light		*light;
 	t_ambient	*ambient;
 	t_camera	*camera;
-
 }				t_world;
 
 t_ray			*ray_to_object_space(t_ray *ray, t_object *obj);

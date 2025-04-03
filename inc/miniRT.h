@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/31 11:46:41 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:17:01 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,6 @@ typedef struct s_comps
 	bool			inside;
 }					t_comps;
 
-typedef struct s_material
-{
-	double			ambient;
-	double			diffuse;
-	double			specular;
-	double			shininess;
-
-}					t_material;
-
 typedef struct s_object
 {
 	char			*id;
@@ -51,7 +42,6 @@ typedef struct s_object
 	double			*orientation_vector;
 	struct s_matrix	*transform;
 	struct s_matrix	*inv_transform;
-	t_material		*material;
 }					t_object;
 
 typedef struct s_camera
@@ -78,10 +68,5 @@ typedef struct s_ambient
 	double			brightness;
 	int				*color;
 }					t_ambient;
-
-void				free_objects(t_input_data **inp_data, t_object **objs,
-						int no_lines);
-void				clean_objects(t_object **objs, t_input_data **data,
-						int no_lines);
 
 #endif

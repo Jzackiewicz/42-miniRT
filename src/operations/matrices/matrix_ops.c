@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:00 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/24 13:19:31 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:21:18 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ t_matrix	*multiply_matrices(t_matrix *matrix1, t_matrix *matrix2)
 	int			k;
 	t_matrix	*result;
 
-	if (!matrix1 || !matrix2)
-		return (NULL);
-	if (matrix1->col != matrix2->row)
+	if (!matrix1 || !matrix2 || matrix1->col != matrix2->row)
 		return (NULL);
 	result = init_matrix(matrix1->row, matrix2->col);
 	if (!result)

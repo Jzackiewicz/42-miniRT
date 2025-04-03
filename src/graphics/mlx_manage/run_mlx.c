@@ -6,29 +6,29 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:15:56 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 12:26:03 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:30:20 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/graphics.h"
 #include "../../../inc/miniRT.h"
 
-static void	init_mlx(t_ray_tracer_data **rt_data)
+static void	init_mlx(t_ray_tracer_data **data)
 {
-	*rt_data = malloc(sizeof(t_ray_tracer_data));
-	if (!(*rt_data))
+	*data = malloc(sizeof(t_ray_tracer_data));
+	if (!(*data))
 		exit(1);
-	(*rt_data)->mlx_data = malloc(sizeof(t_mlx_data));
-	if (!(*rt_data)->mlx_data)
+	(*data)->mlx_data = malloc(sizeof(t_mlx_data));
+	if (!(*data)->mlx_data)
 		exit(1);
-	(*rt_data)->mlx_data->mlx_ptr = mlx_init();
-	(*rt_data)->mlx_data->window_ptr = mlx_new_window((*rt_data)->mlx_data->mlx_ptr,
+	(*data)->mlx_data->mlx_ptr = mlx_init();
+	(*data)->mlx_data->window_ptr = mlx_new_window((*data)->mlx_data->mlx_ptr,
 			WINDOW_WIDTH, WINDOW_HEIGHT, "miniRT");
-	(*rt_data)->mlx_data->img_ptr = mlx_new_image((*rt_data)->mlx_data->mlx_ptr,
+	(*data)->mlx_data->img_ptr = mlx_new_image((*data)->mlx_data->mlx_ptr,
 			WINDOW_WIDTH, WINDOW_HEIGHT);
-	(*rt_data)->mlx_data->img_addr = mlx_get_data_addr((*rt_data)->mlx_data->img_ptr,
-			&(*rt_data)->mlx_data->bits_per_pixel,
-			&(*rt_data)->mlx_data->line_length, &(*rt_data)->mlx_data->endian);
+	(*data)->mlx_data->img_addr = mlx_get_data_addr((*data)->mlx_data->img_ptr,
+			&(*data)->mlx_data->bits_per_pixel,
+			&(*data)->mlx_data->line_length, &(*data)->mlx_data->endian);
 }
 
 void	mlx_run(int **bitmap)

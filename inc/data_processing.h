@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:21:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/31 13:53:00 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:17:15 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,11 @@ int							count_objects(struct s_object **objs);
 
 //							Partition
 t_object					*assign_object(t_input_data *data);
-void						assign_object_material(t_ambient *ambient,
-								t_object *obj);
-void	load_camera_transform_matrix(t_camera *cam_data);
+void						load_camera_transform_matrix(t_camera *cam_data);
+
 // 							Debug
 void						print_object(t_input_data *obj);
-void	free_input_data(t_input_data *input_data);
-void	free_world(t_world	*world);
+void						free_input_data(t_input_data **inp_data, int no_lines);;
+void						free_world(t_world *world);
 
 #endif

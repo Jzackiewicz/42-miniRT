@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:57:27 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/03 09:17:03 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:20:09 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ double	*get_normal_at(t_object *obj, double *w_point)
 	sphere_center = init_tuple(1);
 	obj_point = multiply_tuple_and_matrix(obj->inv_transform, w_point);
 	obj_normal = subtract_tuple(obj_point, sphere_center);
+	free(obj_point);
 	normalize(&obj_normal);
 	transpose(&obj->inv_transform);
 	world_normal = multiply_tuple_and_matrix(obj->inv_transform, obj_normal);
@@ -37,10 +38,10 @@ double	*get_normal_at(t_object *obj, double *w_point)
 double	*find_reflection(double *lightp, double *normal, double *objectp)
 {
 	double	*lightv;
-	// double	*rev_lightv;
 	double	*reflection;
 	double	*tmp;
-	
+
+	// double	*rev_lightv;
 	lightv = subtract_tuple(lightp, objectp);
 	normalize(&lightv);
 	if (dot(lightv, normal) < 0)
@@ -60,11 +61,11 @@ double	get_diffuse(double *lightp, double *normal, double *objectp)
 	double	angle_of_incidence;
 	double	diffuse;
 	double	diffuse_factor;
-	
+
 	diffuse_factor = 0.7;
 	lightv = subtract_tuple(lightp, objectp);
-    normalize(&lightv);
-    angle_of_incidence = dot(lightv, normal);
+	normalize(&lightv);
+	angle_of_incidence = dot(lightv, normal);
 	free(lightv);
 	if (angle_of_incidence < 0)
 		return (0);
@@ -72,19 +73,23 @@ double	get_diffuse(double *lightp, double *normal, double *objectp)
 	return (diffuse);
 }
 
-double	get_specular(double *light_origin, double *cam_v, double *normal, double *target)
+double	get_specular(double *light_origin, double *cam_v, double *normal,
+		double *target)
 {
 	double	*reflection;
 	double	angle_of_reflection;
 	double	specular;
-	double	specular_factor = 0.6;
-	double	shininess = 50;
-	
+	double	specular_factor;
+	double	shininess;
+
+	specular_factor = 0.6;
+	shininess = 50;
 	reflection = find_reflection(light_origin, normal, target);
 	if (!reflection)
 		return (0);
 	normalize(&reflection);
 	angle_of_reflection = dot(reflection, cam_v);
+	free(reflection);
 	if (angle_of_reflection <= 0)
 		return (0);
 	else
@@ -92,37 +97,55 @@ double	get_specular(double *light_origin, double *cam_v, double *normal, double 
 	return (specular);
 }
 
-double lighting(t_world *world, t_comps *comps)
+double	lighting(t_world *world, t_comps *comps)
 {
-    double ambient;
+	double	ambient;
 	double	diffuse;
 	double	specular;
-    double r = comps->obj->color[0];
-    double g = comps->obj->color[1];
-    double b = comps->obj->color[2];
-    double light_r = world->light->color[0] / 255.0;
-    double light_g = world->light->color[1] / 255.0;
-    double light_b = world->light->color[2] / 255.0;
+	double	r;
+	double	g;
+	double	b;
+	double	light_r;
+	double	light_g;
+	double	light_b;
+	double	effective_ambient_r;
+	double	effective_ambient_g;
+	double	effective_ambient_b;
+	double	effective_diffuse_r;
+	double	effective_diffuse_g;
+	double	effective_diffuse_b;
+	double	effective_specular_r;
+	double	effective_specular_g;
+	double	effective_specular_b;
+	int		result_r;
+	int		result_g;
+	int		result_b;
 
+	r = comps->obj->color[0];
+	g = comps->obj->color[1];
+	b = comps->obj->color[2];
+	light_r = world->light->color[0] / 255.0;
+	light_g = world->light->color[1] / 255.0;
+	light_b = world->light->color[2] / 255.0;
 	diffuse = get_diffuse(world->light->coords, comps->normalv, comps->point);
-	specular = get_specular(world->light->coords, world->camera->orientation_vector, comps->normalv, comps->point);
+	specular = get_specular(world->light->coords,
+			world->camera->orientation_vector, comps->normalv, comps->point);
 	ambient = world->ambient->brightness;
-	
-    double effective_ambient_r = ambient * light_r * world->light->brightness;
-    double effective_ambient_g = ambient * light_g * world->light->brightness;
-    double effective_ambient_b = ambient * light_b * world->light->brightness;
-
-    double effective_diffuse_r = diffuse * light_r * world->light->brightness;
-    double effective_diffuse_g = diffuse * light_g * world->light->brightness;
-    double effective_diffuse_b = diffuse * light_b * world->light->brightness;
-
-    double effective_specular_r = specular * light_r * world->light->brightness;
-    double effective_specular_g = specular * light_g * world->light->brightness;
-    double effective_specular_b = specular * light_b * world->light->brightness;
-
-    // color by color for precisio
-    int result_r = fmin(255, r * effective_ambient_r + r * effective_diffuse_r + 255 * effective_specular_r);
-    int result_g = fmin(255, g * effective_ambient_g + g * effective_diffuse_g + 255 * effective_specular_g);
-    int result_b = fmin(255, b * effective_ambient_b + b * effective_diffuse_b + 255 * effective_specular_b);
-    return rgb_to_int(result_r, result_g, result_b);
+	effective_ambient_r = ambient * light_r * world->light->brightness;
+	effective_ambient_g = ambient * light_g * world->light->brightness;
+	effective_ambient_b = ambient * light_b * world->light->brightness;
+	effective_diffuse_r = diffuse * light_r * world->light->brightness;
+	effective_diffuse_g = diffuse * light_g * world->light->brightness;
+	effective_diffuse_b = diffuse * light_b * world->light->brightness;
+	effective_specular_r = specular * light_r * world->light->brightness;
+	effective_specular_g = specular * light_g * world->light->brightness;
+	effective_specular_b = specular * light_b * world->light->brightness;
+	// color by color for precisio
+	result_r = fmin(255, r * effective_ambient_r + r * effective_diffuse_r + 255
+			* effective_specular_r);
+	result_g = fmin(255, g * effective_ambient_g + g * effective_diffuse_g + 255
+			* effective_specular_g);
+	result_b = fmin(255, b * effective_ambient_b + b * effective_diffuse_b + 255
+			* effective_specular_b);
+	return (rgb_to_int(result_r, result_g, result_b));
 }

@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/02 12:10:37 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:48:54 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,8 @@ typedef struct s_light	t_light;
 
 // light section
 double					*get_normal_at(t_object *obj, double *w_point);
-double					*reflect(double *in, double *normal);
 typedef struct s_comps	t_comps;
-double lighting(t_world *world, t_comps *comps);
+double					lighting(t_world *world, t_comps *comps);
 
 void					free_intersections(t_intersec **ray_intersex);
 #endif
