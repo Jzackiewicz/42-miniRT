@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:57:27 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/02 18:34:32 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 08:59:20 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ double	*get_normal_at(t_object *obj, double *w_point)
 double	*find_reflection(double *lightp, double *normal, double *objectp)
 {
 	double	*lightv;
-	double	*rev_lightv;
+	// double	*rev_lightv;
 	double	*reflection;
 	double	*tmp;
 	
@@ -45,12 +45,12 @@ double	*find_reflection(double *lightp, double *normal, double *objectp)
 	normalize(&lightv);
 	if (dot(lightv, normal) < 0)
 		return (free(lightv), NULL);
-	rev_lightv = negate_tuple(lightv);
-	free(lightv);
+	// rev_lightv = negate_tuple(lightv);
 	tmp = multiply_tuple(normal, 2 * dot(lightv, normal));
 	reflection = subtract_tuple(lightv, tmp);
 	free(tmp);
-	free(rev_lightv);
+	free(lightv);
+	// free(rev_lightv);
 	return (reflection);
 }
 
@@ -78,9 +78,9 @@ double	get_specular(double *light_origin, double *cam_v, double *normal, double 
 	double	angle_of_reflection;
 	double	specular;
 	double	specular_factor = 1;
-	double	shininess = 20;
+	double	shininess = 50;
 	
-	reflection = find_reflection(light_origin, target, normal);
+	reflection = find_reflection(light_origin, normal, target);
 	if (!reflection)
 		return (0);
 	normalize(&reflection);
