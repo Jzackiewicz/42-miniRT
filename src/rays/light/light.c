@@ -6,11 +6,19 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:57:27 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/03 10:20:09 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:34:05 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/miniRT.h"
+
+static int	rgb_to_int(double r, double g, double b)
+{
+	r = fmin(255, fmax(0, r));
+	g = fmin(255, fmax(0, g));
+	b = fmin(255, fmax(0, b));
+	return (((int)r << 16) | ((int)g << 8) | (int)b);
+}
 
 /* returns the normal vector at a point on the surface of the object
 	works only for a sphere for now */
