@@ -6,12 +6,14 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/31 13:36:06 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:15:06 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
+
+#define EPSILON 0.00001
 
 # include "../lib/libft/libft.h"
 # include "graphics.h"
@@ -29,7 +31,7 @@ typedef struct s_comps
 	double			t;
 	t_object		*obj;
 	double			*point;
-    double			*over_point;
+	double			*over_point;
 	double			*eyev;
 	double			*normalv;
 	bool			inside;

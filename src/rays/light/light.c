@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:57:27 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/03 10:34:05 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:01:08 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,13 @@ double	get_specular(double *light_origin, double *cam_v, double *normal,
 
 double	lighting(t_world *world, t_comps *comps)
 {
+	if (is_shadowed(world, comps->over_point)) {
+		double s_r = comps->obj->color[0] * world->ambient->color[0] / 255.0 * world->ambient->brightness;
+		double s_g = comps->obj->color[1] * world->ambient->color[1] / 255.0 * world->ambient->brightness;
+		double s_b = comps->obj->color[2] * world->ambient->color[2] / 255.0 * world->ambient->brightness;
+		return rgb_to_int(s_r, s_g, s_b);
+	}
+	
 	double	ambient;
 	double	diffuse;
 	double	specular;

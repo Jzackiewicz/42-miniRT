@@ -2,7 +2,10 @@
 
 static t_intersec	*precompute_shadows(double *p, double *v, t_object **objs)
 {
+<<<<<<< HEAD
 	double		distance;
+=======
+>>>>>>> main
 	double		*direction;
 	t_ray		*ray;
 	t_intersec	**i_s;

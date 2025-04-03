@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/31 13:36:41 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:15:25 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "graphics.h"
 # include "stdbool.h"
 # include "operations.h"
-# include "data_processing.h"
+# include <stdbool.h>
 
 typedef struct s_ray // xD
 {
@@ -39,6 +39,7 @@ t_ray					*create_ray(double *origin, double *direction);
 t_ray					**generate_rays(t_camera *cam_data);
 double					*position(t_ray *ray, double t);
 double					*intersect(t_object *obj, t_ray *ray);
+t_intersec				**get_intersections(t_ray *ray, t_object **objs);
 void					sort_intersections(t_intersec **i_s, int start_index,
 							int end_index);
 t_intersec				**get_intersections(t_ray *ray, t_object **objs);
@@ -57,12 +58,11 @@ typedef struct s_light	t_light;
 
 // light section
 double					*get_normal_at(t_object *obj, double *w_point);
-double					*reflect(double *in, double *normal);
-double					lighting(t_light *light, t_object *obj,
-							t_camera *cam_data, double *normal, double *point);
+typedef struct s_comps	t_comps;
+double					lighting(t_world *world, t_comps *comps);
 
-typedef struct s_world	t_world;
-// shadows
-bool	is_shadowed(t_world *w, double *p);
+// shadow section
+bool					is_shadowed(t_world *w, double *p);
 
+void					free_intersections(t_intersec **ray_intersex);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 10:41:40 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/03 09:56:32 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 11:17:05 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ typedef struct s_world
 }				t_world;
 
 t_ray			*ray_to_object_space(t_ray *ray, t_object *obj);
-int				rgb_to_int(double r, double g, double b);
 t_ray			*ray_for_pixel(t_camera *cam_data, int px, int py);
 
 t_world			*create_world(t_input_data **input_data, int no_lines);
 
 double			color_at(t_world *world, t_ray *ray);
-
+t_world			*create_world(t_input_data **input_data, int no_lines);
+t_comps			*prepare_computations(t_intersec *intersection, t_ray *ray);
+void			free_comps(t_comps *comps);
 int				**generate_bitmap(t_world *world);
 void			free_bitmap(int **bitmap);
 
