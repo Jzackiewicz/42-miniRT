@@ -3,7 +3,7 @@
 #include <cstring>
 
 extern "C" {
-    #include "../../inc/parser.h"
+    #include "../../inc/data_processing.h"
 }
 
 TEST(ParsingValidation, ValidFile1)
@@ -84,7 +84,7 @@ TEST(ParsingValidation, ValidFile1)
     EXPECT_EQ(objs[5]->color[1], 0);
     EXPECT_EQ(objs[5]->color[2], 255);
 
-    free_objects(objs, no_elems);
+    free_input_data(objs, no_elems);
     free(filepath);
 }
 
@@ -166,7 +166,7 @@ TEST(ParsingValidation, ValidFile2)
     EXPECT_EQ(objs[5]->color[1], 255);
     EXPECT_EQ(objs[5]->color[2], 0);
 
-    free_objects(objs, no_elems);
+    free_input_data(objs, no_elems);
     free(filepath);
 }
 
@@ -267,6 +267,6 @@ TEST(ParsingValidation, MultipleObjectsFile)
     EXPECT_EQ(objs[7]->color[1], 0);
     EXPECT_EQ(objs[7]->color[2], 0);
 
-    free_objects(objs, no_elems);
+    free_input_data(objs, no_elems);
     free(filepath);
 }

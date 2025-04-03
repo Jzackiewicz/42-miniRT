@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/03/31 13:53:15 by jzackiew         ###   ########.fr       */
+/*   Created: 2025/04/03 10:28:39 by jzackiew          #+#    #+#             */
+/*   Updated: 2025/04/03 10:28:42 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	main(void)
 	if (no_lines == -1)
 		return (printf("Error: file error\n"), -1);
 	world_data = create_world(input_data, no_lines);
-	// free_input_data(input_data);
+	free_input_data(input_data, no_lines);
 	bitmap = generate_bitmap(world_data);
-	// free_world(world_data);
+	free_world(world_data);
 	mlx_run(bitmap);
 	return (0);
 }

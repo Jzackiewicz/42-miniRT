@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:32:48 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/31 13:51:33 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:23:12 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	free_ray(t_ray *ray)
 void	free_intersections(t_intersec **ray_intersex)
 {
 	int	i;
-	
+
 	i = 0;
 	while (ray_intersex[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/31 11:40:26 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:20:46 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	load_object_transform_matrix(t_object *obj)
 t_object	*assign_object(t_input_data *data)
 {
 	t_object	*obj;
-	
+
 	obj = (t_object *)malloc(sizeof(t_object));
 	if (!obj)
 		return (NULL);
