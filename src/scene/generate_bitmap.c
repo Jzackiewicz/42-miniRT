@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:02:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/31 11:33:58 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:06:19 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	**generate_bitmap(t_world *world)
 		j = -1;
 		while (++j < WINDOW_WIDTH)
 		{
-			ray = ray_for_pixel(world->camera, i, j);
+			ray = ray_for_pixel(world->camera, j, i);
 			color = color_at(world, ray);
 			bitmap[i][j] = color;
 		}
