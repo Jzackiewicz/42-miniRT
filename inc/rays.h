@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/03 11:26:04 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/03 12:41:11 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "data_processing.h"
 # include "graphics.h"
 # include "operations.h"
+# include <stdbool.h>
 
 typedef struct s_ray // xD
 {
@@ -52,6 +53,9 @@ typedef struct s_light	t_light;
 double					*get_normal_at(t_object *obj, double *w_point);
 typedef struct s_comps	t_comps;
 double					lighting(t_world *world, t_comps *comps);
+
+// shadow section
+bool					is_shadowed(t_world *w, double *p);
 
 void					free_intersections(t_intersec **ray_intersex);
 #endif
