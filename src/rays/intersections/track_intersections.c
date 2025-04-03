@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   track_intersections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 09:26:53 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/31 10:26:10 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 11:25:39 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	append_intersec(t_intersec **all, double *arr_t, t_object *obj,
 	all[(intersec_no * 2) + 2] = NULL;
 }
 
-static t_intersec	**get_intersections(t_ray *ray, t_object **objs)
+t_intersec	**get_intersections(t_ray *ray, t_object **objs)
 {
 	int			i;
 	int			j;

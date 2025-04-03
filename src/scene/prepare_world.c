@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   prepare_world.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/03 10:40:12 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/03 11:31:08 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_comps	*prepare_computations(t_intersec *intersection, t_ray *ray)
 	comps->point = position(ray, comps->t);
 	comps->eyev = negate_tuple(ray->direction);
 	comps->normalv = get_normal_at(comps->obj, comps->point);
+	comps->over_point = add_tuple(comps->point, (multiply_tuple(comps->normalv, EPSILON)));
 	if (dot(comps->normalv, comps->eyev) < 0)
 	{
 		comps->inside = true;
