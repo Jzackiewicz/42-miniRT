@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/03 16:43:25 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/04 17:53:03 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ t_intersec				*identify_hit(t_intersec **i_s);
 typedef struct s_comps	t_comps;
 typedef struct s_light	t_light;
 
-double					*get_normal_at(t_object *obj, double *w_point);
 int						rgb_to_int(double r, double g, double b);
 double					*find_reflection(double *lightp, double *normal,
 							double *objectp);
