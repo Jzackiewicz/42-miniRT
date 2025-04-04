@@ -6,25 +6,33 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/04 14:36:56 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/04 18:00:59 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/miniRT.h"
 
-static void	free_input_ids(t_input_data **input_data)
+/* returns the normal vector at a point on the surface of the object
+	works only for a sphere for now */
+double	*get_normal_at(t_object *obj, double *w_point)
 {
-	int	i;
+	double	*sphere_center;
+	double	*obj_normal;
+	double	*obj_point;
+	double	*world_normal;
 
-	i = 0;
-	while (input_data[i])
-	{
-		if (!ft_strncmp(input_data[i]->id, "A\0", 2)
-			|| !ft_strncmp(input_data[i]->id, "C\0", 2)
-			|| !ft_strncmp(input_data[i]->id, "L\0", 2))
-			free(input_data[i]->id);
-		i++;
-	}
+	sphere_center = init_tuple(1);
+	obj_point = multiply_tuple_and_matrix(obj->inv_transform, w_point);
+	obj_normal = subtract_tuple(obj_point, sphere_center);
+	free(obj_point);
+	normalize(&obj_normal);
+	transpose(&obj->inv_transform);
+	world_normal = multiply_tuple_and_matrix(obj->inv_transform, obj_normal);
+	transpose(&obj->inv_transform);
+	normalize(&world_normal);
+	free(sphere_center);
+	free(obj_normal);
+	return (world_normal);
 }
 
 /* default world initializer
@@ -71,12 +79,4 @@ t_comps	*prepare_computations(t_intersec *intersection, t_ray *ray)
 	else
 		comps->inside = false;
 	return (comps);
-}
-
-void	free_comps(t_comps *comps)
-{
-	free(comps->point);
-	free(comps->eyev);
-	free(comps->normalv);
-	free(comps);
 }
