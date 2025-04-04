@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/03 10:20:46 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/04 19:42:23 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_object	*assign_object(t_input_data *data)
 	obj->id = data->id;
 	obj->diameter = data->diameter;
 	obj->height = data->height;
-	obj->color = data->color;
+	obj->color = convert_color(data->color);
 	obj->coords = data->coords;
 	obj->orientation_vector = data->orientation_vector;
 	load_object_transform_matrix(obj);
