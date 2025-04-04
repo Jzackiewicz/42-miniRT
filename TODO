@@ -1,6 +1,9 @@
-1. Parsing accepts negative diameter.
-2. Ambient doesn't work in lightining
-3. Ambient color not taken into account in assign_object_material
-4. Check every case where coordinates direction matters -> default camera forward orientation in book is z=-1; I assumed z=1 :v
-5. Fisheye effect is a thing and maybe we wanna get rid of this. It kind of makes it hard to check whether the light is projected correctly
+1. Ambient doesn't work in lighting
+2. Ambient color not taken into account in assign_object_material
+3. Check every case where coordinates direction matters -> default camera forward orientation in book is z=-1; I assumed z=1 :v
+4. Fisheye effect is a thing and maybe we wanna get rid of this. It kind of makes it hard to check whether the light is projected correctly
 5.1 FOV acts funny at 180
+
+
+not important:
+    fix errno code for exiting with X button

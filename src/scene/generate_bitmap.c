@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   generate_bitmap.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:02:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/03 10:33:49 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/04 17:37:17 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	**generate_bitmap(t_world *world)
 	t_ray		*ray;
 	int			color;
 
+	if (!*world->objs)
+		return (NULL);
 	bitmap = init_bitmap();
 	i = -1;
 	while (++i < WINDOW_HEIGHT)

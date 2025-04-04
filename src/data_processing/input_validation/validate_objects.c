@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_objects.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:16:47 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 12:08:17 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/04 17:29:49 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	validate_sphere(char **line_split)
 		return (clean_on_error(line_split));
 	if (check_coords(line_split[1]) == -1)
 		return (clean_on_error(line_split));
-	if (!is_valid_float(line_split[2]))
+	if (!is_valid_float(line_split[2]) || ft_atof(line_split[2]) < 0.0)
 		return (clean_on_error(line_split));
 	if (check_colors(line_split[3]) == -1)
 		return (clean_on_error(line_split));
@@ -52,7 +52,7 @@ static int	validate_cylinder(char **line_split)
 		return (clean_on_error(line_split));
 	if (check_vector(line_split[2], -1) == -1)
 		return (clean_on_error(line_split));
-	if (!is_valid_float(line_split[3]))
+	if (!is_valid_float(line_split[3]) || ft_atof(line_split[3]) < 0.0)
 		return (clean_on_error(line_split));
 	if (!is_valid_float(line_split[4]))
 		return (clean_on_error(line_split));
