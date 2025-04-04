@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/03 11:31:08 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/04 12:20:54 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_comps	*prepare_computations(t_intersec *intersection, t_ray *ray)
 {
 	t_comps	*comps;
 	double	*tmp;
+	double	*normal_epsilon_product;
 
 	comps = malloc(sizeof(t_comps));
 	if (!comps)
@@ -41,7 +42,9 @@ t_comps	*prepare_computations(t_intersec *intersection, t_ray *ray)
 	comps->point = position(ray, comps->t);
 	comps->eyev = negate_tuple(ray->direction);
 	comps->normalv = get_normal_at(comps->obj, comps->point);
-	comps->over_point = add_tuple(comps->point, (multiply_tuple(comps->normalv, EPSILON)));
+	normal_epsilon_product = multiply_tuple(comps->normalv, EPSILON);
+	comps->over_point = add_tuple(comps->point, normal_epsilon_product);
+	free(normal_epsilon_product);
 	if (dot(comps->normalv, comps->eyev) < 0)
 	{
 		comps->inside = true;
