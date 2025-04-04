@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_mlx.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:15:56 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/03 10:30:20 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/04 17:38:50 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ void	mlx_run(int **bitmap)
 
 	rt_data = NULL;
 	init_mlx(&rt_data);
-	render_image(rt_data, bitmap);
+	if (bitmap)
+		render_image(rt_data, bitmap);
 	mlx_key_hook(rt_data->mlx_data->window_ptr, handle_key_input, rt_data);
 	mlx_hook(rt_data->mlx_data->window_ptr, 17, 0, close_window, rt_data);
-	free_bitmap(bitmap);
+	if (bitmap)
+		free_bitmap(bitmap);
 	mlx_loop(rt_data->mlx_data->mlx_ptr);
 }

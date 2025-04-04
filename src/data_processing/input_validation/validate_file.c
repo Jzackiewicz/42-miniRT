@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 12:01:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 12:08:00 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/04 17:26:56 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	check_extension(const char *filepath)
 		len = ft_strlen(filepath);
 	if (len < 3)
 		return (-1);
-	if (ft_strncmp(ext + len - 3, ".rt", 3) == 0)
+	if (!ft_strncmp(ext + len - 3, ".rt", 3))
 		return (0);
 	return (-1);
 }
