@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_world.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/04 12:20:54 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/04 14:36:56 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/miniRT.h"
+
+static void	free_input_ids(t_input_data **input_data)
+{
+	int	i;
+
+	i = 0;
+	while (input_data[i])
+	{
+		if (!ft_strncmp(input_data[i]->id, "A\0", 2)
+			|| !ft_strncmp(input_data[i]->id, "C\0", 2)
+			|| !ft_strncmp(input_data[i]->id, "L\0", 2))
+			free(input_data[i]->id);
+		i++;
+	}
+}
 
 /* default world initializer
 	takes an array of objects and the light + ambient data */
@@ -25,6 +40,7 @@ t_world	*create_world(t_input_data **input_data, int no_lines)
 	world->camera = get_cam_data(input_data);
 	world->light = get_light_data(input_data);
 	world->ambient = get_ambient_data(input_data);
+	free_input_ids(input_data);
 	return (world);
 }
 

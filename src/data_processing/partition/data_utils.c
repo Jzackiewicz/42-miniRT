@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:33:06 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/03 10:19:47 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/04 14:27:12 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@ static void	free_object(t_object *obj)
 	free(obj);
 }
 
-void	free_world(t_world *world)
+static void	free_settings(t_world *world)
 {
-	int	i;
-
 	free(world->ambient->color);
 	free(world->ambient);
 	free_matrix(world->camera->inv_transform);
@@ -45,6 +43,13 @@ void	free_world(t_world *world)
 	free(world->light->color);
 	free(world->light->coords);
 	free(world->light);
+}
+
+void	free_world(t_world *world)
+{
+	int	i;
+
+	free_settings(world);
 	i = 0;
 	while (world->objs[i])
 	{
