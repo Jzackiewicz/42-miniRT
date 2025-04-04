@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_conversion.c                                 :+:      :+:    :+:   */
+/*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/03 16:35:46 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/03 16:45:07 by agarbacz         ###   ########.fr       */
+/*   Created: 2025/03/20 11:57:27 by agarbacz          #+#    #+#             */
+/*   Updated: 2025/04/04 20:01:57 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/rays.h"
+#include "../../../inc/miniRT.h"
 
-int	rgb_to_int(double r, double g, double b)
+double	lighting(t_world *world, t_comps *comps)
 {
-	r = fmin(255, fmax(0, r));
-	g = fmin(255, fmax(0, g));
-	b = fmin(255, fmax(0, b));
-	return (((int)r << 16) | ((int)g << 8) | (int)b);
+	if (is_shadowed(world, comps->over_point))
+		return (apply_shadow(comps, world));
+	else
+		return (apply_phong_model(world, comps));
 }

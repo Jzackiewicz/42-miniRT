@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadows.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:23:41 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/04 12:23:53 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/04 20:10:36 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,19 @@ bool	is_shadowed(t_world *w, double *p)
 		return (true);
 	}
 	return (false);
+}
+
+int	apply_shadow(t_comps *comps, t_world *world)
+{
+	double	s_r;
+	double	s_g;
+	double	s_b;
+
+	s_r = comps->obj->color[0] * world->ambient->color[0] / 255.0
+		* world->ambient->brightness;
+	s_g = comps->obj->color[1] * world->ambient->color[1] / 255.0
+		* world->ambient->brightness;
+	s_b = comps->obj->color[2] * world->ambient->color[2] / 255.0
+		* world->ambient->brightness;
+	return (rgb_to_int(s_r, s_g, s_b));
 }
