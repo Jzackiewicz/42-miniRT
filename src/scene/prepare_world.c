@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/04 18:00:59 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:30:12 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@
 	works only for a sphere for now */
 double	*get_normal_at(t_object *obj, double *w_point)
 {
-	double	*sphere_center;
+	double	*object_center;
 	double	*obj_normal;
 	double	*obj_point;
 	double	*world_normal;
 
-	sphere_center = init_tuple(1);
+	object_center = init_tuple(1);
 	obj_point = multiply_tuple_and_matrix(obj->inv_transform, w_point);
-	obj_normal = subtract_tuple(obj_point, sphere_center);
+	obj_normal = subtract_tuple(obj_point, object_center);
 	free(obj_point);
 	normalize(&obj_normal);
 	transpose(&obj->inv_transform);
 	world_normal = multiply_tuple_and_matrix(obj->inv_transform, obj_normal);
 	transpose(&obj->inv_transform);
 	normalize(&world_normal);
-	free(sphere_center);
+	free(object_center);
 	free(obj_normal);
 	return (world_normal);
 }
