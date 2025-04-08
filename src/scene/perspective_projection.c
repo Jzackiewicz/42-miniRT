@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   perspective_projection.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:21:32 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/04 12:24:09 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/08 12:10:44 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/miniRT.h"
 #include "../../inc/rays.h"
 
-/* For now for sphere only */
 t_ray	*ray_to_object_space(t_ray *ray, t_object *obj)
 {
 	t_ray	*new_ray;
