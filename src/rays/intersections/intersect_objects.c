@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/04 17:23:29 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/07 12:24:32 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,27 @@ static double	*intersect_sphere(t_ray *ray)
 	return (arr_t);
 }
 
-static double	*intersect_plane(t_object *obj, t_ray *ray)
+static double *intersect_plane(t_object *obj, t_ray *ray)
 {
-	double	*arr_t;
-	double	denom;
-	double	t;
-	double	*sub;
+    double *arr_t;
+    double denom;
+    double t;
+    double *sub;
 
-	denom = dot(ray->direction, obj->orientation_vector);
-	if (compare_floats(denom, 0.0))
-		return (NULL);
-	sub = subtract_tuple(obj->coords, ray->origin);
-	t = dot(obj->orientation_vector, sub) / denom;
-	free(sub);
-	arr_t = (double *)malloc(sizeof(double) * 2);
-	if (!arr_t)
-		return (NULL);
-	arr_t[0] = t;
-	arr_t[1] = t;
-	return (arr_t);
+    denom = dot(ray->direction, obj->orientation_vector);
+    if (compare_floats(denom, 0.0))
+        return (NULL);
+    sub = subtract_tuple(obj->coords, ray->origin);
+    t = dot(obj->orientation_vector, sub) / denom;
+    free(sub);
+    if (t < 0)
+        return (NULL);
+    arr_t = (double *)malloc(sizeof(double) * 2);
+    if (!arr_t)
+        return (NULL);
+    arr_t[0] = t;
+    arr_t[1] = t;
+    return (arr_t);
 }
 
 /* highest level intersection finding function
