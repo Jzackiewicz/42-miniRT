@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   generate_bitmap.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:02:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/04 17:37:17 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:39:44 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	**generate_bitmap(t_world *world)
 {
 	int			i;
 	int			j;
-	int			**bitmap;
+	int	**bitmap;
 	t_ray		*ray;
 	int			color;
 

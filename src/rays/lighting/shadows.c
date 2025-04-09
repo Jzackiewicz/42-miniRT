@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:23:41 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/04 20:10:36 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/09 19:41:09 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ static t_intersec	*precompute_shadows(double *p, double *v, t_object **objs)
 	{
 		free_ray(ray);
 		free_intersections(i_s);
+		return (NULL);
+	}
+	else if (!ft_strncmp(hit_tmp->object->id, "pl\0", 3))
+	{
 		return (NULL);
 	}
 	hit = (t_intersec *) malloc(sizeof(t_intersec));
@@ -70,17 +74,15 @@ bool	is_shadowed(t_world *w, double *p)
 	return (false);
 }
 
-int	apply_shadow(t_comps *comps, t_world *world)
+/* int	apply_shadow(t_comps *comps, t_world *world)
 {
-	double	s_r;
-	double	s_g;
-	double	s_b;
-
-	s_r = comps->obj->color[0] * world->ambient->color[0] / 255.0
+	double rgb[3];
+	
+	rgb[0] = comps->obj->color[0] * world->ambient->color[0] / 255.0
 		* world->ambient->brightness;
-	s_g = comps->obj->color[1] * world->ambient->color[1] / 255.0
+	rgb[1] = comps->obj->color[1] * world->ambient->color[1] / 255.0
 		* world->ambient->brightness;
-	s_b = comps->obj->color[2] * world->ambient->color[2] / 255.0
+	rgb[2] = comps->obj->color[2] * world->ambient->color[2] / 255.0
 		* world->ambient->brightness;
-	return (rgb_to_int(s_r, s_g, s_b));
-}
+	return (rgb_to_int(rgb));
+} */
