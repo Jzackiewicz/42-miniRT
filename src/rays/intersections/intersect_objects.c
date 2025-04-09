@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/08 16:40:10 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/09 08:57:36 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static double	*intersect_plane(t_ray *ray)
 	double	*arr_t;
 	double	t;
 
-	if (ray->direction[1] < EPSILON)
+	if (fabs(ray->direction[1]) < EPSILON)
 		return (NULL);
 	t = -ray->origin[1] / ray->direction[1];
 	arr_t = (double *)malloc(sizeof(double) * 2);
