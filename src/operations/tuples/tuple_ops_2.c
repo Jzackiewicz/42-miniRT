@@ -37,6 +37,8 @@ void	normalize(double **vector)
 	int		i;
 	double	len;
 
+	if (!vector || !*vector)
+		return ;
 	len = magnitude(*vector);
 	if (!len)
 		return ;
