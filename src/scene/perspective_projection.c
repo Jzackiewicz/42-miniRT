@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:21:32 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/08 12:10:44 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:39:49 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_ray	*ray_for_pixel(t_camera *cam_data, int px, int py)
 	return (ray);
 }
 
-double	color_at(t_world *world, t_ray *ray)
+int	color_at(t_world *world, t_ray *ray)
 {
 	t_intersec	**intersections;
 	t_intersec	*hit;
