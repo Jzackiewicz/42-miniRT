@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/08 18:45:30 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/09 10:56:25 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,42 @@ static t_matrix	*prepare_sphere_transoform(t_object *obj)
 	return (transform);
 }
 
+static t_matrix	*get_plane_rotation_matrix(t_object *obj)
+{
+	t_matrix	*rotation_transform;
+	t_matrix	*matrix_x;
+	t_matrix	*matrix_z;
+	double		denom;
+
+	denom = sqrt(pow(obj->orientation_vector[1], 2)
+			+ pow(obj->orientation_vector[2], 2));
+	if (compare_floats(denom, 0))
+		matrix_x = rotation_x(0);
+	else
+		matrix_x = rotation_x(acos(obj->orientation_vector[1] / denom));
+	denom = sqrt(pow(obj->orientation_vector[1], 2)
+			+ pow(obj->orientation_vector[0], 2));
+	if (compare_floats(denom, 0))
+		matrix_z = rotation_z(0);
+	else
+		matrix_z = rotation_z(acos(obj->orientation_vector[1] / denom));
+	rotation_transform = multiply_matrices(matrix_x, matrix_z);
+	free_matrix(matrix_x);
+	free_matrix(matrix_z);
+	return (rotation_transform);
+}
+
 static t_matrix	*prepare_plane_transform(t_object *obj)
 {
 	t_matrix	*transform;
-	double		angle_x;
-	double		angle_z;
-	double		denom;
+	t_matrix	*rotation_transform;
+	t_matrix	*translation_transform;
 
-	denom = sqrt(pow(obj->orientation_vector[1], 2) + pow(obj->orientation_vector[2], 2));
-	if (compare_floats(denom, 0))
-		angle_x = 0;
-	else
-		angle_x = obj->orientation_vector[1] / denom;
-	denom = sqrt(pow(obj->orientation_vector[0], 2) + pow(obj->orientation_vector[1], 2));
-	if (compare_floats(denom, 0))
-		angle_z = 0;
-	else
-		angle_z = obj->orientation_vector[1] / denom;
-	angle_x = M_PI / 2;
-	angle_z = 0;
-	printf("angle x: %f\n", angle_x / M_PI * 180);
-	printf("angle z: %f\n", angle_z / M_PI * 180);
-	transform = multiply_matrices(rotation_x(angle_x), rotation_z(angle_z));
+	rotation_transform = get_plane_rotation_matrix(obj);
+	translation_transform = translation(obj->coords);
+	transform = multiply_matrices(translation_transform, rotation_transform);
+	free_matrix(rotation_transform);
+	free_matrix(translation_transform);
 	return (transform);
 }
 
