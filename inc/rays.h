@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/03 13:15:25 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:46:30 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 typedef struct s_ray // xD
 {
-	double *origin;
-	double *direction;
+	double	*origin;
+	double	*direction;
 }						t_ray;
 
 typedef struct s_intersec
@@ -45,24 +45,25 @@ void					sort_intersections(t_intersec **i_s, int start_index,
 t_intersec				**get_intersections(t_ray *ray, t_object **objs);
 t_intersec				**get_sorted_intersections(t_ray *ray, t_object **objs);
 t_intersec				*identify_hit(t_intersec **i_s);
-t_intersec				***intersect_world(t_ray **rays,
-							t_object **objs);
-int						count_intersections(t_intersec **intersex);
-
+void					free_intersections(t_intersec **ray_intersex);
 
 //				spacial_conversion
-t_ray					*ray_to_object_space(t_ray *ray, t_object *obj);
-int						rgb_to_int(double r, double g, double b);
-
-typedef struct s_light	t_light;
 
 // light section
-double					*get_normal_at(t_object *obj, double *w_point);
 typedef struct s_comps	t_comps;
-double					lighting(t_world *world, t_comps *comps);
+typedef struct s_light	t_light;
+
+int			rgb_to_int(double *rgb);
+double					*assign_light_colors(t_world *world);
+double					get_diffuse(double *lightp, double *normal,
+							double *objectp);
+double					get_specular(double *light_origin, double *cam_v,
+							double *normal, double *target);
+int			apply_phong_model(t_world *world, t_comps *comps);
+int			lighting(t_world *world, t_comps *comps);
 
 // shadow section
 bool					is_shadowed(t_world *w, double *p);
+int			apply_shadow(t_comps *comps, t_world *world);
 
-void					free_intersections(t_intersec **ray_intersex);
 #endif
