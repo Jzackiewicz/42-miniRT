@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_settings.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 17:10:12 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/04 14:30:20 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:06:51 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	parse_settings(char **line_split, t_input_data **objects, int i)
 		return ;
 	init_with_default(objects[i]);
 	objects[i]->id = ft_strdup(line_split[0]);
+	objects[i]->is_checkered = false;
 	if (!ft_strncmp(objects[i]->id, "A\0", 2))
 		parse_ambient(objects[i], line_split);
 	else if (!ft_strncmp(objects[i]->id, "C\0", 2))

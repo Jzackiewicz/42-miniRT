@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_model.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:39:18 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/10 11:37:46 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:08:59 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	apply_phong_model(t_world *world, t_comps *comps)
 	double	*effective_diffuse;
 	double	*effective_specular;
 
+	if (comps->obj->is_checkered)
+		return (checker_at_object(comps->obj, comps->point));
 	light_rgb = assign_light_colors(world);
 	effective_ambient = assign_effective_ambient(world, comps);
 	if (is_shadowed(world, comps->over_point))

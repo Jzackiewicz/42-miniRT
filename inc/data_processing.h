@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_processing.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:21:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/04 20:17:16 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:08:17 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 // SECTION: includes
 # include "../lib/libft/libft.h"
 # include <math.h>
+# include <stdbool.h>
 
 // SECTION: key validation
 // array indexes of each id type for presence checks
@@ -48,6 +49,7 @@ typedef struct s_input_data
 	int						*color;
 	double					*coords;
 	double					*vector;
+	bool					is_checkered;
 }							t_input_data;
 
 // 							Input_validation

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/09 15:38:42 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:10:28 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ typedef struct s_intersec
 	double				t;
 	struct s_object		*object;
 }						t_intersec;
+
+typedef struct s_checker_pattern
+{
+	int color_a;
+	int color_b;
+	t_matrix *transform;
+} t_checker_p ;
 
 typedef struct s_light	t_light;
 typedef struct s_object	t_object;
@@ -64,5 +71,8 @@ int			lighting(t_world *world, t_comps *comps);
 // shadow section
 bool					is_shadowed(t_world *w, double *p);
 int			apply_shadow(t_comps *comps, t_world *world);
+
+// pattern section
+int	checker_at_object(t_object *object, double *world_point);
 
 #endif
