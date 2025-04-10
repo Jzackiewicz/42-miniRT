@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:32:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 12:08:25 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:06:14 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ static void	parse_sphere(t_input_data *obj, char **line_split)
 	parse_coords(line_split[1], obj);
 	obj->diameter = ft_atof(line_split[2]);
 	parse_colors(line_split[3], obj);
+	if (line_split[4] && !check_for_overflow(line_split[4]) && ft_atoi(line_split[4]) == 1)
+		obj->is_checkered = true;
+	else
+		obj->is_checkered = false;
+			
 }
 
 static void	parse_plane(t_input_data *obj, char **line_split)
@@ -24,6 +29,10 @@ static void	parse_plane(t_input_data *obj, char **line_split)
 	parse_coords(line_split[1], obj);
 	parse_vector(line_split[2], obj);
 	parse_colors(line_split[3], obj);
+	if (line_split[4] && !check_for_overflow(line_split[4]) && ft_atoi(line_split[4]) == 1)
+		obj->is_checkered = true;
+	else
+		obj->is_checkered = false;
 }
 
 static void	parse_cylinder(t_input_data *obj, char **line_split)
@@ -33,6 +42,10 @@ static void	parse_cylinder(t_input_data *obj, char **line_split)
 	obj->diameter = ft_atof(line_split[3]);
 	obj->height = ft_atof(line_split[4]);
 	parse_colors(line_split[5], obj);
+	if (line_split[6] && !check_for_overflow(line_split[6]) && ft_atoi(line_split[6]) == 1)
+		obj->is_checkered = true;
+	else
+		obj->is_checkered = false;
 }
 
 void	parse_objects(char **line_split, t_input_data **objects, int i)

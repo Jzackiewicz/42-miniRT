@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_object_data.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/09 10:56:25 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:07:44 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ t_object	*assign_object(t_input_data *data)
 	obj->color = convert_color(data->color);
 	obj->coords = data->coords;
 	obj->orientation_vector = data->vector;
+	obj->is_checkered = data->is_checkered;
 	load_object_transform_matrix(obj);
 	return (obj);
 }
