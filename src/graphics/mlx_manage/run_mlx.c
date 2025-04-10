@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_mlx.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:15:56 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/04 17:38:50 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:22:37 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	init_mlx(t_ray_tracer_data **data)
 			&(*data)->mlx_data->line_length, &(*data)->mlx_data->endian);
 }
 
-void	mlx_run(int **bitmap)
+void	mlx_run(unsigned int **bitmap)
 {
 	t_ray_tracer_data	*rt_data;
 

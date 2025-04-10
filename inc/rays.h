@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/03 16:43:25 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:38:42 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 typedef struct s_ray // xD
 {
-	double *origin;
-	double *direction;
+	double	*origin;
+	double	*direction;
 }						t_ray;
 
 typedef struct s_intersec
@@ -44,6 +44,7 @@ void					sort_intersections(t_intersec **i_s, int start_index,
 							int end_index);
 t_intersec				**get_sorted_intersections(t_ray *ray, t_object **objs);
 t_intersec				*identify_hit(t_intersec **i_s);
+void					free_intersections(t_intersec **ray_intersex);
 
 //				spacial_conversion
 
@@ -51,26 +52,17 @@ t_intersec				*identify_hit(t_intersec **i_s);
 typedef struct s_comps	t_comps;
 typedef struct s_light	t_light;
 
-double					*get_normal_at(t_object *obj, double *w_point);
-int						rgb_to_int(double r, double g, double b);
-double					*find_reflection(double *lightp, double *normal,
+int			rgb_to_int(double *rgb);
+double					*assign_light_colors(t_world *world);
+double					get_diffuse(double *lightp, double *normal,
 							double *objectp);
-							double	get_diffuse(double *lightp, double *normal, double *objectp);
 double					get_specular(double *light_origin, double *cam_v,
 							double *normal, double *target);
-double					*assign_rgb(t_comps *comps);
-double					*assign_light_colors(t_world *world);
-double					*assign_effective_ambient(t_world *world,
-							double *light_rgb);
-double					*assign_effective_diffuse(double *light_rgb,
-							t_world *world, t_comps *comps);
-double					*assign_effective_specular(double *light_rgb,
-							t_world *world, t_comps *comps);
-
-double					lighting(t_world *world, t_comps *comps);
+int			apply_phong_model(t_world *world, t_comps *comps);
+int			lighting(t_world *world, t_comps *comps);
 
 // shadow section
 bool					is_shadowed(t_world *w, double *p);
+int			apply_shadow(t_comps *comps, t_world *world);
 
-void					free_intersections(t_intersec **ray_intersex);
 #endif
