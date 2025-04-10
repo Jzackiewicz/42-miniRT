@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 12:56:01 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/10 16:21:23 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:48:55 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ int	checker_at_object(t_object *object, double *world_point)
 	pattern = init_checker_pattern(0x00AFFF, 0xFF007F);
 	if (!pattern.transform)
 		return (0);
-	obj_point = multiply_tuple_and_matrix((object->transform),
+	obj_point = multiply_tuple_and_matrix(inverse(object->transform),
 			world_point);
 	if (!obj_point)
 		return (0);
-	pattern_point = multiply_tuple_and_matrix((pattern.transform),
+	pattern_point = multiply_tuple_and_matrix(inverse(pattern.transform),
 			obj_point);
 	if (!pattern_point)
 	{
