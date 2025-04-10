@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:23:41 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/10 11:38:28 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:42:40 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ bool	is_shadowed(t_world *w, double *p)
 	double		*v;
 	double		distance;
 
+	if (!w || !p)
+		return (false);
 	v = subtract_tuple(w->light->coords, p);
 	distance = magnitude(v);
 	hit = precompute_shadows(p, v, w->objs);
