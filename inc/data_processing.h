@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:21:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/03 10:17:15 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/04 20:17:16 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,11 @@ void						load_camera_transform_matrix(t_camera *cam_data);
 
 // 							Debug
 void						print_object(t_input_data *obj);
-void						free_input_data(t_input_data **inp_data, int no_lines);;
 void						free_world(t_world *world);
+void						free_input_data(t_input_data **inp_data,
+								int no_lines);
+
+//							Utils
+double						*convert_color(int *int_color);
 
 #endif

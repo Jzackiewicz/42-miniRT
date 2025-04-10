@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 12:04:30 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/04 14:23:48 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/04 19:42:16 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_light	*get_light_data(t_input_data **data)
 		if (!ft_strncmp(data[i]->id, "L\0", 2))
 		{
 			light->brightness = data[i]->brightness;
-			light->color = data[i]->color;
+			light->color = convert_color(data[i]->color);
 			light->coords = data[i]->coords;
 			light->coords[3] = 1;
 			return (light);
@@ -109,7 +109,7 @@ t_ambient	*get_ambient_data(t_input_data **data)
 		if (!ft_strncmp(data[i]->id, "A\0", 2))
 		{
 			ambient->brightness = data[i]->ambient_light_ratio;
-			ambient->color = data[i]->color;
+			ambient->color = convert_color(data[i]->color);
 			return (ambient);
 		}
 	}

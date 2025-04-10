@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/03 11:33:09 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/04 20:16:55 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-#define EPSILON 0.00001
+# define EPSILON 10e-6
 
 # include "../lib/libft/libft.h"
+# include "data_processing.h"
 # include "graphics.h"
 # include "operations.h"
-# include "data_processing.h"
 # include "rays.h"
 # include "scene.h"
 # include <math.h>
@@ -40,7 +40,7 @@ typedef struct s_object
 	char			*id;
 	double			diameter;
 	double			height;
-	int				*color;
+	double			*color;
 	double			*coords;
 	double			*orientation_vector;
 	struct s_matrix	*transform;
@@ -63,13 +63,13 @@ typedef struct s_light
 {
 	double			*coords;
 	double			brightness;
-	int				*color;
+	double			*color;
 }					t_light;
 
 typedef struct s_ambient
 {
 	double			brightness;
-	int				*color;
+	double			*color;
 }					t_ambient;
 
 #endif

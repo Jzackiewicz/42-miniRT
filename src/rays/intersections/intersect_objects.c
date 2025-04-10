@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/07 12:24:32 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:34:23 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,23 @@ static double	*intersect_sphere(t_ray *ray)
 	return (arr_t);
 }
 
-static double *intersect_plane(t_object *obj, t_ray *ray)
+/* Finds t for ray-plane intersection for identity plane.
+Identity plane is a plane that intersects (0, 0, 0) world point and
+has a (0, 0, 1) orientation vector */
+static double	*intersect_plane(t_ray *ray)
 {
-    double *arr_t;
-    double denom;
-    double t;
-    double *sub;
+	double	*arr_t;
+	double	t;
 
-    denom = dot(ray->direction, obj->orientation_vector);
-    if (compare_floats(denom, 0.0))
-        return (NULL);
-    sub = subtract_tuple(obj->coords, ray->origin);
-    t = dot(obj->orientation_vector, sub) / denom;
-    free(sub);
-    if (t < 0)
-        return (NULL);
-    arr_t = (double *)malloc(sizeof(double) * 2);
-    if (!arr_t)
-        return (NULL);
-    arr_t[0] = t;
-    arr_t[1] = t;
-    return (arr_t);
+	if (fabs(ray->direction[1]) < EPSILON)
+		return (NULL);
+	t = -ray->origin[1] / ray->direction[1];
+	arr_t = (double *)malloc(sizeof(double) * 2);
+	if (!arr_t)
+		return (NULL);
+	arr_t[0] = t;
+	arr_t[1] = t;
+	return (arr_t);
 }
 
 /* highest level intersection finding function
@@ -74,7 +70,7 @@ double	*intersect(t_object *obj, t_ray *ray)
 	if (!ft_strncmp(obj->id, "sp\0", 3))
 		arr_t = intersect_sphere(ray);
 	else if (!ft_strncmp(obj->id, "pl\0", 3))
-		arr_t = intersect_plane(obj, ray);
+		arr_t = intersect_plane(ray);
 	else
 	{
 		printf("Error: unknown object id: %s\n", obj->id);
