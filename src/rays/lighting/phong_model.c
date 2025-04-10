@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:39:18 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/09 19:37:14 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:37:46 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	apply_phong_model(t_world *world, t_comps *comps)
 
 	light_rgb = assign_light_colors(world);
 	effective_ambient = assign_effective_ambient(world, comps);
-	if (is_shadowed(world, comps->over_point) && !ft_strncmp(comps->obj->id, "pl\0", 3))
+	if (is_shadowed(world, comps->over_point))
 		return (rgb_to_int(effective_ambient));
 	effective_diffuse = assign_effective_diffuse(light_rgb, world, comps);
 	effective_specular = assign_effective_specular(light_rgb, world, comps);

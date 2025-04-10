@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:15:56 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/09 15:22:37 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:35:13 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	init_mlx(t_ray_tracer_data **data)
 			&(*data)->mlx_data->line_length, &(*data)->mlx_data->endian);
 }
 
-void	mlx_run(unsigned int **bitmap)
+void	mlx_run(int **bitmap)
 {
 	t_ray_tracer_data	*rt_data;
 
