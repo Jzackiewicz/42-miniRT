@@ -6,36 +6,23 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:23:41 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/11 11:06:26 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:31:51 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/miniRT.h"
 
-static t_intersec	*precompute_shadows(double *p, double *v, t_object **objs)
+static t_intersec	*precompute_shadows(double *worldp, double *lightv,
+		t_object **objs)
 {
-	double		*direction;
 	t_ray		*ray;
 	t_intersec	**i_s;
-	t_intersec	*hit_tmp;
 	t_intersec	*hit;
 
-	direction = (double *) malloc(4 * sizeof(double));
-	ft_memcpy(direction, v, 4 * sizeof(double));
-	normalize(&direction);
-	ray = create_ray(p, direction);
+	ray = create_ray(worldp, lightv);
 	i_s = get_intersections(ray, objs);
 	free(ray);
-	hit_tmp = identify_hit(i_s);
-	if (!hit_tmp)
-	{
-		free_intersections(i_s);
-		return (NULL);
-	}
-	hit = (t_intersec *) malloc(sizeof(t_intersec));
-	if (!hit)
-		return (NULL);
-	ft_memcpy(hit, hit_tmp, sizeof(t_intersec));
+	hit = identify_hit(i_s);
 	free_intersections(i_s);
 	return (hit);
 }
@@ -46,25 +33,23 @@ static t_intersec	*precompute_shadows(double *p, double *v, t_object **objs)
 
 	The algorithm:
 	1. 	measure the distance
-	2. 	create a ray from point toward the light source by normalizing the 
+	2. 	create a ray from point toward the light source by normalizing the
 			vector from step 1
 	3. 	intersect the world with that ray
 	4. 	check if there's a hit
  */
-bool	is_shadowed(t_world *w, double *p)
+bool	is_shadowed(t_world *w, double *worldp)
 {
 	t_intersec	*hit;
-	double		*v;
+	double		*lightv;
 	double		distance;
 
-	v = subtract_tuple(w->light->coords, p);
-	distance = magnitude(v);
-	hit = precompute_shadows(p, v, w->objs);
-	free(v);
+	lightv = subtract_tuple(w->light->coords, worldp);
+	distance = magnitude(lightv);
+	normalize(&lightv);
+	hit = precompute_shadows(worldp, lightv, w->objs);
+	free(lightv);
 	if (hit && hit->t < distance)
-	{
-		free(hit);
-		return (true);
-	}
+		return (free(hit), true);
 	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/09 15:38:42 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:32:35 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,12 @@ t_intersec				**get_sorted_intersections(t_ray *ray, t_object **objs);
 t_intersec				*identify_hit(t_intersec **i_s);
 void					free_intersections(t_intersec **ray_intersex);
 
-//				spacial_conversion
-
 // light section
 typedef struct s_comps	t_comps;
 typedef struct s_light	t_light;
 
-int			rgb_to_int(double *rgb);
-double					*assign_light_colors(t_world *world);
-double					get_diffuse(double *lightp, double *normal,
-							double *objectp);
-double					get_specular(double *light_origin, double *cam_v,
-							double *normal, double *target);
-int			apply_phong_model(t_world *world, t_comps *comps);
-int			lighting(t_world *world, t_comps *comps);
-
-// shadow section
 bool					is_shadowed(t_world *w, double *p);
-int			apply_shadow(t_comps *comps, t_world *world);
+double					*apply_phong_attributes(t_world *world, t_comps *comps);
+int						lighting(t_world *world, t_comps *comps);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:51:39 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/04 17:52:26 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/11 12:25:57 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ void	free_comps(t_comps *comps)
 	free(comps->point);
 	free(comps->eyev);
 	free(comps->normalv);
+	free(comps->over_point);
 	free(comps);
 }
