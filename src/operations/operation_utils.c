@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:26:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/03 10:28:22 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/11 11:39:48 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ double	*tupledup(double *tuple)
 	return (new_tuple);
 }
 
+/* Debug */
 void	print_tuple(double *tuple)
 {
 	if (!tuple)
@@ -76,4 +77,20 @@ void	print_tuple(double *tuple)
 		return ;
 	}
 	printf("{%f, %f, %f}\n", tuple[0], tuple[1], tuple[2]);
+}
+
+/* Debug */
+void	find_vector(double x, double y, double z)
+{
+	double point[3];
+	double	*zero_point;
+	double	*vector;
+	
+	point[0] = x;
+	point[1] = y;
+	point[2] = z;
+	zero_point = init_tuple(1);
+	vector = subtract_tuple(point, zero_point);
+	normalize(&vector);
+	print_tuple(vector);
 }
