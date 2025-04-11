@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 12:56:01 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/10 16:48:55 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/11 13:23:13 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_checker_p	init_checker_pattern(int color_a, int color_b)
 
 	res.color_a = color_a;
 	res.color_b = color_b;
-	res.transform = malloc(sizeof(t_matrix));
+	res.transform = init_matrix(4, 4);
 	if (!res.transform)
 		return (res);
 	make_identity(res.transform);
@@ -37,7 +37,10 @@ int	checker_at(t_checker_p pattern, double *point)
 	if (!point)
 		return (0);
 	sum = (int)floor(point[0]) + (int)floor(point[1]) + (int)floor(point[2]);
-	return ((sum % 2 == 0) ? pattern.color_a : pattern.color_b);
+	if (0 == (sum % 2))
+		return (pattern.color_a);
+	else
+		return (pattern.color_b);
 }
 
 /*
@@ -51,11 +54,11 @@ int	checker_at_object(t_object *object, double *world_point)
 	double *pattern_point;
 	t_checker_p pattern;
 
-	pattern = init_checker_pattern(0x00AFFF, 0xFF007F);
+	pattern = init_checker_pattern(0x0000FF, 0xFF0000);
 	if (!pattern.transform)
 		return (0);
 	obj_point = multiply_tuple_and_matrix(inverse(object->transform),
-			world_point);
+	world_point);
 	if (!obj_point)
 		return (0);
 	pattern_point = multiply_tuple_and_matrix(inverse(pattern.transform),
