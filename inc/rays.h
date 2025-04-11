@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/11 13:57:09 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:22:34 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include "graphics.h"
 # include "operations.h"
 # include <stdbool.h>
+
+# define SPHERE_CHECKER_SCALE 3.0
+# define PLANE_CHECKER_SCALE 0.5
+# define CYLINDER_CHECKER_SCALE 1.0 // tmp
 
 typedef struct s_ray // xD
 {

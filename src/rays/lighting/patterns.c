@@ -6,15 +6,13 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 12:56:01 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/11 14:22:20 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:26:21 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/miniRT.h"
 
-// TODO: dynamic checker sizing according to distance
-
-void	set_pattern_transform(t_checker_p *pattern, t_matrix *transform)
+static void	set_pattern_transform(t_checker_p *pattern, t_matrix *transform)
 {
 	if (pattern->transform)
 		free(pattern->transform);
@@ -22,7 +20,7 @@ void	set_pattern_transform(t_checker_p *pattern, t_matrix *transform)
 	pattern->inv_transform = inverse(transform);
 }
 
-t_checker_p	init_checker_pattern(t_object *obj)
+static t_checker_p	init_checker_pattern(t_object *obj)
 {
 	t_checker_p	res;
 
@@ -47,26 +45,40 @@ t_checker_p	init_checker_pattern(t_object *obj)
 	determines the color at the given point in the checker pattern
 	returns color_a if the sum of floor(x) + floor(y) + floor(z) is even,
 	otherwise returns color_b
+	
+	EPSILON is utilized to avoid floating
+	point errors and increase floating point precision
  */
-int	checker_at(t_checker_p pattern, double *point)
+static int	checker_at(t_object *obj, t_checker_p pattern, double *point)
 {
 	int sum;
+	int i;
+	double *xyz;
+	double scale;
 
 	if (!point)
 		return (0);
-	double x = point[0] * 0.6;
-	double y = point[1] * 0.6;	
-	double z = point[2] * 0.6; 
-	
-	sum = (int)floor(x + EPSILON) + (int)floor(y + EPSILON) + (int)floor(z + EPSILON);
-	if (0 == (sum % 2))
-		return (pattern.color_a);
+	xyz = malloc (3 * sizeof(double));
+	if (!xyz)
+		return (0);
+	if (0 == ft_strncmp(obj->id, "sp\0", 3))
+		scale = SPHERE_CHECKER_SCALE;
+	else if (0 == ft_strncmp(obj->id, "pl\0", 3))
+		scale = PLANE_CHECKER_SCALE;
 	else
-		return (pattern.color_b);
+		scale = CYLINDER_CHECKER_SCALE;
+	i = -1;
+	while (++i < 3)
+		xyz[i] = point[i] * scale;
+	sum = (int)floor(xyz[0] + EPSILON) + (int)floor(xyz[1] + EPSILON) + (int)floor(xyz[2] + EPSILON);
+	if (0 == (sum % 2))
+		return (free(xyz), pattern.color_a);
+	else
+		return (free(xyz), pattern.color_b);
 }
 
 /*
-	Determines the color at a point on an object, considering both
+	determines the color at a point on an object, considering both
 	the object's transformation and the pattern's transformation
  */
 int	checker_at_object(t_object *object, double *world_point)
@@ -88,7 +100,7 @@ int	checker_at_object(t_object *object, double *world_point)
 		free(obj_point);
 		return (0);
 	}
-	color = checker_at(pattern, pattern_point);
+	color = checker_at(object, pattern, pattern_point);
 	free(obj_point);
 	free(pattern_point);
 	free(pattern.transform);
