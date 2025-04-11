@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadows.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:23:41 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/10 11:42:40 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/11 13:30:57 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ static t_intersec	*precompute_shadows(double *p, double *v, t_object **objs)
 	normalize(&direction);
 	ray = create_ray(p, direction);
 	i_s = get_intersections(ray, objs);
+	free(ray);
 	hit_tmp = identify_hit(i_s);
-	if (!hit_tmp || !ft_strncmp(hit_tmp->object->id, "pl\0", 3))
+	if (!hit_tmp)
 	{
-		free_ray(ray);
 		free_intersections(i_s);
 		return (NULL);
 	}
@@ -36,7 +36,6 @@ static t_intersec	*precompute_shadows(double *p, double *v, t_object **objs)
 	if (!hit)
 		return (NULL);
 	ft_memcpy(hit, hit_tmp, sizeof(t_intersec));
-	free_ray(ray);
 	free_intersections(i_s);
 	return (hit);
 }
@@ -71,16 +70,3 @@ bool	is_shadowed(t_world *w, double *p)
 	}
 	return (false);
 }
-
-/* int	apply_shadow(t_comps *comps, t_world *world)
-{
-	double rgb[3];
-	
-	rgb[0] = comps->obj->color[0] * world->ambient->color[0] / 255.0
-		* world->ambient->brightness;
-	rgb[1] = comps->obj->color[1] * world->ambient->color[1] / 255.0
-		* world->ambient->brightness;
-	rgb[2] = comps->obj->color[2] * world->ambient->color[2] / 255.0
-		* world->ambient->brightness;
-	return (rgb_to_int(rgb));
-} */
