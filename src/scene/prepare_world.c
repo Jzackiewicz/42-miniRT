@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/11 12:26:34 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:17:17 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ static double	*get_normal_at(t_object *obj, double *w_point)
 	double	*world_normal;
 
 	if (!strncmp(obj->id, "pl\0", 3))
-		return (tupledup(obj->orientation_vector));
+	{
+		obj_normal = tupledup(obj->orientation_vector);
+		return (obj_normal);
+	}
 	object_center = init_tuple(1);
 	obj_point = multiply_tuple_and_matrix(obj->inv_transform, w_point);
 	obj_normal = subtract_tuple(obj_point, object_center);
