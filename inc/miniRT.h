@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/04 20:16:55 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/10 12:53:02 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_object
 	double			*orientation_vector;
 	struct s_matrix	*transform;
 	struct s_matrix	*inv_transform;
+	bool 			is_checkered;
 }					t_object;
 
 typedef struct s_camera

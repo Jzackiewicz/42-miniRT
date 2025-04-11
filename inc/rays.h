@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/11 15:32:35 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:20:46 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@
 # include "operations.h"
 # include <stdbool.h>
 
+# define SPHERE_CHECKER_SCALE 3.0
+# define PLANE_CHECKER_SCALE 0.5
+# define CYLINDER_CHECKER_SCALE 1.0 // tmp
+
 typedef struct s_ray // xD
 {
-	double	*origin;
-	double	*direction;
+	double *origin;
+	double *direction;
 }						t_ray;
 
 typedef struct s_intersec
@@ -30,6 +34,14 @@ typedef struct s_intersec
 	double				t;
 	struct s_object		*object;
 }						t_intersec;
+
+typedef struct s_checker_pattern
+{
+	int					color_a;
+	int					color_b;
+	t_matrix			*transform;
+	t_matrix			*inv_transform;
+}						t_checker_p;
 
 typedef struct s_light	t_light;
 typedef struct s_object	t_object;
@@ -54,4 +66,6 @@ bool					is_shadowed(t_world *w, double *p);
 double					*apply_phong_attributes(t_world *world, t_comps *comps);
 int						lighting(t_world *world, t_comps *comps);
 
+double					*checker_at_object(t_object *object,
+	double *world_point);
 #endif
