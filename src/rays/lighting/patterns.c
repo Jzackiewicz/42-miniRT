@@ -6,18 +6,18 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 12:56:01 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/11 13:23:13 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/11 13:38:47 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/miniRT.h"
 
-t_checker_p	init_checker_pattern(int color_a, int color_b)
+t_checker_p	init_checker_pattern(t_object *obj)
 {
 	t_checker_p	res;
 
-	res.color_a = color_a;
-	res.color_b = color_b;
+	res.color_a = rgb_to_int(obj->color);
+	res.color_b = 0xFFFFFF - rgb_to_int(obj->color);
 	res.transform = init_matrix(4, 4);
 	if (!res.transform)
 		return (res);
@@ -54,7 +54,7 @@ int	checker_at_object(t_object *object, double *world_point)
 	double *pattern_point;
 	t_checker_p pattern;
 
-	pattern = init_checker_pattern(0x0000FF, 0xFF0000);
+	pattern = init_checker_pattern(object);
 	if (!pattern.transform)
 		return (0);
 	obj_point = multiply_tuple_and_matrix(inverse(object->transform),
