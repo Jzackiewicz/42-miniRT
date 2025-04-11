@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:39:18 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/11 13:30:21 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/11 13:31:41 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	apply_phong_model(t_world *world, t_comps *comps)
 
 	if (true == comps->obj->is_checkered)
 		return (checker_at_object(comps->obj, comps->point));
-	light_rgb = assign_light_colors(world);
 	effective_ambient = assign_effective_ambient(world, comps);
 	if (is_shadowed(world, comps->over_point))
 		return (rgb_to_int(effective_ambient));
