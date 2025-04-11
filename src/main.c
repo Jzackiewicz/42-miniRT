@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:28:39 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/11 15:32:23 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:39:07 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ int	main(void)
 	bitmap = generate_bitmap(world_data);
 	free_world(world_data);
 	mlx_run(bitmap);
+	
 	return (0);
 }
