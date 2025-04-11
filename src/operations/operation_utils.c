@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:26:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/11 11:39:48 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:32:15 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ void	print_tuple(double *tuple)
 /* Debug */
 void	find_vector(double x, double y, double z)
 {
-	double point[3];
+	double	point[3];
 	double	*zero_point;
 	double	*vector;
-	
+
 	point[0] = x;
 	point[1] = y;
 	point[2] = z;

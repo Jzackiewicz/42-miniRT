@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:02:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/09 15:39:44 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:32:03 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ static int	**init_bitmap(void)
 
 int	**generate_bitmap(t_world *world)
 {
-	int			i;
-	int			j;
-	int	**bitmap;
-	t_ray		*ray;
-	int			color;
+	int		i;
+	int		j;
+	int		**bitmap;
+	t_ray	*ray;
+	int		color;
 
 	if (!*world->objs)
 		return (NULL);

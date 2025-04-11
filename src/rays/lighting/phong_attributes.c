@@ -6,13 +6,13 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:42:38 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/09 11:18:26 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:31:56 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/miniRT.h"
 
-double	get_diffuse(double *lightp, double *normal, double *objectp)
+static double	get_diffuse(double *lightp, double *normal, double *objectp)
 {
 	double	*lightv;
 	double	angle_of_incidence;
@@ -48,8 +48,8 @@ static double	*find_reflection(double *lightp, double *normal,
 	return (reflection);
 }
 
-double	get_specular(double *light_origin, double *cam_v, double *normal,
-		double *target)
+static double	get_specular(double *light_origin, double *cam_v,
+		double *normal, double *target)
 {
 	double	*reflection;
 	double	angle_of_reflection;
@@ -70,4 +70,32 @@ double	get_specular(double *light_origin, double *cam_v, double *normal,
 	else
 		specular = specular_factor * pow(angle_of_reflection, shininess);
 	return (specular);
+}
+
+double	*apply_phong_attributes(t_world *world, t_comps *comps)
+{
+	double	*phong_lighting;
+	double	diffuse;
+	double	specular;
+	bool	shadow_flag;
+	int		i;
+
+	phong_lighting = (double *)malloc(sizeof(double) * 3);
+	diffuse = get_diffuse(world->light->coords, comps->normalv, comps->point);
+	specular = get_specular(world->light->coords,
+			world->camera->orientation_vector, comps->normalv, comps->point);
+	shadow_flag = is_shadowed(world, comps->over_point);
+	i = -1;
+	while (++i < 3)
+	{
+		phong_lighting[i] = world->ambient->brightness
+			* world->ambient->color[i] / 255.0 * comps->obj->color[i];
+		if (shadow_flag)
+			continue ;
+		phong_lighting[i] += diffuse * world->light->color[i]
+			* world->light->brightness;
+		phong_lighting[i] += specular * world->light->color[i]
+			* world->light->brightness;
+	}
+	return (phong_lighting);
 }

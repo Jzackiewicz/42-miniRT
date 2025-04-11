@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:28:39 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/09 15:39:07 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:32:23 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(void)
 {
 	t_input_data	**input_data;
 	t_world			*world_data;
-	int	**bitmap;
+	int				**bitmap;
 	int				no_lines;
 
 	input_data = NULL;

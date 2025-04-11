@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   track_intersections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 09:26:53 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/03 11:25:39 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:21:53 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ t_intersec	**get_sorted_intersections(t_ray *ray, t_object **objs)
 // returns NULL on non-negative t not found
 t_intersec	*identify_hit(t_intersec **i_s)
 {
-	int	i;
+	int			i;
+	t_intersec	*hit;
 
 	i = 0;
 	if (!i_s)
@@ -99,7 +100,13 @@ t_intersec	*identify_hit(t_intersec **i_s)
 	while (i_s[i])
 	{
 		if (i_s[i]->t > 0)
-			return (i_s[i]);
+		{
+			hit = (t_intersec *)malloc(sizeof(t_intersec));
+			if (!hit)
+				return (NULL);
+			ft_memcpy(hit, i_s[i], sizeof(t_intersec));
+			return (hit);
+		}
 		i++;
 	}
 	return (NULL);
