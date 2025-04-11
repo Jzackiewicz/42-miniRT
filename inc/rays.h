@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/10 15:10:28 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/11 13:57:09 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_checker_pattern
 	int color_a;
 	int color_b;
 	t_matrix *transform;
+	t_matrix *inv_transform;
 } t_checker_p ;
 
 typedef struct s_light	t_light;
