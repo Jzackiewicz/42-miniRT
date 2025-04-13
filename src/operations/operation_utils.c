@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:26:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/11 15:32:15 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/13 20:09:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ double	*init_tuple(int w)
 	return (tuple);
 }
 
-double	*tupledup(double *tuple)
+double	*tupledup(double *tuple, int size)
 {
 	int		i;
 	double	*new_tuple;
 
-	new_tuple = (double *)malloc(sizeof(double) * 4);
+	new_tuple = (double *)malloc(sizeof(double) * size);
 	if (!new_tuple)
 		return (NULL);
 	i = 0;
-	while (i < 4)
+	while (i < size)
 	{
 		new_tuple[i] = tuple[i];
 		i++;

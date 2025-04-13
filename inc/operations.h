@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 17:29:30 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/11 11:40:24 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/13 20:52:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		print_matrix(t_matrix *matrix);
 // 			utils
 int			compare_floats(double a, double b);
 double		*init_tuple(int w);
-double		*tupledup(double *tuple);
+double		*tupledup(double *tuple, int size);
 
 //			debug
 void		print_tuple(double *tuple);
