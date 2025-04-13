@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_attributes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:42:38 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/11 15:31:56 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/13 20:05:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static double	get_specular(double *light_origin, double *cam_v,
 	return (specular);
 }
 
-double	*apply_phong_attributes(t_world *world, t_comps *comps)
+double	*apply_phong_attributes(t_world *world, t_comps *comps, double *new_color)
 {
 	double	*phong_lighting;
 	double	diffuse;
@@ -89,7 +89,7 @@ double	*apply_phong_attributes(t_world *world, t_comps *comps)
 	while (++i < 3)
 	{
 		phong_lighting[i] = world->ambient->brightness
-			* world->ambient->color[i] / 255.0 * comps->obj->color[i];
+			* world->ambient->color[i] / 255.0 * new_color[i];
 		if (shadow_flag)
 			continue ;
 		phong_lighting[i] += diffuse * world->light->color[i]
