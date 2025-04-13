@@ -22,7 +22,7 @@ static double	*get_normal_at(t_object *obj, double *w_point)
 
 	if (!strncmp(obj->id, "pl\0", 3))
 	{
-		obj_normal = tupledup(obj->orientation_vector);
+		obj_normal = tupledup(obj->orientation_vector, 4);
 		return (obj_normal);
 	}
 	object_center = init_tuple(1);
