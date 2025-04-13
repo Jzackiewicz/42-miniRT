@@ -120,3 +120,14 @@ double	*checker_at_object(t_object *object, double *world_point)
 	free_pattern_components(obj_point, pattern_point, pattern);
 	return (res);
 }
+
+double	*get_checker_color(t_comps *comps)
+{
+	double	*new_color;
+
+	if (true == comps->obj->is_checkered)
+        new_color = checker_at_object(comps->obj, comps->point);
+	else
+		new_color = tupledup(comps->obj->color, 3);
+	return(new_color);
+}
