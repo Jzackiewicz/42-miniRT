@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/14 13:01:20 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/14 19:10:55 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,6 @@ typedef struct s_checker_pattern
 	t_matrix			*transform;
 	t_matrix			*inv_transform;
 }						t_checker_p;
-
-typedef struct s_uv_image
-{
-	int width;
-	int height;
-	unsigned int *pixels;
-} t_uv_image;
-
-typedef struct s_uv
-{
-	double u;
-	double v;
-} t_uv;
 
 typedef struct s_light	t_light;
 typedef struct s_object	t_object;

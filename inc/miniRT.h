@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/14 17:22:33 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/14 19:01:35 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ typedef struct s_object
 	double			*orientation_vector;
 	struct s_matrix	*transform;
 	struct s_matrix	*inv_transform;
-	bool 			is_checkered;
+	bool			is_checkered;
+	char		*texture_path;
 	t_texture		texture;
 }					t_object;
 

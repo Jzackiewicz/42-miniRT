@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:39:18 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/14 17:29:27 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/14 18:24:03 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ int	lighting(t_world *world, t_comps *comps)
 {
 	double	*res;
 	double	*new_color;
+	t_uv	uv;
 	int		int_final_color;
 
 	if (comps->obj->texture.texel.img)
 	{
-		t_uv uv = get_spherical_map(comps);
+		uv = get_spherical_map(comps);
 		new_color = get_texture_color(comps->obj->texture, uv.u, uv.v);
 	}
 	else
