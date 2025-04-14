@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phong_model.c                                      :+:      :+:    :+:   */
+/*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:39:18 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/11 16:22:11 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:41:17 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/miniRT.h"
 
-int	rgb_to_int(double *rgb)
+static int	rgb_to_int(double *rgb)
 {
 	rgb[0] = fmin(255, fmax(0, rgb[0]));
 	rgb[1] = fmin(255, fmax(0, rgb[1]));
@@ -20,15 +20,19 @@ int	rgb_to_int(double *rgb)
 	return (((int)rgb[0] << 16) | ((int)rgb[1] << 8) | (int)rgb[2]);
 }
 
-int	lighting(t_world *world, t_comps *comps)
+int	get_pixel_color(t_world *world, t_comps *comps)
 {
 	double	*res;
-	double	*new_color;
-	int		int_final_color;
+	double	*rbg_color;
+	int		int_color;
 
-	new_color = get_checker_color(comps);
-	res = apply_phong_attributes(world, comps, new_color);
-	int_final_color = rgb_to_int(res);
+	if (comps->obj->is_checkered)
+		rbg_color = get_checkered_color(comps->obj, comps->point);
+	else
+		rbg_color = tupledup(comps->obj->color, 3);
+	res = apply_phong_attributes(world, comps, rbg_color);
+	free(rbg_color);
+	int_color = rgb_to_int(res);
 	free(res);
-	return (int_final_color);
+	return (int_color);
 }

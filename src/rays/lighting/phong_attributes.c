@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_attributes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:42:38 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/13 20:05:45 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 13:34:09 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ static double	get_specular(double *light_origin, double *cam_v,
 	return (specular);
 }
 
-double	*apply_phong_attributes(t_world *world, t_comps *comps, double *new_color)
+double	*apply_phong_attributes(t_world *world, t_comps *comps,
+		double *new_color)
 {
 	double	*phong_lighting;
 	double	diffuse;

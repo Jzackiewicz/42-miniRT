@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:21:32 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/11 15:23:36 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:36:09 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	color_at(t_world *world, t_ray *ray)
 	{
 		comps = prepare_computations(hit, ray);
 		free(hit);
-		result = lighting(world, comps);
+		result = get_pixel_color(world, comps);
 		free_comps(comps);
 	}
 	else
