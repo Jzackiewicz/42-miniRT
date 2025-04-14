@@ -1,9 +1,7 @@
-1. Ambient doesn't work in lighting
-2. Ambient color not taken into account in assign_object_material
-3. Check every case where coordinates direction matters -> default camera forward orientation in book is z=-1; I assumed z=1 :v
-4. Fisheye effect is a thing and maybe we wanna get rid of this. It kind of makes it hard to check whether the light is projected correctly
-5.1 FOV acts funny at 180
-6. Segfault when diameter is 0
-7. More tests for planes and lighting are needed since Im not sure if they work correctly at all times.
+1. Make sure that ambient/light color works when different than white.
+2. Fisheye effect is a thing and maybe we wanna get rid of this.
+3.1 FOV acts funny at 180
+4. Segfault when diameter is 0
+5. More tests for planes and lighting are needed since Im not sure if they work correctly at all times.
 not important:
     fix errno code for exiting with X button
