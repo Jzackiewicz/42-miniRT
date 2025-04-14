@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/11 16:20:46 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:41:12 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,9 @@ void					free_intersections(t_intersec **ray_intersex);
 typedef struct s_comps	t_comps;
 typedef struct s_light	t_light;
 
+double					*get_checkered_color(t_object *obj, double *point);
 bool					is_shadowed(t_world *w, double *p);
-double					*apply_phong_attributes(t_world *world, t_comps *comps);
-int						lighting(t_world *world, t_comps *comps);
-
-double					*checker_at_object(t_object *object,
-	double *world_point);
+double					*apply_phong_attributes(t_world *world, t_comps *comps,
+							double *new_color);
+int						get_pixel_color(t_world *world, t_comps *comps);
 #endif
