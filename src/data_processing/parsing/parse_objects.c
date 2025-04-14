@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:32:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/10 16:06:14 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:35:53 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	parse_sphere(t_input_data *obj, char **line_split)
 		obj->is_checkered = true;
 	else
 		obj->is_checkered = false;
-			
 }
 
 static void	parse_plane(t_input_data *obj, char **line_split)

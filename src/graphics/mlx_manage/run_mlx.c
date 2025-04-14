@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_mlx.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:15:56 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/10 11:35:13 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/14 17:32:48 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,27 @@ static void	init_mlx(t_ray_tracer_data **data)
 			&(*data)->mlx_data->line_length, &(*data)->mlx_data->endian);
 }
 
-void	mlx_run(int **bitmap)
+void	mlx_run(t_world *world_data, int no_lines, t_input_data **in_data)
 {
 	t_ray_tracer_data	*rt_data;
-
+	int **bitmap;
+	
 	rt_data = NULL;
 	init_mlx(&rt_data);
+	for (int i = 0; world_data->objs[i]; i++)
+	{
+		if (0 == ft_strncmp(world_data->objs[i]->id, "sp\0", 3))
+		{
+			t_object *obj = world_data->objs[i];
+			ft_memset(&(obj->texture), 0, sizeof(t_texture));
+			create_image_texture(rt_data->mlx_data->mlx_ptr, &(obj->texture), "textures/earth_day.xpm");
+		}
+	}
+	bitmap = generate_bitmap(world_data);
 	if (bitmap)
 		render_image(rt_data, bitmap);
+	free_input_data(in_data, no_lines);
+	free_world(world_data);
 	mlx_key_hook(rt_data->mlx_data->window_ptr, handle_key_input, rt_data);
 	mlx_hook(rt_data->mlx_data->window_ptr, 17, 0, close_window, rt_data);
 	if (bitmap)

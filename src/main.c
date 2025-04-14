@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:28:39 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/11 15:46:18 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:41:27 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	main(void)
 {
 	t_input_data	**input_data;
 	t_world			*world_data;
-	int				**bitmap;
 	int				no_lines;
 
 	input_data = NULL;
@@ -25,10 +24,6 @@ int	main(void)
 	if (no_lines == -1)
 		return (printf("Error: file error\n"), -1);
 	world_data = create_world(input_data, no_lines);
-	free_input_data(input_data, no_lines);
-	bitmap = generate_bitmap(world_data);
-	free_world(world_data);
-	mlx_run(bitmap);
-	
+	mlx_run(world_data, no_lines, input_data);
 	return (0);
 }
