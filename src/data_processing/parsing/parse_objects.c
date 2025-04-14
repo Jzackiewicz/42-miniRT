@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:32:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/14 16:35:53 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/14 19:00:32 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@ static void	parse_sphere(t_input_data *obj, char **line_split)
 		obj->is_checkered = true;
 	else
 		obj->is_checkered = false;
+	if (line_split[5])
+	{
+		if (line_split[5][ft_strlen(line_split[5]) - 1] == '\n')
+			line_split[5][ft_strlen(line_split[5]) - 1] = '\0';
+		obj->texture_path = ft_strdup(line_split[5]);
+	}
+	else
+		obj->texture_path = NULL;
 }
 
 static void	parse_plane(t_input_data *obj, char **line_split)
@@ -32,6 +40,14 @@ static void	parse_plane(t_input_data *obj, char **line_split)
 		obj->is_checkered = true;
 	else
 		obj->is_checkered = false;
+	if (line_split[5])
+	{
+		if (line_split[5][ft_strlen(line_split[5]) - 1] == '\n')
+			line_split[5][ft_strlen(line_split[5]) - 1] = '\0';
+		obj->texture_path = ft_strdup(line_split[5]);
+	}
+	else
+		obj->texture_path = NULL;
 }
 
 static void	parse_cylinder(t_input_data *obj, char **line_split)
@@ -45,6 +61,14 @@ static void	parse_cylinder(t_input_data *obj, char **line_split)
 		obj->is_checkered = true;
 	else
 		obj->is_checkered = false;
+	if (line_split[7])
+	{
+		if (line_split[5][ft_strlen(line_split[5]) - 1] == '\n')
+			line_split[5][ft_strlen(line_split[5]) - 1] = '\0';
+		obj->texture_path = ft_strdup(line_split[7]);
+	}
+	else
+		obj->texture_path = NULL;
 }
 
 void	parse_objects(char **line_split, t_input_data **objects, int i)

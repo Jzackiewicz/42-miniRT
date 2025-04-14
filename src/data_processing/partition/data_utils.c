@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:33:06 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/09 12:48:11 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/14 19:01:23 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	free_object(t_object *obj)
 	free(obj->color);
 	free(obj->coords);
 	free(obj->id);
+	free(obj->texture_path);
 	free(obj->orientation_vector);
 	free_matrix(obj->inv_transform);
 	free_matrix(obj->transform);

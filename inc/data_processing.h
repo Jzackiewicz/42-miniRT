@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:21:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/10 16:08:17 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/14 18:13:34 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_input_data
 	double					*coords;
 	double					*vector;
 	bool					is_checkered;
+	const char				*texture_path;
 }							t_input_data;
 
 // 							Input_validation
@@ -58,6 +59,7 @@ int							check_coords(char *coords);
 int							check_vector(char *vector, int i);
 int							is_valid_number(const char *str);
 int							is_valid_float(const char *str);
+int							validate_texture_file(const char *path);
 int							drain_file(int fd);
 int							validate_settings(char **line_split, int fd,
 								t_key_presence *key_presence);
