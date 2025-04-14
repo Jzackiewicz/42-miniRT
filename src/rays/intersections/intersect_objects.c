@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_objects.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/10 11:34:23 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:10:05 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,31 @@ static double	*intersect_plane(t_ray *ray)
 	arr_t[1] = t;
 	return (arr_t);
 }
+
+/* Finds t for ray-cylinder intersection for identity cylinder.
+Identity cylinder is a cylinder that has it's center at (0, 0, 0) world point,
+is infinitely long in +y and -y directions and it's radius length is 1*/
+/* static	double	*intersect_cylinder(t_ray *ray)
+{
+	double	coefficients[3];
+	double	delta;
+	double	*arr_t;
+	
+	coefficients[0] = pow(ray->direction[0], 2) + pow(ray->direction[2], 2);
+	if (compare_floats(coefficients[0], 0))
+		return (NULL);
+	coefficients[1] = 2 * ray->origin[0] * ray->direction[0] + 2 * ray->origin[2] * ray->direction[2];
+	coefficients[2] = pow(ray->origin[0], 2) + pow(ray->origin[2], 2) - 1;
+	delta = pow(coefficients[1], 2) - 4 * coefficients[0] * coefficients[2];
+	if (delta < 0)
+		return (NULL);
+	arr_t = (double *)malloc(sizeof(double) * 2);
+	if (!arr_t)
+		return (NULL);
+	arr_t[0] = (-coefficients[1] - sqrt(delta)) / (2 * coefficients[0]);
+	arr_t[1] = (-coefficients[1] + sqrt(delta)) / (2 * coefficients[0]);
+	return (arr_t);
+} */
 
 /* highest level intersection finding function
 	called with a pointer to an object (plane, sphere or cylinder)
