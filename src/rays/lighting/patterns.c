@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 12:56:01 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/11 16:02:14 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/14 12:45:48 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_checker_p	init_checker_pattern(t_object *obj)
 
 	res.color_a = rgb_to_int(obj->color);
 	res.color_b = 0xFFFFFF - rgb_to_int(obj->color);
-	res.transform = init_matrix(4, 4);
+	res.transform = init_matrix(4, 4);	
 	if (!res.transform)
 		return (res);
 	make_identity(res.transform);

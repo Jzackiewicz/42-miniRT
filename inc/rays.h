@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/11 16:20:46 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:01:20 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,19 @@ typedef struct s_checker_pattern
 	t_matrix			*inv_transform;
 }						t_checker_p;
 
+typedef struct s_uv_image
+{
+	int width;
+	int height;
+	unsigned int *pixels;
+} t_uv_image;
+
+typedef struct s_uv
+{
+	double u;
+	double v;
+} t_uv;
+
 typedef struct s_light	t_light;
 typedef struct s_object	t_object;
 typedef struct s_camera	t_camera;
@@ -63,9 +76,12 @@ typedef struct s_comps	t_comps;
 typedef struct s_light	t_light;
 
 bool					is_shadowed(t_world *w, double *p);
-double					*apply_phong_attributes(t_world *world, t_comps *comps);
 int						lighting(t_world *world, t_comps *comps);
 
 double					*checker_at_object(t_object *object,
-	double *world_point);
+							double *world_point);
+int						rgb_to_int(double *rgb);
+double					*apply_phong_attributes(t_world *world, t_comps *comps,
+							double *new_color);
+double					*get_checker_color(t_comps *comps);
 #endif
