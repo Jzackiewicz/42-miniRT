@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:45:23 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/14 19:11:26 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/15 11:31:58 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_comps	t_comps;
 t_texture				*create_image_texture(void *mlx, t_texture *texture,
 							const char *path);
 t_uv					get_spherical_map(t_comps *comps);
+t_uv					get_planar_map(t_comps *comps);
 double					*get_texture_color(t_texture texture, double u,
 							double v);
 #endif
