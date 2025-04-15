@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:39:18 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/14 18:24:03 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/15 11:33:42 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	lighting(t_world *world, t_comps *comps)
 
 	if (comps->obj->texture.texel.img)
 	{
-		uv = get_spherical_map(comps);
+		if (0 == ft_strncmp(comps->obj->id, "sp\0", 3))
+			uv = get_spherical_map(comps);
+		else if (0 == ft_strncmp(comps->obj->id, "pl\0", 3))
+			uv = get_planar_map(comps);
 		new_color = get_texture_color(comps->obj->texture, uv.u, uv.v);
 	}
 	else
