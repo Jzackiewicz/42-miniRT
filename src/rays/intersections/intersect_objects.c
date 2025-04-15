@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/14 14:10:05 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:55:25 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,38 @@ static double	*intersect_plane(t_ray *ray)
 	return (arr_t);
 }
 
+double	*truncate_cylinder(double *arr_t, t_ray *ray, t_object *obj)
+{
+	double	limit;
+	bool	is_t[2];
+	int		i;
+	double	*out_t;
+	
+	limit = obj->height / 2;
+	i = -1;
+	while (++i < 2)
+	{
+		if (arr_t[i] * ray->direction[1] > ray->origin[1] - limit &&
+			arr_t[i] * ray->direction[1] < ray->origin[1] + limit)
+			is_t[i] = true;
+		else
+			is_t[i] = false;
+	}
+	if (!is_t[0] && !is_t[1])
+		return(free(arr_t), NULL);
+	out_t = tupledup(arr_t, 2);
+	if (is_t[0] && !is_t[1])
+		out_t[1] = arr_t[0];
+	else if (is_t[1] && !is_t[0])
+		out_t[0] = arr_t[1];
+	free(arr_t);
+	return(out_t);
+}
+
 /* Finds t for ray-cylinder intersection for identity cylinder.
 Identity cylinder is a cylinder that has it's center at (0, 0, 0) world point,
 is infinitely long in +y and -y directions and it's radius length is 1*/
-/* static	double	*intersect_cylinder(t_ray *ray)
+static	double	*intersect_cylinder(t_ray *ray)
 {
 	double	coefficients[3];
 	double	delta;
@@ -82,7 +110,7 @@ is infinitely long in +y and -y directions and it's radius length is 1*/
 	arr_t[0] = (-coefficients[1] - sqrt(delta)) / (2 * coefficients[0]);
 	arr_t[1] = (-coefficients[1] + sqrt(delta)) / (2 * coefficients[0]);
 	return (arr_t);
-} */
+}
 
 /* highest level intersection finding function
 	called with a pointer to an object (plane, sphere or cylinder)
@@ -90,12 +118,18 @@ is infinitely long in +y and -y directions and it's radius length is 1*/
 double	*intersect(t_object *obj, t_ray *ray)
 {
 	double	*arr_t;
-
+	
 	arr_t = NULL;
 	if (!ft_strncmp(obj->id, "sp\0", 3))
 		arr_t = intersect_sphere(ray);
 	else if (!ft_strncmp(obj->id, "pl\0", 3))
 		arr_t = intersect_plane(ray);
+	else if (!ft_strncmp(obj->id, "cy\0", 3))
+	{
+		arr_t = intersect_cylinder(ray);
+		if (arr_t)
+			arr_t = truncate_cylinder(arr_t, ray, obj);
+	}
 	else
 	{
 		printf("Error: unknown object id: %s\n", obj->id);

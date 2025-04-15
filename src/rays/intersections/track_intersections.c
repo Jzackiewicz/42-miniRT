@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 09:26:53 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/11 15:21:53 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:41:24 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ t_intersec	**get_intersections(t_ray *ray, t_object **objs)
 		if (arr_t)
 		{
 			append_intersec(intersex, arr_t, objs[i], j);
-			j++;
 			free(arr_t);
+			j++;
 		}
 	}
 	return (intersex);
