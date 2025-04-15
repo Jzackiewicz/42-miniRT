@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   assign_object_data.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/11 13:30:38 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/15 10:06:22 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/data_processing.h"
 #include "../../../inc/miniRT.h"
 
-static t_matrix	*prepare_sphere_transoform(t_object *obj)
+static t_matrix	*prepare_sphere_transform(t_object *obj)
 {
 	t_matrix	*scaling_transform;
 	t_matrix	*translation_transform;
@@ -76,7 +76,7 @@ static void	load_object_transform_matrix(t_object *obj)
 	t_matrix	*transform;
 
 	if (!strncmp(obj->id, "sp\0", 3))
-		transform = prepare_sphere_transoform(obj);
+		transform = prepare_sphere_transform(obj);
 	else if (!strncmp(obj->id, "pl\0", 3))
 		transform = prepare_plane_transform(obj);
 	else
