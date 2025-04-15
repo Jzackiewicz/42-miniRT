@@ -2,6 +2,8 @@
 2. Fisheye effect is a thing and maybe we wanna get rid of this.
 3.1 FOV acts funny at 180
 4. Segfault when diameter is 0
-5. More tests for planes and lighting are needed since Im not sure if they work correctly at all times.
+5. Lighting at planes doesn't show when normal vector is oriented in other direction.
+6. Shadows on planes get cropped when there is multiple planes intersecting.
+7. Texture module needs leak fix and refactor (may be working faster imo but idk)
 not important:
     fix errno code for exiting with X button
