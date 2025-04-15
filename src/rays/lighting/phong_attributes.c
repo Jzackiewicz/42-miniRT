@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:42:38 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/14 13:34:09 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/15 09:53:47 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ double	*apply_phong_attributes(t_world *world, t_comps *comps,
 		if (shadow_flag)
 			continue ;
 		phong_lighting[i] += diffuse * world->light->color[i]
-			* world->light->brightness;
+			* world->light->brightness / 255.0 * new_color[i];
 		phong_lighting[i] += specular * world->light->color[i]
-			* world->light->brightness;
+			* world->light->brightness / 255.0 * new_color[i];
 	}
 	return (phong_lighting);
 }
