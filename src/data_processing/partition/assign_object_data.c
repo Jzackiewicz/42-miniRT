@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/15 10:06:22 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/15 11:49:37 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ t_object	*assign_object(t_input_data *data)
 	obj->coords = data->coords;
 	obj->orientation_vector = data->vector;
 	obj->is_checkered = data->is_checkered;
+	obj->texture_path = (char *)data->texture_path;
 	load_object_transform_matrix(obj);
 	return (obj);
 }
