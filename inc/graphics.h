@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:45:23 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/15 11:48:17 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:05:08 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <stdlib.h>
 
 // SECTION: constants
-# define WINDOW_WIDTH 1200
-# define WINDOW_HEIGHT 1200
+# define WINDOW_WIDTH 500
+# define WINDOW_HEIGHT 500
 
 // SECTION: structs
 typedef struct s_mlx_data
@@ -59,8 +59,8 @@ typedef struct s_uv
 
 typedef struct s_texture
 {
-	t_image texel; // texture element
-	t_image				nmap;
+	t_image *texel; // texture element
+	t_image				*nmap;
 	int					width;
 	int					height;
 	int					nwidth;
@@ -81,8 +81,9 @@ void					mlx_run(t_world *world_data, int no_lines,
 typedef struct s_comps	t_comps;
 t_texture				*create_image_texture(void *mlx, t_texture *texture,
 							const char *path);
+void					free_texture(t_texture *texture);
 t_uv					get_spherical_map(t_comps *comps);
 t_uv					get_planar_map(t_comps *comps);
-double					*get_texture_color(t_texture texture, double u,
+double					*get_texture_color(t_texture *texture, double u,
 							double v);
 #endif

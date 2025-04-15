@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:58:11 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/14 19:01:35 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/15 13:17:50 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_object
 	struct s_matrix	*inv_transform;
 	bool			is_checkered;
 	char		*texture_path;
-	t_texture		texture;
+	t_texture		*texture;
 }					t_object;
 
 typedef struct s_camera

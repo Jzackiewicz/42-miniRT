@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:39:18 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/15 11:51:16 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:13:45 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	get_pixel_color(t_world *world, t_comps *comps)
 
 	if (comps->obj->is_checkered)
 		rbg_color = get_checkered_color(comps->obj, comps->point);
-	else if (comps->obj->texture.texel.img)
+	else if (comps->obj->texture)
 	{
 		if (0 == ft_strncmp(comps->obj->id, "sp\0", 3))
 			uv = get_spherical_map(comps);

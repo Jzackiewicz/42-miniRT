@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_mlx.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:15:56 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/14 19:02:51 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/15 13:30:00 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ static void	assign_textures(t_world *world, t_ray_tracer_data *rt_data)
 	{
 		if (world->objs[i]->texture_path)
 		{
-			ft_memset(&(world->objs[i]->texture), 0, sizeof(t_texture));
-			create_image_texture(rt_data->mlx_data->mlx_ptr,
-				&(world->objs[i]->texture), world->objs[i]->texture_path);
+			world->objs[i]->texture = create_image_texture(rt_data->mlx_data->mlx_ptr,
+				world->objs[i]->texture, world->objs[i]->texture_path);
 		}
 	}
 }
