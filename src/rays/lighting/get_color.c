@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:39:18 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/14 13:41:17 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/15 11:51:16 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,19 @@ int	get_pixel_color(t_world *world, t_comps *comps)
 {
 	double	*res;
 	double	*rbg_color;
+	t_uv	uv;
 	int		int_color;
 
 	if (comps->obj->is_checkered)
 		rbg_color = get_checkered_color(comps->obj, comps->point);
+	else if (comps->obj->texture.texel.img)
+	{
+		if (0 == ft_strncmp(comps->obj->id, "sp\0", 3))
+			uv = get_spherical_map(comps);
+		else if (0 == ft_strncmp(comps->obj->id, "pl\0", 3))
+			uv = get_planar_map(comps);
+		rbg_color = get_texture_color(comps->obj->texture, uv.u, uv.v);
+	}
 	else
 		rbg_color = tupledup(comps->obj->color, 3);
 	res = apply_phong_attributes(world, comps, rbg_color);
