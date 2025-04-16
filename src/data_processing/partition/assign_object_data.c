@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/15 14:53:24 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:56:11 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,24 @@ static t_matrix	*prepare_plane_transform(t_object *obj)
 	return (transform);
 }
 
+t_matrix	*prepare_cylinder_transform(t_object *obj)
+{
+	t_matrix	*translation_transform;
+	t_matrix	*scaling_transform;
+	t_matrix	*transform;
+	double		tmp[3];
+
+	tmp[0] = obj->diameter;
+	tmp[1] = obj->diameter;
+	tmp[2] = obj->diameter;
+	scaling_transform = scaling(tmp);
+	translation_transform = translation(obj->coords);
+	transform = multiply_matrices(scaling_transform, translation_transform);
+	free_matrix(scaling_transform);
+	free_matrix(translation_transform);
+	return (transform);
+}
+
 static void	load_object_transform_matrix(t_object *obj)
 {
 	t_matrix	*transform;
@@ -79,6 +97,8 @@ static void	load_object_transform_matrix(t_object *obj)
 		transform = prepare_sphere_transform(obj);
 	else if (!strncmp(obj->id, "pl\0", 3))
 		transform = prepare_plane_transform(obj);
+	else if (!strncmp(obj->id, "cy\0", 3))
+		transform = prepare_cylinder_transform(obj);
 	else
 	{
 		transform = init_matrix(4, 4);
