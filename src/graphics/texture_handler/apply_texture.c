@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   apply_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:21:38 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/15 15:21:14 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:59:18 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/miniRT.h"
 
-void	free_texture(t_texture *texture)
+void	free_texture(t_ray_tracer_data *rt_data, t_object *obj)
 {
-	if (texture)
+	if (obj->texture)
 	{
-		free(texture->texel->img);
-		free(texture->texel);
-		free(texture->nmap);
+		mlx_destroy_image(rt_data->mlx_data->mlx_ptr, obj->texture->texel->img);
+		free(obj->texture->texel);
+		free(obj->texture->nmap);
 	}
-	free(texture);
+	free(obj->texture);
 }
 
 /**
@@ -45,8 +45,8 @@ t_texture *create_image_texture(void *mlx_ptr, t_texture *texture,
 		texture->texel->addr = mlx_get_data_addr(texture->texel->img,
 				&texture->texel->bits_per_pixel, &texture->texel->line_length,
 				&texture->texel->endian);
-				return (texture);
-			}
+		return (texture);
+	}
 	mlx_destroy_image(mlx_ptr, texture->texel->img);
 	free(texture);
 	return (NULL);

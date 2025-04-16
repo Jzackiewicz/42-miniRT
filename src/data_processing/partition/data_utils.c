@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:33:06 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/15 15:05:25 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:55:08 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	free_input_data(t_input_data **inp_data, int no_lines)
 	free(inp_data);
 }
 
-static void	free_object(t_object *obj)
+static void	free_object(t_object *obj, t_ray_tracer_data *rt_data)
 {
 	free(obj->color);
 	free(obj->coords);
@@ -43,7 +43,7 @@ static void	free_object(t_object *obj)
 	free(obj->orientation_vector);
 	free_matrix(obj->inv_transform);
 	free_matrix(obj->transform);
-	free_texture(obj->texture);
+	free_texture(rt_data, obj);
 	free(obj);
 }
 
@@ -61,7 +61,7 @@ static void	free_settings(t_world *world)
 	free(world->light);
 }
 
-void	free_world(t_world *world)
+void	free_world(t_world *world, t_ray_tracer_data *rt_data)
 {
 	int	i;
 
@@ -69,7 +69,7 @@ void	free_world(t_world *world)
 	i = 0;
 	while (world->objs[i])
 	{
-		free_object(world->objs[i]);
+		free_object(world->objs[i], rt_data);
 		i++;
 	}
 	free(world->objs);

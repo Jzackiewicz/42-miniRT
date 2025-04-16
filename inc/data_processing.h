@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:21:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/14 18:13:34 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:50:50 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,11 @@ int							count_objects(struct s_object **objs);
 t_object					*assign_object(t_input_data *data);
 void						load_camera_transform_matrix(t_camera *cam_data);
 
+typedef struct s_ray_tracer_data t_ray_tracer_data;
+
 // 							Debug
 void						print_object(t_input_data *obj);
-void						free_world(t_world *world);
+void						free_world(t_world *world, t_ray_tracer_data *rt_data);
 void						free_input_data(t_input_data **inp_data,
 								int no_lines);
 
