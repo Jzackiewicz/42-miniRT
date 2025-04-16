@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:33:06 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/16 17:52:43 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/16 19:57:14 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,14 @@ static void free_lights(t_world *world)
 {
 	int i;
 
-	i = 0;
-	while (world->lights[i])
+	i = -1;
+	while (world->lights[++i])
 	{
 		free(world->lights[i]->color);
 		free(world->lights[i]->coords);
 		free(world->lights[i]);
 	}
+	free(world->lights);
 }
 
 static void	free_settings(t_world *world)

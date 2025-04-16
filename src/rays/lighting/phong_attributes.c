@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:42:38 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/16 18:01:55 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/16 19:55:09 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,12 @@ static double	get_specular(double *light_origin, double *cam_v,
 	return (specular);
 }
 
+// algorithm:
+// initialize the color with ambient
+// loop through the light sources
+// calc diffuse and specular
+// calc shadow
+// if not shadow at this light's contribution
 double	*apply_phong_attributes(t_world *world, t_comps *comps,
 		double *new_color)
 {
@@ -80,23 +86,37 @@ double	*apply_phong_attributes(t_world *world, t_comps *comps,
 	double	specular;
 	bool	shadow_flag;
 	int		i;
+	int		light_id;
 
 	phong_lighting = (double *)malloc(sizeof(double) * 3);
-	diffuse = get_diffuse(world->lights[0]->coords, comps->normalv, comps->point);
-	specular = get_specular(world->lights[0]->coords,
-			world->camera->orientation_vector, comps->normalv, comps->point);
-	shadow_flag = is_shadowed(world, comps->over_point);
 	i = -1;
 	while (++i < 3)
 	{
 		phong_lighting[i] = world->ambient->brightness
 			* world->ambient->color[i] / 255.0 * new_color[i];
-		if (shadow_flag)
-			continue ;
-		phong_lighting[i] += diffuse * world->lights[0]->color[i]
-			* world->lights[0]->brightness / 255.0 * new_color[i];
-		phong_lighting[i] += specular * world->lights[0]->color[i]
-			* world->lights[0]->brightness / 255.0 * new_color[i];
+	}
+	light_id = -1;
+	while (world->lights[++light_id])
+	{
+		shadow_flag = is_shadowed(world, comps->over_point);
+		if (!shadow_flag)
+		{
+			diffuse = get_diffuse(world->lights[light_id]->coords,
+					comps->normalv, comps->point);
+			specular = get_specular(world->lights[light_id]->coords,
+					world->camera->orientation_vector, comps->normalv,
+					comps->point);
+			i = -1;
+			while (++i < 3)
+			{
+				phong_lighting[i] += diffuse * world->lights[light_id]->color[i]
+					* world->lights[light_id]->brightness / 255.0
+					* new_color[i];
+				phong_lighting[i] += specular
+					* world->lights[light_id]->color[i]
+					* world->lights[light_id]->brightness;
+			}
+		}
 	}
 	return (phong_lighting);
 }
