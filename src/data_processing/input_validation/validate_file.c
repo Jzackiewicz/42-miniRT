@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 12:01:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/04 17:26:56 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:12:00 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ int	validate_file(char *filepath)
 		return (-1);
 	close(fd);
 	i = -1;
-	while (++i < 6)
+	while (++i < 5)
 	{
-		if ((key_presence.no_present[i] != 1 && i < 3))
+		if ((key_presence.no_present[i] != 1 && i < 2))
 			return (-1);
 	}
 	return (0);

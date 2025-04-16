@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_attributes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:42:38 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/15 11:52:24 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/16 18:01:55 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ double	*apply_phong_attributes(t_world *world, t_comps *comps,
 	int		i;
 
 	phong_lighting = (double *)malloc(sizeof(double) * 3);
-	diffuse = get_diffuse(world->light->coords, comps->normalv, comps->point);
-	specular = get_specular(world->light->coords,
+	diffuse = get_diffuse(world->lights[0]->coords, comps->normalv, comps->point);
+	specular = get_specular(world->lights[0]->coords,
 			world->camera->orientation_vector, comps->normalv, comps->point);
 	shadow_flag = is_shadowed(world, comps->over_point);
 	i = -1;
@@ -93,10 +93,10 @@ double	*apply_phong_attributes(t_world *world, t_comps *comps,
 			* world->ambient->color[i] / 255.0 * new_color[i];
 		if (shadow_flag)
 			continue ;
-		phong_lighting[i] += diffuse * world->light->color[i]
-			* world->light->brightness / 255.0 * new_color[i];
-		phong_lighting[i] += specular * world->light->color[i]
-			* world->light->brightness / 255.0 * new_color[i];
+		phong_lighting[i] += diffuse * world->lights[0]->color[i]
+			* world->lights[0]->brightness / 255.0 * new_color[i];
+		phong_lighting[i] += specular * world->lights[0]->color[i]
+			* world->lights[0]->brightness / 255.0 * new_color[i];
 	}
 	return (phong_lighting);
 }

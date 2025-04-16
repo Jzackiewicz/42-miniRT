@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_settings.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:13:36 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/27 18:51:00 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:10:43 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int	validate_settings(char **line_split, int fd, t_key_presence *key_presence)
 	{
 		if (validate_light(line_split) == -1)
 			return (drain_file(fd));
-		key_presence->no_present[LIGHT]++;
 		return (0);
 	}
 	else

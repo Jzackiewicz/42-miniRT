@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_world.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/11 16:17:17 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:48:36 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ static double	*get_normal_at(t_object *obj, double *w_point)
 
 /* default world initializer
 	takes an array of objects and the light + ambient data */
-t_world	*create_world(t_input_data **input_data, int no_lines)
+t_world	*create_world(t_input_data **input_data)
 {
 	t_world	*world;
 
 	world = (t_world *)malloc(sizeof(t_world));
 	if (!world)
 		return (NULL);
-	world->objs = get_objects(input_data, no_lines);
+	world->objs = get_objects(input_data);
 	world->camera = get_cam_data(input_data);
-	world->light = get_light_data(input_data);
+	world->lights = get_light_data(input_data);
 	world->ambient = get_ambient_data(input_data);
 	free_input_ids(input_data);
 	return (world);

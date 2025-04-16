@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data_structs.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 12:04:30 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/04 19:42:16 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:56:50 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	count_objects(t_object **objs)
 	return (len);
 }
 
-t_object	**get_objects(t_input_data **data, int no_data)
+t_object	**get_objects(t_input_data **data)
 {
 	int			num_of_objs;
 	int			i;
 	t_object	**objects;
 
-	num_of_objs = no_data - 3;
+	num_of_objs = get_no_obj_elems(data);
 	objects = (t_object **)ft_calloc(sizeof(t_object *), num_of_objs + 1);
 	if (!objects)
 		return (NULL);
@@ -72,27 +72,33 @@ t_camera	*get_cam_data(t_input_data **data)
 	return (NULL);
 }
 
-t_light	*get_light_data(t_input_data **data)
+t_light	**get_light_data(t_input_data **data)
 {
 	int		i;
-	t_light	*light;
+	t_light	**lights;
+	int		no_lights;
 
-	light = (t_light *)malloc(sizeof(t_light));
-	if (!light)
+	no_lights = get_no_light_elems(data);
+	lights = (t_light **) malloc((no_lights + 1) * sizeof(t_light *));
+	if (!lights)
 		return (NULL);
+	lights[no_lights] = NULL;
 	i = -1;
+	no_lights = 0;
 	while (data[++i])
 	{
 		if (!ft_strncmp(data[i]->id, "L\0", 2))
 		{
-			light->brightness = data[i]->brightness;
-			light->color = convert_color(data[i]->color);
-			light->coords = data[i]->coords;
-			light->coords[3] = 1;
-			return (light);
+			lights[no_lights] = (t_light *)malloc(sizeof(t_light));
+			if (!lights[no_lights])
+				return (NULL);
+			lights[no_lights]->brightness = data[i]->brightness;
+			lights[no_lights]->color = convert_color(data[i]->color);
+			lights[no_lights]->coords = data[i]->coords;
+			lights[no_lights++]->coords[3] = 1;
 		}
 	}
-	return (NULL);
+	return (lights);
 }
 
 t_ambient	*get_ambient_data(t_input_data **data)

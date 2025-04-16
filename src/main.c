@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:28:39 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/15 11:48:58 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:57:31 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(void)
 			&input_data);
 	if (no_lines == -1)
 		return (printf("Error: file error\n"), -1);
-	world_data = create_world(input_data, no_lines);
+	world_data = create_world(input_data);
 	mlx_run(world_data, no_lines, input_data);
 	return (0);
 }
