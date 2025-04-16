@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadows.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:23:41 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/15 14:58:15 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:53:48 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool	is_shadowed(t_world *w, double *worldp)
 	double		distance;
 	bool		state;
 
-	lightv = subtract_tuple(w->light->coords, worldp);
+	lightv = subtract_tuple(w->lights[0]->coords, worldp);
 	distance = magnitude(lightv);
 	normalize(&lightv);
 	hit = precompute_shadows(worldp, lightv, w->objs);

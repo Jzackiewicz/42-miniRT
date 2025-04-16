@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:33:06 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/16 16:55:08 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:52:43 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,19 @@ static void	free_object(t_object *obj, t_ray_tracer_data *rt_data)
 	free(obj);
 }
 
+static void free_lights(t_world *world)
+{
+	int i;
+
+	i = 0;
+	while (world->lights[i])
+	{
+		free(world->lights[i]->color);
+		free(world->lights[i]->coords);
+		free(world->lights[i]);
+	}
+}
+
 static void	free_settings(t_world *world)
 {
 	free(world->ambient->color);
@@ -56,9 +69,7 @@ static void	free_settings(t_world *world)
 	free(world->camera->orientation_vector);
 	free(world->camera->origin);
 	free(world->camera);
-	free(world->light->color);
-	free(world->light->coords);
-	free(world->light);
+	free_lights(world);
 }
 
 void	free_world(t_world *world, t_ray_tracer_data *rt_data)

@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:21:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/16 16:50:50 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:50:08 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@
 // array indexes of each id type for presence checks
 # define AMBIENT 0
 # define CAMERA 1
-# define LIGHT 2
-# define SPHERE 3
-# define PLANE 4
-# define CYLINDER 5
+# define SPHERE 2
+# define PLANE 3
+# define CYLINDER 4
 
 typedef struct s_key_presence
 {
-	int						no_present[6];
+	int						no_present[5];
 }							t_key_presence;
 
 typedef struct s_input_data
@@ -85,14 +84,16 @@ typedef struct s_object		t_object;
 typedef struct s_camera		t_camera;
 typedef struct s_world		t_world;
 
-struct s_object				**get_objects(t_input_data **data, int no_data);
+struct s_object				**get_objects(t_input_data **data);
 struct s_camera				*get_cam_data(t_input_data **data);
 void						assign_pixel_size(struct s_camera *cam_data);
-struct s_light				*get_light_data(t_input_data **data);
+struct s_light				**get_light_data(t_input_data **data);
 struct s_ambient			*get_ambient_data(t_input_data **data);
 int							count_objects(struct s_object **objs);
 
 //							Partition
+int							get_no_obj_elems(t_input_data **data);
+int							get_no_light_elems(t_input_data **data);
 t_object					*assign_object(t_input_data *data);
 void						load_camera_transform_matrix(t_camera *cam_data);
 
