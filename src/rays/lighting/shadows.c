@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:23:41 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/16 17:53:48 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/17 13:19:15 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ static t_intersec	*precompute_shadows(double *worldp, double *lightv,
 	3. 	intersect the world with that ray
 	4. 	check if there's a hit
  */
-bool	is_shadowed(t_world *w, double *worldp)
+bool	is_shadowed(t_world *w, double *worldp, int light_index)
 {
 	t_intersec	*hit;
 	double		*lightv;
 	double		distance;
 	bool		state;
 
-	lightv = subtract_tuple(w->lights[0]->coords, worldp);
+	lightv = subtract_tuple(w->lights[light_index]->coords, worldp);
 	distance = magnitude(lightv);
 	normalize(&lightv);
 	hit = precompute_shadows(worldp, lightv, w->objs);

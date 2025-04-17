@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/15 11:48:51 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/17 13:19:31 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_comps	t_comps;
 typedef struct s_light	t_light;
 
 double					*get_checkered_color(t_object *obj, double *point);
-bool					is_shadowed(t_world *w, double *p);
+bool					is_shadowed(t_world *w, double *p, int light_index);
 double					*apply_phong_attributes(t_world *world, t_comps *comps,
 							double *new_color);
 int						get_pixel_color(t_world *world, t_comps *comps);

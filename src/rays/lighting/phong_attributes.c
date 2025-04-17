@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:42:38 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/16 19:55:09 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/17 13:19:39 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ double	*apply_phong_attributes(t_world *world, t_comps *comps,
 	light_id = -1;
 	while (world->lights[++light_id])
 	{
-		shadow_flag = is_shadowed(world, comps->over_point);
+		shadow_flag = is_shadowed(world, comps->over_point, light_id);
 		if (!shadow_flag)
 		{
 			diffuse = get_diffuse(world->lights[light_id]->coords,
