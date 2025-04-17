@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:42:38 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/17 13:19:39 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/17 14:03:01 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,21 +72,75 @@ static double	get_specular(double *light_origin, double *cam_v,
 	return (specular);
 }
 
-// algorithm:
-// initialize the color with ambient
-// loop through the light sources
-// calc diffuse and specular
-// calc shadow
-// if not shadow at this light's contribution
+/**
+ * A utility func for apply_phong_attributes() func
+ *  to calculate the light contribution for all light sources
+ *
+ * @param: phong_lighting: the final colors of the pixel
+ *
+ * @var l_id: the current's light source index in the lights array
+ * @var diff: the diffuse contribution
+ * @var spec: the specular contribution
+ * @var shadow: a boolean indicating if the current pixel should be shadowed
+ *
+ * @return None, the function modifies the phong lighting parameter in-place
+ */
+static void	add_light_contribution(t_world *w, t_comps *c, double *new_color,
+		double *phong_lighting)
+{
+	int		l_id;
+	int		i;
+	double	diff;
+	double	spec;
+	bool	shadow;
+
+	l_id = -1;
+	while (w->lights[++l_id])
+	{
+		shadow = is_shadowed(w, c->over_point, l_id);
+		if (!shadow)
+		{
+			diff = get_diffuse(w->lights[l_id]->coords, c->normalv, c->point);
+			spec = get_specular(w->lights[l_id]->coords,
+					w->camera->orientation_vector, c->normalv, c->point);
+			i = -1;
+			while (++i < 3)
+			{
+				phong_lighting[i] += diff * w->lights[l_id]->color[i]
+					* w->lights[l_id]->brightness / 255.0 * new_color[i];
+				phong_lighting[i] += spec * w->lights[l_id]->color[i]
+					* w->lights[l_id]->brightness;
+			}
+		}
+	}
+}
+
+/**
+ * this func applies the Phong reflection model to calculate the
+ * final color of a point in a scene- meaning the color of a pixel.
+ *
+ * @param world: the world struct containing all the scene's arrays
+ * 					with objects, lights, and camera.
+ * @param comps: the computations struct containing the object, the point,
+ *               the eye vector, and the normal vector.
+ * @param new_color: the final color of the point.
+ *
+ * @return the final color of the point, after applying the Phong reflection
+ *         model.
+ *
+ * The algorithm:
+ * 		1. init the color channels with the ambient color channels.
+ * 		2. loop through all the lights in the scene.
+ * 			2a. check if the light is shadowed.
+ * 			2b. if not shadowed, calculate the diffuse and specular
+ * 				components of the light.
+ *			2c. Add the diffuse and specular components to the color channels.
+ */
 double	*apply_phong_attributes(t_world *world, t_comps *comps,
 		double *new_color)
 {
 	double	*phong_lighting;
-	double	diffuse;
-	double	specular;
-	bool	shadow_flag;
 	int		i;
-	int		light_id;
 
 	phong_lighting = (double *)malloc(sizeof(double) * 3);
 	i = -1;
@@ -95,28 +149,6 @@ double	*apply_phong_attributes(t_world *world, t_comps *comps,
 		phong_lighting[i] = world->ambient->brightness
 			* world->ambient->color[i] / 255.0 * new_color[i];
 	}
-	light_id = -1;
-	while (world->lights[++light_id])
-	{
-		shadow_flag = is_shadowed(world, comps->over_point, light_id);
-		if (!shadow_flag)
-		{
-			diffuse = get_diffuse(world->lights[light_id]->coords,
-					comps->normalv, comps->point);
-			specular = get_specular(world->lights[light_id]->coords,
-					world->camera->orientation_vector, comps->normalv,
-					comps->point);
-			i = -1;
-			while (++i < 3)
-			{
-				phong_lighting[i] += diffuse * world->lights[light_id]->color[i]
-					* world->lights[light_id]->brightness / 255.0
-					* new_color[i];
-				phong_lighting[i] += specular
-					* world->lights[light_id]->color[i]
-					* world->lights[light_id]->brightness;
-			}
-		}
-	}
+	add_light_contribution(world, comps, new_color, phong_lighting);
 	return (phong_lighting);
 }
