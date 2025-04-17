@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 16:19:50 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/17 17:48:03 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/17 18:11:12 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	drain_file(int fd)
 
 int	validate_texture_file(const char *path)
 {
-	int texture_fd;
+	int	texture_fd;
 
 	texture_fd = open(path, O_RDONLY);
 	if (texture_fd < 0)
