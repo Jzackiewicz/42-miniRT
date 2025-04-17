@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/17 17:01:23 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/17 18:05:21 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,8 @@ static t_matrix	*prepare_plane_transform(t_object *obj)
 
 t_matrix	*prepare_cylinder_transform(t_object *obj)
 {
-	// t_matrix	*scaling_transform;
 	t_matrix	*translation_transform;
-	// t_matrix	*transform;
-	// double		tmp[3];
-	
-	// tmp[0] = obj->diameter;
-	// tmp[1] = obj->diameter;
-	// tmp[2] = obj->diameter;
+
 	translation_transform = translation(obj->coords);
 	return (translation_transform);
 }

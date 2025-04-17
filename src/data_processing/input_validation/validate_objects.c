@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_objects.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:16:47 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/14 18:12:19 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/17 17:47:59 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ static int	validate_sphere(char **line_split)
 		return (clean_on_error(line_split));
 	if (!line_split[4] || check_for_overflow(line_split[4]))
 		return (clean_on_error(line_split));
-	if (ft_2d_strlen(line_split) == 6 && validate_texture_file((const char *)line_split[5]))
+	if (ft_2d_strlen(line_split) == 6
+		&& validate_texture_file((const char *)line_split[5]))
 		return (clean_on_error(line_split));
 	return (0);
 }
 
 static int	validate_plane(char **line_split)
-{	
+{
 	if (!line_split)
 		return (clean_on_error(line_split));
 	if (ft_2d_strlen(line_split) != 5 && ft_2d_strlen(line_split) != 6)

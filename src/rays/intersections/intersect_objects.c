@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/17 10:15:32 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/17 17:47:52 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static double	*intersect_plane(t_ray *ray)
 double	*intersect(t_object *obj, t_ray *ray)
 {
 	double	*arr_t;
-	
+
 	arr_t = NULL;
 	if (!ft_strncmp(obj->id, "sp\0", 3))
 		arr_t = intersect_sphere(ray);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:33:06 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/16 19:57:14 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/17 17:48:07 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static void	free_object(t_object *obj, t_ray_tracer_data *rt_data)
 	free(obj);
 }
 
-static void free_lights(t_world *world)
+static void	free_lights(t_world *world)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (world->lights[++i])
