@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/14 14:10:05 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/17 10:15:32 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,43 +59,20 @@ static double	*intersect_plane(t_ray *ray)
 	return (arr_t);
 }
 
-/* Finds t for ray-cylinder intersection for identity cylinder.
-Identity cylinder is a cylinder that has it's center at (0, 0, 0) world point,
-is infinitely long in +y and -y directions and it's radius length is 1*/
-/* static	double	*intersect_cylinder(t_ray *ray)
-{
-	double	coefficients[3];
-	double	delta;
-	double	*arr_t;
-	
-	coefficients[0] = pow(ray->direction[0], 2) + pow(ray->direction[2], 2);
-	if (compare_floats(coefficients[0], 0))
-		return (NULL);
-	coefficients[1] = 2 * ray->origin[0] * ray->direction[0] + 2 * ray->origin[2] * ray->direction[2];
-	coefficients[2] = pow(ray->origin[0], 2) + pow(ray->origin[2], 2) - 1;
-	delta = pow(coefficients[1], 2) - 4 * coefficients[0] * coefficients[2];
-	if (delta < 0)
-		return (NULL);
-	arr_t = (double *)malloc(sizeof(double) * 2);
-	if (!arr_t)
-		return (NULL);
-	arr_t[0] = (-coefficients[1] - sqrt(delta)) / (2 * coefficients[0]);
-	arr_t[1] = (-coefficients[1] + sqrt(delta)) / (2 * coefficients[0]);
-	return (arr_t);
-} */
-
 /* highest level intersection finding function
 	called with a pointer to an object (plane, sphere or cylinder)
 	and an initialized t_ray pointer */
 double	*intersect(t_object *obj, t_ray *ray)
 {
 	double	*arr_t;
-
+	
 	arr_t = NULL;
 	if (!ft_strncmp(obj->id, "sp\0", 3))
 		arr_t = intersect_sphere(ray);
 	else if (!ft_strncmp(obj->id, "pl\0", 3))
 		arr_t = intersect_plane(ray);
+	else if (!ft_strncmp(obj->id, "cy\0", 3))
+		arr_t = intersect_cylinder(ray, obj);
 	else
 	{
 		printf("Error: unknown object id: %s\n", obj->id);

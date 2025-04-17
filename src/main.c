@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:28:39 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/17 13:25:43 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/17 17:30:33 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(void)
 	int				no_lines;
 
 	input_data = NULL;
-	no_lines = parse_file("tests/integration_tests/testfiles/room.rt",
+	no_lines = parse_file("tests/integration_tests/testfiles/cylindron.rt",
 			&input_data);
 	if (no_lines == -1)
 		return (printf("Error: file error\n"), -1);
