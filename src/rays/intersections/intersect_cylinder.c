@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:09:22 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/17 17:10:38 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:36:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,10 @@ static double	*truncate_caps(t_ray *ray, double *arr_t, double diameter)
 static double	*intersect_caps(double *arr_t, t_ray *ray, double cyl_height)
 {
 	double	*out_t;
-	double	limit;
 
 	if (compare_floats(ray->direction[1], 0) || (arr_t
 			&& !compare_floats(arr_t[0], arr_t[1])))
 		return (arr_t);
-	limit = cyl_height / 2;
 	out_t = (double *)malloc(sizeof(double) * 2);
 	out_t[0] = -ray->origin[1] / ray->direction[1];
 	out_t[1] = (cyl_height - ray->origin[1]) / ray->direction[1];
