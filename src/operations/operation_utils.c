@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:26:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/13 20:09:26 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/18 16:26:26 by kubaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,20 @@ int	compare_floats(double a, double b)
 	return (fabs(a - b) < epsilon);
 }
 
-/* Creates a tuple filled with zeros
+/* Creates a tuple filled with x, y, z
 	w == 1: point{0, 0, 0, 1}
 	w == 0: vector{0, 0, 0, 0} */
-double	*init_tuple(int w)
+double		*init_tuple(double x, double y, double z, double w)
 {
-	int		i;
 	double	*tuple;
 
 	tuple = (double *)malloc(sizeof(double) * 4);
 	if (!tuple)
 		return (NULL);
-	i = 0;
-	while (i < 3)
-	{
-		tuple[i] = 0;
-		i++;
-	}
-	tuple[i] = w;
+	tuple[0] = x;
+	tuple[1] = y;
+	tuple[2] = z;
+	tuple[3] = w;
 	return (tuple);
 }
 
@@ -89,7 +85,7 @@ void	find_vector(double x, double y, double z)
 	point[0] = x;
 	point[1] = y;
 	point[2] = z;
-	zero_point = init_tuple(1);
+	zero_point = init_tuple(0, 0, 0, 1);
 	vector = subtract_tuple(point, zero_point);
 	normalize(&vector);
 	print_tuple(vector);

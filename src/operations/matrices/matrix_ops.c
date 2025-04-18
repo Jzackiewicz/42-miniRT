@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_ops.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:00 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/03 10:21:18 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/18 19:37:34 by kubaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ double	*multiply_tuple_and_matrix(t_matrix *matrix, double *tuple)
 
 	if (!matrix || !tuple)
 		return (NULL);
-	result = init_tuple((int)tuple[3]);
+	result = init_tuple(0, 0, 0, tuple[3]);
 	if (!result)
 		return (NULL);
 	i = -1;
@@ -91,13 +91,15 @@ void	transpose(t_matrix **matrix)
 }
 
 /* Turns any square matrix into indentity matrix */
-void	make_identity(t_matrix *matrix)
+t_matrix	*create_identity_matrix(int row, int col)
 {
-	int	i;
-	int	j;
-
+	int			i;
+	int			j;
+	t_matrix	*matrix;
+	
+	matrix = init_matrix(row, col);
 	if (!matrix || matrix->row != matrix->col)
-		return ;
+		return (NULL);
 	i = 0;
 	while (i < matrix->row)
 	{
@@ -112,4 +114,5 @@ void	make_identity(t_matrix *matrix)
 		}
 		i++;
 	}
+	return (matrix);
 }

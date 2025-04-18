@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 17:29:30 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/13 20:52:21 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/18 19:34:06 by kubaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ double		*cross(double *vector1, double *vector2);
 t_matrix	*multiply_matrices(t_matrix *matrix1, t_matrix *matrix2);
 double		*multiply_tuple_and_matrix(t_matrix *matrix, double *tuple);
 void		transpose(t_matrix **matrix);
-void		make_identity(t_matrix *matrix);
+t_matrix	*create_identity_matrix(int row, int col);
 
 //			transformations
 t_matrix	*inverse(t_matrix *matrix);
 t_matrix	*translation(double *tuple);
-t_matrix	*scaling(double *tuple);
+t_matrix	*scaling(double mult_x, double mult_y, double mult_z);
 t_matrix	*shearing(double *tuple);
 t_matrix	*rotation_x(double angle);
 t_matrix	*rotation_y(double angle);
@@ -64,7 +64,7 @@ void		print_matrix(t_matrix *matrix);
 
 // 			utils
 int			compare_floats(double a, double b);
-double		*init_tuple(int w);
+double		*init_tuple(double x, double y, double z, double w);
 double		*tupledup(double *tuple, int size);
 
 //			debug

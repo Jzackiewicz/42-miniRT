@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 13:19:19 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/07 17:57:12 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/18 19:35:45 by kubaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ t_matrix	*translation(double *tuple)
 
 	if (!tuple)
 		return (NULL);
-	transform = init_matrix(4, 4);
+	transform = create_identity_matrix(4, 4);
 	if (!transform)
 		return (NULL);
-	make_identity(transform);
 	transform->grid[0][3] = tuple[0];
 	transform->grid[1][3] = tuple[1];
 	transform->grid[2][3] = tuple[2];
@@ -34,22 +33,19 @@ t_matrix	*translation(double *tuple)
 }
 
 /* Creates a 4x4 matrix that after multiplication moves a tuple by
-multiplying its coordinates by tuple coords given as a parameter.
+multiplying its coordinates by multiplier given as a parameter.
 Also acts as reflecting when scaled by negative values.
 Undefined behavior when tuple is not of size 3*/
-t_matrix	*scaling(double *tuple)
+t_matrix	*scaling(double mult_x, double mult_y, double mult_z)
 {
 	t_matrix	*transform;
 
-	if (!tuple)
-		return (NULL);
-	transform = init_matrix(4, 4);
+	transform = create_identity_matrix(4, 4);
 	if (!transform)
 		return (NULL);
-	make_identity(transform);
-	transform->grid[0][0] = tuple[0];
-	transform->grid[1][1] = tuple[1];
-	transform->grid[2][2] = tuple[2];
+	transform->grid[0][0] = mult_x;
+	transform->grid[1][1] = mult_y;
+	transform->grid[2][2] = mult_z;
 	return (transform);
 }
 
@@ -64,10 +60,9 @@ t_matrix	*shearing(double *tuple)
 
 	if (!tuple)
 		return (NULL);
-	transform = init_matrix(4, 4);
+	transform = create_identity_matrix(4, 4);
 	if (!transform)
 		return (NULL);
-	make_identity(transform);
 	transform->grid[0][1] = tuple[0];
 	transform->grid[0][2] = tuple[1];
 	transform->grid[1][0] = tuple[2];

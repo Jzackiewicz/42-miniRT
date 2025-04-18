@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_world.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/17 17:47:56 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/18 16:29:26 by kubaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static double	*get_sphere_normal_at(t_object *obj, double *w_point)
 	double	*obj_point;
 	double	*world_normal;
 
-	sphere_center = init_tuple(1);
+	sphere_center = init_tuple(0, 0, 0, 1);
 	obj_point = multiply_tuple_and_matrix(obj->inv_transform, w_point);
 	obj_normal = subtract_tuple(obj_point, sphere_center);
 	free(obj_point);
@@ -41,7 +41,7 @@ double	*get_cylinder_normal_at(t_object *obj, double *w_point)
 
 	distance = pow(w_point[0], 2) + pow(w_point[2], 2);
 	limit = obj->height / 2;
-	obj_normal = init_tuple(0);
+	obj_normal = init_tuple(0, 0, 0, 0);
 	if (distance < obj->diameter - EPSILON && (w_point[1] > obj->coords[1]
 			+ limit + EPSILON))
 		obj_normal[1] = 1;

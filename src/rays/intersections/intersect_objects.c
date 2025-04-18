@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_objects.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/17 17:47:52 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/18 16:28:04 by kubaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static double	*intersect_sphere(t_ray *ray)
 	double	delta;
 	double	*coords;
 
-	coords = init_tuple(1);
+	coords = init_tuple(0, 0, 0, 1);
 	oc_vector = subtract_tuple(ray->origin, coords);
 	free(coords);
 	coefficients[0] = dot(ray->direction, ray->direction);
