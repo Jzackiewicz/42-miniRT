@@ -3,3 +3,4 @@
 *.o
 miniRT
 libft.a
+lib/mlx
