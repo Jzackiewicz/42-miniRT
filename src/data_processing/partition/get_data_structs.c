@@ -3,25 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_data_structs.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 12:04:30 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/16 17:56:50 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:44:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/data_processing.h"
 #include "../../../inc/miniRT.h"
-
-int	count_objects(t_object **objs)
-{
-	int	len;
-
-	len = 0;
-	while (objs[len])
-		len++;
-	return (len);
-}
 
 t_object	**get_objects(t_input_data **data)
 {

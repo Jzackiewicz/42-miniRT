@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_data_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:36:23 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/16 17:51:26 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:44:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,14 @@ int	get_no_light_elems(t_input_data **data)
 			no_elems++;
 	}
 	return (no_elems);
+}
+
+int	count_objects(t_object **objs)
+{
+	int	len;
+
+	len = 0;
+	while (objs[len])
+		len++;
+	return (len);
 }
