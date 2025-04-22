@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_object_data.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/19 00:25:28 by kubaz            ###   ########.fr       */
+/*   Updated: 2025/04/22 14:49:17 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ t_matrix *get_plane_rotation_matrix(t_object *obj)
 	rotation_transform = multiply_matrices(matrix_x, matrix_z);
 	free_matrix(matrix_x);
 	free_matrix(matrix_z);
-	print_matrix(rotation_transform);
 	return (rotation_transform);
 }
 
@@ -109,9 +108,9 @@ t_matrix	*get_transform_matrix(t_object *obj)
 	t_matrix	*tmp_3;
 	
 	tmp_1 = translation(obj->coords);
-	// if (obj->orientation_vector)
-	// 	tmp_2 = get_rotation_matrix(obj->orientation_vector);
-	// else
+	if (obj->orientation_vector)
+		tmp_2 = get_plane_rotation_matrix(obj);
+	else
 		tmp_2 = create_identity_matrix(4, 4);
 	if (obj->height && obj->diameter)
 		tmp_3 = scaling(obj->diameter, obj->height, obj->diameter);
@@ -161,8 +160,8 @@ t_object *assign_object(t_input_data *data)
 	obj->is_checkered = data->is_checkered;
 	obj->texture_path = (char *)data->texture_path;
 	obj->texture = NULL;
-	load_object_transform_matrix(obj);
-	// obj->transform = get_transform_matrix(obj);
-	// obj->inv_transform = inverse(obj->transform);
+	// load_object_transform_matrix(obj);
+	obj->transform = get_transform_matrix(obj);
+	obj->inv_transform = inverse(obj->transform);
 	return (obj);
 }
