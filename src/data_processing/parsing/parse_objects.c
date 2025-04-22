@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:32:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/15 11:49:14 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/22 11:55:33 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ static void	parse_cylinder(t_input_data *obj, char **line_split)
 		obj->is_checkered = false;
 	if (line_split[7])
 	{
-		if (line_split[5][ft_strlen(line_split[5]) - 1] == '\n')
-			line_split[5][ft_strlen(line_split[5]) - 1] = '\0';
+		if (line_split[7][ft_strlen(line_split[7]) - 1] == '\n')
+			line_split[7][ft_strlen(line_split[7]) - 1] = '\0';
 		obj->texture_path = ft_strdup(line_split[7]);
 	}
 	else
