@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:21:38 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/22 11:58:35 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:30:01 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_texture	*create_image_texture(void *mlx_ptr, t_texture *texture,
 	free(texture);
 	return (NULL);
 }
+
 /* unused for now */
 t_texture	*apply_normal_map_to_texture(void *mlx_ptr, t_texture *texture,
 		const char *path)

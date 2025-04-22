@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:21:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/22 16:20:14 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:34:58 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ typedef struct s_world				t_world;
 
 struct s_object						**get_objects(t_input_data **data);
 struct s_camera						*get_cam_data(t_input_data **data);
-void								assign_pixel_size(struct s_camera *cam_data);
+void								assign_pixel_size(
+										struct s_camera *cam_data);
 struct s_light						**get_light_data(t_input_data **data);
 struct s_ambient					*get_ambient_data(t_input_data **data);
 int									count_objects(struct s_object **objs);
@@ -101,7 +102,8 @@ int									count_objects(struct s_object **objs);
 int									get_no_obj_elems(t_input_data **data);
 int									get_no_light_elems(t_input_data **data);
 t_object							*assign_object(t_input_data *data);
-void								load_camera_transform_matrix(t_camera *cam_data);
+void								load_camera_transform_matrix(
+										t_camera *cam_data);
 
 typedef struct s_ray_tracer_data	t_ray_tracer_data;
 

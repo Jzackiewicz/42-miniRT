@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_cam_data.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:37:54 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/18 19:34:28 by kubaz            ###   ########.fr       */
+/*   Updated: 2025/04/22 16:26:26 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static t_matrix	*assign_data_to_matrix(double *cam_left, double *cam_up,
 {
 	t_matrix	*orient_matrix;
 
-	orient_matrix = create_identity_matrix(4,4);
+	orient_matrix = create_identity_matrix(4, 4);
 	orient_matrix->grid[0][0] = cam_left[0];
 	orient_matrix->grid[0][1] = cam_left[1];
 	orient_matrix->grid[0][2] = cam_left[2];

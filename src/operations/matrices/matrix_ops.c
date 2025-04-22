@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_ops.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:00 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/18 19:37:34 by kubaz            ###   ########.fr       */
+/*   Updated: 2025/04/22 16:31:36 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ t_matrix	*create_identity_matrix(int row, int col)
 	int			i;
 	int			j;
 	t_matrix	*matrix;
-	
+
 	matrix = init_matrix(row, col);
 	if (!matrix || matrix->row != matrix->col)
 		return (NULL);

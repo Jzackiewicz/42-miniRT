@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:09:22 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/22 13:14:34 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:31:51 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static double	*truncate_cylinder(double *arr_t, t_ray *ray, double cyl_height)
 	i = -1;
 	while (++i < 2)
 	{
-		if (ray->origin[1] + arr_t[i] * ray->direction[1] > - cyl_height / 2 && ray->origin[1]
-			+ arr_t[i] * ray->direction[1] < cyl_height / 2)
+		if (ray->origin[1] + arr_t[i] * ray->direction[1] > -cyl_height / 2
+			&& ray->origin[1] + arr_t[i] * ray->direction[1] < cyl_height / 2)
 			is_t[i] = true;
 		else
 			is_t[i] = false;
@@ -71,7 +71,7 @@ static double	*truncate_caps(t_ray *ray, double *arr_t, double diameter)
 static double	*intersect_caps(double *arr_t, t_ray *ray, double cyl_height)
 {
 	double	*out_t;
-	
+
 	if (compare_floats(ray->direction[1], 0) || (arr_t
 			&& !compare_floats(arr_t[0], arr_t[1])))
 		return (arr_t);

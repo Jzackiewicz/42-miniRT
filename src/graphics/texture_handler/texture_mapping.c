@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:18:32 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/22 14:49:07 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:30:19 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 
 	The functions map it to a UV coordinate for planes, cylinders and spheres.
 	The mapping is done by calculating the spherical coordinates of the point
-	and then converting them to UV coordinates. The UV coordinates range from 0 to 1.
+	and then converting them to UV coordinates. The UV coordinates
+	range from 0 to 1.
 	returns t_uv structure containing the UV coordinates of the point.
  */
 

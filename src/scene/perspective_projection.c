@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   perspective_projection.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:21:32 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/18 16:28:43 by kubaz            ###   ########.fr       */
+/*   Updated: 2025/04/22 16:32:58 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ t_ray	*ray_for_pixel(t_camera *cam_data, int px, int py)
 	offset[0] = ((double)px + 0.5) * cam_data->pixel_size;
 	offset[1] = ((double)py + 0.5) * cam_data->pixel_size;
 	zero_point = init_tuple(0, 0, 0, 1);
-	worldp = init_tuple(cam_data->half_height - offset[0], cam_data->half_width - offset[1], -1, 1);
+	worldp = init_tuple(cam_data->half_height - offset[0], cam_data->half_width
+			- offset[1], -1, 1);
 	pixel_point = multiply_tuple_and_matrix(cam_data->inv_transform, worldp);
 	ray->origin = multiply_tuple_and_matrix(cam_data->inv_transform,
 			zero_point);
