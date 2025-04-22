@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/22 17:18:13 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:24:51 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,11 @@ static double	*get_cylinder_normal_at(t_object *obj, double *w_point)
 	obj_point = multiply_tuple_and_matrix(obj->inv_transform, w_point);
 	distance = pow(obj_point[0], 2) + pow(obj_point[2], 2);
 	obj_normal = init_tuple(0, 0, 0, 0);
-	if (distance < 1.0 && (obj_point[1] > 0.5 - EPSILON || compare_floats(obj_point[1], 0.5)))
+	if (distance < 1.0 && (obj_point[1] > 0.5 - EPSILON
+			|| compare_floats(obj_point[1], 0.5)))
 		obj_normal[1] = 1;
-	else if (distance < 1.0 && (obj_point[1] < -0.5 + EPSILON || compare_floats(obj_point[1], -0.5)))
+	else if (distance < 1.0 && (obj_point[1] < -0.5 + EPSILON
+			|| compare_floats(obj_point[1], -0.5)))
 		obj_normal[1] = -1;
 	else
 	{

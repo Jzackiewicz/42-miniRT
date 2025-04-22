@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data_structs.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 12:04:30 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/18 15:44:05 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/22 17:30:35 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,7 @@ t_light	**get_light_data(t_input_data **data)
 	int		no_lights;
 
 	no_lights = get_no_light_elems(data);
-	lights = (t_light **) malloc((no_lights + 1) * sizeof(t_light *));
-	if (!lights)
-		return (NULL);
+	lights = (t_light **)malloc((no_lights + 1) * sizeof(t_light *));
 	lights[no_lights] = NULL;
 	i = -1;
 	no_lights = 0;
@@ -83,7 +81,8 @@ t_light	**get_light_data(t_input_data **data)
 			if (!lights[no_lights])
 				return (NULL);
 			lights[no_lights]->brightness = data[i]->brightness;
-			lights[no_lights]->color = convert_color(data[i]->color);
+			lights[no_lights]->color = init_tuple((double)data[i]->color[0],
+					(double)data[i]->color[1], (double)data[i]->color[2], 1);
 			lights[no_lights]->coords = data[i]->coords;
 			lights[no_lights++]->coords[3] = 1;
 		}
@@ -105,7 +104,8 @@ t_ambient	*get_ambient_data(t_input_data **data)
 		if (!ft_strncmp(data[i]->id, "A\0", 2))
 		{
 			ambient->brightness = data[i]->ambient_light_ratio;
-			ambient->color = convert_color(data[i]->color);
+			ambient->color = init_tuple((double)data[i]->color[0],
+					(double)data[i]->color[1], (double)data[i]->color[2], 1);
 			return (ambient);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/22 17:22:13 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:28:20 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ t_object	*assign_object(t_input_data *data)
 	obj->id = data->id;
 	obj->diameter = data->diameter;
 	obj->height = data->height;
-	obj->color = convert_color(data->color);
+	obj->color = init_tuple((double)data->color[0], (double)data->color[1],
+			(double)data->color[2], 1);
 	obj->coords = data->coords;
 	obj->orientation_vector = data->vector;
 	obj->is_checkered = data->is_checkered;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_processing.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:21:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/22 16:34:58 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:31:09 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,4 @@ void								free_world(t_world *world,
 										t_ray_tracer_data *rt_data);
 void								free_input_data(t_input_data **inp_data,
 										int no_lines);
-
-//							Utils
-double								*convert_color(int *int_color);
-
 #endif

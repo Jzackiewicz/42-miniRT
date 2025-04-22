@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:09:22 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/22 17:22:31 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:25:07 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static double	*truncate_cylinder(double *arr_t, t_ray *ray)
 	i = -1;
 	while (++i < 2)
 	{
-		if (ray->origin[1] + arr_t[i] * ray->direction[1] > -0.5 && ray->origin[1]
-			+ arr_t[i] * ray->direction[1] < 0.5)
+		if (ray->origin[1] + arr_t[i] * ray->direction[1] > -0.5
+			&& ray->origin[1] + arr_t[i] * ray->direction[1] < 0.5)
 			is_t[i] = true;
 		else
 			is_t[i] = false;
@@ -52,8 +52,8 @@ static double	*truncate_caps(t_ray *ray, double *arr_t)
 	{
 		x = ray->origin[0] + arr_t[i] * ray->direction[0];
 		z = ray->origin[2] + arr_t[i] * ray->direction[2];
-		if (pow(x, 2) + pow(z, 2) < 1.0 || compare_floats(pow(x, 2)
-				+ pow(z, 2), 1.0))
+		if (pow(x, 2) + pow(z, 2) < 1.0 || compare_floats(pow(x, 2) + pow(z, 2),
+				1.0))
 			is_t[i] = true;
 		else
 			is_t[i] = false;
@@ -101,8 +101,7 @@ static double	*intersect_infinite_tube(t_ray *ray)
 		return (NULL);
 	coefficients[1] = 2 * ray->origin[0] * ray->direction[0] + 2
 		* ray->origin[2] * ray->direction[2];
-	coefficients[2] = pow(ray->origin[0], 2) + pow(ray->origin[2], 2)
-		- 1;
+	coefficients[2] = pow(ray->origin[0], 2) + pow(ray->origin[2], 2) - 1;
 	delta = pow(coefficients[1], 2) - 4 * coefficients[0] * coefficients[2];
 	if (delta < 0)
 		return (NULL);
@@ -115,7 +114,8 @@ static double	*intersect_infinite_tube(t_ray *ray)
 }
 
 /* Finds t for ray-cylinder intersection for a closed identity cylinder.
-Identity cylinder is a cylinder that is closed and 1 unit long and 1 unit wide.*/
+Identity cylinder is a cylinder that is closed and 
+1 unit long and 1 unit wide.*/
 double	*intersect_cylinder(t_ray *ray)
 {
 	double	*arr_t;
