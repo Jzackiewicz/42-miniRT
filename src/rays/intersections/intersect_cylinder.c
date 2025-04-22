@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:09:22 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/19 00:26:32 by kubaz            ###   ########.fr       */
+/*   Updated: 2025/04/22 13:14:34 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,8 @@ double	*intersect_cylinder(t_ray *ray, t_object *obj)
 {
 	double	*arr_t;
 
-	obj->diameter = 1;
-	obj->height = 1;
+	obj->diameter = 10;
+	obj->height = 5;
 	arr_t = intersect_infinite_tube(ray, obj->diameter);
 	if (arr_t)
 		arr_t = truncate_cylinder(arr_t, ray, obj->height);

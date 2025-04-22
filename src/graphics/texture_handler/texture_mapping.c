@@ -6,13 +6,11 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:18:32 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/15 11:42:04 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:23:28 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/miniRT.h"
-
-// TODO: planar and cylindrical maps
 
 /**
 	a set of functions that map a point on a sphere to a UV coordinate.
@@ -68,3 +66,45 @@ t_uv	get_spherical_map(t_comps *comps)
 	uv.v = 1 - (phi / M_PI);
 	return (uv);
 }
+
+t_uv	get_cylindrical_map(t_comps *comps)
+{
+	t_uv	uv;
+	double	theta;
+	double	*obj_pt;
+	double	height;
+
+	obj_pt = multiply_tuple_and_matrix(comps->obj->inv_transform, comps->point);
+	if (!obj_pt)
+	{
+		uv.u = 0;
+		uv.v = 0;
+		return (uv);
+	}
+	theta = atan2(obj_pt[0], obj_pt[2]);
+	uv.u = 1 - ((theta / (2 * M_PI)) + 0.5);
+	height = obj_pt[1];
+	if (comps->obj->height > 0)
+		uv.v = fmod(height / comps->obj->height + 0.5, 1.0);
+	else
+		uv.v = fmod(height + 0.5, 1.0);
+	if (uv.u < 0)
+		uv.u += 1.0;
+	if (uv.v < 0)
+		uv.v += 1.0;
+	free(obj_pt);
+	return (uv);
+}
+
+// t_uv	get_cone_map(t_comps *comps)
+// {
+// 	t_uv	uv;
+// 	double	theta;
+// 	double	radius;
+
+// 	radius = intersect_p.x * intersect_p.x + intersect_p.z * intersect_p.z;
+// 	theta = atan2(intersect_p.x, intersect_p.z);
+// 	uv.u = 1 - ((theta / (2 * M_PI)) + 0.5);
+// 	uv.v = fmod(sqrt(radius), 1);
+// 	return (uv);
+// }
