@@ -4,6 +4,6 @@
 LIGHT:
 5. Lighting at planes doesn't show when normal vector is oriented in other direction.
 6. Shadows on planes get cropped when there is multiple planes intersecting.
-7. Topdown lighting right above object with non-centered camera show shadow but shoudln't. 
+7. Light inside an object is still visible on other objects
 not important:
     fix errno code for exiting with X button
