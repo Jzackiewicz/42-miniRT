@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:39:18 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/22 13:09:15 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/22 14:41:14 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	get_pixel_color(t_world *world, t_comps *comps)
 			uv = get_planar_map(comps);
 		else if (0 == ft_strncmp(comps->obj->id, "cy\0", 3))
 			uv = get_cylindrical_map(comps);
+		else if (0 == ft_strncmp(comps->obj->id, "co\0", 3))
+			uv = get_cone_map(comps);
 		rbg_color = get_texture_color(comps->obj->texture, uv.u, uv.v);
 	}
 	else

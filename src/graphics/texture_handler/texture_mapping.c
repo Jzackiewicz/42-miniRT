@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:18:32 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/22 13:23:28 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/22 14:49:07 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,15 +96,30 @@ t_uv	get_cylindrical_map(t_comps *comps)
 	return (uv);
 }
 
-// t_uv	get_cone_map(t_comps *comps)
-// {
-// 	t_uv	uv;
-// 	double	theta;
-// 	double	radius;
+t_uv	get_cone_map(t_comps *comps)
+{
+	t_uv	uv;
+	double	theta;
+	double	radius;
+	double	*obj_pt;
+	double	height;
 
-// 	radius = intersect_p.x * intersect_p.x + intersect_p.z * intersect_p.z;
-// 	theta = atan2(intersect_p.x, intersect_p.z);
-// 	uv.u = 1 - ((theta / (2 * M_PI)) + 0.5);
-// 	uv.v = fmod(sqrt(radius), 1);
-// 	return (uv);
-// }
+	obj_pt = multiply_tuple_and_matrix(comps->obj->inv_transform, comps->point);
+	if (!obj_pt)
+		return (uv.u = 0, uv.v = 0, uv);
+	theta = atan2(obj_pt[0], obj_pt[2]);
+	uv.u = 1 - ((theta / (2 * M_PI)) + 0.5);
+	height = obj_pt[1];
+	radius = sqrt(obj_pt[0] * obj_pt[0] + obj_pt[2] * obj_pt[2]);
+	if (comps->obj->height > 0)
+		uv.v = height / comps->obj->height;
+	else
+		uv.v = height;
+	if (uv.u < 0)
+		uv.u += 1.0;
+	if (uv.v < 0)
+		uv.v += 1.0;
+	if (uv.v > 1.0)
+		uv.v = fmod(uv.v, 1.0);
+	return (free(obj_pt), uv);
+}

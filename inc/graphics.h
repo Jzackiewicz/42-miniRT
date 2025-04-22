@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:45:23 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/22 13:09:27 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/22 14:42:09 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void					free_texture(t_ray_tracer_data *rt_data, t_object *obj);
 t_uv					get_spherical_map(t_comps *comps);
 t_uv					get_planar_map(t_comps *comps);
 t_uv					get_cylindrical_map(t_comps *comps);
+t_uv					get_cone_map(t_comps *comps);
 double					*get_texture_color(t_texture *texture, double u,
 							double v);
 #endif
