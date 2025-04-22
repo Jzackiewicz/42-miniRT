@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:16:47 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/22 15:46:36 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:22:42 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static int	validate_sphere(char **line_split)
 		return (clean_on_error(line_split));
 	if (check_coords(line_split[1]) == -1)
 		return (clean_on_error(line_split));
-	if (!is_valid_float(line_split[2]) || ft_atof(line_split[2]) < 0.0)
+	if (!is_valid_float(line_split[2], -1, 0, 0)
+		|| ft_atof(line_split[2]) <= 0.0)
 		return (clean_on_error(line_split));
 	if (check_colors(line_split[3]) == -1)
 		return (clean_on_error(line_split));
@@ -61,9 +62,11 @@ static int	validate_cylinder_or_cone(char **line_split)
 		return (clean_on_error(line_split));
 	if (check_vector(line_split[2], -1) == -1)
 		return (clean_on_error(line_split));
-	if (!is_valid_float(line_split[3]) || ft_atof(line_split[3]) < 0.0)
+	if (!is_valid_float(line_split[3], -1, 0, 0)
+		|| ft_atof(line_split[3]) <= 0.0)
 		return (clean_on_error(line_split));
-	if (!is_valid_float(line_split[4]))
+	if (!is_valid_float(line_split[4], -1, 0, 0)
+		|| ft_atof(line_split[4]) <= 0.0)
 		return (clean_on_error(line_split));
 	if (check_colors(line_split[5]) == -1)
 		return (clean_on_error(line_split));

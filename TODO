@@ -1,6 +1,5 @@
 2. Fisheye effect is a thing and maybe we wanna get rid of this.
 3.1 FOV acts funny at 180
-4. Segfault when diameter is 0
 
 LIGHT:
 5. Lighting at planes doesn't show when normal vector is oriented in other direction.
@@ -8,6 +7,3 @@ LIGHT:
 7. Topdown lighting right above object with non-centered camera show shadow but shoudln't. 
 not important:
     fix errno code for exiting with X button
-
-VERY IMPORTANT:
-Segfault when sphere and cylinder is in rt file

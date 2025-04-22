@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 16:19:50 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/17 18:11:12 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:22:13 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,12 @@ int	is_valid_number(const char *str)
 	return (1);
 }
 
-int	is_valid_float(const char *str)
+// f**k norminette
+int	is_valid_float(const char *str, int i, int has_dot, int has_digit)
 {
-	int	i;
-	int	has_dot;
-	int	has_digit;
+	int	frac_len;
 
-	i = -1;
-	has_dot = 0;
-	has_digit = 0;
+	frac_len = 0;
 	if (!str || !*str)
 		return (0);
 	while (str[++i])
@@ -60,7 +57,11 @@ int	is_valid_float(const char *str)
 			return (0);
 		else
 			has_digit = 1;
+		if (has_dot)
+			frac_len++;
 	}
+	if (frac_len >= 7)
+		return (0);
 	return (has_digit);
 }
 
