@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:09:22 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/22 15:33:03 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:10:27 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static double	*truncate_caps(t_ray *ray, double *arr_t)
 		x = ray->origin[0] + arr_t[i] * ray->direction[0];
 		z = ray->origin[2] + arr_t[i] * ray->direction[2];
 		if (pow(x, 2) + pow(z, 2) < 1.0 || compare_floats(pow(x, 2)
-				+ pow(z, 2), 1))
+				+ pow(z, 2), 1.0))
 			is_t[i] = true;
 		else
 			is_t[i] = false;
