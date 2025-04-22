@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_world.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/18 16:29:26 by kubaz            ###   ########.fr       */
+/*   Updated: 2025/04/22 15:31:06 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,27 @@ static double	*get_sphere_normal_at(t_object *obj, double *w_point)
 	return (world_normal);
 }
 
-double	*get_cylinder_normal_at(t_object *obj, double *w_point)
+static double	*get_cylinder_normal_at(t_object *obj, double *w_point)
 {
 	double	distance;
 	double	limit;
+	double	*obj_point;
 	double	*obj_normal;
 
-	distance = pow(w_point[0], 2) + pow(w_point[2], 2);
+	obj_point = multiply_tuple_and_matrix(obj->inv_transform, w_point);
+	distance = pow(obj_point[0], 2) + pow(obj_point[2], 2);
 	limit = obj->height / 2;
 	obj_normal = init_tuple(0, 0, 0, 0);
-	if (distance < obj->diameter - EPSILON && (w_point[1] > obj->coords[1]
-			+ limit + EPSILON))
+	if (distance < 1 - EPSILON && (obj_point[1] > 0.5 - EPSILON))
 		obj_normal[1] = 1;
-	else if (distance < obj->diameter - EPSILON && (w_point[1] < obj->coords[1]
-			- limit - EPSILON))
+	else if (distance < 1 - EPSILON && (obj_point[1] < -0.5 + EPSILON))
 		obj_normal[1] = -1;
 	else
 	{
-		obj_normal[0] = w_point[0];
-		obj_normal[2] = w_point[2];
+		obj_normal[0] = obj_point[0];
+		obj_normal[2] = obj_point[2];
 	}
+	free(obj_point);
 	normalize(&obj_normal);
 	return (obj_normal);
 }
