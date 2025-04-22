@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_data_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:36:23 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/18 15:44:13 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/22 15:49:21 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	get_no_obj_elems(t_input_data **data)
 	while (data[++i])
 	{
 		if (!ft_strncmp(data[i]->id, "sp\0", 3) || !ft_strncmp(data[i]->id,
-				"cy\0", 3) || !ft_strncmp(data[i]->id, "pl\0", 3))
+				"cy\0", 3) || !ft_strncmp(data[i]->id, "pl\0", 3)
+			|| !ft_strncmp(data[i]->id, "co\0", 3))
 			no_elems++;
 	}
 	return (no_elems);
