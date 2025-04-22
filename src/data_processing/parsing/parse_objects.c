@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:32:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/22 11:55:33 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:46:28 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	parse_plane(t_input_data *obj, char **line_split)
 		obj->texture_path = NULL;
 }
 
-static void	parse_cylinder(t_input_data *obj, char **line_split)
+static void	parse_cylinder_or_cone(t_input_data *obj, char **line_split)
 {
 	parse_coords(line_split[1], obj);
 	parse_vector(line_split[2], obj);
@@ -85,6 +85,7 @@ void	parse_objects(char **line_split, t_input_data **objects, int i)
 		parse_sphere(objects[i], line_split);
 	else if (!ft_strncmp(objects[i]->id, "pl\0", 3))
 		parse_plane(objects[i], line_split);
-	else if (!ft_strncmp(objects[i]->id, "cy\0", 3))
-		parse_cylinder(objects[i], line_split);
+	else if (!ft_strncmp(objects[i]->id, "cy\0", 3)
+		|| !ft_strncmp(objects[i]->id, "co\0", 3))
+		parse_cylinder_or_cone(objects[i], line_split);
 }

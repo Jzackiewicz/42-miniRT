@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_objects.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:16:47 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/17 17:47:59 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:46:36 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	validate_plane(char **line_split)
 	return (0);
 }
 
-static int	validate_cylinder(char **line_split)
+static int	validate_cylinder_or_cone(char **line_split)
 {
 	if (!line_split)
 		return (clean_on_error(line_split));
@@ -84,22 +84,24 @@ int	validate_objects(char **line_split, int fd, t_key_presence *key_presence)
 		if (validate_sphere(line_split) == -1)
 			return (drain_file(fd));
 		key_presence->no_present[SPHERE]++;
-		return (0);
 	}
 	else if (!ft_strncmp(line_split[0], "pl\0", 3))
 	{
 		if (validate_plane(line_split) == -1)
 			return (drain_file(fd));
 		key_presence->no_present[PLANE]++;
-		return (0);
 	}
-	else if (!ft_strncmp(line_split[0], "cy\0", 3))
+	else if (!ft_strncmp(line_split[0], "cy\0", 3) || !ft_strncmp(line_split[0],
+			"co\0", 3))
 	{
-		if (validate_cylinder(line_split) == -1)
+		if (validate_cylinder_or_cone(line_split) == -1)
 			return (drain_file(fd));
-		key_presence->no_present[CYLINDER]++;
-		return (0);
+		if (!ft_strncmp(line_split[0], "cy\0", 3))
+			key_presence->no_present[CYLINDER]++;
+		else if (!ft_strncmp(line_split[0], "co\0", 3))
+			key_presence->no_present[CONE]++;
 	}
 	else
 		return (1);
+	return (0);
 }
