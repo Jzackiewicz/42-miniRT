@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:09:22 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/22 16:31:51 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:22:31 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/miniRT.h"
 #include "../../../inc/rays.h"
 
-static double	*truncate_cylinder(double *arr_t, t_ray *ray, double cyl_height)
+static double	*truncate_cylinder(double *arr_t, t_ray *ray)
 {
 	bool	is_t[2];
 	int		i;
@@ -22,8 +22,8 @@ static double	*truncate_cylinder(double *arr_t, t_ray *ray, double cyl_height)
 	i = -1;
 	while (++i < 2)
 	{
-		if (ray->origin[1] + arr_t[i] * ray->direction[1] > -cyl_height / 2
-			&& ray->origin[1] + arr_t[i] * ray->direction[1] < cyl_height / 2)
+		if (ray->origin[1] + arr_t[i] * ray->direction[1] > -0.5 && ray->origin[1]
+			+ arr_t[i] * ray->direction[1] < 0.5)
 			is_t[i] = true;
 		else
 			is_t[i] = false;
@@ -39,7 +39,7 @@ static double	*truncate_cylinder(double *arr_t, t_ray *ray, double cyl_height)
 	return (out_t);
 }
 
-static double	*truncate_caps(t_ray *ray, double *arr_t, double diameter)
+static double	*truncate_caps(t_ray *ray, double *arr_t)
 {
 	int		i;
 	double	x;
@@ -52,8 +52,8 @@ static double	*truncate_caps(t_ray *ray, double *arr_t, double diameter)
 	{
 		x = ray->origin[0] + arr_t[i] * ray->direction[0];
 		z = ray->origin[2] + arr_t[i] * ray->direction[2];
-		if (pow(x, 2) + pow(z, 2) < diameter || compare_floats(pow(x, 2)
-				+ pow(z, 2), diameter))
+		if (pow(x, 2) + pow(z, 2) < 1.0 || compare_floats(pow(x, 2)
+				+ pow(z, 2), 1.0))
 			is_t[i] = true;
 		else
 			is_t[i] = false;
@@ -68,7 +68,7 @@ static double	*truncate_caps(t_ray *ray, double *arr_t, double diameter)
 	return (free(arr_t), out_t);
 }
 
-static double	*intersect_caps(double *arr_t, t_ray *ray, double cyl_height)
+static double	*intersect_caps(double *arr_t, t_ray *ray)
 {
 	double	*out_t;
 
@@ -76,8 +76,8 @@ static double	*intersect_caps(double *arr_t, t_ray *ray, double cyl_height)
 			&& !compare_floats(arr_t[0], arr_t[1])))
 		return (arr_t);
 	out_t = (double *)malloc(sizeof(double) * 2);
-	out_t[0] = (-cyl_height / 2 - ray->origin[1]) / ray->direction[1];
-	out_t[1] = (cyl_height / 2 - ray->origin[1]) / ray->direction[1];
+	out_t[0] = (-0.5 - ray->origin[1]) / ray->direction[1];
+	out_t[1] = (0.5 - ray->origin[1]) / ray->direction[1];
 	if (arr_t && arr_t[0] < out_t[0])
 		out_t[0] = arr_t[0];
 	if (arr_t && arr_t[1] < out_t[1])
@@ -90,7 +90,7 @@ static double	*intersect_caps(double *arr_t, t_ray *ray, double cyl_height)
 	return (out_t);
 }
 
-static double	*intersect_infinite_tube(t_ray *ray, double diameter)
+static double	*intersect_infinite_tube(t_ray *ray)
 {
 	double	coefficients[3];
 	double	delta;
@@ -102,7 +102,7 @@ static double	*intersect_infinite_tube(t_ray *ray, double diameter)
 	coefficients[1] = 2 * ray->origin[0] * ray->direction[0] + 2
 		* ray->origin[2] * ray->direction[2];
 	coefficients[2] = pow(ray->origin[0], 2) + pow(ray->origin[2], 2)
-		- diameter;
+		- 1;
 	delta = pow(coefficients[1], 2) - 4 * coefficients[0] * coefficients[2];
 	if (delta < 0)
 		return (NULL);
@@ -114,20 +114,17 @@ static double	*intersect_infinite_tube(t_ray *ray, double diameter)
 	return (arr_t);
 }
 
-/* Finds t for ray-cylinder intersection for a closed cylinder.
-Intersected cylinder is a cylinder that is already translated and scaled by
-parameters in obj argument.*/
-double	*intersect_cylinder(t_ray *ray, t_object *obj)
+/* Finds t for ray-cylinder intersection for a closed identity cylinder.
+Identity cylinder is a cylinder that is closed and 1 unit long and 1 unit wide.*/
+double	*intersect_cylinder(t_ray *ray)
 {
 	double	*arr_t;
 
-	obj->diameter = 10;
-	obj->height = 5;
-	arr_t = intersect_infinite_tube(ray, obj->diameter);
+	arr_t = intersect_infinite_tube(ray);
 	if (arr_t)
-		arr_t = truncate_cylinder(arr_t, ray, obj->height);
-	arr_t = intersect_caps(arr_t, ray, obj->height);
+		arr_t = truncate_cylinder(arr_t, ray);
+	arr_t = intersect_caps(arr_t, ray);
 	if (arr_t)
-		arr_t = truncate_caps(ray, arr_t, obj->diameter);
+		arr_t = truncate_caps(ray, arr_t);
 	return (arr_t);
 }

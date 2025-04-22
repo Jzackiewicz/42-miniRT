@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_objects.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/18 16:28:04 by kubaz            ###   ########.fr       */
+/*   Updated: 2025/04/22 13:02:36 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ double	*intersect(t_object *obj, t_ray *ray)
 	else if (!ft_strncmp(obj->id, "pl\0", 3))
 		arr_t = intersect_plane(ray);
 	else if (!ft_strncmp(obj->id, "cy\0", 3))
-		arr_t = intersect_cylinder(ray, obj);
+		arr_t = intersect_cylinder(ray);
 	else
 	{
 		printf("Error: unknown object id: %s\n", obj->id);
