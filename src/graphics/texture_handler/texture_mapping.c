@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_mapping.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:18:32 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/22 14:49:07 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/23 15:37:35 by kubaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ t_uv	get_cone_map(t_comps *comps)
 {
 	t_uv	uv;
 	double	theta;
-	double	radius;
 	double	*obj_pt;
 	double	height;
 
@@ -110,7 +109,6 @@ t_uv	get_cone_map(t_comps *comps)
 	theta = atan2(obj_pt[0], obj_pt[2]);
 	uv.u = 1 - ((theta / (2 * M_PI)) + 0.5);
 	height = obj_pt[1];
-	radius = sqrt(obj_pt[0] * obj_pt[0] + obj_pt[2] * obj_pt[2]);
 	if (comps->obj->height > 0)
 		uv.v = height / comps->obj->height;
 	else
