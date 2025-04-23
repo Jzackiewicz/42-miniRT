@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:21:40 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/16 17:50:08 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:36:43 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@
 # define SPHERE 2
 # define PLANE 3
 # define CYLINDER 4
+# define CONE 5
 
 typedef struct s_key_presence
 {
-	int						no_present[5];
+	int						no_present[6];
 }							t_key_presence;
 
 typedef struct s_input_data
