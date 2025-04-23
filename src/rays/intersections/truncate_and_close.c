@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:09:22 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/23 12:38:18 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/23 12:42:19 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,22 +97,10 @@ Identity cylinder/cone is a cylinder/cone that is closed and 1 unit long and
 1 unit wide.*/
 double	*truncate_infinite_object(double *arr_t, t_ray *ray, char *obj_id)
 {
-	double	*out_t;
-
-	if (compare_floats(ray->direction[1], 0) || (arr_t
-			&& !compare_floats(arr_t[0], arr_t[1])))
-		return (arr_t);
-	out_t = (double *)malloc(sizeof(double) * 2);
-	out_t[0] = (-0.5 - ray->origin[1]) / ray->direction[1];
-	out_t[1] = (0.5 - ray->origin[1]) / ray->direction[1];
-	if (arr_t && arr_t[0] < out_t[0])
-		out_t[0] = arr_t[0];
-	if (arr_t && arr_t[1] < out_t[1])
-		out_t[1] = arr_t[1];
-	if (arr_t && arr_t[1] < out_t[0])
-		out_t[0] = arr_t[1];
-	if (arr_t && arr_t[0] < out_t[1])
-		out_t[1] = arr_t[0];
-	free(arr_t);
-	return (out_t);
+	if (arr_t)
+		arr_t = truncate_object(arr_t, ray);
+	arr_t = intersect_caps(arr_t, ray, obj_id);
+	if (arr_t)
+		arr_t = truncate_caps(ray, arr_t);
+	return (arr_t);
 }
