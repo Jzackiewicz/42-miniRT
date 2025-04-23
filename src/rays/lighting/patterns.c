@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 12:56:01 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/17 18:05:48 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/23 12:28:48 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@ static bool	is_color_inverted_at(t_object *obj, double *point)
 	int		sum;
 	int		i;
 
+	scale = 1;
 	if (0 == ft_strncmp(obj->id, "sp\0", 3))
 		scale = SPHERE_CHECKER_SCALE;
 	else if (0 == ft_strncmp(obj->id, "pl\0", 3))
 		scale = PLANE_CHECKER_SCALE;
 	else if (0 == ft_strncmp(obj->id, "cy\0", 3))
 		scale = CYLINDER_CHECKER_SCALE;
+	else if (0 == ft_strncmp(obj->id, "co\0", 3))
+		scale = CONE_CHECKER_SCALE;
 	i = -1;
 	while (++i < 3)
 		point[i] = point[i] * scale;

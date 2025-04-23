@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/22 13:02:44 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/23 12:28:59 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define SPHERE_CHECKER_SCALE 3.0
 # define PLANE_CHECKER_SCALE 0.5
 # define CYLINDER_CHECKER_SCALE 1.0 // tmp
+# define CONE_CHECKER_SCALE 3.0
 
 typedef struct s_ray // xD
 {
@@ -50,7 +51,7 @@ typedef struct s_camera	t_camera;
 t_ray					*create_ray(double *origin, double *direction);
 void					free_ray(t_ray *ray);
 double					*position(t_ray *ray, double t);
-double					*intersect_cylinder(t_ray *ray);
+double					*truncate_infinite_object(double *arr_t, t_ray *ray, char *obj_id);
 double					*intersect(t_object *obj, t_ray *ray);
 t_intersec				**get_intersections(t_ray *ray, t_object **objs);
 void					sort_intersections(t_intersec **i_s, int start_index,

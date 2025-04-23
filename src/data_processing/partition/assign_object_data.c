@@ -6,14 +6,14 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/22 17:17:00 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/23 12:25:43 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/data_processing.h"
 #include "../../../inc/miniRT.h"
 
-t_matrix *get_plane_rotation_matrix(t_object *obj)
+static t_matrix *get_rotation_matrix(t_object *obj)
 {
 	t_matrix *rotation_transform;
 	t_matrix *matrix_x;
@@ -45,7 +45,7 @@ t_matrix	*get_transform_matrix(t_object *obj)
 	
 	tmp_1 = translation(obj->coords);
 	if (obj->orientation_vector)
-		tmp_2 = get_plane_rotation_matrix(obj);
+		tmp_2 = get_rotation_matrix(obj);
 	else
 		tmp_2 = create_identity_matrix(4, 4);
 	if (obj->height && obj->diameter)
