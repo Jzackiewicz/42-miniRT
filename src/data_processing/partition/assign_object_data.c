@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/23 12:25:43 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:24:37 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,46 @@ static t_matrix *get_rotation_matrix(t_object *obj)
 {
 	t_matrix *rotation_transform;
 	t_matrix *matrix_x;
+	double	*axis;
+	double	angle;
+	double	*up_vector;
+	t_matrix *matrix_y;
 	t_matrix *matrix_z;
-	double denom;
+	t_matrix *tmp;
 
-	denom = sqrt(pow(obj->orientation_vector[1], 2) + pow(obj->orientation_vector[2], 2));
-	if (compare_floats(denom, 0))
-		matrix_x = rotation_x(0);
+	up_vector = init_tuple(0, 1, 0, 0);
+	axis = cross(obj->orientation_vector, up_vector);
+	angle = acos(dot(obj->orientation_vector, up_vector));
+	if (fabs(axis[0]) > EPSILON)
+		matrix_x = rotation_x(angle);
 	else
-		matrix_x = rotation_x(acos(obj->orientation_vector[1] / denom));
-	denom = sqrt(pow(obj->orientation_vector[1], 2) + pow(obj->orientation_vector[0], 2));
-	if (compare_floats(denom, 0))
-		matrix_z = rotation_z(0);
+		matrix_x = create_identity_matrix(4, 4);
+	if (fabs(axis[1]) > EPSILON)
+		matrix_y = rotation_y(angle);
 	else
-		matrix_z = rotation_z(acos(obj->orientation_vector[1] / denom));
-	rotation_transform = multiply_matrices(matrix_x, matrix_z);
+		matrix_y = create_identity_matrix(4, 4);
+	if (fabs(axis[2]) > EPSILON)
+		matrix_z = rotation_z(angle);
+	else
+		matrix_z = create_identity_matrix(4, 4);
+	tmp = multiply_matrices(matrix_z, matrix_y);
+	rotation_transform = multiply_matrices(tmp, matrix_x);
 	free_matrix(matrix_x);
+	free_matrix(matrix_y);
 	free_matrix(matrix_z);
+	free_matrix(tmp);
 	return (rotation_transform);
 }
+
+// static t_matrix *get_rotation_matrix(t_object *obj)
+// {
+// 	t_matrix *rotation_transform;
+	
+// 	printf("xangle: %f, yangle: %f, zangle: %f\n",  / M_PI * 180,  / M_PI * 180,  / M_PI * 180);
+// 	(void)obj;
+// 	exit(1);
+// 	return (rotation_transform);
+// }
 
 t_matrix	*get_transform_matrix(t_object *obj)
 {
