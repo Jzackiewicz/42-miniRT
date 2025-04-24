@@ -3,15 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   get_data_structs.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/23 12:35:53 by jzackiew         ###   ########.fr       */
+/*   Created: 2025/04/24 16:21:54 by agarbacz          #+#    #+#             */
+/*   Updated: 2025/04/24 16:21:59 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "../../../inc/data_processing.h"
 #include "../../../inc/miniRT.h"
 
 t_object	**get_objects(t_input_data **data)
