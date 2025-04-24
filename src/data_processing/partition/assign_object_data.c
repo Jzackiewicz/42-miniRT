@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/24 16:21:39 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:23:34 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,23 @@
 #include "../../../inc/miniRT.h"
 
 static t_matrix	*get_rotation_matrix(t_object *obj)
+static t_matrix	*get_rotation_matrix(t_object *obj)
 {
+	double		pitch;
+	double		roll;
 	t_matrix	*rotation_transform;
-	t_matrix	*matrix_x;
-	t_matrix	*matrix_z;
-	double		denom;
+	t_matrix	*x_matrix;
+	t_matrix	*z_matrix;
 
-	denom = sqrt(pow(obj->orientation_vector[1], 2)
-			+ pow(obj->orientation_vector[2], 2));
-	if (compare_floats(denom, 0))
-		matrix_x = rotation_x(0);
-	else
-		matrix_x = rotation_x(acos(obj->orientation_vector[1] / denom));
-	denom = sqrt(pow(obj->orientation_vector[1], 2)
-			+ pow(obj->orientation_vector[0], 2));
-	if (compare_floats(denom, 0))
-		matrix_z = rotation_z(0);
-	else
-		matrix_z = rotation_z(acos(obj->orientation_vector[1] / denom));
-	rotation_transform = multiply_matrices(matrix_x, matrix_z);
-	free_matrix(matrix_x);
-	free_matrix(matrix_z);
+	pitch = atan2(-obj->orientation_vector[2],
+			sqrt(pow(obj->orientation_vector[0], 2)
+				+ pow(obj->orientation_vector[1], 2)));
+	roll = -atan2(obj->orientation_vector[0], obj->orientation_vector[1]);
+	x_matrix = rotation_x(pitch);
+	z_matrix = rotation_z(roll);
+	rotation_transform = multiply_matrices(z_matrix, x_matrix);
+	free_matrix(x_matrix);
+	free_matrix(z_matrix);
 	return (rotation_transform);
 }
 
