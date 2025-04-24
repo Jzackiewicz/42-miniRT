@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/23 12:13:11 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/24 14:58:47 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,11 @@ static double	*get_cone_normal_at(t_object *obj, double *w_point)
 		obj_normal[1] = -1;
 	else
 	{
-		obj_normal[0] = -obj_point[0];
-		obj_normal[1] = -sqrt(pow(obj_point[0], 2) + pow(obj_point[2], 2));
-		obj_normal[2] = -obj_point[2];
+		obj_normal[0] = obj_point[0];
+		obj_normal[1] = sqrt(pow(obj_point[0], 2) + pow(obj_point[2], 2));
+		if (obj_point[1] > 0)
+			obj_normal[1] = -obj_normal[1];
+		obj_normal[2] = obj_point[2];
 	}
 	free(obj_point);
 	normalize(&obj_normal);
