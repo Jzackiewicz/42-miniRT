@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:18:32 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/24 14:34:09 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:00:56 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_uv	get_spherical_map(t_comps *comps)
 	theta = atan2(normal_pt[0], normal_pt[2]);
 	phi = acos(normal_pt[1]);
 	uv.u = 1 - ((theta / (2 * M_PI)) + 0.5);
-	uv.v = 1 - (phi / M_PI);
+	uv.v = (phi / M_PI);
 	return (uv);
 }
 

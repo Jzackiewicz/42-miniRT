@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 16:19:50 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/22 16:22:13 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/24 11:51:48 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	is_valid_float(const char *str, int i, int has_dot, int has_digit)
 		if (has_dot)
 			frac_len++;
 	}
-	if (frac_len >= 7)
+	if (frac_len >= 11)
 		return (0);
 	return (has_digit);
 }
