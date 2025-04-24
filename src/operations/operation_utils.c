@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:26:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/23 15:54:44 by kubaz            ###   ########.fr       */
+/*   Updated: 2025/04/24 14:34:27 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	compare_floats(double a, double b)
 /* Creates a tuple filled with x, y, z
 	w == 1: point{0, 0, 0, 1}
 	w == 0: vector{0, 0, 0, 0} */
-double		*init_tuple(double x, double y, double z, double w)
+double	*init_tuple(double x, double y, double z, double w)
 {
 	double	*tuple;
 

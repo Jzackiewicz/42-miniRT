@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_params.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:02:01 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/03/25 12:08:15 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:21:11 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	check_coords(char *coords)
 	i = -1;
 	while (++i < 3)
 	{
-		if (!is_valid_float(coords_split[i]))
+		if (!is_valid_float(coords_split[i], -1, 0, 0))
 		{
 			ft_arr2d_free(coords_split);
 			return (-1);
@@ -95,7 +95,7 @@ int	check_vector(char *vector, int i)
 		return (ft_arr2d_free(vector_split), -1);
 	while (++i < 3)
 	{
-		if (!is_valid_float(vector_split[i]))
+		if (!is_valid_float(vector_split[i], -1, 0, 0))
 			return (ft_arr2d_free(vector_split), -1);
 	}
 	cnv_xyz(vector_split, &x, &y, &z);

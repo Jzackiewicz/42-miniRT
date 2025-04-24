@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:34:08 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/23 12:28:59 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/23 12:31:57 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 
 typedef struct s_ray // xD
 {
-	double *origin;
-	double *direction;
+	double	*origin;
+	double	*direction;
 }						t_ray;
 
 typedef struct s_intersec

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:44:57 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/23 11:34:42 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:20:43 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	parse_element(char **line_split, t_input_data **objects, int i)
 			"C\0", 2) || !ft_strncmp(line_split[0], "L\0", 2))
 		parse_settings(line_split, objects, i);
 	else if (!ft_strncmp(line_split[0], "sp\0", 3) || !ft_strncmp(line_split[0],
-			"pl\0", 3) || !ft_strncmp(line_split[0], "cy\0", 3) || !ft_strncmp(line_split[0], "co\0", 3))
+			"pl\0", 3) || !ft_strncmp(line_split[0], "cy\0", 3)
+		|| !ft_strncmp(line_split[0], "co\0", 3))
 		parse_objects(line_split, objects, i);
 }
 

@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:39:18 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/22 14:41:14 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:32:41 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,5 @@ int	get_pixel_color(t_world *world, t_comps *comps)
 	res = apply_phong_attributes(world, comps, rbg_color);
 	free(rbg_color);
 	int_color = rgb_to_int(res);
-	free(res);
-	return (int_color);
+	return (free(res), int_color);
 }

@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:45:23 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/22 14:42:09 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:34:09 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_uv
 
 typedef struct s_texture
 {
-	t_image *texel; // texture element
+	t_image				*texel; // texture element
 	t_image				*nmap;
 	int					width;
 	int					height;

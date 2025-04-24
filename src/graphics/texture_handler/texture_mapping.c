@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_mapping.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:18:32 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/23 15:37:35 by kubaz            ###   ########.fr       */
+/*   Updated: 2025/04/24 15:00:56 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 
 	The functions map it to a UV coordinate for planes, cylinders and spheres.
 	The mapping is done by calculating the spherical coordinates of the point
-	and then converting them to UV coordinates. The UV coordinates range from 0 to 1.
+	and then converting them to UV coordinates. The UV coordinates
+	range from 0 to 1.
 	returns t_uv structure containing the UV coordinates of the point.
  */
 
@@ -63,7 +64,7 @@ t_uv	get_spherical_map(t_comps *comps)
 	theta = atan2(normal_pt[0], normal_pt[2]);
 	phi = acos(normal_pt[1]);
 	uv.u = 1 - ((theta / (2 * M_PI)) + 0.5);
-	uv.v = 1 - (phi / M_PI);
+	uv.v = (phi / M_PI);
 	return (uv);
 }
 

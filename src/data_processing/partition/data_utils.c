@@ -6,26 +6,12 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:33:06 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/17 17:48:07 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:31:04 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/data_processing.h"
 #include "../../../inc/miniRT.h"
-
-double	*convert_color(int *int_color)
-{
-	double	*color;
-
-	color = (double *)malloc(sizeof(double) * 3);
-	if (!color)
-		return (NULL);
-	color[0] = (double)int_color[0];
-	color[1] = (double)int_color[1];
-	color[2] = (double)int_color[2];
-	free(int_color);
-	return (color);
-}
 
 void	free_input_data(t_input_data **inp_data, int no_lines)
 {
