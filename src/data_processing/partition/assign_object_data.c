@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   assign_object_data.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/23 12:35:28 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:21:39 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/data_processing.h"
 #include "../../../inc/miniRT.h"
 
-static t_matrix *get_rotation_matrix(t_object *obj)
+static t_matrix	*get_rotation_matrix(t_object *obj)
 {
 	t_matrix	*rotation_transform;
 	t_matrix	*matrix_x;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_objects.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:26 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/23 12:02:09 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:18:35 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ static double	*intersect_plane(t_ray *ray)
 }
 
 /* Finds t for ray-cylinder intersection for a infinite cylinder.
-Identity cylinder is a cylinder that is closed and 1 unit long and 1 unit wide.*/
+Identity cylinder is a cylinder that is closed and 1 unit long
+ and 1 unit wide.*/
 double	*intersect_infinite_cylinder(t_ray *ray)
 {
 	double	coefficients[3];
@@ -126,12 +127,12 @@ double	*intersect(t_object *obj, t_ray *ray)
 	{
 		arr_t = intersect_infinite_cylinder(ray);
 		arr_t = truncate_infinite_object(arr_t, ray, obj->id);
-	}	
+	}
 	else if (!ft_strncmp(obj->id, "co\0", 3))
 	{
 		arr_t = intersect_infinite_cone(ray);
 		arr_t = truncate_infinite_object(arr_t, ray, obj->id);
-	}	
+	}
 	else
 	{
 		printf("Error: unknown object id: %s\n", obj->id);
