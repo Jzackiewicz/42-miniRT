@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data_structs.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:21:54 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/24 16:21:59 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:34:02 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ t_light	**get_light_data(t_input_data **data)
 			lights[no_lights]->brightness = data[i]->brightness;
 			lights[no_lights]->color = init_tuple((double)data[i]->color[0],
 					(double)data[i]->color[1], (double)data[i]->color[2], 1);
+			free(data[i]->color);
 			lights[no_lights]->coords = data[i]->coords;
 			lights[no_lights++]->coords[3] = 1;
 		}
@@ -105,6 +106,7 @@ t_ambient	*get_ambient_data(t_input_data **data)
 			ambient->brightness = data[i]->ambient_light_ratio;
 			ambient->color = init_tuple((double)data[i]->color[0],
 					(double)data[i]->color[1], (double)data[i]->color[2], 1);
+			free(data[i]->color);
 			return (ambient);
 		}
 	}

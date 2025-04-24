@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_object_data.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/24 16:24:16 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:29:54 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ t_object	*assign_object(t_input_data *data)
 	obj->height = data->height;
 	obj->color = init_tuple((double)data->color[0], (double)data->color[1],
 			(double)data->color[2], 1);
+	free(data->color);
 	obj->coords = data->coords;
 	obj->orientation_vector = data->vector;
 	obj->is_checkered = data->is_checkered;
