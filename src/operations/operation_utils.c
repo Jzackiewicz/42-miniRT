@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:26:02 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/22 16:31:31 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/24 14:34:27 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,14 @@ void	print_tuple(double *tuple)
 /* Debug */
 void	find_vector(double x, double y, double z)
 {
-	double	point[3];
+	double	point[4];
 	double	*zero_point;
 	double	*vector;
 
 	point[0] = x;
 	point[1] = y;
 	point[2] = z;
+	point[3] = 1;
 	zero_point = init_tuple(0, 0, 0, 1);
 	vector = subtract_tuple(point, zero_point);
 	normalize(&vector);
