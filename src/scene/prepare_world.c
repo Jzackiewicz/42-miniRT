@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:14:54 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/29 16:48:31 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/29 17:07:35 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,10 @@ t_comps	*prepare_computations(t_intersec *intersection, t_ray *ray)
 	comps->normalv = get_normal_at(comps->obj, comps->point);
 	if (dot(comps->normalv, comps->eyev) < 0)
 	{
-		comps->inside = true;
 		tmp = comps->normalv;
 		comps->normalv = negate_tuple(tmp);
 		free(tmp);
 	}
-	else
-		comps->inside = false;
 	normal_epsilon_product = multiply_tuple(comps->normalv, EPSILON);
 	comps->over_point = add_tuple(comps->point, normal_epsilon_product);
 	free(normal_epsilon_product);
