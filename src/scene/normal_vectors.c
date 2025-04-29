@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/29 16:14:08 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/29 17:05:31 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ double	*get_cylinder_normal_at(t_object *obj, double *w_point)
 	world_normal = multiply_tuple_and_matrix(obj->inv_transform, obj_normal);
 	transpose(&obj->inv_transform);
 	normalize(&world_normal);
-	return (world_normal, free(obj_normal));
+	return (free(obj_normal), world_normal);
 }
 
 static double	*get_cone_normal_at(t_object *obj, double *w_point)
