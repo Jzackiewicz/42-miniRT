@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:23:41 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/17 17:31:12 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:43:08 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ bool	is_shadowed(t_world *w, double *worldp, int light_index)
 	normalize(&lightv);
 	hit = precompute_shadows(worldp, lightv, w->objs);
 	free(lightv);
-	if (hit && hit->t < distance && ft_strncmp(hit->object->id, "pl\0", 3))
+	if (hit && hit->t < distance)
 		state = true;
 	else
 		state = false;

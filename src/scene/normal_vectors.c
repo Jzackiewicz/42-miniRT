@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 17:42:53 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/29 11:15:10 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:14:08 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ double	*get_cylinder_normal_at(t_object *obj, double *w_point)
 	double	distance;
 	double	*obj_point;
 	double	*obj_normal;
-
+	double	*world_normal;
+	
 	obj_point = multiply_tuple_and_matrix(obj->inv_transform, w_point);
 	distance = pow(obj_point[0], 2) + pow(obj_point[2], 2);
 	obj_normal = init_tuple(0, 0, 0, 0);
@@ -54,8 +55,11 @@ double	*get_cylinder_normal_at(t_object *obj, double *w_point)
 		obj_normal[2] = obj_point[2];
 	}
 	free(obj_point);
-	normalize(&obj_normal);
-	return (obj_normal);
+	transpose(&obj->inv_transform);
+	world_normal = multiply_tuple_and_matrix(obj->inv_transform, obj_normal);
+	transpose(&obj->inv_transform);
+	normalize(&world_normal);
+	return (world_normal, free(obj_normal));
 }
 
 static double	*get_cone_normal_at(t_object *obj, double *w_point)
@@ -63,6 +67,7 @@ static double	*get_cone_normal_at(t_object *obj, double *w_point)
 	double	distance;
 	double	*obj_point;
 	double	*obj_normal;
+	double	*world_normal;
 
 	obj_point = multiply_tuple_and_matrix(obj->inv_transform, w_point);
 	distance = pow(obj_point[0], 2) + pow(obj_point[2], 2);
@@ -77,26 +82,27 @@ static double	*get_cone_normal_at(t_object *obj, double *w_point)
 	}
 	free(obj_point);
 	transpose(&obj->inv_transform);
-	obj_normal = multiply_tuple_and_matrix(obj->inv_transform, obj_normal);
+	world_normal = multiply_tuple_and_matrix(obj->inv_transform, obj_normal);
+	free(obj_normal);
 	transpose(&obj->inv_transform);
-	normalize(&obj_normal);
-	return (obj_normal);
+	normalize(&world_normal);
+	return (world_normal);
 }
 
 /* returns the normal vector at a point on the surface of the object*/
 double	*get_normal_at(t_object *obj, double *w_point)
 {
-	double	*obj_normal;
+	double	*normal_vector;
 
 	if (!strncmp(obj->id, "pl\0", 3))
-		obj_normal = tupledup(obj->orientation_vector, 4);
+		normal_vector = tupledup(obj->orientation_vector, 4);
 	else if (!strncmp(obj->id, "sp\0", 3))
-		obj_normal = get_sphere_normal_at(obj, w_point);
+		normal_vector = get_sphere_normal_at(obj, w_point);
 	else if (!strncmp(obj->id, "cy\0", 3))
-		obj_normal = get_cylinder_normal_at(obj, w_point);
+		normal_vector = get_cylinder_normal_at(obj, w_point);
 	else if (!strncmp(obj->id, "co\0", 3))
-		obj_normal = get_cone_normal_at(obj, w_point);
+		normal_vector = get_cone_normal_at(obj, w_point);
 	else
-		obj_normal = NULL;
-	return (obj_normal);
+		normal_vector = NULL;
+	return (normal_vector);
 }
