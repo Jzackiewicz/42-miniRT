@@ -6,7 +6,7 @@
 /*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:23:41 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/29 14:43:08 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/04/30 12:40:53 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_intersec	*precompute_shadows(double *worldp, double *lightv,
 	t_intersec	*hit;
 
 	ray = create_ray(worldp, lightv);
-	i_s = get_intersections(ray, objs);
+	i_s = get_sorted_intersections(ray, objs);
 	free(ray);
 	hit = identify_hit(i_s);
 	free_intersections(i_s);
