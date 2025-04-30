@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   perspective_projection.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:21:32 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/22 16:32:58 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:15:58 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

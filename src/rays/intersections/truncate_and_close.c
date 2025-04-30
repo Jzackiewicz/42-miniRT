@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   truncate_and_close.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:09:22 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/24 16:18:08 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:06:44 by jzackiew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,7 @@ static double	*truncate_caps(t_ray *ray, double *arr_t)
 /* Finds t for ray-cylinder/cone intersection for 
 	a closed identity cylinder/cone.
 	Identity cylinder/cone is a cylinder/cone that is closed
-	and 1 unit long and
-	1 unit wide.*/
+	and 1 unit long and 1 unit wide.*/
 double	*truncate_infinite_object(double *arr_t, t_ray *ray, char *obj_id)
 {
 	if (arr_t)
