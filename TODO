@@ -1,7 +1,1 @@
-2. Fisheye effect is a thing and maybe we wanna get rid of this.
-3.1 FOV acts funny at 180
-
-LIGHT:
-6. Shadows on planes get cropped when there is multiple planes intersecting.
-plane_shadows_rot.rt to fix
-weird_plane.rt to fix
+Black gap between cap and rest of the body in cylinder and cone when being inside the object and moving closer to the wall (something about truncating caps I think). Gap size varies based on camera position.
