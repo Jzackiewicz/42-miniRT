@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_cam_data.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:37:54 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/22 16:26:26 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/05/02 00:47:17 by kubaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	assign_pixel_size(t_camera *cam_data)
 	double	aspect;
 
 	half_view = tan(cam_data->fov / 2.0);
-	aspect = (double)WINDOW_HEIGHT / (double)WINDOW_WIDTH;
+	aspect = (double)WINDOW_WIDTH / (double)WINDOW_HEIGHT;
 	if (aspect >= 1)
 	{
 		cam_data->half_width = half_view;
@@ -31,7 +31,7 @@ void	assign_pixel_size(t_camera *cam_data)
 		cam_data->half_width = half_view * aspect;
 		cam_data->half_height = half_view;
 	}
-	cam_data->pixel_size = (cam_data->half_width * 2.0) / (double)WINDOW_HEIGHT;
+	cam_data->pixel_size = (cam_data->half_width * 2.0) / (double)WINDOW_WIDTH;
 }
 
 static t_matrix	*assign_data_to_matrix(double *cam_left, double *cam_up,

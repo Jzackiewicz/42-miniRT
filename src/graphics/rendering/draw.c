@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:30:12 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/04/10 11:34:54 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/05/02 00:54:20 by kubaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void	draw_pixel(t_ray_tracer_data *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x > WINDOW_WIDTH || y > WINDOW_HEIGHT || x < 0 || y < 0)
+	if (y > WINDOW_WIDTH || x > WINDOW_HEIGHT || x < 0 || y < 0)
 		return ;
-	dst = data->mlx_data->img_addr + (y * data->mlx_data->line_length + x
+	dst = data->mlx_data->img_addr + (x * data->mlx_data->line_length + y
 			* (data->mlx_data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
@@ -35,7 +35,7 @@ void	render_image(t_ray_tracer_data *data, int **bitmap)
 		j = 0;
 		while (j < WINDOW_WIDTH)
 		{
-			draw_pixel(data, i, j, bitmap[j][i]);
+			draw_pixel(data, i, j, bitmap[i][j]);
 			j++;
 		}
 		i++;
