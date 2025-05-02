@@ -6,7 +6,7 @@
 /*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:37:54 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/05/02 00:47:17 by kubaz            ###   ########.fr       */
+/*   Updated: 2025/05/02 01:12:00 by kubaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ static t_matrix	*get_orient_matrix(t_camera *cam_data)
 	if (compare_floats(cam_data->orientation_vector[1], 1)
 		|| compare_floats(cam_data->orientation_vector[1], -1))
 		cam_left[0] = -1;
+	normalize(&cam_left);
 	cam_up = cross(cam_left, cam_data->orientation_vector);
+	normalize(&cam_up);
 	orient_matrix = assign_data_to_matrix(cam_left, cam_up,
 			cam_data->orientation_vector);
 	free(cam_left);

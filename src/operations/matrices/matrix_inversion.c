@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_inversion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:31:28 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/03/20 16:11:27 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/05/02 01:11:21 by kubaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,12 @@ static double	cofactor(t_matrix *matrix, int row, int col)
 t_matrix	*inverse(t_matrix *matrix)
 {
 	t_matrix	*inverted;
+	double		det;
 	int			i;
 	int			j;
 
-	if (!matrix || matrix->row != matrix->col || determinant(matrix) == 0)
+	det = determinant(matrix);
+	if (!matrix || matrix->row != matrix->col || compare_floats(det, 0))
 		return (NULL);
 	inverted = init_matrix(matrix->row, matrix->col);
 	if (!inverted)
@@ -107,7 +109,7 @@ t_matrix	*inverse(t_matrix *matrix)
 		j = -1;
 		while (++j < matrix->col)
 		{
-			inverted->grid[j][i] = cofactor(matrix, i, j) / determinant(matrix);
+			inverted->grid[j][i] = cofactor(matrix, i, j) / det;
 			if (compare_floats(inverted->grid[j][i], 0))
 				inverted->grid[j][i] = 0;
 		}
