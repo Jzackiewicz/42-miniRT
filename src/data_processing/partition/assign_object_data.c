@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_object_data.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:00:36 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/24 16:29:54 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/05/02 02:43:23 by kubaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ t_matrix	*get_transform_matrix(t_object *obj)
 	else
 		tmp_2 = create_identity_matrix(4, 4);
 	if (obj->height && obj->diameter)
-		tmp_3 = scaling(obj->diameter, obj->height, obj->diameter);
+		tmp_3 = scaling(obj->diameter / 2, obj->height, obj->diameter / 2);
 	else if (!obj->height && obj->diameter)
-		tmp_3 = scaling(obj->diameter, obj->diameter, obj->diameter);
+		tmp_3 = scaling(obj->diameter / 2, obj->diameter / 2, obj->diameter / 2);
 	else
 		tmp_3 = create_identity_matrix(4, 4);
 	transform = multiply_matrices(tmp_1, tmp_2);
