@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   truncate_and_close.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jzackiew <jzackiew@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:09:22 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/30 14:06:44 by jzackiew         ###   ########.fr       */
+/*   Updated: 2025/05/02 02:34:59 by kubaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static double	*truncate_object(double *arr_t, t_ray *ray)
 	i = -1;
 	while (++i < 2)
 	{
-		if (ray->origin[1] + arr_t[i] * ray->direction[1] > -0.5
+		if (arr_t[i] > 0 && ray->origin[1] + arr_t[i] * ray->direction[1] > -0.5
 			&& ray->origin[1] + arr_t[i] * ray->direction[1] < 0.5)
 			is_t[i] = true;
 		else
@@ -43,7 +43,7 @@ static double	*intersect_caps(double *arr_t, t_ray *ray, char *obj_id)
 {
 	double	*out_t;
 
-	if (compare_floats(ray->direction[1], 0) || (arr_t
+	if (compare_floats(ray->direction[1], 0.0) || (arr_t
 			&& !compare_floats(arr_t[0], arr_t[1])))
 		return (arr_t);
 	out_t = (double *)malloc(sizeof(double) * 2);
