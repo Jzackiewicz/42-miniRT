@@ -1,1 +1,2 @@
 Black gap between cap and rest of the body in cylinder and cone when being inside the object and moving closer to the wall (something about truncating caps I think). Gap size varies based on camera position.
+    It is solved for cylinders but at the same time it screws cones.
