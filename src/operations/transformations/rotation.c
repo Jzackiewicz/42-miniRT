@@ -6,7 +6,7 @@
 /*   By: kubaz <kubaz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:22:46 by jzackiew          #+#    #+#             */
-/*   Updated: 2025/04/18 19:34:54 by kubaz            ###   ########.fr       */
+/*   Updated: 2025/05/02 04:06:58 by kubaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_matrix	*rotation_x(double angle)
 	if (!transform)
 		return (NULL);
 	transform->grid[1][1] = cos(angle);
-	transform->grid[2][1] = sin(angle);
-	transform->grid[1][2] = -sin(angle);
+	transform->grid[2][1] = -sin(angle);
+	transform->grid[1][2] = sin(angle);
 	transform->grid[2][2] = cos(angle);
 	return (transform);
 }
